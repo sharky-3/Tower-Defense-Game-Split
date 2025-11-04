@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://c4ntnjha21d56"]
+
+[ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://Scenes/Texture/color_palet.png" id="1_gdnbj"]
+[ext_resource type="ArrayMesh" uid="uid://bfqq735b6wyrs" path="res://Scenes/Environment/Rock_B_1.obj" id="2_6yt35"]
+[ext_resource type="ArrayMesh" uid="uid://dvkglo0lab58b" path="res://Scenes/Environment/Rock_F_1.obj" id="3_7d43w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kuwt"]
+albedo_texture = ExtResource("1_gdnbj")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mdxf8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ehygk"]
+size = Vector3(2.0327148, 2.0063477, 1.9592285)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r5xb0"]
+albedo_texture = ExtResource("1_gdnbj")
+
+[node name="rock_design_1" type="Node3D"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="RockB1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0841732, 0, 1.2823012)
+material_override = SubResource("StandardMaterial3D_2kuwt")
+mesh = ExtResource("2_6yt35")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RockB1"]
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RockB1/RigidBody3D"]
+transform = Transform3D(2.0095618, 0, 0, 0, 1.9926354, 0, 0, 0, 1.9113506, 0.067094326, -0.13418758, -0.3224628)
+visible = false
+mesh = SubResource("BoxMesh_mdxf8")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RockB1/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.054807186, -0.1422596, -0.30697608)
+shape = SubResource("BoxShape3D_ehygk")
+
+[node name="RockF1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08617926, 0.08517647, -1.0919869)
+material_override = SubResource("StandardMaterial3D_r5xb0")
+mesh = ExtResource("3_7d43w")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="RockF1"]
+freeze = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RockF1/RigidBody3D"]
+transform = Transform3D(2.0095618, 0, 0, 0, 1.9926354, 0, 0, 0, 1.9113506, -0.1207695, -0.20799243, 0.09352207)
+visible = false
+mesh = SubResource("BoxMesh_mdxf8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RockF1/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13305664, -0.21606445, 0.10900879)
+shape = SubResource("BoxShape3D_ehygk")
