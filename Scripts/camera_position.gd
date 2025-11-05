@@ -42,7 +42,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_rotation_x.rotation.x -= event.relative.y * mouse_sensitivity
 		camera_rotation_x.rotation.x = clamp(
 			camera_rotation_x.rotation.x,
-			deg_to_rad(-50),
+			deg_to_rad(-90),
 			deg_to_rad(20)
 		)
 
