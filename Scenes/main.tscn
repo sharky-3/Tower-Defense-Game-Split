@@ -1,57 +1,49 @@
-[gd_scene load_steps=6 format=3 uid="uid://c83uwb8w26m3a"]
+[gd_scene load_steps=7 format=3 uid="uid://c83uwb8w26m3a"]
 
-[ext_resource type="PackedScene" uid="uid://clx4m0xx575tx" path="res://Scenes/Characters/Player3D.tscn" id="2_8gbba"]
-[ext_resource type="PackedScene" uid="uid://c4ntnjha21d56" path="res://Sprites/Environment/Rocks/rock_design_1.tscn" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/camera_position.gd" id="1_jjgbg"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_bo1nx"]
-rayleigh_coefficient = 0.2
-rayleigh_color = Color(0, 0.36402497, 0.8620414, 1)
-mie_coefficient = 0.05
-mie_color = Color(0.54693294, 0.7434056, 0.9798055, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7u77a"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 
-[sub_resource type="Sky" id="Sky_8gbba"]
-sky_material = SubResource("PhysicalSkyMaterial_bo1nx")
+[sub_resource type="Sky" id="Sky_jjgbg"]
+sky_material = SubResource("ProceduralSkyMaterial_7u77a")
 
-[sub_resource type="Environment" id="Environment_jjvhh"]
+[sub_resource type="Environment" id="Environment_bo1nx"]
 background_mode = 2
-sky = SubResource("Sky_8gbba")
+sky = SubResource("Sky_jjgbg")
+tonemap_mode = 2
+glow_enabled = true
 
-[node name="Main" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_7u77a"]
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("2_8gbba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjgbg"]
 
-[node name="Lighting" type="Node" parent="."]
+[node name="World" type="Node3D"]
 
-[node name="Environment" type="WorldEnvironment" parent="Lighting"]
-environment = SubResource("Environment_jjvhh")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bo1nx")
 
-[node name="Sky" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(-0.5915793, 0.47601458, -0.6507257, -0.5135156, 0.39976108, 0.75927126, 0.621559, 0.783327, 0.007950525, 0, 6.688843, 14.615319)
-light_color = Color(0.6046204, 0.6639759, 0.7495572, 1)
-light_energy = 10.0
-
-[node name="Sun" type="DirectionalLight3D" parent="Lighting"]
-transform = Transform3D(0.20811085, -0.6510657, -0.72993386, 0.62434185, -0.486037, 0.611527, -0.7529191, -0.5829936, 0.30533797, 0, 6.688843, 14.615319)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
-sky_mode = 1
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
+mesh = SubResource("BoxMesh_7u77a")
 
-[node name="rock_design_1" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, -1)
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
 
-[node name="rock_design_2" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, -1)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
+shape = SubResource("BoxShape3D_jjgbg")
 
-[node name="rock_design_3" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, 0, -1)
+[node name="CameraPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 20)
+script = ExtResource("1_jjgbg")
 
-[node name="rock_design_4" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -2, -1)
+[node name="CameraRotationX" type="Node3D" parent="CameraPosition"]
 
-[node name="rock_design_5" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, -2, -1)
+[node name="CameraZoomPivot" type="Node3D" parent="CameraPosition/CameraRotationX"]
 
-[node name="rock_design_6" parent="." instance=ExtResource("3_8gbba")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 4, -2, -1)
+[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
