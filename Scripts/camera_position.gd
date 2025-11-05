@@ -22,6 +22,8 @@ var zoom_target: float
 var min_zoom = -20.0
 var max_zoom = 20.0
 
+var max_distance_from_center: float = 50.0 
+
 # =============================================
 # READY
 func _ready() -> void:
@@ -72,6 +74,10 @@ func _process(delta: float) -> void:
 		transform.basis * Vector3(input_direction.x, 0, input_direction.y)
 	).normalized()
 	move_target += move_speed * movement_direction
+	
+	# Clamp move_target to max distance from center (X and Z)
+	move_target.x = clamp(move_target.x, -max_distance_from_center, max_distance_from_center)
+	move_target.z = clamp(move_target.z, -max_distance_from_center, max_distance_from_center)
 
 	# =============================================
 	# Rotate player camera (keyboard)

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2egtuqxgp1v4"]
+
+[ext_resource type="Script" uid="uid://citbyumnck7t6" path="res://Scripts/cannon.gd" id="1_uplnw"]
+[ext_resource type="ArrayMesh" uid="uid://bkhpj7f2soctq" path="res://Sprites/Towers/Cannon.obj" id="2_uplnw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_gyw4j"]
+height = 3.0
+radius = 3.0
+
+[node name="Cannon" type="Node3D" node_paths=PackedStringArray("meshes")]
+script = ExtResource("1_uplnw")
+meshes = [NodePath("Mesh")]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_uplnw")
+
+[node name="Area3D" type="Area3D" parent="Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("CylinderShape3D_gyw4j")
+
+[node name="Ray1" type="RayCast3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.062443078, 2)
+target_position = Vector3(0, -0.18, 0)
+
+[node name="Ray2" type="RayCast3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.062443078, 2)
+target_position = Vector3(0, -0.18, 0)
+
+[node name="Ray3" type="RayCast3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.062443078, -2)
+target_position = Vector3(0, -0.18, 0)
+
+[node name="Ray4" type="RayCast3D" parent="Mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.062443078, -2)
+target_position = Vector3(0, -0.18, 0)
