@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5l0fet50ce65"
-path="res://.godot/imported/Attack.png-7957dac4d7be74c44ce8c4f7cca389c8.ctex"
+uid="uid://icuaibxbg6hk"
+path="res://.godot/imported/cannon.png-36ce23135cc66ebab6206fdfa27398ab.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CharacterAnimations/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-7957dac4d7be74c44ce8c4f7cca389c8.ctex"]
+source_file="res://Sprites/User Interface/Icons/cannon.png"
+dest_files=["res://.godot/imported/cannon.png-36ce23135cc66ebab6206fdfa27398ab.ctex"]
 
 [params]
 

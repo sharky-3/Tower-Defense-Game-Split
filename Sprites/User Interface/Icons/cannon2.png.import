@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0xjhl8vee4pj"
-path="res://.godot/imported/Die.png-e461b382916da7976546ec70db9ddd25.ctex"
+uid="uid://t2doudyujjwy"
+path="res://.godot/imported/cannon2.png-c6d3638b45ddbb478423d060e133e9ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprites/CharacterAnimations/Die.png"
-dest_files=["res://.godot/imported/Die.png-e461b382916da7976546ec70db9ddd25.ctex"]
+source_file="res://Sprites/User Interface/Icons/cannon2.png"
+dest_files=["res://.godot/imported/cannon2.png-c6d3638b45ddbb478423d060e133e9ae.ctex"]
 
 [params]
 

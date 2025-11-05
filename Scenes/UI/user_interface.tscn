@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnyvl53gma8e4"]
+
+[ext_resource type="Texture2D" uid="uid://icuaibxbg6hk" path="res://Sprites/User Interface/Icons/cannon.png" id="1_j6mn1"]
+[ext_resource type="Texture2D" uid="uid://t2doudyujjwy" path="res://Sprites/User Interface/Icons/cannon2.png" id="2_ebjbk"]
+
+[node name="UserInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ItemList" type="ItemList" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -161.5
+offset_top = -178.0
+offset_right = 161.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+item_count = 2
+max_columns = 3
+item_0/icon = ExtResource("1_j6mn1")
+item_1/icon = ExtResource("2_ebjbk")
