@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://c83uwb8w26m3a"]
 
-[ext_resource type="PackedScene" uid="uid://dnyvl53gma8e4" path="res://Scenes/UI/user_interface.tscn" id="1_bo1nx"]
-[ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/camera_position.gd" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_kry3j"]
-[ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://Scenes/Towers/player_tower.tscn" id="3_8gbba"]
-[ext_resource type="PackedScene" uid="uid://dei74pmv4ggyf" path="res://Scenes/Characters/enemy.tscn" id="4_jjvhh"]
+[ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://scripts/world_script.gd" id="1_2avkh"]
+[ext_resource type="PackedScene" uid="uid://dnyvl53gma8e4" path="res://scenes/ui/user_interface.tscn" id="2_dlv6v"]
+[ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://scripts/player/camera_position.gd" id="3_n56wl"]
+[ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://scenes/towers/player_tower.tscn" id="4_m6k0o"]
+[ext_resource type="PackedScene" uid="uid://dei74pmv4ggyf" path="res://scenes/characters/enemy.tscn" id="5_ss43a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7u77a"]
 
@@ -32,7 +32,7 @@ agent_height = 2.0
 agent_radius = 1.0
 
 [node name="World" type="Node3D"]
-script = ExtResource("1_kry3j")
+script = ExtResource("1_2avkh")
 
 [node name="Map" type="MeshInstance3D" parent="." groups=["navigation_mesh_source_group"]]
 transform = Transform3D(20, 0, 0, 0, 1, 0, 0, 0, 20, 0, 0, 0)
@@ -54,7 +54,7 @@ transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map2/StaticBody3D"]
 shape = SubResource("BoxShape3D_jjgbg")
 
-[node name="UserInterface" parent="." instance=ExtResource("1_bo1nx")]
+[node name="UserInterface" parent="." instance=ExtResource("2_dlv6v")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_bo1nx")
@@ -65,7 +65,7 @@ shadow_enabled = true
 
 [node name="CameraPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 20)
-script = ExtResource("1_jjgbg")
+script = ExtResource("3_n56wl")
 
 [node name="CameraRotationX" type="Node3D" parent="CameraPosition"]
 
@@ -73,10 +73,10 @@ script = ExtResource("1_jjgbg")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
 
-[node name="PlayerTower" parent="." instance=ExtResource("3_8gbba")]
+[node name="PlayerTower" parent="." instance=ExtResource("4_m6k0o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.200564, 0.34419608, -9.270824)
 
-[node name="Enemy" parent="." instance=ExtResource("4_jjvhh")]
+[node name="Enemy" parent="." instance=ExtResource("5_ss43a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.239476, 1.5, 3.4338667)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

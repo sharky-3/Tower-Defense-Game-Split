@@ -5,8 +5,8 @@ extends Node3D
 @onready var raycasts = [$Mesh/Ray1, $Mesh/Ray2, $Mesh/Ray3, $Mesh/Ray4]
 @export var meshes: Array[MeshInstance3D]
 @onready var area: Area3D = $Mesh/Area3D
-@onready var green_mat = preload("res://Sprites/Material/placement_green.tres")
-@onready var red_mat = preload("res://Sprites/Material/placement_red.tres")
+@onready var green_mat = preload("res://assets/material/placement_green.tres")
+@onready var red_mat = preload("res://assets/material/placement_red.tres")
 
 # =============================================
 # PLACEMENT

@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2egtuqxgp1v4"]
 
-[ext_resource type="Script" uid="uid://citbyumnck7t6" path="res://Scripts/cannon.gd" id="1_uplnw"]
-[ext_resource type="ArrayMesh" uid="uid://bkhpj7f2soctq" path="res://Sprites/Towers/Cannon.obj" id="2_uplnw"]
+[ext_resource type="Script" uid="uid://citbyumnck7t6" path="res://scripts/towers/cannon.gd" id="1_uplnw"]
+[ext_resource type="ArrayMesh" uid="uid://bkhpj7f2soctq" path="res://assets/models/Cannon.obj" id="2_uplnw"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gyw4j"]
 height = 3.0
