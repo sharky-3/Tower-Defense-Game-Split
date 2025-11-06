@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dei74pmv4ggyf"]
+
+[ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Scripts/enemy.gd" id="1_lsx3x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lsx3x"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b1c4r"]
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_lsx3x")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lsx3x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_b1c4r")
+
+[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]

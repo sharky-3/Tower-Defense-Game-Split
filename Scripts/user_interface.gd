@@ -18,9 +18,9 @@ var rotation_tween
 var current_angle_z: float = 0
 var mouse_timer: float = 0.0
 var mouse_moved: bool = false
-var can_angle: bool = false  # Control angle adjustment for X and Z
-const MOUSE_IDLE_RESET_TIME: float = .05  # Time in seconds to reset angles
-const MOUSE_IDLE_THRESHOLD: float = 0.01   # Time in seconds before checking idle state
+var can_angle: bool = false
+const MOUSE_IDLE_RESET_TIME: float = .05
+const MOUSE_IDLE_THRESHOLD: float = 0.01  
 
 # =============================================
 # READY
@@ -56,7 +56,6 @@ func _process(_delta: float) -> void:
 		var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 		var collision = camera.get_world_3d().direct_space_state.intersect_ray(query)
 
-		# Change color material
 		if collision.size() > 0:
 			can_place = instance.check_placement()
 			instance.transform.origin = collision.position
@@ -66,10 +65,8 @@ func _process(_delta: float) -> void:
 # INPUT
 func _input(event: InputEvent) -> void:
 	if placing:
-		if event is InputEventMouseMotion:
-			mouse_moved = true  # Mouse has moved
-		else:
-			mouse_moved = false
+		if event is InputEventMouseMotion: mouse_moved = true 
+		else: mouse_moved = false
 
 		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			placing = false
@@ -84,7 +81,6 @@ func _input(event: InputEvent) -> void:
 					rotation_tween.kill()
 
 				rotation_tween = create_tween()
-				var current_angle = instance.rotation_degrees.y
 				rotation_tween.tween_property(
 					instance,
 					"rotation_degrees:y",
@@ -98,7 +94,7 @@ func _on_item_list_item_selected(index: int) -> void:
 	if placing and instance:
 		instance.queue_free()
 
-	if index == 0 or index == 1:  # Assuming both indexes are valid for cannon
+	if index == 0 or index == 1:  
 		instance = cannon_scene.instantiate() as Node3D
 		rotation_target_y = instance.rotation_degrees.y
 		placing = true
