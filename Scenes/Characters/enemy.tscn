@@ -8,7 +8,13 @@
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_lsx3x")
-damage = 25.0
+move_speed = 5.0
+enemie_health = 15.0
+attach_move_speed = 5.0
+attack_damage = 25.0
+attack_cooldown = 2.5
+reward_gold = 15
+reward_exp = 5
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

@@ -1,6 +1,15 @@
 extends Node3D
-@export var health := 100
-@export var is_alive : bool = true
+
+@export_category("Main")
+@export var health: float
+@export var max_health: float
+@export var is_alive: bool = true
+
+@export_category("Visual/Audio")
+@export var damage_effect: bool
+@export var death_effect: bool
+@export var hit_sound: AudioStream
+@export var death_sound: AudioStream
 
 func take_damage(amount: int) -> void:
 	health -= amount

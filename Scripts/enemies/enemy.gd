@@ -1,9 +1,31 @@
 extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var target: Node3D = $"../PlayerTower" # default, can be set dynamically
-@export var speed: float = 4.0
-@export var damage: float = 10.0
+@onready var target: Node3D = $"../PlayerTower"
+
+@export_category("Main")
+@export var move_speed: float
+@export var enemie_health: float
+
+@export_category("Combat")
+@export var attach_move_speed: float
+@export var attack_damage: float
+@export var attack_cooldown: float
+
+@export_category("Status")
+@export var is_alive: bool = true
+@export var is_slowed: bool
+@export var slow_factor: float = .5
+@export var can_fly: bool
+
+@export_category("Rewards")
+@export var reward_gold: int
+@export var reward_exp: int
+
+@export_category("Visual/Audio")
+@export var death_effect: bool
+@export var hit_sound: AudioStream
+@export var death_sound: AudioStream
 
 func _ready() -> void:
 	# Make sure we have a target
@@ -32,8 +54,8 @@ func _physics_process(_delta: float) -> void:
 	var next_path_pos = navigation_agent_3d.get_next_path_position()
 	var dir = (next_path_pos - global_position).normalized()
 	
-	velocity.x = dir.x * speed
-	velocity.z = dir.z * speed
+	velocity.x = dir.x * move_speed
+	velocity.z = dir.z * move_speed
 	velocity.y = 0  # prevent vertical movement
 	
 	# Rotate horizontally towards target
@@ -44,6 +66,6 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func _on_navigation_agent_3d_target_reached() -> void:
-	if target and target.has_method("take_damage"):
-		target.take_damage(damage)
+	if target and target.has_method("take_attack_damage"):
+		target.take_attack_damage(attack_damage)
 	queue_free()
