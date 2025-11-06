@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c83uwb8w26m3a"]
+[gd_scene load_steps=13 format=3 uid="uid://c83uwb8w26m3a"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://scripts/world_script.gd" id="1_2avkh"]
 [ext_resource type="PackedScene" uid="uid://dnyvl53gma8e4" path="res://scenes/ui/user_interface.tscn" id="2_dlv6v"]
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://scripts/player/camera_position.gd" id="3_n56wl"]
 [ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://scenes/towers/player_tower.tscn" id="4_m6k0o"]
 [ext_resource type="PackedScene" uid="uid://dei74pmv4ggyf" path="res://scenes/characters/enemy.tscn" id="5_ss43a"]
+[ext_resource type="PackedScene" uid="uid://1xjnsdcqq5uq" path="res://scenes/effects/explosion.tscn" id="6_dlv6v"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_7u77a"]
 
@@ -82,3 +83,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.239476, 1.5, 3.4338667)
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11666846, 0)
 navigation_mesh = SubResource("NavigationMesh_kry3j")
+
+[node name="Explosion" parent="." instance=ExtResource("6_dlv6v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.8322453, 3)
