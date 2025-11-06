@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://xjqc8al6xfu1"]
+[gd_scene load_steps=4 format=3 uid="uid://xjqc8al6xfu1"]
+
+[ext_resource type="Script" uid="uid://5i2krnuovkov" path="res://Scripts/towers/player_tower.gd" id="1_v3u6p"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_38mk8"]
 
@@ -6,6 +8,7 @@
 
 [node name="PlayerTower" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
+script = ExtResource("1_v3u6p")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -15,8 +18,3 @@ mesh = SubResource("CylinderMesh_38mk8")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 shape = SubResource("CylinderShape3D_7elqh")
-
-[node name="TopMarker" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-
-[node name="BaseMarker" type="Node3D" parent="."]

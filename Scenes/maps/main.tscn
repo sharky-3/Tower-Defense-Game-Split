@@ -86,3 +86,6 @@ navigation_mesh = SubResource("NavigationMesh_kry3j")
 
 [node name="Explosion" parent="." instance=ExtResource("6_dlv6v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 3.8322453, 3)
+
+[node name="spawn_enemy_position" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.328699, 1.0524497, 7.117219)

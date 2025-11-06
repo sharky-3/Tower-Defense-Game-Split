@@ -8,6 +8,7 @@
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_lsx3x")
+damage = 25.0
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
@@ -17,4 +18,4 @@ shape = SubResource("BoxShape3D_lsx3x")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_b1c4r")
 
-[connection signal="target_reached" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_target_reached"]
+[connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]

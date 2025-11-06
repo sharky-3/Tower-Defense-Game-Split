@@ -20,7 +20,7 @@ var mouse_timer: float = 0.0
 var mouse_moved: bool = false
 var can_angle: bool = false
 const MOUSE_IDLE_RESET_TIME: float = .05
-const MOUSE_IDLE_THRESHOLD: float = 0.01  
+const MOUSE_IDLE_THRESHOLD: float = 0.01 
 
 # =============================================
 # READY
