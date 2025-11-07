@@ -1,7 +1,7 @@
 extends Node3D
 
-@onready var player_tower: Node3D = $PlayerTower
-@onready var spawn_enemy_position: Node3D = $spawn_enemy_position
+@onready var player_tower: Node3D = $Map/PlayerTower
+@onready var spawn_enemy_position: Node3D = $Map/spawn_enemy_position
 const Enemy = preload("res://scenes/characters/enemy.tscn")
 
 var spawn_interval: float = 2.0

@@ -22,7 +22,7 @@ var zoom_target: float
 var min_zoom = -20.0
 var max_zoom = 20.0
 
-var max_distance_from_center: float = 50.0 
+var max_distance_from_center: float = 100.0 
 
 # =============================================
 # READY

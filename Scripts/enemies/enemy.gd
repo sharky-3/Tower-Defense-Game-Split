@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
-@onready var target: Node3D = $"../PlayerTower"
+@onready var target: Node3D = $"../Map/PlayerTower"
 
 @export_category("Main")
 @export var move_speed: float
@@ -35,7 +35,7 @@ func _ready() -> void:
 	# Setup NavigationAgent3D
 	if target:
 		navigation_agent_3d.target_position = target.global_position + Vector3.UP
-		navigation_agent_3d.target_desired_distance = 2.0
+		navigation_agent_3d.target_desired_distance = 10.0
 		navigation_agent_3d.connect("target_reached", Callable(self, "_on_navigation_agent_3d_target_reached"))
 
 func _set_target():
@@ -56,7 +56,7 @@ func _physics_process(_delta: float) -> void:
 	
 	velocity.x = dir.x * move_speed
 	velocity.z = dir.z * move_speed
-	velocity.y = 0  # prevent vertical movement
+	velocity.y = dir.y * move_speed
 	
 	# Rotate horizontally towards target
 	var target_pos = target.global_position

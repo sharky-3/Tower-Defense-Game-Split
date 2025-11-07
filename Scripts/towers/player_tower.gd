@@ -11,7 +11,7 @@ extends Node3D
 @export var hit_sound: AudioStream
 @export var death_sound: AudioStream
 
-func take_damage(amount: int) -> void:
+func take_attack_damage(amount: int) -> void:
 	health -= amount
 	print("Tower took ", amount, " damage! Remaining health: ", health)
 	if health <= 0:
