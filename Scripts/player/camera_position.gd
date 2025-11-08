@@ -17,12 +17,12 @@ var mouse_sensitivity: float = 0.01
 var edge_size = 5.0
 var scroll_speed = .6
 
-var zoom_speed = 3.0
+var zoom_speed = 4.0
 var zoom_target: float
 var min_zoom = -20.0
 var max_zoom = 20.0
 
-var max_distance_from_center: float = 100.0 
+var max_distance_from_center: float = 150.0 
 
 # new – damping speeds
 var smooth_pos_lerp := 10.0
