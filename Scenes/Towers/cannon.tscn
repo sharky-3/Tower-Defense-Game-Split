@@ -21,17 +21,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_gyw4j")
 
 [node name="Ray1" type="RayCast3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.062443078, 2)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.062443078, 2)
 target_position = Vector3(0, -0.18, 0)
 
 [node name="Ray2" type="RayCast3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.062443078, 2)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2, 0.062443078, 2)
 target_position = Vector3(0, -0.18, 0)
 
 [node name="Ray3" type="RayCast3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.062443078, -2)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 2, 0.062443078, -2)
 target_position = Vector3(0, -0.18, 0)
 
 [node name="Ray4" type="RayCast3D" parent="Mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.062443078, -2)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -2, 0.062443078, -2)
 target_position = Vector3(0, -0.18, 0)
