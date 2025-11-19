@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://xjqc8al6xfu1"]
 
-[ext_resource type="Script" uid="uid://5i2krnuovkov" path="res://scripts/towers/player_tower.gd" id="1_v3u6p"]
+[ext_resource type="Script" uid="uid://5i2krnuovkov" path="res://scripts/assets/player_tower.gd" id="1_v3u6p"]
 [ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="2_7l51e"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pvie3"]
