@@ -1,27 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://dei74pmv4ggyf"]
+[gd_scene load_steps=9 format=3 uid="uid://dei74pmv4ggyf"]
 
 [ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://scripts/characters/enemy.gd" id="1_lsx3x"]
+[ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="2_f2e6v"]
+[ext_resource type="ArrayMesh" uid="uid://bfygdhktxcdvx" path="res://assets/models/characters/enemy/goblin/Goblin1.obj" id="3_21x0f"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_lsx3x"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jgk6k"]
+albedo_texture = ExtResource("2_f2e6v")
 
-[sub_resource type="BoxMesh" id="BoxMesh_b1c4r"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f2e6v"]
+points = PackedVector3Array(0.0033718348, 0.73539954, 1.103806, -0.5622377, -0.014196, 0.7070582, 0.0033718348, -0.014196, 0.99986506, 0.5691456, -0.014196, 0.7070582, 0.6714315, 3.1936781, 0.6865293, 0.25309378, 3.3026857, 0.9391427, 0.19677907, 3.9517968, 0.9389267, 0.10335916, 3.943722, 0.9389267, -0.36078548, 3.9029005, 0.9389267, -0.7661526, 3.8674617, 0.6865293, -0.67929995, -0.014196, 0.35374522, 0.68620783, -0.014196, 0.35374522, 0.7850459, 3.349339, 0, 0.72331315, 3.8279858, 0.114745736, 0.6019822, 3.9872355, 0.6865293, 0.15294236, 4.460499, 0.5313741, 0.05935818, 4.452424, 0.5313741, -0.40609992, 4.4116025, 0.5313741, -0.5492673, 4.399042, 0.4241917, -0.63874686, 4.391416, 0.20766592, -0.72445023, 4.38379, 0, -0.8305123, 3.8620787, 0.3362416, -0.67929995, -0.014196, -0.3539613, -0.892245, 3.8566954, 0, 0.68620783, -0.014196, -0.3539613, 0.7246266, 1.1324024, 0.13376188, 0.6714315, 3.1936781, -0.6867454, 0.7242983, 3.8333688, -0.1078307, 0.72823864, 3.9984503, 0, 0.7246266, 1.1324024, -0.13397801, 0.47129267, 4.488312, 0, 0.2962739, 4.4730597, 0.4241917, 0.12847906, 4.568609, -0.0071310997, -0.40068188, 4.521956, 0.0069149733, -0.63694084, 4.391416, -0.21220392, -0.7661526, 3.8674617, -0.6867454, -0.5622377, -0.014196, -0.7072743, 0.5691456, -0.014196, -0.7072743, 0.25309378, 3.3026857, -0.93935883, 0.19677907, 3.9517968, -0.9391427, 0.6019822, 3.9872355, -0.6867454, 0.0033718348, 0.73539954, -1.103806, 0.6650283, 3.9930673, -0.3433727, 0.2962739, 4.4730597, -0.42440778, 0.15294236, 4.460499, -0.5315902, 0.05935818, 4.452424, -0.5315902, -0.40609992, 4.4116025, -0.5315902, -0.5492673, 4.399042, -0.42440778, -0.36078548, 3.9029005, -0.9391427, 0.0033718348, -0.014196, -1.0000811, 0.10335916, 3.943722, -0.9391427)
+
+[sub_resource type="Animation" id="Animation_f2e6v"]
+resource_name = "Walking"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.08726646, 1.5707964, 4.0272834e-09), Vector3(-0.08726646, 1.5707964, 4.0272834e-09), Vector3(0.08726646, 1.5707964, 4.0272834e-09)]
+}
+
+[sub_resource type="Animation" id="Animation_21x0f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.5707964, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jgk6k"]
+_data = {
+&"RESET": SubResource("Animation_21x0f"),
+&"Walking": SubResource("Animation_f2e6v")
+}
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_lsx3x")
-move_speed = 5.0
+move_speed = 1.0
 enemie_health = 15.0
-attach_move_speed = 5.0
-attack_damage = 25.0
 attack_cooldown = 2.5
 reward_gold = 15
 reward_exp = 5
 
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_jgk6k")
+mesh = ExtResource("3_21x0f")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(-8.742278e-09, 3.520763e-17, 0.2, 8.054567e-10, 0.2, 0, -0.2, 8.054567e-10, -8.742278e-09, 0, -0.5, 0)
+shape = SubResource("ConvexPolygonShape3D_f2e6v")
+
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_lsx3x")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_b1c4r")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jgk6k")
+}
 
 [connection signal="navigation_finished" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_navigation_finished"]
