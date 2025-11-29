@@ -5,7 +5,7 @@ extends Node3D
 const Enemy = preload("res://scenes/characters/enemy.tscn")
 
 @export var total_waves: int = 5
-@export var enemies_per_wave: Array[int] = [2, 5, 6, 10, 15]
+@export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
 @export var time_between_waves: float = 15.0
 @export var difficulty_per_wave: Array[float] = [1, 1.2, 1.5, 1.8, 2.0]
 @export var spawn_radius: float = 5
