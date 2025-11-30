@@ -62,6 +62,6 @@ func spawn_enemy(difficulty: float) -> void:
 
 	enemy_instance.set_difficulty(difficulty)
 
-	var chosen_mesh = enemy_types[randi() % enemy_types.size()]
-	enemy_instance.set_enemy_mesh(chosen_mesh)
-	enemy_instance.add_to_group("enemy")
+	#var chosen_mesh = enemy_types[randi() % enemy_types.size()]
+	#enemy_instance.set_enemy_mesh(chosen_mesh)
+	#enemy_instance.add_to_group("enemy")

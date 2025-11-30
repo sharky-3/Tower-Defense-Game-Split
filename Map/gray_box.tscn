@@ -27,6 +27,7 @@ uv1_world_triplanar = true
 
 [node name="GrayBox" type="Node3D"]
 script = ExtResource("1_4p7dm")
+enemies_per_wave = Array[int]([10, 2, 2, 2, 2])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_b7tvy")
@@ -114,11 +115,12 @@ shadow_blur = 4.0
 directional_shadow_max_distance = 400.0
 
 [node name="CameraPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 13.150675)
 script = ExtResource("3_mm57a")
 max_distance_from_center = 45.0
 
 [node name="CameraRotationX" type="Node3D" parent="CameraPosition"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 
 [node name="CameraZoomPivot" type="Node3D" parent="CameraPosition/CameraRotationX"]
 

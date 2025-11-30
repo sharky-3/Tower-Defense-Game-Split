@@ -30,8 +30,8 @@ extends CharacterBody3D
 @export var death_sound: AudioStream
 
 # Optimization: throttle path updates
-var path_update_timer: float = 0.0
-const PATH_UPDATE_INTERVAL: float = 0.2
+var path_update_timer: float = 0.5
+const PATH_UPDATE_INTERVAL: float = 1.0
 
 func _ready() -> void:
 	if not target:
