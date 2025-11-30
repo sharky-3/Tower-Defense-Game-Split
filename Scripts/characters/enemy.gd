@@ -69,7 +69,8 @@ func _physics_process(_delta: float) -> void:
 	velocity.x = dir.x * move_speed
 	velocity.z = dir.z * move_speed
 	velocity.y = dir.y * move_speed
-
+	
+	animation.play("Walking")
 	# Rotate only if necessary
 	if (target.global_position - global_position).length() > 0.1:
 		look_at_xz(target.global_position)
