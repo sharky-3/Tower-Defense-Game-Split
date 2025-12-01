@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://1m8cwwnji0lj"]
+
+[ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="1_cehvg"]
+[ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="2_abmpb"]
+[ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://Scenes/Towers/player_tower/player_tower.tscn" id="3_xut6b"]
+[ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="4_xut6b"]
+
+[node name="TileMap" type="Node3D"]
+
+[node name="HexGrid" type="Node3D" parent="."]
+script = ExtResource("1_cehvg")
+
+[node name="CameraPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 13.150675)
+script = ExtResource("2_abmpb")
+max_distance_from_center = 45.0
+
+[node name="CameraRotationX" type="Node3D" parent="CameraPosition"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+
+[node name="CameraZoomPivot" type="Node3D" parent="CameraPosition/CameraRotationX"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
+
+[node name="Map" type="Node" parent="."]
+
+[node name="spawn_enemy_position" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, -7)
+
+[node name="PlayerTower" parent="Map" instance=ExtResource("3_xut6b")]
+transform = Transform3D(-0.43780008, -0.0035638325, 0.24149202, 0.002869319, 0.4998336, 0.012578102, -0.24150127, 0.012399221, -0.43763387, -8, 1, 7.0096636)
+health = 0.0
+max_health = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("4_xut6b")
+
+[node name="Lights" type="Node3D" parent="."]
+transform = Transform3D(-0.52521276, -0.5167623, 0.67609763, 0.8509572, -0.32339656, 0.4138672, 0.0047766254, 0.7926981, 0.60959524, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
+transform = Transform3D(0.330514, 0, 0.943801, 0, 1, 0, -0.943801, 0, 0.330514, 100, 0, 0)
+light_color = Color(1, 0.8154974, 0.692145, 1)
+light_energy = 10.0
+light_indirect_energy = 0.5
+light_volumetric_fog_energy = 2.0
+shadow_enabled = true
+shadow_bias = 0.008
+shadow_blur = 4.0
+directional_shadow_max_distance = 400.0

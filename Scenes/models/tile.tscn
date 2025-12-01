@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqr2nia2wo1lm"]
+
+[ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="1_ue7ck"]
+[ext_resource type="ArrayMesh" uid="uid://bdpahb7huo4w1" path="res://assets/models/tile/basic.obj" id="2_uri3x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o75tf"]
+albedo_texture = ExtResource("1_ue7ck")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mwghd"]
+points = PackedVector3Array(0.866025, 0.9314227, 0.42418367, 0.79023933, 1.007242, 0.4562047, 0.8004118, 0.9314227, 0.537764, 0.866025, 0.075720616, 0.42418367, 0.866025, 0.9314227, -0.42437202, 0, 1.007242, 0.91240937, 0.065443516, 0.9314227, 0.962136, 0.79023933, 1.007242, -0.456393, 0.8004118, 0.075720616, 0.537764, 0.79023933, 0, 0.4562047, 0.866025, 0.075720616, -0.42437202, 0.8004118, 0.9314227, -0.5379523, -0.06561309, 0.9314227, 0.962136, -0.79040885, 1.007242, 0.4562047, 0.065443516, 0.075720616, 0.962136, 0, 1.007242, -0.91259766, 0, 0, 0.91240937, 0.79023933, 0, -0.456393, 0.8004118, 0.075720616, -0.5379523, 0.065443516, 0.9314227, -0.962136, -0.80058146, 0.9314227, 0.537764, -0.06561309, 0.075720616, 0.962136, -0.866025, 0.9314227, 0.42418367, -0.79040885, 1.007242, -0.456393, -0.06561309, 0.9314227, -0.962136, -0.80058146, 0.9314227, -0.5379523, -0.79040885, 0, 0.4562047, 0, 0, -0.91259766, 0.065443516, 0.075720616, -0.962136, -0.80058146, 0.075720616, 0.537764, -0.866025, 0.075720616, 0.42418367, -0.866025, 0.9314227, -0.42437202, -0.06561309, 0.075720616, -0.962136, -0.80058146, 0.075720616, -0.5379523, -0.79040885, 0, -0.456393, -0.866025, 0.075720616, -0.42437202)
+
+[node name="Tile" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_o75tf")
+mesh = ExtResource("2_uri3x")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_mwghd")
