@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://duu1tsc7gf3kk"]
+[gd_scene load_steps=2 format=3 uid="uid://duu1tsc7gf3kk"]
 
-[node name="CardsFrame" type="Control"]
+[ext_resource type="Script" uid="uid://bpxdukoduq7tg" path="res://Scripts/ui/placing_system.gd" id="1_j46x2"]
+
+[node name="PlacingSystem" type="Control"]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -12,41 +14,42 @@ offset_bottom = -82.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(1.4443448, 1.4443448)
+script = ExtResource("1_j46x2")
 
-[node name="Card2" type="Panel" parent="."]
+[node name="Card1" type="Button" parent="."]
 layout_mode = 0
-offset_left = -191.76054
-offset_top = -172.33081
-offset_right = 8.239456
-offset_bottom = 107.66919
-rotation = -0.12217305
-pivot_offset = Vector2(100, 140)
-
-[node name="Card1" type="Panel" parent="."]
-layout_mode = 0
-offset_left = -372.48727
-offset_top = -122.54693
-offset_right = -172.48727
-offset_bottom = 157.45306
+offset_left = -372.48703
+offset_top = -122.547
+offset_right = -172.48703
+offset_bottom = 157.453
 rotation = -0.20943952
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(100, 140)
 
-[node name="Card4" type="Panel" parent="."]
+[node name="Card2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 177.24297
-offset_top = -135.70168
-offset_right = 377.243
-offset_bottom = 144.29832
-rotation = 0.19198622
-scale = Vector2(0.9, 0.9)
+offset_left = -191.76099
+offset_top = -172.33104
+offset_right = 8.238998
+offset_bottom = 107.66896
+rotation = -0.12217305
 pivot_offset = Vector2(100, 140)
 
-[node name="Card3" type="Panel" parent="."]
+[node name="Card3" type="Button" parent="."]
 layout_mode = 0
-offset_left = -8.601746
-offset_top = -171.37027
-offset_right = 191.39825
-offset_bottom = 108.62973
+offset_left = -8.602
+offset_top = -171.37
+offset_right = 191.39798
+offset_bottom = 108.630005
 rotation = 0.08726646
+pivot_offset = Vector2(100, 140)
+
+[node name="Card4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 177.24301
+offset_top = -135.70201
+offset_right = 377.24298
+offset_bottom = 144.29799
+rotation = 0.19198622
+scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(100, 140)

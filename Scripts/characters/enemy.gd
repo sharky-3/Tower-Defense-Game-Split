@@ -39,7 +39,6 @@ func _set_target():
 
 func look_at_xz(pos: Vector3):
 	var flat = Vector3(pos.x, global_position.y, pos.z)
-	print(flat)
 	look_at(flat, Vector3.UP)
 
 func _physics_process(delta):

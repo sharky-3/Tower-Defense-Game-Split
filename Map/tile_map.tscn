@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://1m8cwwnji0lj"]
+[gd_scene load_steps=8 format=3 uid="uid://1m8cwwnji0lj"]
 
 [ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="1_cehvg"]
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_o4np1"]
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="2_abmpb"]
 [ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://Scenes/Towers/player_tower/player_tower.tscn" id="3_xut6b"]
 [ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="4_xut6b"]
+[ext_resource type="PackedScene" uid="uid://duu1tsc7gf3kk" path="res://Scenes/ui/cards_frame.tscn" id="5_0ps8j"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o4np1"]
 
@@ -45,6 +46,8 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 [node name="CameraZoomPivot" type="Node3D" parent="CameraPosition/CameraRotationX"]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
+
+[node name="PlacingSystem" parent="." instance=ExtResource("5_0ps8j")]
 
 [node name="Map" type="Node" parent="."]
 
