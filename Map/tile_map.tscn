@@ -1,11 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://1m8cwwnji0lj"]
+[gd_scene load_steps=7 format=3 uid="uid://1m8cwwnji0lj"]
 
 [ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="1_cehvg"]
+[ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_o4np1"]
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="2_abmpb"]
 [ext_resource type="PackedScene" uid="uid://xjqc8al6xfu1" path="res://Scenes/Towers/player_tower/player_tower.tscn" id="3_xut6b"]
 [ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="4_xut6b"]
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_o4np1"]
+
 [node name="TileMap" type="Node3D"]
+script = ExtResource("1_o4np1")
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_o4np1")
+
+[node name="HexGrid" type="Node3D" parent="NavigationRegion3D"]
+script = ExtResource("1_cehvg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_xut6b")
@@ -24,9 +34,6 @@ shadow_bias = 0.008
 shadow_blur = 4.0
 directional_shadow_max_distance = 400.0
 
-[node name="HexGrid" type="Node3D" parent="."]
-script = ExtResource("1_cehvg")
-
 [node name="CameraPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 13.150675)
 script = ExtResource("2_abmpb")
@@ -42,7 +49,7 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 [node name="Map" type="Node" parent="."]
 
 [node name="spawn_enemy_position" type="Node3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.5, -7)
+transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)
 
 [node name="PlayerTower" parent="Map" instance=ExtResource("3_xut6b")]
 transform = Transform3D(-0.26268008, -0.0021382982, 0.14489521, 0.0017215913, 0.29990014, 0.0075468584, -0.14490075, 0.007439532, -0.26258036, 0, 1, 0)

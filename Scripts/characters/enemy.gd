@@ -39,8 +39,8 @@ func _set_target():
 
 func look_at_xz(pos: Vector3):
 	var flat = Vector3(pos.x, global_position.y, pos.z)
+	print(flat)
 	look_at(flat, Vector3.UP)
-
 
 func _physics_process(delta):
 	if not target:
@@ -54,17 +54,15 @@ func _physics_process(delta):
 
 	# Path movement
 	var next_point = navigation_agent_3d.get_next_path_position()
-	var dir = (next_point - global_position).normalized()
+	var dir = next_point - global_position
 
-	# Move manually (fastest)
-	global_position += dir * move_speed * delta
+	var move_dir = dir.normalized()
+	global_position += move_dir * move_speed * delta
+	look_at_xz(global_position + move_dir)
 
-	# Rotate only when needed
-	if dir.length() > 0.05:
-		look_at_xz(global_position + dir)
 
-	# Play animation only once
-	if animation and not animation.is_playing():
+	# Play walking animation only when moving
+	if animation and not animation.is_playing() and dir.length_squared() > 0.0001:
 		animation.play("Walking")
 
 func _on_target_reached():
