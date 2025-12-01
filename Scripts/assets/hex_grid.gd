@@ -2,6 +2,7 @@ extends Node3D
 
 const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
 const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
+@onready var player_tower: Node3D = $"../Map/PlayerTower"
 
 const TILE_SIZE := 1.5
 const SPACING := 1.1
@@ -60,6 +61,8 @@ func _generate_grid():
 
 			# --- Raise center tile ---
 			if x == int(center.x) and y == int(center.y):
+				player_tower.position = tile_coordinates
+				player_tower.position.y += 1.4
 				tile_coordinates.y += 0.5
 
 			tile.translate(tile_coordinates)
