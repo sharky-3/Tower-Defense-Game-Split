@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var player_tower: Node3D = $Map/PlayerTower
 @onready var spawn_enemy_position: Node3D = $Map/spawn_enemy_position
-const Enemy = preload("res://scenes/characters/enemy.tscn")
+const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
 
 @export var total_waves: int = 5
 @export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
@@ -62,6 +62,6 @@ func spawn_enemy(difficulty: float) -> void:
 
 	enemy_instance.set_difficulty(difficulty)
 
-	#var chosen_mesh = enemy_types[randi() % enemy_types.size()]
-	#enemy_instance.set_enemy_mesh(chosen_mesh)
-	#enemy_instance.add_to_group("enemy")
+	var chosen_mesh = enemy_types[randi() % enemy_types.size()]
+	enemy_instance.set_enemy_mesh(chosen_mesh)
+	enemy_instance.add_to_group("enemy")

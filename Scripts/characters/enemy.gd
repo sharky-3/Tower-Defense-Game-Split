@@ -1,4 +1,4 @@
-extends CharacterBody3D
+extends Node3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var target: Node3D = $"../Map/PlayerTower"
@@ -6,83 +6,78 @@ extends CharacterBody3D
 @onready var mesh: MeshInstance3D = $Mesh
 
 @export_category("Main")
-@export var move_speed: float
-@export var enemie_health: float
+@export var move_speed: float = 3.0
+@export var enemie_health: float = 10.0
 
 @export_category("Combat")
-@export var attach_move_speed: float
-@export var attack_damage: float
-@export var attack_cooldown: float
+@export var attack_damage: float = 1.0
+@export var attack_cooldown: float = 1.0
 
 @export_category("Status")
 @export var is_alive: bool = true
-@export var is_slowed: bool
-@export var slow_factor: float = .5
-@export var can_fly: bool
+@export var is_slowed: bool = false
+@export var slow_factor: float = 0.5
+@export var can_fly: bool = false
 
 @export_category("Rewards")
-@export var reward_gold: int
-@export var reward_exp: int
+@export var reward_gold: int = 5
+@export var reward_exp: int = 1
 
-@export_category("Visual/Audio")
-@export var death_effect: bool
-@export var hit_sound: AudioStream
-@export var death_sound: AudioStream
+# Path update throttle
+var path_update_timer := 0.0
+const PATH_UPDATE_INTERVAL := 0.75   # update less often = faster
 
-# Optimization: throttle path updates
-var path_update_timer: float = 0.5
-const PATH_UPDATE_INTERVAL: float = 1.0
-
-func _ready() -> void:
+func _ready():
 	if not target:
 		_set_target()
-	if target:
-		navigation_agent_3d.target_position = target.global_position + Vector3.UP
-		navigation_agent_3d.target_desired_distance = 2.0
-		navigation_agent_3d.connect("target_reached", Callable(self, "_on_navigation_agent_3d_target_reached"))
+
+	navigation_agent_3d.target_position = target.global_position
+	navigation_agent_3d.connect("target_reached", _on_target_reached)
 
 func _set_target():
 	target = get_tree().get_first_node_in_group("PlayerTower")
 
-func look_at_xz(target_pos: Vector3) -> void:
-	var flat_target = Vector3(target_pos.x, global_position.y, target_pos.z)
-	look_at(flat_target, Vector3.UP)
+func look_at_xz(pos: Vector3):
+	var flat = Vector3(pos.x, global_position.y, pos.z)
+	look_at(flat, Vector3.UP)
 
-func set_enemy_mesh(new_mesh: Mesh) -> void:
-	if mesh:
-		mesh.mesh = new_mesh
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta):
 	if not target:
 		return
 
-	# Throttle navigation updates
-	path_update_timer -= _delta
+	# Throttle expensive pathfinding calls
+	path_update_timer -= delta
 	if path_update_timer <= 0.0:
-		if not navigation_agent_3d.is_target_reachable():
-			navigation_agent_3d.set_target_position(target.global_position + Vector3.UP)
+		navigation_agent_3d.target_position = target.global_position
 		path_update_timer = PATH_UPDATE_INTERVAL
 
-	var next_path_pos = navigation_agent_3d.get_next_path_position()
-	var dir = (next_path_pos - global_position).normalized()
+	# Path movement
+	var next_point = navigation_agent_3d.get_next_path_position()
+	var dir = (next_point - global_position).normalized()
 
-	velocity.x = dir.x * move_speed
-	velocity.z = dir.z * move_speed
-	velocity.y = dir.y * move_speed
-	
-	animation.play("Walking")
-	# Rotate only if necessary
-	if (target.global_position - global_position).length() > 0.1:
-		look_at_xz(target.global_position)
+	# Move manually (fastest)
+	global_position += dir * move_speed * delta
 
-	move_and_slide()
+	# Rotate only when needed
+	if dir.length() > 0.05:
+		look_at_xz(global_position + dir)
 
-func set_difficulty(multiplier: float) -> void:
+	# Play animation only once
+	if animation and not animation.is_playing():
+		animation.play("Walking")
+
+
+func _on_target_reached():
+	if target and target.has_method("take_attack_damage"):
+		target.take_attack_damage(attack_damage)
+
+	queue_free()
+
+func set_enemy_mesh(new_mesh: Mesh):
+	mesh.mesh = new_mesh
+
+func set_difficulty(multiplier: float):
 	move_speed *= multiplier
 	enemie_health *= multiplier
 	attack_damage *= multiplier
-
-func _on_navigation_agent_3d_target_reached() -> void:
-	if target and target.has_method("take_attack_damage"):
-		target.take_attack_damage(attack_damage)
-	queue_free()

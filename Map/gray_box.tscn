@@ -27,7 +27,7 @@ uv1_world_triplanar = true
 
 [node name="GrayBox" type="Node3D"]
 script = ExtResource("1_4p7dm")
-enemies_per_wave = Array[int]([10, 2, 2, 2, 2])
+enemies_per_wave = Array[int]([50, 50, 50, 50, 50])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_b7tvy")
