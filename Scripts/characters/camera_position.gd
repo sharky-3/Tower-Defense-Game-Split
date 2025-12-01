@@ -6,7 +6,8 @@ extends Node3D
 @onready var camera_zoom_pivot: Node3D = $CameraRotationX/CameraZoomPivot
 @onready var camera: Camera3D = $CameraRotationX/CameraZoomPivot/Camera3D
 
-@export var max_distance_from_center: float
+@export var max_distance_from_center: float = 25
+@export var center_point: Vector3 = Vector3(14.28942, 0.05, 16.5)
 
 # =============================================
 # VARIABLES
@@ -23,7 +24,6 @@ var zoom_speed = 4.0
 var zoom_target: float
 var min_zoom = -20.0
 var max_zoom = 20.0
-
 
 # new – damping speeds
 var smooth_pos_lerp := 10.0
@@ -82,8 +82,17 @@ func _process(delta: float) -> void:
 	move_target += move_speed * movement_direction
 	
 	# clamp move_target to max distance from center (X and Z)
-	move_target.x = clamp(move_target.x, -max_distance_from_center, max_distance_from_center)
-	move_target.z = clamp(move_target.z, -max_distance_from_center, max_distance_from_center)
+	move_target.x = clamp(
+		move_target.x,
+		center_point.x - max_distance_from_center,
+		center_point.x + max_distance_from_center
+	)
+
+	move_target.z = clamp(
+		move_target.z,
+		center_point.z - max_distance_from_center,
+		center_point.z + max_distance_from_center
+	)
 
 	# rotate keyboard
 	var rotate_keys = Input.get_axis("rotate_right", "rotate_left")

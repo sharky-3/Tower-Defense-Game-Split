@@ -4,6 +4,8 @@ extends Node3D
 const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
 const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
 @onready var player_tower: Node3D = $"../../Map/PlayerTower"
+@onready var player_camera: Node3D = $"../../CameraPosition"
+@onready var camera_rotation_x: Node3D = $"../../CameraPosition/CameraRotationX"
 
 const TILE_SIZE := 1.5
 const SPACING := 1.1
@@ -57,5 +59,8 @@ func _generate_grid():
 			if x == int(center.x) and y == int(center.y):
 				player_tower.position = tile_coordinates
 				player_tower.position.y += 1.15
+				player_camera.position = tile_coordinates
+				player_camera.position.y += 10
+				player_camera.position.z += 5
 
 	navigation_region_3d.bake_navigation_mesh()
