@@ -39,13 +39,9 @@ func start_waves() -> void:
 
 		for i in range(enemy_count):
 			spawn_enemy(difficulty)
-			await get_tree().create_timer(0.1).timeout  # small delay between spawns
-			print(i)
+			await get_tree().create_timer(0.1).timeout  
 
-		print("Wave %d finished spawning" % wave_index)
-		await get_tree().create_timer(time_between_waves).timeout  # wait before next wave
-
-	print("All waves finished!")
+		await get_tree().create_timer(time_between_waves).timeout
 
 # Spawn a single enemy
 func spawn_enemy(difficulty: float) -> void:

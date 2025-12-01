@@ -32,7 +32,7 @@ func _ready():
 		_set_target()
 
 	navigation_agent_3d.target_position = target.global_position
-	navigation_agent_3d.connect("target_reached", _on_target_reached)
+	navigation_agent_3d.connect("target_reached", Callable(self, "_on_target_reached"))
 
 func _set_target():
 	target = get_tree().get_first_node_in_group("PlayerTower")
@@ -67,11 +67,9 @@ func _physics_process(delta):
 	if animation and not animation.is_playing():
 		animation.play("Walking")
 
-
 func _on_target_reached():
 	if target and target.has_method("take_attack_damage"):
 		target.take_attack_damage(attack_damage)
-
 	queue_free()
 
 func set_enemy_mesh(new_mesh: Mesh):

@@ -71,5 +71,3 @@ shape = SubResource("ConvexPolygonShape3D_sdh2x")
 libraries = {
 &"": SubResource("AnimationLibrary_jgk6k")
 }
-
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
