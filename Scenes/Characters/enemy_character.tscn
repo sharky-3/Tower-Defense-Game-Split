@@ -48,8 +48,9 @@ _data = {
 }
 
 [node name="Enemy" type="Node3D"]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_sdh2x")
-move_speed = 2.0
+move_speed = 1.0
 enemie_health = 15.0
 attack_damage = 0.0
 

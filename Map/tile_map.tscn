@@ -11,6 +11,7 @@
 
 [node name="TileMap" type="Node3D"]
 script = ExtResource("1_o4np1")
+enemies_per_wave = Array[int]([50, 2, 2, 2, 2])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o4np1")
@@ -26,7 +27,7 @@ transform = Transform3D(-0.52521276, -0.5167623, 0.67609763, 0.8509572, -0.32339
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(0.330514, 0, 0.943801, 0, 1, 0, -0.943801, 0, 0.330514, 100, 0, 0)
-light_color = Color(1, 0.8154974, 0.692145, 1)
+light_color = Color(0.94509804, 0.99215686, 0.9254902, 1)
 light_energy = 10.0
 light_indirect_energy = 0.5
 light_volumetric_fog_energy = 2.0
