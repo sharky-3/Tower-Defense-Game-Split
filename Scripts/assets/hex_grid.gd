@@ -1,11 +1,13 @@
 extends Node3D
 
-@onready var navigation_region_3d: NavigationRegion3D = $".."
 const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
 const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
+
+@onready var navigation_region_3d: NavigationRegion3D = $".."
 @onready var player_tower: Node3D = $"../../Map/PlayerTower"
 @onready var player_camera: Node3D = $"../../CameraPosition"
 @onready var camera_rotation_x: Node3D = $"../../CameraPosition/CameraRotationX"
+@onready var spawn_enemy_position: Node3D = $"../../Map/spawn_enemy_position"
 
 const TILE_SIZE := 1.5
 const SPACING := 1.1
@@ -57,10 +59,13 @@ func _generate_grid():
 
 			# --- Center tile: place player tower ---
 			if x == int(center.x) and y == int(center.y):
-				player_tower.position = tile_coordinates
-				player_tower.position.y += 1.15
-				player_camera.position = tile_coordinates
-				player_camera.position.y += 10
-				player_camera.position.z += 5
+				var TOWER_OFFSET = Vector3(0, 0, 0)
+				var CAMERA_OFFSET = Vector3(0, 10, 5)
+				var ENEMY_SPAWN_OFFSET = Vector3(0,.6,0)
+
+				player_tower.position = tile_coordinates + TOWER_OFFSET
+				player_camera.position = tile_coordinates + CAMERA_OFFSET
+				
+				spawn_enemy_position.position = tile_coordinates + ENEMY_SPAWN_OFFSET
 
 	navigation_region_3d.bake_navigation_mesh()

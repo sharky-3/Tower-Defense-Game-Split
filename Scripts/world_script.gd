@@ -8,7 +8,7 @@ const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
 @export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
 @export var time_between_waves: float = 15.0
 @export var difficulty_per_wave: Array[float] = [1, 1.2, 1.5, 1.8, 2.0]
-@export var spawn_radius: float = 5
+@export var spawn_radius: float = 10
 
 const GOBLIN_1 = preload("uid://bfygdhktxcdvx")
 const GOBLIN_2 = preload("uid://dgan33wtxphvc")

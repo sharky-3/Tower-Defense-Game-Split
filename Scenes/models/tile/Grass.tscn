@@ -12,7 +12,7 @@ points = PackedVector3Array(0.866025, 0.9314227, 0.42418367, 0.79023933, 1.00724
 [node name="Grass" type="Node3D"]
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -1, 0)
 material_override = SubResource("StandardMaterial3D_o75tf")
 mesh = ExtResource("2_uri3x")
 
