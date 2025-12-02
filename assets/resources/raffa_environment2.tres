@@ -8,9 +8,9 @@ colors = PackedColorArray(0, 0, 0, 1, 0.0675, 0.093625, 0.15, 1, 0.9, 0.8232, 0.
 gradient = SubResource("Gradient_e1esm")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uuw0g"]
-sky_top_color = Color(0.35077038, 0.66130024, 0.90619445, 1)
+sky_top_color = Color(0.5294118, 0.72156864, 1, 1)
 sky_energy_multiplier = 11.55
-ground_bottom_color = Color(0.1425009, 0.28353673, 0.30560562, 1)
+ground_bottom_color = Color(0.90588236, 0.8627451, 0.7647059, 1)
 
 [sub_resource type="Sky" id="Sky_q4x03"]
 sky_material = SubResource("ProceduralSkyMaterial_uuw0g")

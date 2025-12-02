@@ -17,7 +17,7 @@ const BUILDINGS = [
 @onready var card4: Button = $Card4
 
 const TILE_SIZE: float = 1.5
-const SPACING: float = 1.1
+const SPACING: float = 1
 var TOWER_OFFSET: Vector3 = Global.Y_OFFSET
 
 # =============================================
