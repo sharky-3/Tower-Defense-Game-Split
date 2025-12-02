@@ -16,8 +16,9 @@ const BUILDINGS = [
 @onready var card3: Button = $Card3
 @onready var card4: Button = $Card4
 
-const TILE_SIZE := 1.5
-const SPACING := 1.1
+const TILE_SIZE: float = 1.5
+const SPACING: float = 1.1
+var TOWER_OFFSET: Vector3 = Global.Y_OFFSET
 
 # =============================================
 # VARIABLES
@@ -38,12 +39,12 @@ func start_placing(index: int):
 	get_tree().current_scene.add_child(current_building)
 
 	var pos = snap_to_hex_grid(get_mouse_world_position())
-	current_building.global_transform.origin = pos + Vector3(0, 1.6, 0)
+	current_building.global_transform.origin = pos + TOWER_OFFSET
 
 func _process(delta):
 	if current_building:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
-		current_building.global_transform.origin = pos + Vector3(0, 1.6, 0)
+		current_building.global_transform.origin = pos + TOWER_OFFSET
 
 func _unhandled_input(event):
 	if current_building and event is InputEventMouseButton:
@@ -56,7 +57,6 @@ func get_mouse_world_position() -> Vector3:
 	var origin = camera.project_ray_origin(mouse_pos)
 	var direction = camera.project_ray_normal(mouse_pos)
 
-	# Intersect ray with plane at y = 0
 	var t = -origin.y / direction.y
 	return origin + direction * t
 
@@ -65,21 +65,14 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 	var half_shift = size / 2.0
 	var cos30 = cos(deg_to_rad(30))
 
-	# Convert world → hex offset coords
 	var q = world_pos.x / (size * cos30)
-
-	# Convert q to integer BEFORE modulo
 	var iq = int(round(q))
-
 	var r = (world_pos.z - (half_shift if iq % 2 != 0 else 0.0)) / size
 
-	# Round both coords
 	var rq = iq
 	var rr = int(round(r))
 
-	# Convert back to world → snapped tile position
 	var snapped = Vector3.ZERO
 	snapped.x = rq * size * cos30
 	snapped.z = rr * size + (half_shift if rq % 2 != 0 else 0.0)
-
 	return snapped

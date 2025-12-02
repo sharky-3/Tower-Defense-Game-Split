@@ -61,7 +61,7 @@ func _generate_grid():
 			if x == int(center.x) and y == int(center.y):
 				var TOWER_OFFSET = Vector3(0, 0, 0)
 				var CAMERA_OFFSET = Vector3(0, 10, 5)
-				var ENEMY_SPAWN_OFFSET = Vector3(0,.6,0)
+				var ENEMY_SPAWN_OFFSET = Global.Y_OFFSET
 
 				player_tower.position = tile_coordinates + TOWER_OFFSET
 				player_camera.position = tile_coordinates + CAMERA_OFFSET
