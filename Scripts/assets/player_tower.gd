@@ -13,8 +13,6 @@ extends Node3D
 
 func take_attack_damage(amount: int) -> void:
 	health -= amount
-	print("Tower took ", amount, " damage! Remaining health: ", health)
 	if health <= 0:
-		print("Tower destroyed!")
 		is_alive = false
 		#queue_free() 

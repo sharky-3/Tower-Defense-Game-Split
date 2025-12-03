@@ -47,6 +47,9 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
 
+[node name="RayCast3D" type="RayCast3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot/Camera3D"]
+target_position = Vector3(0, 0, 0)
+
 [node name="PlacingSystem" parent="." instance=ExtResource("5_0ps8j")]
 
 [node name="Map" type="Node" parent="."]

@@ -112,3 +112,4 @@ func _process(delta: float) -> void:
 	rotation.y = lerp_angle(rotation.y, rotate_keys_target, clamp(smooth_rot_lerp * delta, 0, 1))
 	camera.position.z = lerp(camera.position.z, zoom_target, clamp(smooth_zoom_lerp * delta, 0, 1))
 	camera_rotation_x.rotation.x = lerp(camera_rotation_x.rotation.x, pitch_target, clamp(smooth_pitch_lerp * delta, 0, 1))
+	

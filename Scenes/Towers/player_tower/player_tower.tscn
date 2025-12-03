@@ -15,7 +15,7 @@ points = PackedVector3Array(0.64046144, 3.6300225, 2.08962, -0.6063156, 3.719064
 [node name="PlayerTower" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_v3u6p")
-health = 100.0
+health = 100000000.0
 max_health = 100.0
 
 [node name="PlayerTower" type="MeshInstance3D" parent="."]
