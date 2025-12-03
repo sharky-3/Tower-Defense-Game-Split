@@ -1,4 +1,5 @@
 extends Node3D
+@onready var TOWER: Node3D = $"."
 
 @onready var range: MeshInstance3D = $Range
 @onready var collision: CollisionShape3D = $Range/Area3D/Collision
@@ -38,3 +39,7 @@ func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_inde
 func _on_area_3d_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
 	if body and body.is_in_group("Enemy"): 
 		enemies_in_range.erase(body)
+
+func _input(event):
+	if event is InputEventMouseButton and event.is_pressed():
+		pass
