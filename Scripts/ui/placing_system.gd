@@ -9,6 +9,8 @@ const BUILDINGS = [
 	preload("uid://ctu1pahffsbfr")
 ]
 
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+
 # =============================================
 # ONREADY BUTTONS
 @onready var card1: Button = $Card1
@@ -40,6 +42,9 @@ func start_placing(index: int):
 
 	var pos = snap_to_hex_grid(get_mouse_world_position())
 	current_building.global_transform.origin = pos + TOWER_OFFSET
+	
+	var random_angle = deg_to_rad(rng.randf_range(0, 360))
+	current_building.rotate(Vector3(0, 1, 0), random_angle)
 
 func _process(delta):
 	if current_building:
