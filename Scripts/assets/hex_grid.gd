@@ -99,6 +99,6 @@ func _generate_grid():
 				tile.position = tile_coordinates - CENTER_OFFSET
 				player_tower.position = tile_coordinates - CENTER_OFFSET
 				player_camera.position = tile_coordinates + Vector3(0, 10, 5)
-				spawn_enemy_position.position = tile_coordinates + Vector3(0, 0, -5)
+				spawn_enemy_position.position = tile_coordinates + Vector3(0, 1, 0)
 
 	navigation_region_3d.bake_navigation_mesh()
