@@ -1,11 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctu1pahffsbfr"]
+[gd_scene load_steps=7 format=3 uid="uid://ctu1pahffsbfr"]
+
+[ext_resource type="Script" uid="uid://bjwr71vjwbwhw" path="res://Scripts/assets/attach_tower.gd" id="1_s5kil"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_5nlp7"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_s5kil"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_s5kil"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b5mx7"]
+transparency = 1
+albedo_color = Color(0, 0.6666667, 0.9411765, 0.19607843)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b5mx7"]
+
 [node name="TestTower" type="Node3D"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+script = ExtResource("1_s5kil")
+RANGE_VALUE = 15.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("CylinderMesh_5nlp7")
@@ -14,3 +26,20 @@ mesh = SubResource("CylinderMesh_5nlp7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 shape = SubResource("CylinderShape3D_s5kil")
+
+[node name="Range" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 0.1, 0, 0, 0, 5, 0, -0.5, 0)
+mesh = SubResource("CylinderMesh_s5kil")
+surface_material_override/0 = SubResource("StandardMaterial3D_b5mx7")
+
+[node name="Area3D" type="Area3D" parent="Range"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 4.7683716e-07, 0)
+
+[node name="Collision" type="CollisionShape3D" parent="Range/Area3D"]
+shape = SubResource("CylinderShape3D_b5mx7")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="body_shape_entered" from="Range/Area3D" to="." method="_on_area_3d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Range/Area3D" to="." method="_on_area_3d_body_shape_exited"]

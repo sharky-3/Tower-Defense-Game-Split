@@ -1,4 +1,6 @@
 extends Node3D
+@onready var ENEMY: Node3D = $"."
+@onready var rigid_body_3d: RigidBody3D = $Mesh/RigidBody3D
 
 @onready var navigation_agent_3d: NavigationAgent3D = $NavigationAgent3D
 @onready var target: Node3D = $"../Map/PlayerTower"
@@ -59,7 +61,6 @@ func _physics_process(delta):
 	global_position += move_dir * move_speed * delta
 	look_at_xz(global_position + move_dir)
 
-
 	# Play walking animation only when moving
 	if animation and not animation.is_playing() and dir.length_squared() > 0.0001:
 		animation.play("Walking")
@@ -76,3 +77,11 @@ func set_difficulty(multiplier: float):
 	move_speed *= multiplier
 	enemie_health *= multiplier
 	attack_damage *= multiplier
+
+func take_damage(damage: float):
+	enemie_health -= damage
+	if enemie_health <= 0:
+		ENEMY.queue_free()
+		
+func add_group():
+	rigid_body_3d.add_to_group("Enemy")

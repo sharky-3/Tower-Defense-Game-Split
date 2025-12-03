@@ -47,17 +47,24 @@ func start_waves() -> void:
 func spawn_enemy(difficulty: float) -> void:
 	var enemy_instance = Enemy.instantiate()
 	add_child(enemy_instance)
+	enemy_instance.add_group()
 
 	if is_instance_valid(spawn_enemy_position):
+		var min_distance = 6.0
+		var max_distance = spawn_radius
+		var distance = randf_range(min_distance, max_distance)
+		
+		var angle = randf_range(0, TAU) 
+		
 		var random_offset = Vector3(
-			randf_range(-spawn_radius, spawn_radius),
+			cos(angle) * distance,
 			0,
-			randf_range(-spawn_radius, spawn_radius)
+			sin(angle) * distance
 		)
+		
 		enemy_instance.global_transform.origin = spawn_enemy_position.global_transform.origin + random_offset
 
 	enemy_instance.set_difficulty(difficulty)
 
 	var chosen_mesh = enemy_types[randi() % enemy_types.size()]
 	enemy_instance.set_enemy_mesh(chosen_mesh)
-	enemy_instance.add_to_group("enemy")

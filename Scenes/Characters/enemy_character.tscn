@@ -59,7 +59,7 @@ transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09
 material_override = SubResource("StandardMaterial3D_nraa5")
 mesh = ExtResource("3_f31sj")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
+[node name="RigidBody3D" type="RigidBody3D" parent="Mesh" groups=["Enemy"]]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2.5, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]

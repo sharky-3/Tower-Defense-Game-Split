@@ -18,3 +18,5 @@ func take_attack_damage(amount: int) -> void:
 		print("Tower destroyed!")
 		is_alive = false
 		#queue_free() 
+
+func is_enemy(): return false

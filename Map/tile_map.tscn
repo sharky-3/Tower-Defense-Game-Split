@@ -11,14 +11,14 @@
 
 [node name="TileMap" type="Node3D"]
 script = ExtResource("1_o4np1")
-enemies_per_wave = Array[int]([50, 2, 2, 2, 2])
+enemies_per_wave = Array[int]([10, 15, 20, 30, 45])
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o4np1")
 
 [node name="HexGrid" type="Node3D" parent="NavigationRegion3D"]
 script = ExtResource("1_cehvg")
-grid_size = 50
+terrain_type = "Flat"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("4_xut6b")

@@ -12,11 +12,11 @@ const TILE_SIZE := 1.5
 const SPACING := 1
 var CENTER_OFFSET := Vector3(0, 0.2, 0)
 
-@export_range(30, 100) var grid_size := 20
+@export_range(30, 100) var grid_size: int = 25
 var radius: int = grid_size / 2 
 
 # Terrain types
-@export_enum("Flat", "Hills", "Mountain") var terrain_type: String = "Hills"
+@export_enum("Flat", "Hills", "Mountain", "Dunes") var terrain_type: String = "Hills"
 
 # --- NEW: global water level ---
 const WATER_LEVEL := -1.1   # lower = deeper ocean
@@ -34,7 +34,7 @@ func is_water(x: int, y: int, _center: Vector2, dist: float, max_dist: float) ->
 			return true
 	return false
 
-func get_land_height(dist: float, max_dist: float) -> float:
+func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
 	var normalized := 1.0 - (dist / max_dist)
 
 	match terrain_type:
@@ -46,12 +46,17 @@ func get_land_height(dist: float, max_dist: float) -> float:
 			var base := normalized * 1.2
 			CENTER_OFFSET = Vector3(0, 0, 0)
 			return max(base + (randf() - 0.5) * 0.25, 0.0)
-
+		
 		"Mountain":
-			var base := pow(normalized, 3.5) * 6
+			var base := pow(normalized, 3.0) * 2
 			CENTER_OFFSET = Vector3(0, 0.2, 0)
 			var noise := (randf() - 0.5) * 0.1
 			return base + noise
+			
+		"Dunes":
+			var smooth := sin(x * .7) * 0.8 + cos(y * 1.2) * 0.4
+			CENTER_OFFSET = Vector3(0, 0, 0)
+			return smooth * normalized
 
 	return 0.0
 
@@ -84,7 +89,7 @@ func _generate_grid():
 			if tile_is_water:
 				tile_coordinates.y = WATER_LEVEL
 			else:
-				tile_coordinates.y = get_land_height(dist, max_dist)
+				tile_coordinates.y = get_land_height(dist, max_dist, x, y)
 
 			tile.position = tile_coordinates
 			add_child(tile)
