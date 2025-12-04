@@ -23,11 +23,12 @@ func take_attack_damage(amount: float) -> void:
 		
 func _attampt_damage(damage: float) -> void:
 	tower_healt -= damage
-	print("Tower health:", tower_healt)
 	if _tower_health(tower_healt):
-		print("Tower is destroyed")
 		player_tower.queue_free()
 	
 func _tower_health(health: float):
 	if health <= 0: return true
 	return false
+
+func is_tower_dead() -> bool:
+	return _tower_health(tower_healt)

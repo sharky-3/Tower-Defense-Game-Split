@@ -39,7 +39,7 @@ func _ready() -> void:
 	area_3d.body_shape_exited.connect(Callable(self, "_on_area_3d_body_shape_exited"))
 	_enable_upgrade_after_delay()
 	
-func _process(delta):
+func _process(_delta) -> void:
 	_update_ray_from_mouse()
 
 # --------------------------------------------------------------------
@@ -51,6 +51,7 @@ func _update_ray_from_mouse():
 	var mouse_pos = get_viewport().get_mouse_position()
 	var from = camera.project_ray_origin(mouse_pos)
 	var to = from + camera.project_ray_normal(mouse_pos) * 1000
+	
 	camera_ray_cast.cast_to = to - camera_ray_cast.global_transform.origin
 	camera_ray_cast.force_update_transform()
 
@@ -68,7 +69,6 @@ func _load_upgrade_level(level: int) -> void:
 	
 	var data = upgrade_values[current_upgrade]
 
-	# Apply stats
 	tower_range  = data["range"]
 	tower_damage = data["damage"]
 

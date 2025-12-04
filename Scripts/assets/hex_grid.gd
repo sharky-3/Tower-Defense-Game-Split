@@ -1,64 +1,91 @@
 extends Node3D
 
+# --- Resources ---
 const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
 const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
 
-@onready var navigation_region_3d: NavigationRegion3D = $".."
-@onready var player_tower: Node3D = $"../../Map/PlayerTower"
-@onready var player_camera: Node3D = $"../../CameraPosition"
-@onready var spawn_enemy_position: Node3D = $"../../Map/spawn_enemy_position"
-
-const TILE_SIZE := 1.5
-const SPACING := 1
-var CENTER_OFFSET := Vector3(0, 0.2, 0)
-
+# --- Constants / Exported Data ---
 @export_range(30, 100) var grid_size: int = 25
-var radius: int = grid_size / 2 
-
-# Terrain types
 @export_enum("Flat", "Hills", "Mountain", "Dunes") var terrain_type: String = "Hills"
 
-# --- NEW: global water level ---
-const WATER_LEVEL := -1.1   # lower = deeper ocean
+# --- Node references ---
+@onready var nav_region: NavigationRegion3D = $".."
+@onready var player_tower: Node3D = $"../../Map/PlayerTower"
+@onready var player_camera: Node3D = $"../../CameraPosition"
+@onready var spawn_enemy_pos: Node3D = $"../../Map/spawn_enemy_position"
+
+# --- Stats ---
+const TILE_SIZE := 1.5
+const SPACING := 1.0
+const WATER_LEVEL := -1.1
+
+var center_offset := Vector3(0, 0.2, 0)
+var radius: int = grid_size / 2
+
+# -----------------------------------------------------------
+# Ready
+# -----------------------------------------------------------
 
 func _ready() -> void:
 	randomize()
 	_generate_grid()
 
-func is_water(x: int, y: int, _center: Vector2, dist: float, max_dist: float) -> bool:
-	if dist > max_dist * 0.85:
-		return true
+# -----------------------------------------------------------
+# Tile Type Checks
+# -----------------------------------------------------------
+
+func is_water(
+	x: int,
+	y: int,
+	center: Vector2,
+	dist: float,
+	max_dist: float
+) -> bool:
+
+	if dist > max_dist * 0.85: return true
+
 	if dist > 5:
-		var n := hash(x * 928371 + y * 192837) % 1000 / 1000.0
-		if n < 0.15:
-			return true
+		var n = (hash(x * 928371 + y * 192837) % 1000) / 1000.0
+		if n < 0.15: return true
 	return false
 
-func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
-	var normalized := 1.0 - (dist / max_dist)
+# -----------------------------------------------------------
+# Heightmap / Terrain Generation
+# -----------------------------------------------------------
+
+func get_land_height(
+	dist: float,
+	max_dist: float,
+	x: float,
+	y: float
+) -> float:
+
+	var norm := 1.0 - (dist / max_dist)
 
 	match terrain_type:
 		"Flat":
-			CENTER_OFFSET = Vector3(0, 0, 0)
+			center_offset = Vector3.ZERO
 			return (randf() - 0.5) * 0.05
 
 		"Hills":
-			var base := normalized * 1.2
-			CENTER_OFFSET = Vector3(0, 0, 0)
+			center_offset = Vector3.ZERO
+			var base := norm * 1.2
 			return max(base + (randf() - 0.5) * 0.25, 0.0)
-		
-		"Mountain":
-			var base := pow(normalized, 3.0) * 2
-			CENTER_OFFSET = Vector3(0, 0.2, 0)
-			var noise := (randf() - 0.5) * 0.1
-			return base + noise
-			
-		"Dunes":
-			var smooth := sin(x * .7) * 0.8 + cos(y * 1.2) * 0.4
-			CENTER_OFFSET = Vector3(0, 0, 0)
-			return smooth * normalized
 
+		"Mountain":
+			center_offset = Vector3(0, 0.2, 0)
+			var base := pow(norm, 3.0) * 2
+			return base + (randf() - 0.5) * 0.1
+
+		"Dunes":
+			center_offset = Vector3.ZERO
+			var wave := sin(x * 0.7) * 0.8 + cos(y * 1.2) * 0.4
+			return wave * norm
 	return 0.0
+
+# -----------------------------------------------------------
+# Grid Generation
+# -----------------------------------------------------------
 
 func _generate_grid():
 	var center := Vector2(radius, radius)
@@ -68,37 +95,28 @@ func _generate_grid():
 		for y in range(grid_size):
 
 			var dist := center.distance_to(Vector2(x, y))
-			if dist > max_dist:
-				continue
+			if dist > max_dist: continue
 
-			var tile_is_water := is_water(x, y, center, dist, max_dist)
+			var water := is_water(x, y, center, dist, max_dist)
+			var tile: Node3D = (WATER_TILE if water else GRASS_TILE).instantiate()
 
-			var tile: Node3D
-			if tile_is_water:
-				tile = WATER_TILE.instantiate()
-			else:
-				tile = GRASS_TILE.instantiate()
-
-			var tile_coordinates := Vector3(
+			var tile_pos := Vector3(
 				x * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
 				0,
 				y * TILE_SIZE * SPACING + (0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
 			)
 
-			# --- NEW FIXED WATER LEVEL ---
-			if tile_is_water:
-				tile_coordinates.y = WATER_LEVEL
-			else:
-				tile_coordinates.y = get_land_height(dist, max_dist, x, y)
-
-			tile.position = tile_coordinates
+			tile_pos.y = WATER_LEVEL if water else get_land_height(dist, max_dist, x, y)
+			tile.position = tile_pos
 			add_child(tile)
 
-			# Center placement
 			if x == int(center.x) and y == int(center.y):
-				tile.position = tile_coordinates - CENTER_OFFSET
-				player_tower.position = tile_coordinates - CENTER_OFFSET
-				player_camera.position = tile_coordinates + Vector3(0, 10, 5)
-				spawn_enemy_position.position = tile_coordinates + Vector3(0, 1, 0)
 
-	navigation_region_3d.bake_navigation_mesh()
+				var centered := tile_pos - center_offset
+				tile.position = centered
+
+				player_tower.position = centered
+				player_camera.position = centered + Vector3(0, 10, 5)
+				spawn_enemy_pos.position = centered + Vector3(0, 1, 0)
+
+	nav_region.bake_navigation_mesh()

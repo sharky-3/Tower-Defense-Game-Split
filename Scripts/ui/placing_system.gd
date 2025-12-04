@@ -46,7 +46,7 @@ func start_placing(index: int):
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
 
-func _process(delta):
+func _process(_delta) -> void:
 	if current_building:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos + TOWER_OFFSET

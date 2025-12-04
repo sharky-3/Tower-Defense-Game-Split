@@ -47,7 +47,7 @@ func start_waves() -> void:
 func spawn_enemy(difficulty: float) -> void:
 	var enemy_instance = Enemy.instantiate()
 	add_child(enemy_instance)
-	enemy_instance.add_group()
+	enemy_instance.add_enemy_to_group()
 
 	if is_instance_valid(spawn_enemy_position):
 		var min_distance = 6.0
