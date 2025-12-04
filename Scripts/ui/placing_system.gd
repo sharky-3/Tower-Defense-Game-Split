@@ -1,14 +1,5 @@
 extends Control
 
-# =============================================
-# BUILDINGS (3D scenes)
-const BUILDINGS = [
-	preload("uid://cvq5oa37c1bkt"),
-	preload("uid://cvq5oa37c1bkt"),
-	preload("uid://cvq5oa37c1bkt"),
-	preload("uid://cvq5oa37c1bkt")
-]
-
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # =============================================
@@ -21,6 +12,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 const TILE_SIZE: float = 1.5
 const SPACING: float = 1
 var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
+var tower_name: String = "basic_tower"
 
 # =============================================
 # VARIABLES
@@ -37,7 +29,7 @@ func start_placing(index: int):
 	if current_building:
 		current_building.queue_free()
 
-	current_building = BUILDINGS[index].instantiate()
+	current_building = Global.get_base_mesh(tower_name).instantiate()
 	get_tree().current_scene.add_child(current_building)
 
 	var pos = snap_to_hex_grid(get_mouse_world_position())
