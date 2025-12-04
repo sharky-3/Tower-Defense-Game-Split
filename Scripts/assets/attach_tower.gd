@@ -1,12 +1,5 @@
 extends Node3D
 
-# --- Constants / Exported Data ---
-@export var upgrade_values := {
-	0: { "mesh": preload("uid://b6v01fbf56avq"), "range": 7, "damage": 5 },
-	1: { "mesh": preload("uid://u0rl2763vgxr"), "range": 10, "damage": 8 },
-	2: { "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 13, "damage": 11 }
-}
-
 # --- Node references ---
 @onready var tower_body_mesh: MeshInstance3D = $Mesh
 
@@ -26,11 +19,14 @@ var enemies_in_range: Array = []
 var tower_range: float = 0.0
 var tower_damage: float = 0.0
 
+var tower_name: String = "basic_tower"
+
 # --------------------------------------------------------------------
 # Life Cycle
 # --------------------------------------------------------------------
 
 func _ready() -> void:
+	_get_tower_stats()
 	_load_upgrade_level(0)
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	timer.start()
@@ -59,21 +55,38 @@ func _update_ray_from_mouse():
 # Upgrading
 # --------------------------------------------------------------------
 	
+func _get_tower_stats():
+	var stats = Global.get_tower_base_stats(tower_name)
+	tower_range = stats["range"]
+	tower_damage = stats["damage"]
+
 func _enable_upgrade_after_delay() -> void:
 	await get_tree().create_timer(2.0).timeout
 	can_upgrade = true
 
 func _load_upgrade_level(level: int) -> void:
-	if not upgrade_values.has(level): return
+	if not Global.get_tower_upgrade(tower_name, level): 
+		return
 	current_upgrade = level
 	
-	var data = upgrade_values[current_upgrade]
-
-	tower_range  = data["range"]
-	tower_damage = data["damage"]
+	var data = Global.get_tower_upgrade(tower_name, current_upgrade)
+	tower_range += data["range"]
+	tower_damage += data["damage"]
 
 	_update_range_mesh(tower_range)
+	_play_upgrade_animation(data["mesh"])
 	tower_body_mesh.mesh = data["mesh"]
+
+func _play_upgrade_animation(new_mesh: Mesh) -> void:
+	var original_scale = tower_body_mesh.scale
+	
+	tower_body_mesh.scale = original_scale * 0.7
+	tower_body_mesh.mesh = new_mesh
+	
+	var tween = create_tween()
+	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(Callable(self, "_on_upgrade_animation_complete"))
+
 	
 func _attemp_upgrade() -> void:
 	if not can_upgrade: return

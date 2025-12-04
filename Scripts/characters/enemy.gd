@@ -1,5 +1,8 @@
 extends Node3D
 
+# --- Resources ---
+const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
+
 # --- Node references ---
 @onready var enemy: Node3D = self
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
@@ -8,24 +11,11 @@ extends Node3D
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
 
-const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
-
 # --- Settings ---
-@export_category("Main")
 @export var move_speed: float = 3.0
 @export var enemy_health: float = 10.0
-
-@export_category("Combat")
 @export var attack_damage: float = 1.0
-@export var attack_cooldown: float = 1.0
 
-@export_category("Status")
-@export var is_alive: bool = true
-@export var is_slowed: bool = false
-@export var slow_factor: float = 0.5
-@export var can_fly: bool = false
-
-@export_category("Rewards")
 @export var reward_gold: int = 5
 @export var reward_exp: int = 1
 
@@ -109,7 +99,6 @@ func take_damage(amount: float):
 	if enemy_health <= 0: _die()
 
 func _die():
-	is_alive = false
 	enemy.queue_free()
 
 func _flash_damage():

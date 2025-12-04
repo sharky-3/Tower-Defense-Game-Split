@@ -20,7 +20,7 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 const TILE_SIZE: float = 1.5
 const SPACING: float = 1
-var TOWER_OFFSET: Vector3 = Global.Y_OFFSET
+var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
 
 # =============================================
 # VARIABLES

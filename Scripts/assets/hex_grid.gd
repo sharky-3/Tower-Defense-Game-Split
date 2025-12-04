@@ -23,12 +23,15 @@ var center_offset := Vector3(0, 0.2, 0)
 var radius: int = grid_size / 2
 
 # -----------------------------------------------------------
-# Ready
+# Life Cycle
 # -----------------------------------------------------------
 
 func _ready() -> void:
 	randomize()
 	_generate_grid()
+
+func _process(_delta) -> void:
+	pass
 
 # -----------------------------------------------------------
 # Tile Type Checks
