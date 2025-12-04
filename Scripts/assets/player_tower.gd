@@ -19,13 +19,12 @@ extends Node3D
 # --------------------------------------------------------------------
 
 func take_attack_damage(amount: float) -> void:
-	print("damage", amount)
 	_attampt_damage(amount)
 		
 func _attampt_damage(damage: float) -> void:
-	var health: float = tower_healt - damage
-	print("Tower health:", health)
-	if _tower_health(health):
+	tower_healt -= damage
+	print("Tower health:", tower_healt)
+	if _tower_health(tower_healt):
 		print("Tower is destroyed")
 		player_tower.queue_free()
 	

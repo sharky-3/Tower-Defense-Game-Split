@@ -56,7 +56,6 @@ target_position = Vector3(0, 0, 0)
 
 [node name="PlayerTower" parent="Map" instance=ExtResource("6_luu0p")]
 transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.4, 0, 0, 0)
-health = 100.0
 
 [node name="spawn_enemy_position" type="Node3D" parent="Map"]
 transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)
