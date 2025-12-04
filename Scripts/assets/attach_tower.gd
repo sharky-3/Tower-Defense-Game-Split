@@ -91,11 +91,7 @@ func _on_area_3d_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
 		_update_ray_from_mouse()
-		
-		if camera_ray_cast and camera_ray_cast.is_colliding():
-			var collider = camera_ray_cast.get_collider()
-			print(collider)
-			if collider == TOWER:
-				CURRENT_UPGRADE += 1
-				if not upgrade_values.has(CURRENT_UPGRADE): return
-				upgrade_tower(upgrade_values[CURRENT_UPGRADE])
+
+		CURRENT_UPGRADE += 1
+		if not upgrade_values.has(CURRENT_UPGRADE): return
+		upgrade_tower(upgrade_values[CURRENT_UPGRADE])

@@ -6,6 +6,7 @@ extends Node3D
 @onready var target: Node3D = $"../Map/PlayerTower"
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
+const TAKE_DAMAGE_MATERIAL = preload("uid://dlnxbyrt6u5g1")
 
 @export_category("Main")
 @export var move_speed: float = 3.0
@@ -25,13 +26,11 @@ extends Node3D
 @export var reward_gold: int = 5
 @export var reward_exp: int = 1
 
-# Path update throttle
 var path_update_timer := 0.0
-const PATH_UPDATE_INTERVAL := 0.75   # update less often = faster
+const PATH_UPDATE_INTERVAL := 0.75
 
 func _ready():
-	if not target:
-		_set_target()
+	if not target: _set_target()
 
 	navigation_agent_3d.target_position = target.global_position
 	navigation_agent_3d.connect("target_reached", Callable(self, "_on_target_reached"))
@@ -78,8 +77,19 @@ func set_difficulty(multiplier: float):
 	enemie_health *= multiplier
 	attack_damage *= multiplier
 
+func flash_damage_effect():
+	if not mesh: return
+	var flash_material = TAKE_DAMAGE_MATERIAL
+	mesh.material_overlay = flash_material
+
+	var timer := get_tree().create_timer(0.1)
+	timer.timeout.connect(func():
+		mesh.material_overlay = null
+	)
+
 func take_damage(damage: float):
 	enemie_health -= damage
+	flash_damage_effect()
 	if enemie_health <= 0:
 		ENEMY.queue_free()
 		
