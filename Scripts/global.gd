@@ -1,5 +1,9 @@
 extends Node
 
+# --------------------------------------------------------------------
+# Tower
+# --------------------------------------------------------------------
+
 # --- Tower stats and upgrades ---
 const tower_stats: Dictionary = {
 	"basic_tower": {
@@ -40,19 +44,18 @@ const tower_stats: Dictionary = {
 	}
 }
 
-# --- Get base mesh for placement ---
+# --- Functions ---
+
 func get_base_mesh(tower_name: String) -> PackedScene:
 	if not tower_stats.has(tower_name): 
 		return null
 	return tower_stats[tower_name]["mesh"]
 
-# --- Get tower stats ---
 func get_tower_base_stats(tower_name: String):
 	if not tower_stats.has(tower_name): 
 		return {}
 	return tower_stats[tower_name]["stats"]
 
-# --- Utility function to get upgrade data ---
 func get_tower_upgrade(tower_name: String, level: int) -> Dictionary:
 	if not tower_stats.has(tower_name): 
 		return {}
@@ -61,3 +64,69 @@ func get_tower_upgrade(tower_name: String, level: int) -> Dictionary:
 	if level < 0 or level >= upgrade.size(): 
 		return {}
 	return upgrade[level]
+
+# --------------------------------------------------------------------
+# Enemies
+# --------------------------------------------------------------------
+
+const enemie_types: Dictionary = {
+	"goblins": {
+		1: {
+			"mesh": preload("uid://bfygdhktxcdvx"),
+			"stats": {"speed": 1.0, "health": 4, "attack_damage": 6},
+			"rewards": {"gold": 3, "exp": 2}
+		},
+		2: {
+			"mesh": preload("uid://dgan33wtxphvc"),
+			"stats": {"speed": 1.1, "health": 5, "attack_damage": 7},
+			"rewards": {"gold": 4, "exp": 3}
+		},
+		3: {
+			"mesh": preload("uid://bw7tyjpxy3ku8"),
+			"stats": {"speed": 1.2, "health": 6, "attack_damage": 8},
+			"rewards": {"gold": 5, "exp": 4}
+		},
+		4: {
+			"mesh": preload("uid://dnih7xrttht20"),
+			"stats": {"speed": 1.3, "health": 7, "attack_damage": 9},
+			"rewards": {"gold": 6, "exp": 5}
+		}
+	},
+	"skeletons": {
+		1: {
+			"mesh": preload("uid://ddj4r3bygamt8"),
+			"stats": {"speed": 0.9, "health": 5, "attack_damage": 5},
+			"rewards": {"gold": 3, "exp": 2}
+		},
+		2: {
+			"mesh": preload("uid://u23q3r8bpqan"),
+			"stats": {"speed": 1.0, "health": 6, "attack_damage": 6},
+			"rewards": {"gold": 4, "exp": 3}
+		},
+		3: {
+			"mesh": preload("uid://conmtsecxcsp8"),
+			"stats": {"speed": 1.1, "health": 7, "attack_damage": 7},
+			"rewards": {"gold": 5, "exp": 4}
+		}
+	}
+}
+
+# --- Functions ---
+
+func get_enemies_type_array() -> Dictionary:
+	return enemie_types
+
+func get_base_enemy(enemy_name: String, level: int) -> Dictionary:
+	if not enemie_types.has(enemy_name) and (level < 0 or level >= enemie_types[enemy_name].size()):
+		return {}
+	return enemie_types[enemy_name][level]
+
+func get_enemy_stats(enemy_name: String, level: int) -> Dictionary:
+	if not enemie_types.has(enemy_name) and (level < 0 or level >= enemie_types[enemy_name].size()):
+		return {}
+	return enemie_types[enemy_name][level]["stats"]
+
+func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
+	if not enemie_types.has(enemy_name) and (level < 0 or level >= enemie_types[enemy_name].size()):
+		return {}
+	return enemie_types[enemy_name][level]["rewards"]

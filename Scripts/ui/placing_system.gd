@@ -2,28 +2,40 @@ extends Control
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
-# =============================================
-# ONREADY BUTTONS
+# --- Node references ---
 @onready var card1: Button = $Card1
 @onready var card2: Button = $Card2
 @onready var card3: Button = $Card3
 @onready var card4: Button = $Card4
 
+@onready var camera := get_viewport().get_camera_3d()
+
+# --- Stats ---
 const TILE_SIZE: float = 1.5
 const SPACING: float = 1
 var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
 var tower_name: String = "basic_tower"
 
-# =============================================
-# VARIABLES
 var current_building: Node3D = null
-@onready var camera := get_viewport().get_camera_3d()
+
+# --------------------------------------------------------------------
+# Life Cycle
+# --------------------------------------------------------------------
 
 func _ready():
 	card1.pressed.connect(func(): start_placing(0))
 	card2.pressed.connect(func(): start_placing(1))
 	card3.pressed.connect(func(): start_placing(2))
 	card4.pressed.connect(func(): start_placing(3))
+
+func _process(_delta) -> void:
+	if current_building:
+		var pos = snap_to_hex_grid(get_mouse_world_position())
+		current_building.global_transform.origin = pos + TOWER_OFFSET
+
+# --------------------------------------------------------------------
+# Tower placing system
+# --------------------------------------------------------------------
 
 func start_placing(index: int):
 	if current_building:
@@ -38,17 +50,6 @@ func start_placing(index: int):
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
 
-func _process(_delta) -> void:
-	if current_building:
-		var pos = snap_to_hex_grid(get_mouse_world_position())
-		current_building.global_transform.origin = pos + TOWER_OFFSET
-
-func _unhandled_input(event):
-	if current_building and event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			current_building = null
-
-# =============================================
 func get_mouse_world_position() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
 	var origin = camera.project_ray_origin(mouse_pos)
@@ -73,3 +74,12 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 	snapped.x = rq * size * cos30
 	snapped.z = rr * size + (half_shift if rq % 2 != 0 else 0.0)
 	return snapped
+
+# --------------------------------------------------------------------
+# Input
+# --------------------------------------------------------------------
+
+func _unhandled_input(event):
+	if current_building and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			current_building = null

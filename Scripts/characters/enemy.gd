@@ -118,6 +118,15 @@ func _flash_damage():
 func set_enemy_mesh(new_mesh: Mesh):
 	mesh.mesh = new_mesh
 
+func set_enemy_stats(enemy_stats: Dictionary):
+	move_speed = enemy_stats["speed"]
+	enemy_health = enemy_stats["health"]
+	attack_damage = enemy_stats["attack_damage"]
+
+func set_enemy_rewards(enemy_rewards):
+	reward_gold = enemy_rewards["gold"]
+	reward_exp = enemy_rewards["exp"]
+
 func set_difficulty(multiplier: float):
 	move_speed *= multiplier
 	enemy_health *= multiplier

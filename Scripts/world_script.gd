@@ -2,47 +2,6 @@ extends Node3D
 
 # --- Resources ---
 const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
-const enemie_types := {
-	"goblins": {
-		1: {
-			"mesh": preload("uid://bfygdhktxcdvx"),
-			"stats": {"speed": 1.0, "health": 4, "attack_damage": 6},
-			"rewards": {"gold": 3, "exp": 2}
-		},
-		2: {
-			"mesh": preload("uid://dgan33wtxphvc"),
-			"stats": {"speed": 1.1, "health": 5, "attack_damage": 7},
-			"rewards": {"gold": 4, "exp": 3}
-		},
-		3: {
-			"mesh": preload("uid://bw7tyjpxy3ku8"),
-			"stats": {"speed": 1.2, "health": 6, "attack_damage": 8},
-			"rewards": {"gold": 5, "exp": 4}
-		},
-		4: {
-			"mesh": preload("uid://dnih7xrttht20"),
-			"stats": {"speed": 1.3, "health": 7, "attack_damage": 9},
-			"rewards": {"gold": 6, "exp": 5}
-		}
-	},
-	"skeletons": {
-		1: {
-			"mesh": preload("uid://ddj4r3bygamt8"),
-			"stats": {"speed": 0.9, "health": 5, "attack_damage": 5},
-			"rewards": {"gold": 3, "exp": 2}
-		},
-		2: {
-			"mesh": preload("uid://u23q3r8bpqan"),
-			"stats": {"speed": 1.0, "health": 6, "attack_damage": 6},
-			"rewards": {"gold": 4, "exp": 3}
-		},
-		3: {
-			"mesh": preload("uid://conmtsecxcsp8"),
-			"stats": {"speed": 1.1, "health": 7, "attack_damage": 7},
-			"rewards": {"gold": 5, "exp": 4}
-		}
-	}
-}
 
 # --- Constants / Exported Data ---
 @export var total_waves: int = 5
@@ -113,11 +72,14 @@ func _spawn_enemy(difficulty: float) -> void:
 
 	enemy_instance.set_difficulty(difficulty)
 
-	var enemy_keys = enemie_types.keys()
+	var enemy_types_array = Global.get_enemies_type_array()
+	
+	var enemy_keys = enemy_types_array.keys()
 	var chosen_type = enemy_keys[randi() % enemy_keys.size()]
-	
-	var type_levels = enemie_types[chosen_type].keys()
+	var type_levels = enemy_types_array[chosen_type].keys()
 	var chosen_level = type_levels[randi() % type_levels.size()]
-	
-	var chosen_mesh_data = enemie_types[chosen_type][chosen_level]
-	enemy_instance.set_enemy_mesh(chosen_mesh_data["mesh"])
+
+	var enemy_mesh = Global.get_base_enemy(chosen_type, chosen_level)
+	enemy_instance.set_enemy_mesh(enemy_mesh["mesh"])
+	enemy_instance.set_enemy_stats(enemy_mesh["stats"])
+	enemy_instance.set_enemy_rewards(enemy_mesh["rewards"])

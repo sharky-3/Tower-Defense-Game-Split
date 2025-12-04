@@ -51,7 +51,10 @@ _data = {
 transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
 script = ExtResource("1_sdh2x")
 move_speed = 1.0
+enemy_health = null
 attack_damage = 10.0
+reward_gold = null
+reward_exp = null
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.5, 0)
