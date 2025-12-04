@@ -3,10 +3,10 @@ extends Control
 # =============================================
 # BUILDINGS (3D scenes)
 const BUILDINGS = [
-	preload("uid://ctu1pahffsbfr"),
-	preload("uid://ctu1pahffsbfr"),
-	preload("uid://ctu1pahffsbfr"),
-	preload("uid://ctu1pahffsbfr")
+	preload("uid://cvq5oa37c1bkt"),
+	preload("uid://cvq5oa37c1bkt"),
+	preload("uid://cvq5oa37c1bkt"),
+	preload("uid://cvq5oa37c1bkt")
 ]
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()

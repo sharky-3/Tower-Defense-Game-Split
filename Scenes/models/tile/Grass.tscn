@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqr2nia2wo1lm"]
 
 [ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="1_ue7ck"]
-[ext_resource type="ArrayMesh" uid="uid://bdpahb7huo4w1" path="res://assets/models/tile/basic.obj" id="2_uri3x"]
+[ext_resource type="ArrayMesh" uid="uid://bdpahb7huo4w1" path="res://assets/meshes/tile/basic.obj" id="2_uri3x"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o75tf"]
 albedo_texture = ExtResource("1_ue7ck")

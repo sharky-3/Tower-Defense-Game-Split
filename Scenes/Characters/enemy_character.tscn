@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Scripts/characters/enemy.gd" id="1_sdh2x"]
 [ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="2_najb4"]
-[ext_resource type="ArrayMesh" uid="uid://bfygdhktxcdvx" path="res://assets/models/characters/enemy/goblin/Goblin1.obj" id="3_f31sj"]
+[ext_resource type="ArrayMesh" uid="uid://bfygdhktxcdvx" path="res://assets/meshes/characters/enemy/goblin/Goblin1.obj" id="3_f31sj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nraa5"]
 albedo_texture = ExtResource("2_najb4")
