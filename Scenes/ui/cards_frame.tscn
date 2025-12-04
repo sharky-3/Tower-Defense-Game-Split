@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://duu1tsc7gf3kk"]
+[gd_scene load_steps=3 format=3 uid="uid://duu1tsc7gf3kk"]
 
 [ext_resource type="Script" uid="uid://bpxdukoduq7tg" path="res://Scripts/ui/placing_system.gd" id="1_j46x2"]
+[ext_resource type="Texture2D" uid="uid://dtph1gg4ahqkc" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_xos3w"]
 
 [node name="PlacingSystem" type="Control"]
 layout_mode = 3
@@ -25,6 +26,8 @@ offset_bottom = 157.453
 rotation = -0.20943952
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(100, 140)
+icon = ExtResource("2_xos3w")
+expand_icon = true
 
 [node name="Card2" type="Button" parent="."]
 layout_mode = 0
@@ -34,6 +37,9 @@ offset_right = 8.238998
 offset_bottom = 107.66896
 rotation = -0.12217305
 pivot_offset = Vector2(100, 140)
+icon = ExtResource("2_xos3w")
+icon_alignment = 1
+expand_icon = true
 
 [node name="Card3" type="Button" parent="."]
 layout_mode = 0
@@ -43,6 +49,8 @@ offset_right = 191.39798
 offset_bottom = 108.630005
 rotation = 0.08726646
 pivot_offset = Vector2(100, 140)
+icon = ExtResource("2_xos3w")
+expand_icon = true
 
 [node name="Card4" type="Button" parent="."]
 layout_mode = 0
@@ -53,3 +61,5 @@ offset_bottom = 144.29799
 rotation = 0.19198622
 scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(100, 140)
+icon = ExtResource("2_xos3w")
+expand_icon = true

@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://c28p73ilgshuq"]
 
-[ext_resource type="Material" uid="uid://cpkcergylk2fp" path="res://assets/material/mat_sand.tres" id="1_3co35"]
-[ext_resource type="PackedScene" uid="uid://dabale7tnn5cp" path="res://scenes/prepared/tiles_combined_mid_section.tscn" id="3_5hwsq"]
-[ext_resource type="PackedScene" uid="uid://b5tvgrv70krpk" path="res://scenes/prepared/temple_pillar_full.tscn" id="3_s10wa"]
-[ext_resource type="PackedScene" uid="uid://bmkr6g26ix3ow" path="res://scenes/base/rocks/rock_big.tscn" id="4_23qne"]
-[ext_resource type="PackedScene" uid="uid://bc1l4deuw25a0" path="res://scenes/base/rocks/rock_small.tscn" id="5_71xhb"]
-[ext_resource type="PackedScene" uid="uid://1qd2gu5g2bws" path="res://scenes/prepared/stairs_combined.tscn" id="6_gyb1k"]
+[ext_resource type="Material" uid="uid://cpkcergylk2fp" path="res://assets/texture/material/mat_sand.tres" id="1_3co35"]
+[ext_resource type="PackedScene" path="res://Scenes/prepared/tiles_combined_mid_section.tscn" id="3_5hwsq"]
+[ext_resource type="PackedScene" path="res://Scenes/prepared/temple_pillar_full.tscn" id="3_s10wa"]
+[ext_resource type="PackedScene" path="res://Scenes/base/rocks/rock_big.tscn" id="4_23qne"]
+[ext_resource type="PackedScene" path="res://Scenes/base/rocks/rock_small.tscn" id="5_71xhb"]
+[ext_resource type="PackedScene" path="res://Scenes/prepared/stairs_combined.tscn" id="6_gyb1k"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_8cc8m"]
 size = Vector2(400, 400)

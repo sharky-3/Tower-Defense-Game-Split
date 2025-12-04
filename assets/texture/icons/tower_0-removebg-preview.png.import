@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t2doudyujjwy"
-path="res://.godot/imported/cannon2.png-4240202b4e8e7c233aad5654885192bc.ctex"
+uid="uid://dtph1gg4ahqkc"
+path="res://.godot/imported/tower_0-removebg-preview.png-6ef0581e6a7d29a794356188a1500e22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/Icons/cannon2.png"
-dest_files=["res://.godot/imported/cannon2.png-4240202b4e8e7c233aad5654885192bc.ctex"]
+source_file="res://assets/texture/icons/tower_0-removebg-preview.png"
+dest_files=["res://.godot/imported/tower_0-removebg-preview.png-6ef0581e6a7d29a794356188a1500e22.ctex"]
 
 [params]
 
