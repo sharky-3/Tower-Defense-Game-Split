@@ -1,8 +1,10 @@
 extends Node3D
 
 # --- Resources ---
-const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
-const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
+var tile_types: Dictionary = {
+	"grass": preload("uid://bqr2nia2wo1lm"),
+	"water": preload("uid://c5nkt4wxc0rs6"),
+}
 
 # --- Constants / Exported Data ---
 @export_range(30, 100) var grid_size: float = 25.0
@@ -101,7 +103,9 @@ func _generate_grid():
 			if dist > max_dist: continue
 
 			var water := is_water(x, y, center, dist, max_dist)
-			var tile: Node3D = (WATER_TILE if water else GRASS_TILE).instantiate()
+			var tile: Node3D = (
+				tile_types["water"] if water else tile_types["grass"]
+			).instantiate()
 
 			var tile_pos := Vector3(
 				x * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
