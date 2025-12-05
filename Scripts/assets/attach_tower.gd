@@ -3,13 +3,11 @@ extends Node3D
 # --- Node references ---
 @onready var tower_body_mesh: MeshInstance3D = $Mesh
 
-@onready var range: MeshInstance3D = $Range
+@onready var range_mesh := $Range
 @onready var collision: CollisionShape3D = $Range/Area3D/Collision
 @onready var area_3d: Area3D = $Range/Area3D
 
 @onready var timer: Timer = $Timer
-@onready var camera_ray_cast: RayCast3D = get_node("/root/World/CameraPosition/CameraRotationX/CameraZoomPivot/Camera3D/RayCast3D")
-@onready var camera: Camera3D = get_node("/root/World/CameraPosition/CameraRotationX/Camera3D")
 
 # --- State ---
 var current_upgrade: int = 0
@@ -36,20 +34,7 @@ func _ready() -> void:
 	_enable_upgrade_after_delay()
 	
 func _process(_delta) -> void:
-	_update_ray_from_mouse()
-
-# --------------------------------------------------------------------
-# Ray Updating
-# --------------------------------------------------------------------
-
-func _update_ray_from_mouse():
-	if not camera: return
-	var mouse_pos = get_viewport().get_mouse_position()
-	var from = camera.project_ray_origin(mouse_pos)
-	var to = from + camera.project_ray_normal(mouse_pos) * 1000
-	
-	camera_ray_cast.cast_to = to - camera_ray_cast.global_transform.origin
-	camera_ray_cast.force_update_transform()
+	pass
 
 # --------------------------------------------------------------------
 # Upgrading
@@ -77,6 +62,8 @@ func _load_upgrade_level(level: int) -> void:
 	_play_upgrade_animation(data["mesh"])
 	tower_body_mesh.mesh = data["mesh"]
 
+	_update_player_stats("towers_upgraded", +1)
+
 func _play_upgrade_animation(new_mesh: Mesh) -> void:
 	var original_scale = tower_body_mesh.scale
 	
@@ -93,7 +80,7 @@ func _attemp_upgrade() -> void:
 	_load_upgrade_level(current_upgrade + 1)
 	
 func _update_range_mesh(value: float) -> void:
-	range.scale = Vector3(value, .1, value)
+	range_mesh.scale = Vector3(value, .1, value)
 	
 # --------------------------------------------------------------------
 # Combat
@@ -114,11 +101,11 @@ func _shoot_enemy(target: Node3D) -> void:
 # Detection
 # --------------------------------------------------------------------
 
-func _on_area_3d_body_shape_entered(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_area_3d_body_shape_entered(body: Node3D) -> void:
 	if body and body.is_in_group("Enemy"): 
 		enemies_in_range.append(body)
 
-func _on_area_3d_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index: int, local_shape_index: int) -> void:
+func _on_area_3d_body_shape_exited(body: Node3D) -> void:
 	if body and body.is_in_group("Enemy"): 
 		enemies_in_range.erase(body)
 
@@ -128,5 +115,11 @@ func _on_area_3d_body_shape_exited(body_rid: RID, body: Node3D, body_shape_index
 
 func _input(event):
 	if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
-		_update_ray_from_mouse()
 		_attemp_upgrade()
+
+# --------------------------------------------------------------------
+# Global Player Stats
+# --------------------------------------------------------------------
+
+func _update_player_stats(stat_name: String, value: int):
+	Global.update_player_stats(stat_name, value)

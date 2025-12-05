@@ -1,5 +1,64 @@
 extends Node
 
+# --- Stats ---
+var player_stats: Dictionary = {
+	"currency": {
+		"gold": 0,
+		"gems": 0
+	},
+
+	"progression": {
+		"exp": 0,
+		"level": 1,
+		"max_level": 15,
+		"exp_to_next_level": 50
+	},
+
+	"bonuses": {
+		"damage_multiplier": 1.0,
+		"range_multiplier": 1.0,
+		"attack_speed_multiplier": 1.0
+	},
+
+	"stats": {
+		"game_won": 0,
+		"game_lost": 0,
+		"waves_played": 0,
+
+		"enemies_killed": 0,
+		"enemies_spawn": 0,
+		"damage_taken": 0,
+		"damage_deald": 0,
+		
+		"towers_built": 0,
+		"towers_upgraded": 0,
+	}
+}
+
+# --------------------------------------------------------------------
+# Player
+# --------------------------------------------------------------------
+
+func get_player_currency() -> Dictionary:
+	return player_stats["currency"]
+
+func get_player_progression() -> Dictionary:
+	return player_stats["progression"]
+
+func get_player_bonuses() -> Dictionary:
+	return player_stats["bonuses"]
+
+func get_player_stats() -> Dictionary:
+	return player_stats["stats"]
+
+func update_player_stats(stat_name: String, value: float):
+	if not player_stats["stats"].has(stat_name): return
+
+	var data = player_stats["stats"]
+	data[stat_name] += value
+
+	print(data)
+
 # --------------------------------------------------------------------
 # Tower
 # --------------------------------------------------------------------

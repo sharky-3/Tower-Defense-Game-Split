@@ -3,6 +3,14 @@ extends Node3D
 # --- Resources ---
 const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 
+# --- Constants / Exported Data ---
+@export var move_speed: float = 3.0
+@export var enemy_health: float = 10.0
+@export var attack_damage: float = 1.0
+
+@export var reward_gold: int = 5
+@export var reward_exp: int = 1
+
 # --- Node references ---
 @onready var enemy: Node3D = self
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
@@ -11,15 +19,8 @@ const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
 
-# --- Settings ---
-@export var move_speed: float = 3.0
-@export var enemy_health: float = 10.0
-@export var attack_damage: float = 1.0
 
-@export var reward_gold: int = 5
-@export var reward_exp: int = 1
-
-# --- Pathfinding ---
+# --- Stats ---
 var path_update_timer := 0.0
 const PATH_UPDATE_INTERVAL := 0.75
 
@@ -97,9 +98,11 @@ func take_damage(amount: float):
 	_flash_damage()
 
 	if enemy_health <= 0: _die()
+	_update_player_stats("damage_deald", amount)
 
 func _die():
 	enemy.queue_free()
+	_update_player_stats("enemies_killed", +1)
 
 func _flash_damage():
 	if not mesh: return
@@ -134,3 +137,10 @@ func set_difficulty(multiplier: float):
 
 func add_enemy_to_group():
 	rigid_body.add_to_group("Enemy")
+
+# --------------------------------------------------------------------
+# Global Player Stats
+# --------------------------------------------------------------------
+
+func _update_player_stats(stat_name: String, value: float):
+	Global.update_player_stats(stat_name, value)

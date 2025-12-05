@@ -35,6 +35,8 @@ func _process(_delta) -> void:
 
 func _wave_system() -> void:
 	for wave_index in range(total_waves):
+		_update_player_stats("waves_played", +1)
+
 		var enemy_count = enemies_per_wave[wave_index]
 		var difficulty = difficulty_per_wave[wave_index] if wave_index < difficulty_per_wave.size() else 1.0
 
@@ -83,3 +85,12 @@ func _spawn_enemy(difficulty: float) -> void:
 	enemy_instance.set_enemy_mesh(enemy_mesh["mesh"])
 	enemy_instance.set_enemy_stats(enemy_mesh["stats"])
 	enemy_instance.set_enemy_rewards(enemy_mesh["rewards"])
+
+	_update_player_stats("enemies_spawn", +1)
+
+# --------------------------------------------------------------------
+# Global Player Stats
+# --------------------------------------------------------------------
+
+func _update_player_stats(stat_name: String, value: int):
+	Global.update_player_stats(stat_name, value)

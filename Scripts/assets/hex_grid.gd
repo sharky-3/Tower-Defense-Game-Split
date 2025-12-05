@@ -5,7 +5,7 @@ const GRASS_TILE = preload("uid://bqr2nia2wo1lm")
 const WATER_TILE = preload("uid://c5nkt4wxc0rs6")
 
 # --- Constants / Exported Data ---
-@export_range(30, 100) var grid_size: int = 25
+@export_range(30, 100) var grid_size: float = 25.0
 @export_enum("Flat", "Hills", "Mountain", "Dunes") var terrain_type: String = "Hills"
 
 # --- Node references ---
@@ -20,7 +20,7 @@ const SPACING := 1.0
 const WATER_LEVEL := -1.1
 
 var center_offset := Vector3(0, 0.2, 0)
-var radius: int = grid_size / 2
+var world_radius: float = grid_size / 2.0
 
 # -----------------------------------------------------------
 # Life Cycle
@@ -40,7 +40,7 @@ func _process(_delta) -> void:
 func is_water(
 	x: int,
 	y: int,
-	center: Vector2,
+	_center: Vector2,
 	dist: float,
 	max_dist: float
 ) -> bool:
@@ -91,8 +91,8 @@ func get_land_height(
 # -----------------------------------------------------------
 
 func _generate_grid():
-	var center := Vector2(radius, radius)
-	var max_dist := radius
+	var center := Vector2(world_radius, world_radius)
+	var max_dist := world_radius
 
 	for x in range(grid_size):
 		for y in range(grid_size):
@@ -106,7 +106,7 @@ func _generate_grid():
 			var tile_pos := Vector3(
 				x * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
 				0,
-				y * TILE_SIZE * SPACING + (0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
+				y * TILE_SIZE * SPACING + (0.0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
 			)
 
 			tile_pos.y = WATER_LEVEL if water else get_land_height(dist, max_dist, x, y)

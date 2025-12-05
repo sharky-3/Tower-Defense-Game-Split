@@ -37,7 +37,7 @@ func _process(_delta) -> void:
 # Tower placing system
 # --------------------------------------------------------------------
 
-func start_placing(index: int):
+func start_placing(_index: int):
 	if current_building:
 		current_building.queue_free()
 
@@ -50,6 +50,8 @@ func start_placing(index: int):
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
 
+	_update_player_stats("towers_built", +1)
+
 func get_mouse_world_position() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
 	var origin = camera.project_ray_origin(mouse_pos)
@@ -59,21 +61,21 @@ func get_mouse_world_position() -> Vector3:
 	return origin + direction * t
 
 func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
-	var size = TILE_SIZE * SPACING
-	var half_shift = size / 2.0
+	var tile_size = TILE_SIZE * SPACING
+	var half_shift = tile_size / 2.0
 	var cos30 = cos(deg_to_rad(30))
 
-	var q = world_pos.x / (size * cos30)
+	var q = world_pos.x / (tile_size * cos30)
 	var iq = int(round(q))
-	var r = (world_pos.z - (half_shift if iq % 2 != 0 else 0.0)) / size
+	var r = (world_pos.z - (half_shift if iq % 2 != 0 else 0.0)) / tile_size
 
 	var rq = iq
 	var rr = int(round(r))
 
-	var snapped = Vector3.ZERO
-	snapped.x = rq * size * cos30
-	snapped.z = rr * size + (half_shift if rq % 2 != 0 else 0.0)
-	return snapped
+	var _snapped = Vector3.ZERO
+	_snapped.x = rq * tile_size * cos30
+	_snapped.z = rr * tile_size + (half_shift if rq % 2 != 0 else 0.0)
+	return _snapped
 
 # --------------------------------------------------------------------
 # Input
@@ -83,3 +85,11 @@ func _unhandled_input(event):
 	if current_building and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			current_building = null
+
+
+# --------------------------------------------------------------------
+# Global Player Stats
+# --------------------------------------------------------------------
+
+func _update_player_stats(stat_name: String, value: int):
+	Global.update_player_stats(stat_name, value)
