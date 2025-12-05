@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://duu1tsc7gf3kk"]
 
-[ext_resource type="Script" uid="uid://bpxdukoduq7tg" path="res://Scripts/ui/placing_system.gd" id="1_j46x2"]
+[ext_resource type="Script" uid="uid://bpxdukoduq7tg" path="res://Scripts/systems/placing_system.gd" id="1_j46x2"]
 [ext_resource type="Texture2D" uid="uid://dtph1gg4ahqkc" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_xos3w"]
 
 [node name="PlacingSystem" type="Control"]

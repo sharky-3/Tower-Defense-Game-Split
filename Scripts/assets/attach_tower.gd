@@ -101,15 +101,15 @@ func _shoot_enemy(target: Node3D) -> void:
 # Detection
 # --------------------------------------------------------------------
 
-func _on_area_3d_body_shape_entered(body: Node3D) -> void:
+func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body and body.is_in_group("Enemy"): 
 		enemies_in_range.append(body)
-
-func _on_area_3d_body_shape_exited(body: Node3D) -> void:
+		
+func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body and body.is_in_group("Enemy"): 
 		enemies_in_range.erase(body)
-
-# --------------------------------------------------------------------
+	
+# --------------------------------------------------------------------s
 # Input
 # --------------------------------------------------------------------
 

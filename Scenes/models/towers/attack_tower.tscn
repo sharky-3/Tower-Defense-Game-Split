@@ -47,6 +47,5 @@ shape = SubResource("CylinderShape3D_b5mx7")
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="child_entered_tree" from="." to="." method="_on_child_entered_tree"]
-[connection signal="child_entered_tree" from="Range/Area3D/Collision" to="." method="_on_collision_child_entered_tree"]
-[connection signal="child_exiting_tree" from="Range/Area3D/Collision" to="." method="_on_collision_child_exiting_tree"]
+[connection signal="body_entered" from="Range/Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Range/Area3D" to="." method="_on_area_3d_body_exited"]

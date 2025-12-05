@@ -4,9 +4,9 @@ extends Node3D
 const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 
 # --- Constants / Exported Data ---
-@export var move_speed: float = 3.0
-@export var enemy_health: float = 10.0
-@export var attack_damage: float = 1.0
+@export var move_speed: float = 1.0
+@export var enemy_health: float = 4.0
+@export var attack_damage: float = 6.0
 
 @export var reward_gold: int = 5
 @export var reward_exp: int = 1
