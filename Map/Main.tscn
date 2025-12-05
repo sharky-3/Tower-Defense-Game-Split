@@ -18,7 +18,7 @@ navigation_mesh = SubResource("NavigationMesh_o4np1")
 
 [node name="HexGrid" type="Node3D" parent="NavigationRegion3D"]
 script = ExtResource("2_jcr5e")
-terrain_type = "Flat"
+terrain_type = "Mountain"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_jm71a")
@@ -28,7 +28,7 @@ transform = Transform3D(-0.52521276, -0.5167623, 0.67609763, 0.8509572, -0.32339
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lights"]
 transform = Transform3D(0.330514, 0, 0.943801, 0, 1, 0, -0.943801, 0, 0.330514, 100, 0, 0)
-light_color = Color(1, 0.94509804, 0.8392157, 1)
+light_color = Color(0.839429, 0.9176236, 0.9965243, 1)
 light_energy = 7.0
 light_volumetric_fog_energy = 5.0
 shadow_enabled = true

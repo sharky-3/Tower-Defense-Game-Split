@@ -1,5 +1,9 @@
 extends Node
 
+# --------------------------------------------------------------------
+# Player
+# --------------------------------------------------------------------
+
 # --- Stats ---
 var player_stats: Dictionary = {
 	"currency": {
@@ -35,9 +39,7 @@ var player_stats: Dictionary = {
 	}
 }
 
-# --------------------------------------------------------------------
-# Player
-# --------------------------------------------------------------------
+# --- Functions ---
 
 func get_player_currency() -> Dictionary:
 	return player_stats["currency"]
@@ -187,3 +189,19 @@ func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
 	if not enemie_types.has(enemy_name) and (level < 0 or level >= enemie_types[enemy_name].size()):
 		return {}
 	return enemie_types[enemy_name][level]["rewards"]
+
+# --------------------------------------------------------------------
+# Terrain
+# --------------------------------------------------------------------
+
+# --- Data ---
+var terrain_heights: Dictionary = {}  
+
+# --- Functions ---
+func set_terrain_coordinates(x: int, z: int, y: float) -> void:
+	var key = "%d_%d" % [x, z]
+	terrain_heights[key] = y
+
+func get_terrain_height_at_hex(x: int, z: int) -> float:
+	var key = "%d_%d" % [x, z]
+	return terrain_heights.get(key, 0.0)

@@ -112,8 +112,11 @@ func _generate_grid():
 				0,
 				y * TILE_SIZE * SPACING + (0.0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
 			)
+			
+			var height := WATER_LEVEL if water else get_land_height(dist, max_dist, x, y)
+			_set_terrain_coordinates(x, y, height)
 
-			tile_pos.y = WATER_LEVEL if water else get_land_height(dist, max_dist, x, y)
+			tile_pos.y = height
 			tile.position = tile_pos
 			add_child(tile)
 
@@ -127,3 +130,11 @@ func _generate_grid():
 				spawn_enemy_pos.position = centered + Vector3(0, 1, 0)
 
 	nav_region.bake_navigation_mesh()
+
+
+# --------------------------------------------------------------------
+# Global Terrain
+# --------------------------------------------------------------------
+
+func _set_terrain_coordinates(x: int, z: int, y: float):
+	Global.set_terrain_coordinates(x, z, y)
