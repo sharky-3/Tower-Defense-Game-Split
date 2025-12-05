@@ -18,6 +18,8 @@ navigation_mesh = SubResource("NavigationMesh_o4np1")
 
 [node name="HexGrid" type="Node3D" parent="NavigationRegion3D"]
 script = ExtResource("2_jcr5e")
+grid_size_x = 20
+grid_size_z = 20
 terrain_type = "Mountain"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
