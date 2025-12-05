@@ -37,9 +37,8 @@ func _process(_delta) -> void:
 # Tower placing system
 # --------------------------------------------------------------------
 
-func start_placing(_index: int):
-	if current_building:
-		current_building.queue_free()
+func start_placing(_card_id: int):
+	if current_building: current_building.queue_free()
 
 	current_building = Global.get_base_mesh(tower_name).instantiate()
 	get_tree().current_scene.add_child(current_building)
