@@ -115,7 +115,10 @@ func _generate_grid():
 			)
 
 			var height := WATER_LEVEL if water else get_land_height(dist, max_dist, x, z)
-			_set_terrain_coordinates(x, z, height)
+			_set_terrain_coordinates(
+				"water" if water else "grass",
+				x, z, height
+			)
 
 			tile_pos.y = height
 			tile.position = tile_pos
@@ -135,5 +138,5 @@ func _generate_grid():
 # Global Terrain
 # --------------------------------------------------------------------
 
-func _set_terrain_coordinates(x: int, z: int, y: float):
-	Global.set_terrain_coordinates(x, z, y)
+func _set_terrain_coordinates(type: String, x: int, z: int, y: float):
+	Global.set_terrain_coordinates(type, x, z, y)
