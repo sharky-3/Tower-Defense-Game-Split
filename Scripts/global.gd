@@ -57,8 +57,6 @@ func update_player_stats(stat_name: String, value: float):
 	var data = player_stats["stats"]
 	data[stat_name] += value
 
-	print(data)
-
 # --------------------------------------------------------------------
 # Tower
 # --------------------------------------------------------------------
