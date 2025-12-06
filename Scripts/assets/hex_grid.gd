@@ -9,12 +9,11 @@ var tile_types: Dictionary = {
 # --- Constants / Exported Data ---
 @export_range(10, 100) var grid_size_x: int = 25
 @export_range(10, 100) var grid_size_z: int = 25
-@export_enum("Flat", "Hills", "Mountain", "Dunes") var terrain_type: String = "Hills"
-@export_enum("Square", "Circle", "Island") var terrain_shape: String = "Circle"
+@export_enum("Flat", "Hills", "Dunes", "Valleys", "Rough") var terrain_type: String = "Hills"
+@export_enum("Square", "Circle", "Island", "Oval", "Ring", "Diamond") var terrain_shape: String = "Circle"
 
 var world_radius_x: float = grid_size_x / 2.0
 var world_radius_z: float = grid_size_z / 2.0
-
 
 # --- Node references ---
 @onready var nav_region: NavigationRegion3D = $".."
@@ -54,7 +53,7 @@ func is_water(
 
 	# Water near edges for some shapes
 	match terrain_shape:
-		"Circle", "Island":
+		"Circle", "Island", "Oval", "Ring", "Diamond":
 			if dist > max_dist * 0.85: return true
 
 	# Random water patches
@@ -78,14 +77,17 @@ func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
 			center_offset = Vector3.ZERO
 			var base := norm * 1.2
 			return max(base + (randf() - 0.5) * 0.25, 0.0)
-		"Mountain":
-			center_offset = Vector3(0, 0.2, 0)
-			var base := pow(norm, 3.0) * 2
-			return base + (randf() - 0.5) * 0.1
 		"Dunes":
 			center_offset = Vector3.ZERO
 			var wave := sin(x * 0.7) * 0.8 + cos(y * 1.2) * 0.4
 			return wave * norm
+		"Valleys":
+			center_offset = Vector3.ZERO
+			var base := pow(dist / max_dist, 1.5)
+			return -(base + (randf() - 0.5) * 0.2)
+		"Rough":
+			center_offset = Vector3.ZERO
+			return (randf() - 0.5) * 1.5
 	return 0.0
 
 # -----------------------------------------------------------
@@ -96,47 +98,58 @@ func _generate_grid():
 	var center := Vector2(world_radius_x, world_radius_z)
 	var max_dist = max(world_radius_x, world_radius_z)
 
-	for x in range(grid_size_x):
-		for z in range(grid_size_z):
-			var pos := Vector2(x, z)
-			var dist := center.distance_to(pos)
+	# Calculate start/end ranges so the grid expands around (0,0)
+	var half_x = grid_size_x / 2.0
+	var half_z = grid_size_z / 2.0
 
-			# Skip tiles for Circle/Island shapes
-			if terrain_shape in ["Circle", "Island"] and dist > max_dist:
-				continue  # <-- only this line should be in the if-block
+	for x_offset in range(-int(half_x), int(half_x) + 1):
+		for z_offset in range(-int(half_z), int(half_z) + 1):
+			var grid_x = int(center.x + x_offset)
+			var grid_z = int(center.y + z_offset)
 
-			var water := is_water(x, z, center, dist, max_dist)
+			# Distance from center
+			var dist := Vector2(grid_x, grid_z).distance_to(center)
+
+			# Skip tiles outside the shape
+			match terrain_shape:
+				"Circle", "Island":
+					if dist > max_dist: continue
+				"Oval":
+					var dx = abs(grid_x - center.x) / world_radius_x
+					var dz = abs(grid_z - center.y) / world_radius_z
+					if dx*dx + dz*dz > 1: continue
+				"Ring":
+					if dist < max_dist * 0.4 or dist > max_dist: continue
+				"Diamond":
+					var dx = abs(grid_x - center.x)
+					var dz = abs(grid_z - center.y)
+					if dx + dz > max_dist: continue
+
+			var water := is_water(grid_x, grid_z, center, dist, max_dist)
 			var tile: Node3D = (tile_types["water"] if water else tile_types["grass"]).instantiate()
 
 			var tile_pos := Vector3(
-				x * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
+				x_offset * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
 				0,
-				z * TILE_SIZE * SPACING + (0.0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
+				z_offset * TILE_SIZE * SPACING + (0.0 if grid_x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
 			)
 
-			var height := WATER_LEVEL if water else get_land_height(dist, max_dist, x, z)
-			_set_terrain_coordinates(
-				"water" if water else "grass",
-				x, z, height
-			)
+			var height := WATER_LEVEL if water else get_land_height(dist, max_dist, grid_x, grid_z)
+			_set_terrain_coordinates(x_offset, z_offset, height)
 
 			tile_pos.y = height
 			tile.position = tile_pos
 			add_child(tile)
 
-			if x == int(center.x) and z == int(center.y):
-				var centered := tile_pos - center_offset
-				tile.position = centered
-				player_tower.position = centered
-				player_camera.position = centered + Vector3(0, 10, 5)
-				spawn_enemy_pos.position = centered + Vector3(0, 1, 0)
+			if grid_x == int(center.x) and grid_z == int(center.y):
+				player_tower.position = Vector3(0, height, 0)
+				spawn_enemy_pos.position = Vector3(0, height + 1, 0)
 
 	nav_region.bake_navigation_mesh()
-
 
 # --------------------------------------------------------------------
 # Global Terrain
 # --------------------------------------------------------------------
 
-func _set_terrain_coordinates(type: String, x: int, z: int, y: float):
-	Global.set_terrain_coordinates(type, x, z, y)
+func _set_terrain_coordinates(x: int, z: int, y: float):
+	Global.set_terrain_coordinates(x, z, y)

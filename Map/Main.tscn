@@ -18,10 +18,7 @@ navigation_mesh = SubResource("NavigationMesh_o4np1")
 
 [node name="HexGrid" type="Node3D" parent="NavigationRegion3D"]
 script = ExtResource("2_jcr5e")
-grid_size_x = 20
-grid_size_z = 20
-terrain_type = "Mountain"
-terrain_shape = null
+terrain_type = "Dunes"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_jm71a")
@@ -40,7 +37,7 @@ shadow_blur = 4.0
 directional_shadow_max_distance = 400.0
 
 [node name="CameraPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 13.150675)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 script = ExtResource("9_0lheq")
 
 [node name="CameraRotationX" type="Node3D" parent="CameraPosition"]

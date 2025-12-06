@@ -7,7 +7,7 @@ extends Node3D
 
 # --- Constants / Exported Data ---
 @export var max_distance_from_center: float = 25
-@export var center_point: Vector3 = Vector3(14.28942, 0.05, 16.5)
+@export var center_point: Vector3 = Vector3(0,0,0)
 
 # --- State ---
 const EDGE_SIZE: float = 5.0

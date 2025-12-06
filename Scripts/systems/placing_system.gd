@@ -17,7 +17,6 @@ var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
 var tower_name: String = "basic_tower"
 
 var current_building: Node3D = null
-var can_place_tower: bool = true
 
 # --------------------------------------------------------------------
 # Life Cycle
@@ -45,13 +44,12 @@ func start_placing(_card_id: int):
 	get_tree().current_scene.add_child(current_building)
 
 	var pos = snap_to_hex_grid(get_mouse_world_position())
-	if can_place_tower:
-		current_building.global_transform.origin = pos
-		
-		var random_angle = deg_to_rad(rng.randf_range(0, 360))
-		current_building.rotate(Vector3(0, 1, 0), random_angle)
-		
-		_update_player_stats("towers_built", +1)
+	current_building.global_transform.origin = pos
+	
+	var random_angle = deg_to_rad(rng.randf_range(0, 360))
+	current_building.rotate(Vector3(0, 1, 0), random_angle)
+	
+	_update_player_stats("towers_built", +1)
 
 func get_mouse_world_position() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -77,14 +75,9 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 	_snapped.x = rq * tile_size * cos30
 	_snapped.z = rr * tile_size + (half_shift if rq % 2 != 0 else 0.0)
 	
-	var terrain_height = _get_tile_height(rq, rr)
+	# Get terrain height and add tower offset
+	var terrain_height = Global.get_terrain_height_at_hex(rq, rr)
 	_snapped.y = terrain_height + TOWER_OFFSET.y
-	
-	var tile_type = _get_tile_type(rq, rr)
-	if tile_type and tile_type == "water": 
-		can_place_tower = false
-		print("You can't place tower in water")
-	else: can_place_tower = true
 	
 	return _snapped
 
@@ -106,6 +99,3 @@ func _update_player_stats(stat_name: String, value: int):
 
 func _get_tile_height(x: int, z: int):
 	return Global.get_terrain_height_at_hex(x, z)
-	
-func _get_tile_type(x: int, z: int):
-	return Global.get_terrain_type(x, z)

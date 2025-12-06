@@ -198,17 +198,10 @@ func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
 var terrain_heights: Dictionary = {}  
 
 # --- Functions ---
-func set_terrain_coordinates(_type: String, x: int, z: int, y: float) -> void:
+func set_terrain_coordinates(x: int, z: int, y: float) -> void:
 	var key = "%d_%d" % [x, z]
-	terrain_heights[key] = {
-		"type": _type,
-		"height": y
-	}
+	terrain_heights[key] = y
 
 func get_terrain_height_at_hex(x: int, z: int) -> float:
 	var key = "%d_%d" % [x, z]
-	return terrain_heights.get(key, {"height": 0.0})["height"]
-
-func get_terrain_type(x: int, z: int):
-	var key = "%d_%d" % [x, z]
-	return terrain_heights.get(key, {"type": "grass"})["type"]
+	return terrain_heights.get(key, 0.0)
