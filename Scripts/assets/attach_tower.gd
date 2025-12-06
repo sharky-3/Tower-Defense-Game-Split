@@ -80,7 +80,7 @@ func _attemp_upgrade() -> void:
 	_load_upgrade_level(current_upgrade + 1)
 	
 func _update_range_mesh(value: float) -> void:
-	range_mesh.scale = Vector3(value, .1, value)
+	range_mesh.scale = Vector3(value, 2, value)
 	
 # --------------------------------------------------------------------
 # Combat

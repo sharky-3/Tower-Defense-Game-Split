@@ -17,6 +17,9 @@ var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
 var tower_name: String = "basic_tower"
 
 var current_building: Node3D = null
+var current_target_coords: Vector2 = Vector2.ZERO
+
+const ATTACK_TOWERS := ["basic_tower", "cannon_tower", "laser_tower", "slow_tower"]
 
 # --------------------------------------------------------------------
 # Life Cycle
@@ -33,6 +36,12 @@ func _process(_delta) -> void:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos
 
+		# compute target grid coords used by hex grid (rq, rr)
+		var tile_coords := _world_to_grid(pos)
+		current_target_coords = tile_coords
+
+		# optional: show visual feedback (not implemented here) when placement invalid
+
 # --------------------------------------------------------------------
 # Tower placing system
 # --------------------------------------------------------------------
@@ -48,7 +57,7 @@ func start_placing(_card_id: int):
 	
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
-	
+
 	_update_player_stats("towers_built", +1)
 
 func get_mouse_world_position() -> Vector3:
@@ -75,11 +84,46 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 	_snapped.x = rq * tile_size * cos30
 	_snapped.z = rr * tile_size + (half_shift if rq % 2 != 0 else 0.0)
 	
-	# Get terrain height and add tower offset
 	var terrain_height = Global.get_terrain_height_at_hex(rq, rr)
 	_snapped.y = terrain_height + TOWER_OFFSET.y
 	
 	return _snapped
+
+func _world_to_grid(world_pos: Vector3) -> Vector2:
+	var tile_size = TILE_SIZE * SPACING
+	var half_shift = tile_size / 2.0
+	var cos30 = cos(deg_to_rad(30))
+
+	var q = world_pos.x / (tile_size * cos30)
+	var iq = int(round(q))
+	var r = (world_pos.z - (half_shift if iq % 2 != 0 else 0.0)) / tile_size
+
+	var rq = iq
+	var rr = int(round(r))
+
+	return Vector2(rq, rr)
+
+func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
+	var tile_node = Global.get_tile_node(x, z)
+	if not tile_node:
+		return false
+
+	if Global.is_tile_taken(x, z):
+		return false
+
+	if Global.is_tile_center(x, z):
+		return false
+
+	var tile_type = Global.get_tile_type(x, z)
+	if tile_type == "water":
+		return false
+
+	if _tower_name in ATTACK_TOWERS:
+		if not (tile_type == "grass" or tile_type == "stone"):
+			return false
+
+	# Passed all checks
+	return true
 
 # --------------------------------------------------------------------
 # Input
@@ -88,7 +132,15 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 func _unhandled_input(event):
 	if current_building and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			current_building = null
+			
+			var rq = int(current_target_coords.x)
+			var rr = int(current_target_coords.y)
+			
+			if _can_place_at(rq, rr, tower_name):
+				Global.set_tile_taken(rq, rr, true)
+				current_building = null
+			else:
+				push_warning("Cannot place tower here: invalid tile or already occupied")
 
 # --------------------------------------------------------------------
 # Global Player Stats

@@ -141,7 +141,15 @@ func _generate_grid():
 			tile.position = tile_pos
 			add_child(tile)
 
-			if grid_x == int(center.x) and grid_z == int(center.y):
+			# Register tile in Global using offset coordinates so placement and height lookups align
+			Global.set_tile_node(x_offset, z_offset, tile)
+			# Store helpful metadata on the tile node for quick checks
+			tile.set_meta("tile_type", ("water" if water else "grass"))
+			tile.set_meta("is_center", x_offset == 0 and z_offset == 0)
+			tile.set_meta("is_taken", false)
+			tile.set_meta("grid_coords", Vector2(x_offset, z_offset))
+
+			if x_offset == 0 and z_offset == 0:
 				player_tower.position = Vector3(0, height, 0)
 				spawn_enemy_pos.position = Vector3(0, height + 1, 0)
 

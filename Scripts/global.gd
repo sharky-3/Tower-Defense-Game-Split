@@ -197,6 +197,40 @@ func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
 # --- Data ---
 var terrain_heights: Dictionary = {}  
 
+# Map of tiles by grid coordinates (x_z -> Node)
+var tile_map: Dictionary = {}
+
+func set_tile_node(x: int, z: int, tile: Node) -> void:
+	var key = "%d_%d" % [x, z]
+	tile_map[key] = tile
+
+func get_tile_node(x: int, z: int) -> Node:
+	var key = "%d_%d" % [x, z]
+	return tile_map.get(key, null)
+
+func set_tile_taken(x: int, z: int, taken: bool = true) -> void:
+	var t = get_tile_node(x, z)
+	if t:
+		t.set_meta("is_taken", taken)
+
+func is_tile_taken(x: int, z: int) -> bool:
+	var t = get_tile_node(x, z)
+	if t:
+		return bool(t.get_meta("is_taken", false))
+	return false
+
+func get_tile_type(x: int, z: int) -> String:
+	var t = get_tile_node(x, z)
+	if t:
+		return str(t.get_meta("tile_type", ""))
+	return ""
+
+func is_tile_center(x: int, z: int) -> bool:
+	var t = get_tile_node(x, z)
+	if t:
+		return bool(t.get_meta("is_center", false))
+	return false
+
 # --- Functions ---
 func set_terrain_coordinates(x: int, z: int, y: float) -> void:
 	var key = "%d_%d" % [x, z]
