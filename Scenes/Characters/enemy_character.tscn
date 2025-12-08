@@ -53,11 +53,13 @@ script = ExtResource("1_sdh2x")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.5, 0)
+layers = 4
 material_override = SubResource("StandardMaterial3D_nraa5")
 mesh = ExtResource("3_f31sj")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2.5, 0)
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -2.5, 0)

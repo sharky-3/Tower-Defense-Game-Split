@@ -96,6 +96,7 @@ func _on_target_reached():
 func take_damage(amount: float):
 	enemy_health -= amount
 	_flash_damage()
+	print("take damage")
 
 	if enemy_health <= 0: _die()
 	_update_player_stats("damage_deald", amount)

@@ -72,7 +72,7 @@ func _attemp_upgrade() -> void:
 	
 func _update_range_mesh(value: float) -> void:
 	if tower_is_placed:
-		range_mesh.scale = Vector3(value, 2, value)
+		range_mesh.scale = Vector3(value, 1.5, value)
 	
 # --------------------------------------------------------------------
 # Combat
@@ -105,10 +105,15 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 # Input
 # --------------------------------------------------------------------
 
-func _input(event):
-	if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
-		_attemp_upgrade()
+#func _input(event):
+	#if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
+		#_attemp_upgrade()
 
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event and InputEventMouseButton:
+		if event.is_action_pressed("LEFT_MOUSE_CLICK") and event.is_pressed() and can_upgrade:
+			_attemp_upgrade()
+			
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
