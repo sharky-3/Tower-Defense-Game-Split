@@ -12,6 +12,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = ExtResource("1_1cbcs")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_8of7w")

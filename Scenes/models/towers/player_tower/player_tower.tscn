@@ -26,6 +26,7 @@ mesh = ExtResource("3_hxvxc")
 skeleton = NodePath("")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="PlayerTower"]
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerTower/RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_hxvxc")

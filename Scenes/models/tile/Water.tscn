@@ -18,6 +18,7 @@ material_override = SubResource("StandardMaterial3D_2pxmd")
 mesh = ExtResource("2_h7uce")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
+freeze = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 shape = SubResource("ConvexPolygonShape3D_18riu")

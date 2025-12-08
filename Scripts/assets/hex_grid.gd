@@ -142,7 +142,7 @@ func _generate_grid():
 		for z_offset in range(-int(half_z), int(half_z) + 1):
 			var grid_x = int(center.x + x_offset)
 			var grid_z = int(center.y + z_offset)
-
+			
 			# Distance from center
 			var dist := Vector2(grid_x, grid_z).distance_to(center)
 
@@ -194,7 +194,7 @@ func _generate_grid():
 			if x_offset == 0 and z_offset == 0:
 				player_tower.position = Vector3(0, height, 0)
 				spawn_enemy_pos.position = Vector3(0, height + 1, 0)
-
+				
 	nav_region.bake_navigation_mesh()
 
 # --------------------------------------------------------------------
