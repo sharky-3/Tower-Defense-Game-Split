@@ -1,10 +1,15 @@
 extends Node3D
 
+var rng = RandomNumberGenerator.new()
+
 # --- Resources ---
 var tile_types: Dictionary = {
 	"grass": preload("uid://bqr2nia2wo1lm"),
 	"water": preload("uid://c5nkt4wxc0rs6"),
 	"stone": preload("uid://12fnbjcnq5k4")
+}
+var environment: Dictionary = {
+	"tree": preload("uid://bcuitu4oaj6xu")
 }
 
 # --- Constants / Exported Data ---
@@ -111,6 +116,20 @@ func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
 # Grid Generation with Shapes
 # -----------------------------------------------------------
 
+func _generate_environment(tile, type: String) -> void:
+	var get_random_seed = rng.randi_range(0, 10)
+	if get_random_seed == 2 and type == "grass":
+		if environment.size() != 0:
+			var environment_keys = environment.keys()
+			var chosen_item = environment_keys[randi() % environment_keys.size()]
+			var chosen_mesh = environment[chosen_item]
+			var env_mesh = MeshInstance3D.new()
+			
+			env_mesh.mesh = chosen_mesh
+			env_mesh.position = tile.position
+			env_mesh.scale = Vector3(0.2, 0.2, 0.2)
+			add_child(env_mesh)
+			
 func _generate_grid():
 	var center := Vector2(world_radius_x, world_radius_z)
 	var max_dist = max(world_radius_x, world_radius_z)
@@ -150,8 +169,7 @@ func _generate_grid():
 				tile_type = "stone"
 
 			var tile: Node3D = tile_types[tile_type].instantiate()
-
-
+					
 			var tile_pos := Vector3(
 				x_offset * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
 				0,
@@ -164,6 +182,7 @@ func _generate_grid():
 			tile_pos.y = height
 			tile.position = tile_pos
 			add_child(tile)
+			_generate_environment(tile, tile_type)
 
 			Global.set_tile_node(x_offset, z_offset, tile)
 			
