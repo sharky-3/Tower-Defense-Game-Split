@@ -249,7 +249,10 @@ func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> 
 	tower_body_mesh.mesh = new_mesh
 
 	var tween = create_tween()
-	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_property(
+		tower_body_mesh, 
+		"scale", original_scale, 0.3
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(Callable(self, "_on_upgrade_animation_complete"))
 
 func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
