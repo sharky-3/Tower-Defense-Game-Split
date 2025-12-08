@@ -196,8 +196,6 @@ func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
 
 # --- Data ---
 var terrain_heights: Dictionary = {}  
-
-# Map of tiles by grid coordinates (x_z -> Node)
 var tile_map: Dictionary = {}
 
 func set_tile_node(x: int, z: int, tile: Node) -> void:

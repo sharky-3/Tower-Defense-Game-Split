@@ -36,11 +36,9 @@ func _process(_delta) -> void:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos
 
-		# compute target grid coords used by hex grid (rq, rr)
 		var tile_coords := _world_to_grid(pos)
 		current_target_coords = tile_coords
 
-		# optional: show visual feedback (not implemented here) when placement invalid
 
 # --------------------------------------------------------------------
 # Tower placing system
@@ -105,24 +103,18 @@ func _world_to_grid(world_pos: Vector3) -> Vector2:
 
 func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
 	var tile_node = Global.get_tile_node(x, z)
-	if not tile_node:
-		return false
+	if not tile_node: return false
 
-	if Global.is_tile_taken(x, z):
-		return false
+	if _is_tile_taken(x, z): return false
+	if _is_tile_center(x, z): return false
 
-	if Global.is_tile_center(x, z):
-		return false
-
-	var tile_type = Global.get_tile_type(x, z)
+	var tile_type = _get_tile_type(x, z)
 	if tile_type == "water":
 		return false
 
 	if _tower_name in ATTACK_TOWERS:
 		if not (tile_type == "grass" or tile_type == "stone"):
 			return false
-
-	# Passed all checks
 	return true
 
 # --------------------------------------------------------------------
@@ -151,3 +143,12 @@ func _update_player_stats(stat_name: String, value: int):
 
 func _get_tile_height(x: int, z: int):
 	return Global.get_terrain_height_at_hex(x, z)
+
+func _get_tile_type(x: int, z: int):
+	return Global.get_tile_type(x, z)
+
+func _is_tile_taken(x: int, z: int):
+	return Global.is_tile_taken(x, z)
+
+func _is_tile_center(x: int, z: int):
+	return Global.is_tile_center(x, z)

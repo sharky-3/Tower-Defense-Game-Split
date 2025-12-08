@@ -4,6 +4,7 @@ extends Node3D
 var tile_types: Dictionary = {
 	"grass": preload("uid://bqr2nia2wo1lm"),
 	"water": preload("uid://c5nkt4wxc0rs6"),
+	"stone": preload("uid://12fnbjcnq5k4")
 }
 
 # --- Constants / Exported Data ---
@@ -61,6 +62,22 @@ func is_water(
 		var n = (hash(x * 928371 + y * 192837) % 1000) / 1000.0
 		if n < 0.15: return true
 	return false
+
+func is_stone(
+	x: int,
+	y: int,
+	_center: Vector2,
+	dist: float,
+	max_dist: float
+) -> bool:
+
+	if dist < max_dist * 0.35:
+		var n = (hash(x * 12891 + y * 77213) % 1000) / 1000.0
+		if n < 0.20:
+			return true
+
+	var n2 = (hash(x * 99127 + y * 44111) % 1000) / 1000.0
+	return n2 < 0.05
 
 # -----------------------------------------------------------
 # Heightmap / Terrain Generation
@@ -126,7 +143,14 @@ func _generate_grid():
 					if dx + dz > max_dist: continue
 
 			var water := is_water(grid_x, grid_z, center, dist, max_dist)
-			var tile: Node3D = (tile_types["water"] if water else tile_types["grass"]).instantiate()
+			var tile_type := "grass"
+			if water: 
+				tile_type = "water"
+			elif is_stone(grid_x, grid_z, center, dist, max_dist):
+				tile_type = "stone"
+
+			var tile: Node3D = tile_types[tile_type].instantiate()
+
 
 			var tile_pos := Vector3(
 				x_offset * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
@@ -141,9 +165,8 @@ func _generate_grid():
 			tile.position = tile_pos
 			add_child(tile)
 
-			# Register tile in Global using offset coordinates so placement and height lookups align
 			Global.set_tile_node(x_offset, z_offset, tile)
-			# Store helpful metadata on the tile node for quick checks
+			
 			tile.set_meta("tile_type", ("water" if water else "grass"))
 			tile.set_meta("is_center", x_offset == 0 and z_offset == 0)
 			tile.set_meta("is_taken", false)
