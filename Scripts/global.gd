@@ -237,3 +237,28 @@ func set_terrain_coordinates(x: int, z: int, y: float) -> void:
 func get_terrain_height_at_hex(x: int, z: int) -> float:
 	var key = "%d_%d" % [x, z]
 	return terrain_heights.get(key, 0.0)
+
+# --------------------------------------------------------------------
+# Animation
+# --------------------------------------------------------------------
+
+func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
+	var original_scale = tower_body_mesh.scale
+
+	tower_body_mesh.scale = original_scale * 0.7
+	tower_body_mesh.mesh = new_mesh
+
+	var tween = create_tween()
+	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(Callable(self, "_on_upgrade_animation_complete"))
+
+func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
+	var original_scale = tower_body_mesh.scale
+	tower_body_mesh.scale = original_scale * 0.7
+	
+	var tween = create_tween()
+	tween.tween_property(
+		tower_body_mesh,
+		"scale", original_scale, 0.3,
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(Callable(self, "_on_placing_animation_complete"))

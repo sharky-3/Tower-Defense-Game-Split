@@ -45,8 +45,8 @@ func _process(_delta) -> void:
 # --------------------------------------------------------------------
 
 func _tower_can_be_placed():
-	if current_building.has_method("tower_is_placed"):
-		current_building.tower_is_placed()
+	if current_building.has_method("tower_can_be_upgraded"):
+		current_building.tower_can_be_upgraded()
 
 func start_placing(_card_id: int):
 	if current_building: current_building.queue_free()

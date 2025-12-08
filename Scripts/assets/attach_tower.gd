@@ -12,6 +12,7 @@ extends Node3D
 # --- State ---
 var current_upgrade: int = 0
 var can_upgrade: bool = false
+var tower_is_placed: bool = false
 
 var enemies_in_range: Array = []
 var tower_range: float = 0.0
@@ -34,13 +35,16 @@ func _ready() -> void:
 	
 func _process(_delta) -> void:
 	pass
-	
-func tower_is_placed():
-	can_upgrade = true
 
 # --------------------------------------------------------------------
 # Upgrading
 # --------------------------------------------------------------------
+
+func tower_can_be_upgraded():
+	can_upgrade = true
+	tower_is_placed = true
+	_update_range_mesh(tower_range)
+	_placing_tower_animation(tower_body_mesh)
 	
 func _get_tower_stats():
 	var stats = Global.get_tower_base_stats(tower_name)
@@ -57,28 +61,18 @@ func _load_upgrade_level(level: int) -> void:
 	tower_damage += data["damage"]
 
 	_update_range_mesh(tower_range)
-	_play_upgrade_animation(data["mesh"])
+	_upgrade_tower_animation(tower_body_mesh, data["mesh"])
 	tower_body_mesh.mesh = data["mesh"]
 
 	_update_player_stats("towers_upgraded", +1)
 
-func _play_upgrade_animation(new_mesh: Mesh) -> void:
-	var original_scale = tower_body_mesh.scale
-	
-	tower_body_mesh.scale = original_scale * 0.7
-	tower_body_mesh.mesh = new_mesh
-	
-	var tween = create_tween()
-	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(Callable(self, "_on_upgrade_animation_complete"))
-
-	
 func _attemp_upgrade() -> void:
 	if not can_upgrade: return
 	_load_upgrade_level(current_upgrade + 1)
 	
 func _update_range_mesh(value: float) -> void:
-	range_mesh.scale = Vector3(value, 2, value)
+	if tower_is_placed:
+		range_mesh.scale = Vector3(value, 2, value)
 	
 # --------------------------------------------------------------------
 # Combat
@@ -121,3 +115,9 @@ func _input(event):
 
 func _update_player_stats(stat_name: String, value: int):
 	Global.update_player_stats(stat_name, value)
+
+func _upgrade_tower_animation(tower_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
+	Global.play_upgrade_animation(tower_mesh, new_mesh)
+
+func _placing_tower_animation(tower_mesh: MeshInstance3D) -> void:
+	Global.play_placing_animation(tower_mesh)
