@@ -239,7 +239,7 @@ func get_terrain_height_at_hex(x: int, z: int) -> float:
 	return terrain_heights.get(key, 0.0)
 
 # --------------------------------------------------------------------
-# Animation
+# Animations
 # --------------------------------------------------------------------
 
 func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> void:

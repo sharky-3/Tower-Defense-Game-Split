@@ -4,7 +4,6 @@ extends Node3D
 const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
 
 # --- Constants / Exported Data ---
-@export var total_waves: int = 5
 @export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
 @export var time_between_waves: float = 15.0
 @export var difficulty_per_wave: Array[float] = [1, 1.2, 1.5, 1.8, 2.0]
@@ -34,7 +33,7 @@ func _process(_delta) -> void:
 # --------------------------------------------------------------------
 
 func _wave_system() -> void:
-	for wave_index in range(total_waves):
+	for wave_index in range(enemies_per_wave.size()):
 		_update_player_stats("waves_played", +1)
 
 		var enemy_count = enemies_per_wave[wave_index]
