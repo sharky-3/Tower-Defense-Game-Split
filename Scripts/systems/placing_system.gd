@@ -44,6 +44,10 @@ func _process(_delta) -> void:
 # Tower placing system
 # --------------------------------------------------------------------
 
+func _tower_can_be_placed():
+	if current_building.has_method("tower_is_placed"):
+		current_building.tower_is_placed()
+
 func start_placing(_card_id: int):
 	if current_building: current_building.queue_free()
 
@@ -55,7 +59,7 @@ func start_placing(_card_id: int):
 	
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
-
+	
 	_update_player_stats("towers_built", +1)
 
 func get_mouse_world_position() -> Vector3:
@@ -109,11 +113,11 @@ func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
 	if _is_tile_center(x, z): return false
 
 	var tile_type = _get_tile_type(x, z)
-	if tile_type == "water":
+	if tile_type == "water" or tile_type == "grass":
 		return false
 
 	if _tower_name in ATTACK_TOWERS:
-		if not (tile_type == "grass" or tile_type == "stone"):
+		if not (tile_type == "stone"):
 			return false
 	return true
 
@@ -130,6 +134,7 @@ func _unhandled_input(event):
 			
 			if _can_place_at(rq, rr, tower_name):
 				Global.set_tile_taken(rq, rr, true)
+				_tower_can_be_placed()
 				current_building = null
 			else:
 				push_warning("Cannot place tower here: invalid tile or already occupied")

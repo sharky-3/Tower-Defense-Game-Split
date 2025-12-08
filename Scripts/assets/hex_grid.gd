@@ -167,7 +167,7 @@ func _generate_grid():
 
 			Global.set_tile_node(x_offset, z_offset, tile)
 			
-			tile.set_meta("tile_type", ("water" if water else "grass"))
+			tile.set_meta("tile_type", tile_type)
 			tile.set_meta("is_center", x_offset == 0 and z_offset == 0)
 			tile.set_meta("is_taken", false)
 			tile.set_meta("grid_coords", Vector2(x_offset, z_offset))

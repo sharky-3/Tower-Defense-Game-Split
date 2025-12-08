@@ -31,10 +31,12 @@ func _ready() -> void:
 
 	area_3d.body_shape_entered.connect(Callable(self, "_on_area_3d_body_shape_entered"))
 	area_3d.body_shape_exited.connect(Callable(self, "_on_area_3d_body_shape_exited"))
-	_enable_upgrade_after_delay()
 	
 func _process(_delta) -> void:
 	pass
+	
+func tower_is_placed():
+	can_upgrade = true
 
 # --------------------------------------------------------------------
 # Upgrading
@@ -44,10 +46,6 @@ func _get_tower_stats():
 	var stats = Global.get_tower_base_stats(tower_name)
 	tower_range = stats["range"]
 	tower_damage = stats["damage"]
-
-func _enable_upgrade_after_delay() -> void:
-	await get_tree().create_timer(2.0).timeout
-	can_upgrade = true
 
 func _load_upgrade_level(level: int) -> void:
 	if not Global.get_tower_upgrade(tower_name, level): 
