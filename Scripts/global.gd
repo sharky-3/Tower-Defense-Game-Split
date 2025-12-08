@@ -257,7 +257,7 @@ func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> 
 
 func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 	var original_scale = tower_body_mesh.scale
-	tower_body_mesh.scale = original_scale * 1
+	tower_body_mesh.scale = original_scale * .7
 	
 	var tween = create_tween()
 	tween.tween_property(

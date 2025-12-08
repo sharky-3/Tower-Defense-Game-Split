@@ -118,6 +118,7 @@ func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
 
 func _generate_environment(tile, type: String) -> void:
 	var get_random_seed = rng.randi_range(0, 10)
+	var get_random_rotation = rng.randf_range(0, 360)
 	if get_random_seed == 2 and type == "grass":
 		if environment.size() != 0:
 			var environment_keys = environment.keys()
@@ -128,6 +129,7 @@ func _generate_environment(tile, type: String) -> void:
 			env_mesh.mesh = chosen_mesh
 			env_mesh.position = tile.position
 			env_mesh.scale = Vector3(0.2, 0.2, 0.2)
+			env_mesh.rotate(Vector3(0, 1, 0), get_random_rotation)
 			add_child(env_mesh)
 			
 func _generate_grid():
@@ -182,7 +184,6 @@ func _generate_grid():
 			tile_pos.y = height
 			tile.position = tile_pos
 			add_child(tile)
-			_generate_environment(tile, tile_type)
 
 			Global.set_tile_node(x_offset, z_offset, tile)
 			
@@ -194,6 +195,8 @@ func _generate_grid():
 			if x_offset == 0 and z_offset == 0:
 				player_tower.position = Vector3(0, height, 0)
 				spawn_enemy_pos.position = Vector3(0, height + 1, 0)
+			else:
+				_generate_environment(tile, tile_type)
 				
 	nav_region.bake_navigation_mesh()
 

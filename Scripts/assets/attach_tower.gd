@@ -1,11 +1,12 @@
 extends Node3D
 
+# --- Imports ---
+const PLACE_TOWER_SOUND: AudioStream = preload("uid://c8ac13k1jtjbe")
+
 # --- Node references ---
 @onready var tower_body_mesh: MeshInstance3D = $Mesh
-
-@onready var collision: CollisionShape3D = $Range/Area3D/Collision
+@onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
-
 @onready var timer: Timer = $Timer
 
 # --- State ---
@@ -40,10 +41,12 @@ func _process(_delta) -> void:
 # --------------------------------------------------------------------
 
 func tower_can_be_upgraded():
-	can_upgrade = true
 	tower_is_placed = true
 	_update_range_mesh(tower_range)
 	_placing_tower_animation(tower_body_mesh)
+	
+	_play_audio(PLACE_TOWER_SOUND, 0.7)
+	timer.start(0.5)
 	
 func _get_tower_stats():
 	var stats = Global.get_tower_base_stats(tower_name)
@@ -64,6 +67,7 @@ func _load_upgrade_level(level: int) -> void:
 	tower_body_mesh.mesh = data["mesh"]
 
 	_update_player_stats("towers_upgraded", +1)
+	_play_audio(PLACE_TOWER_SOUND, 0.7)
 
 func _attemp_upgrade() -> void:
 	if not can_upgrade: return
@@ -78,10 +82,15 @@ func _update_range_mesh(value: float) -> void:
 # --------------------------------------------------------------------
 
 func _on_timer_timeout():
+	if not tower_is_placed: return
+	if not can_upgrade:
+		can_upgrade = true
+		return
 	if enemies_in_range.is_empty(): return
 	
 	var target = enemies_in_range[0]
 	_shoot_enemy(target)
+
 
 func _shoot_enemy(target: Node3D) -> void:
 	var enemy_node := target.get_parent().get_parent()
@@ -104,15 +113,19 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 # Input
 # --------------------------------------------------------------------
 
-#func _input(event):
-	#if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
-		#_attemp_upgrade()
-
-func _on_area_3d_input_event(event: InputEvent) -> void:
+func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event and InputEventMouseButton:
 		if event.is_action_pressed("LEFT_MOUSE_CLICK") and event.is_pressed() and can_upgrade:
 			_attemp_upgrade()
 			
+# --------------------------------------------------------------------
+# Audio
+# --------------------------------------------------------------------
+
+func _play_audio(stream: AudioStream, starting_time: float):
+	$AudioStreamPlayer3D.stream = stream
+	$AudioStreamPlayer3D.play(starting_time)
+
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
