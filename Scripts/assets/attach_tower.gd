@@ -108,7 +108,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 	#if event is InputEventMouseButton and event.is_pressed() and can_upgrade:
 		#_attemp_upgrade()
 
-func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+func _on_area_3d_input_event(event: InputEvent) -> void:
 	if event and InputEventMouseButton:
 		if event.is_action_pressed("LEFT_MOUSE_CLICK") and event.is_pressed() and can_upgrade:
 			_attemp_upgrade()
