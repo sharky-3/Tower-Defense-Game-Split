@@ -12,6 +12,7 @@
 [node name="Map" type="Node3D"]
 script = ExtResource("1_g7ehh")
 enemies_per_wave = Array[int]([10, 15, 20, 30, 45])
+spawn_radius = 15.0
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o4np1")

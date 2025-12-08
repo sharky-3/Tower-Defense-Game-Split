@@ -3,9 +3,8 @@ extends Node3D
 # --- Node references ---
 @onready var tower_body_mesh: MeshInstance3D = $Mesh
 
-@onready var range_mesh := $Range
 @onready var collision: CollisionShape3D = $Range/Area3D/Collision
-@onready var area_3d: Area3D = $Range/Area3D
+@onready var area_3d: Area3D = $Area3D
 
 @onready var timer: Timer = $Timer
 
@@ -72,7 +71,7 @@ func _attemp_upgrade() -> void:
 	
 func _update_range_mesh(value: float) -> void:
 	if tower_is_placed:
-		range_mesh.scale = Vector3(value, 1.5, value)
+		area_3d.scale = Vector3(value, 2.0, value)
 	
 # --------------------------------------------------------------------
 # Combat
@@ -95,6 +94,7 @@ func _shoot_enemy(target: Node3D) -> void:
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body and body.is_in_group("Enemy"): 
+		print(body)
 		enemies_in_range.append(body)
 		
 func _on_area_3d_body_exited(body: Node3D) -> void:
