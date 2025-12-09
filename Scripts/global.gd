@@ -39,25 +39,17 @@ var player_stats: Dictionary = {
 }
 
 # --- Functions ---
-
-func get_player_currency() -> Dictionary:
-	return player_stats["currency"]
-
-func get_player_progression() -> Dictionary:
-	return player_stats["progression"]
-
-func get_player_bonuses() -> Dictionary:
-	return player_stats["bonuses"]
-
-func get_player_stats() -> Dictionary:
-	return player_stats["stats"]
 	
 func update_player_game_stats(directory_name: String, stat_name: String, value: float):
 	if not player_stats[directory_name].has(stat_name): return
-	
 	var data = player_stats[directory_name]
 	data[stat_name] += value
-
+	
+func get_looking_value(directory_name: String, stat_name: String):
+	if not player_stats[directory_name].has(stat_name): return
+	var data = player_stats[directory_name][stat_name]
+	return data
+	
 # --------------------------------------------------------------------
 # Tower
 # --------------------------------------------------------------------

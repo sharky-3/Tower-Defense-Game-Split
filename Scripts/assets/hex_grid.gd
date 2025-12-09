@@ -24,7 +24,6 @@ var world_radius_z: float = grid_size_z / 2.0
 # --- Node references ---
 @onready var nav_region: NavigationRegion3D = $".."
 @onready var player_tower: Node3D = $"../../Map/PlayerTower"
-@onready var player_camera: Node3D = $"../../CameraPosition"
 @onready var spawn_enemy_pos: Node3D = $"../../Map/spawn_enemy_position"
 
 # --- Stats ---

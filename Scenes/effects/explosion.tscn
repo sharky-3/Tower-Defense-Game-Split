@@ -1,34 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://1xjnsdcqq5uq"]
+[gd_scene load_steps=17 format=3 uid="uid://1xjnsdcqq5uq"]
 
 [ext_resource type="Script" uid="uid://jlbsfw5llgm5" path="res://Scripts/assets/explosion.gd" id="1_fqp2o"]
 [ext_resource type="AudioStream" uid="uid://domd0kckv0mom" path="res://assets/audio/explosion.mp3" id="2_d6bb2"]
-
-[sub_resource type="Curve" id="Curve_yqd0p"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.74887896, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_3eccc"]
-curve = SubResource("Curve_yqd0p")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o30ls"]
-particle_flag_align_y = true
-spread = 180.0
-initial_velocity_min = 12.0
-initial_velocity_max = 14.0
-scale_min = 0.5
-scale_max = 1.5
-scale_curve = SubResource("CurveTexture_3eccc")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4wi4f"]
-albedo_color = Color(0.9999998, 0.5418913, 0.28761953, 1)
-emission_enabled = true
-emission = Color(0.75001854, 0.32545114, 7.70092e-07, 1)
-emission_energy_multiplier = 3.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_vpu0t"]
-material = SubResource("StandardMaterial3D_4wi4f")
-top_radius = 0.1
-bottom_radius = 0.0
 
 [sub_resource type="Curve" id="Curve_454x2"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6860987, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -102,16 +75,6 @@ emission_curve = SubResource("CurveTexture_idg7g")
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_fqp2o")
-
-[node name="Debris" type="GPUParticles3D" parent="."]
-emitting = false
-amount = 24
-preprocess = 1.0
-speed_scale = 2.0
-explosiveness = 1.0
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_o30ls")
-draw_pass_1 = SubResource("CylinderMesh_vpu0t")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
 emitting = false

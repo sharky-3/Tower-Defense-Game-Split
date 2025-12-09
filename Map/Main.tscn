@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://ccebti0ataiqd"]
+[gd_scene load_steps=9 format=3 uid="uid://ccebti0ataiqd"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_g7ehh"]
 [ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="2_jcr5e"]
 [ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="3_jm71a"]
+[ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Scenes/characters/player_camera.tscn" id="4_jcr5e"]
 [ext_resource type="PackedScene" uid="uid://duu1tsc7gf3kk" path="res://Scenes/ui/cards_frame.tscn" id="5_xg4kd"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Scenes/models/towers/player_tower/player_tower.tscn" id="6_luu0p"]
-[ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="9_0lheq"]
+[ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Scripts/ui/stats.gd" id="7_jcr5e"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o4np1"]
 
@@ -37,24 +38,43 @@ shadow_bias = 0.008
 shadow_blur = 4.0
 directional_shadow_max_distance = 400.0
 
-[node name="CameraPosition" type="Node3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("4_jcr5e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
-script = ExtResource("9_0lheq")
-
-[node name="CameraRotationX" type="Node3D" parent="CameraPosition"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
-
-[node name="CameraZoomPivot" type="Node3D" parent="CameraPosition/CameraRotationX"]
-
-[node name="Camera3D" type="Camera3D" parent="CameraPosition/CameraRotationX/CameraZoomPivot"]
-
-[node name="PlacingSystem" parent="." instance=ExtResource("5_xg4kd")]
 
 [node name="Map" type="Node" parent="."]
 
 [node name="PlayerTower" parent="Map" instance=ExtResource("6_luu0p")]
 transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.4, 0, 0, 0)
-tower_healt = 10000.0
+tower_healt = 5.0
 
 [node name="spawn_enemy_position" type="Node3D" parent="Map"]
 transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)
+
+[node name="UserInterface2" type="Node" parent="."]
+
+[node name="PlacingSystem" parent="UserInterface2" instance=ExtResource("5_xg4kd")]
+
+[node name="Stats" type="Control" parent="UserInterface2"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 84.0
+grow_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource("7_jcr5e")
+
+[node name="Gold" type="Label" parent="UserInterface2/Stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 30.0
+offset_bottom = 25.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(30, 0)
+text = "Gold: 0"
