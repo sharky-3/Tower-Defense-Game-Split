@@ -79,7 +79,7 @@ func _spawn_enemy(difficulty: float) -> void:
 	var chosen_type = enemy_keys[randi() % enemy_keys.size()]
 	var type_levels = enemy_types_array[chosen_type].keys()
 	var chosen_level = type_levels[randi() % type_levels.size()]
-
+	
 	var enemy_mesh = Global.get_base_enemy(chosen_type, chosen_level)
 	enemy_instance.set_enemy_mesh(enemy_mesh["mesh"])
 	enemy_instance.set_enemy_stats(enemy_mesh["stats"])

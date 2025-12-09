@@ -45,16 +45,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="PlayerTower" parent="Map" instance=ExtResource("6_luu0p")]
 transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.4, 0, 0, 0)
-tower_healt = 5.0
 
 [node name="spawn_enemy_position" type="Node3D" parent="Map"]
 transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)
 
-[node name="UserInterface2" type="Node" parent="."]
+[node name="User Interface" type="Node" parent="."]
 
-[node name="PlacingSystem" parent="UserInterface2" instance=ExtResource("5_xg4kd")]
+[node name="PlacingSystem" parent="User Interface" instance=ExtResource("5_xg4kd")]
 
-[node name="Stats" type="Control" parent="UserInterface2"]
+[node name="Stats" type="Control" parent="User Interface"]
 layout_mode = 3
 anchors_preset = 5
 anchor_left = 0.5
@@ -66,7 +65,7 @@ grow_horizontal = 2
 size_flags_vertical = 0
 script = ExtResource("7_jcr5e")
 
-[node name="Gold" type="Label" parent="UserInterface2/Stats"]
+[node name="Gold" type="Label" parent="User Interface/Stats"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5

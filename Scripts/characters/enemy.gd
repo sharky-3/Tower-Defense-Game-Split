@@ -7,6 +7,7 @@ const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 @export var move_speed: float = 1.0
 @export var enemy_health: float = 4.0
 @export var attack_damage: float = 6.0
+@export var character_scale: float = 0.4
 
 @export var reward_gold: int = 5
 @export var reward_exp: int = 1
@@ -19,11 +20,9 @@ const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
 
-
 # --- Stats ---
 var path_update_timer := 0.0
 const PATH_UPDATE_INTERVAL := 0.75
-
 
 # --------------------------------------------------------------------
 # Ready
@@ -121,11 +120,15 @@ func _flash_damage():
 
 func set_enemy_mesh(new_mesh: Mesh):
 	mesh.mesh = new_mesh
+	self.scale = Vector3(character_scale, character_scale, character_scale)
 
 func set_enemy_stats(enemy_stats: Dictionary):
 	move_speed = enemy_stats["speed"]
 	enemy_health = enemy_stats["health"]
 	attack_damage = enemy_stats["attack_damage"]
+	character_scale = enemy_stats["scale"]
+	
+	set_enemy_mesh(mesh.mesh)  
 
 func set_enemy_rewards(enemy_rewards):
 	reward_gold = enemy_rewards["gold"]
