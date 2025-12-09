@@ -8,7 +8,6 @@ extends Node
 var player_stats: Dictionary = {
 	"currency": {
 		"gold": 0,
-		"gems": 0
 	},
 
 	"progression": {
@@ -52,11 +51,11 @@ func get_player_bonuses() -> Dictionary:
 
 func get_player_stats() -> Dictionary:
 	return player_stats["stats"]
-
-func update_player_stats(stat_name: String, value: float):
-	if not player_stats["stats"].has(stat_name): return
-
-	var data = player_stats["stats"]
+	
+func update_player_game_stats(directory_name: String, stat_name: String, value: float):
+	if not player_stats[directory_name].has(stat_name): return
+	
+	var data = player_stats[directory_name]
 	data[stat_name] += value
 
 # --------------------------------------------------------------------

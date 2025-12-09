@@ -25,7 +25,7 @@ func _attampt_damage(damage: float) -> void:
 	tower_healt -= damage
 	if _tower_health(tower_healt):
 		player_tower.queue_free()
-	_update_player_stats("damage_taken", damage)
+	_update_player_game_stats("damage_taken", damage)
 	
 func _tower_health(health: float):
 	if health <= 0: return true
@@ -38,5 +38,5 @@ func is_tower_dead() -> bool:
 # Global Player Stats
 # --------------------------------------------------------------------
 
-func _update_player_stats(stat_name: String, value: float):
-	Global.update_player_stats(stat_name, value)
+func _update_player_game_stats(stat_name: String, value: float):
+	Global.update_player_game_stats("stats", stat_name, value)

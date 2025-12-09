@@ -72,7 +72,6 @@ func _move_along_path(delta):
 	global_position += move_dir * move_speed * delta
 	_rotate_towards(move_dir)
 
-	# Play walking animation only when actually moving
 	if animator and not animator.is_playing():
 		animator.play("Walking")
 
@@ -98,11 +97,13 @@ func take_damage(amount: float):
 	_flash_damage()
 
 	if enemy_health <= 0: _die()
-	_update_player_stats("damage_deald", amount)
+	_update_player_game_stats("stats", "damage_deald", amount)
 
 func _die():
 	enemy.queue_free()
-	_update_player_stats("enemies_killed", +1)
+	_update_player_game_stats("stats", "enemies_killed", +1)
+	_update_player_game_stats("progression", "exp", reward_exp)
+	_update_player_game_stats("currency", "gold", reward_gold)
 
 func _flash_damage():
 	if not mesh: return
@@ -141,6 +142,6 @@ func add_enemy_to_group():
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
-
-func _update_player_stats(stat_name: String, value: float):
-	Global.update_player_stats(stat_name, value)
+	
+func _update_player_game_stats(disctionary_name: String, stat_name: String, value: float):
+	Global.update_player_game_stats(disctionary_name, stat_name, value)

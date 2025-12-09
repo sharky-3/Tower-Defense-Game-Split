@@ -42,8 +42,6 @@ func _process(_delta):
 	_tower_alive()
 	_update_range_mesh(tower_range)
 	
-	var overlapping_bodies = area_3d.get_overlapping_bodies()
-	
 	if current_target:
 		var target_global_pos = current_target.global_transform.origin
 		var origin = ray_cast.global_transform.origin
@@ -68,7 +66,7 @@ func _tower_alive() -> void:
 func _set_target_position_raycast(enemy_position: Vector3):
 	var direction_to_enemy: Vector3 = enemy_position
 	if direction_to_enemy.length() > 0.01:
-		var local_target_offset: Vector3 = direction_to_enemy.normalized() * 15
+		var local_target_offset: Vector3 = direction_to_enemy.normalized() * 100
 		ray_cast.target_position = local_target_offset
 		
 # --------------------------------------------------------------------
@@ -101,7 +99,7 @@ func _load_upgrade_level(level: int) -> void:
 	_upgrade_tower_animation(tower_body_mesh, data["mesh"])
 	tower_body_mesh.mesh = data["mesh"]
 
-	_update_player_stats("towers_upgraded", +1)
+	_update_player_game_stats("towers_upgraded", +1)
 	_play_audio(PLACE_TOWER_SOUND, 0.7)
 
 func _attemp_upgrade() -> void:
@@ -173,8 +171,8 @@ func _play_audio(stream: AudioStream, starting_time: float):
 # Global Player Stats
 # --------------------------------------------------------------------
 
-func _update_player_stats(stat_name: String, value: int):
-	Global.update_player_stats(stat_name, value)
+func _update_player_game_stats(stat_name: String, value: int):
+	Global.update_player_game_stats("stats", stat_name, value)
 
 func _upgrade_tower_animation(tower_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
 	Global.play_upgrade_animation(tower_mesh, new_mesh)

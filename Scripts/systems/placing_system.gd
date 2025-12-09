@@ -60,7 +60,7 @@ func start_placing(_card_id: int):
 	var random_angle = deg_to_rad(rng.randf_range(0, 360))
 	current_building.rotate(Vector3(0, 1, 0), random_angle)
 	
-	_update_player_stats("towers_built", +1)
+	_update_player_game_stats("towers_built", 1)
 
 func get_mouse_world_position() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -143,8 +143,8 @@ func _unhandled_input(event):
 # Global Player Stats
 # --------------------------------------------------------------------
 
-func _update_player_stats(stat_name: String, value: int):
-	Global.update_player_stats(stat_name, value)
+func _update_player_game_stats(stat_name: String, value: int):
+	Global.update_player_game_stats("stats", stat_name, value)
 
 func _get_tile_height(x: int, z: int):
 	return Global.get_terrain_height_at_hex(x, z)
