@@ -8,6 +8,8 @@ const PLACE_TOWER_SOUND: AudioStream = preload("uid://c8ac13k1jtjbe")
 @onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
 @onready var timer: Timer = $Timer
+@onready var ray_cast: RayCast3D = $Mesh/RayCast3D
+@onready var target_check_timer: Timer = $TargetCheckTimer
 
 # --- State ---
 var current_upgrade: int = 0
@@ -15,6 +17,7 @@ var can_upgrade: bool = false
 var tower_is_placed: bool = false
 
 var enemies_in_range: Array = []
+var current_target: Node3D = null
 var tower_range: float = 0.0
 var tower_damage: float = 0.0
 
@@ -27,15 +30,47 @@ var tower_name: String = "basic_tower"
 func _ready() -> void:
 	_get_tower_stats()
 	_load_upgrade_level(0)
+	
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	timer.start()
 
-	area_3d.body_shape_entered.connect(Callable(self, "_on_area_3d_body_shape_entered"))
-	area_3d.body_shape_exited.connect(Callable(self, "_on_area_3d_body_shape_exited"))
-	
-func _process(_delta) -> void:
-	pass
+	area_3d.body_entered.connect(Callable(self, "_on_area_3d_body_entered"))
+	area_3d.body_exited.connect(Callable(self, "_on_area_3d_body_exited"))
 
+	
+func _process(_delta):
+	_tower_alive()
+	_update_range_mesh(tower_range)
+	
+	var overlapping_bodies = area_3d.get_overlapping_bodies()
+	
+	if current_target:
+		var target_global_pos = current_target.global_transform.origin
+		var origin = ray_cast.global_transform.origin
+		var direction = (target_global_pos - origin)
+
+		_set_target_position_raycast(direction)
+	
+func _tower_alive() -> void:
+	for i in range(enemies_in_range.size() - 1, -1, -1):
+		if enemies_in_range[i] == null or !is_instance_valid(enemies_in_range[i]):
+			enemies_in_range.remove_at(i)
+	
+	if current_target == null or !is_instance_valid(current_target):
+		current_target = enemies_in_range[0] if enemies_in_range.size() > 0 else null
+	elif current_target not in enemies_in_range:
+		current_target = enemies_in_range[0] if enemies_in_range.size() > 0 else null
+		
+# --------------------------------------------------------------------
+# RayCast
+# --------------------------------------------------------------------
+
+func _set_target_position_raycast(enemy_position: Vector3):
+	var direction_to_enemy: Vector3 = enemy_position
+	if direction_to_enemy.length() > 0.01:
+		var local_target_offset: Vector3 = direction_to_enemy.normalized() * 15
+		ray_cast.target_position = local_target_offset
+		
 # --------------------------------------------------------------------
 # Upgrading
 # --------------------------------------------------------------------
@@ -88,9 +123,11 @@ func _on_timer_timeout():
 		return
 	if enemies_in_range.is_empty(): return
 	
+	_tower_alive()
+	if enemies_in_range.is_empty(): return
+	
 	var target = enemies_in_range[0]
 	_shoot_enemy(target)
-
 
 func _shoot_enemy(target: Node3D) -> void:
 	var enemy_node := target.get_parent().get_parent()
@@ -102,13 +139,19 @@ func _shoot_enemy(target: Node3D) -> void:
 # --------------------------------------------------------------------
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
-	if body and body.is_in_group("Enemy"): 
+	if body and body.is_in_group("Enemy"):
 		enemies_in_range.append(body)
-		
+		if current_target == null:
+			current_target = body
+
 func _on_area_3d_body_exited(body: Node3D) -> void:
-	if body and body.is_in_group("Enemy"): 
+	if body and body.is_in_group("Enemy"):
 		enemies_in_range.erase(body)
-	
+
+		if current_target == body:
+			if enemies_in_range.is_empty(): current_target = null
+			else: current_target = enemies_in_range[0]
+
 # --------------------------------------------------------------------s
 # Input
 # --------------------------------------------------------------------
