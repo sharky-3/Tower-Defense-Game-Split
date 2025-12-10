@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyfoj51ed4r7l"]
+[gd_scene load_steps=3 format=3 uid="uid://dyfoj51ed4r7l"]
 
 [ext_resource type="Script" uid="uid://bbs5y4cd2alok" path="res://Scripts/ui/selection_wheel.gd" id="1_a2tva"]
+[ext_resource type="Texture2D" uid="uid://dtph1gg4ahqkc" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_3ygai"]
 
 [node name="SelectionWheel" type="Control"]
 layout_mode = 3
@@ -11,12 +12,15 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 0.21816616
 size_flags_horizontal = 4
 script = ExtResource("1_a2tva")
-outer_radius = 300
+outer_radius = 350
 inner_radius = 100
-padding = 5
+padding = 7
 border_radius = 5
-options = [Color(0.9019608, 0.9019608, 0.9019608, 0), Color(0, 0, 0, 0), Color(0.69411767, 0.34901962, 0.4509804, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
-hover_time = 0.1
+options = Array[Texture2D]([ExtResource("2_3ygai"), ExtResource("2_3ygai"), ExtResource("2_3ygai"), ExtResource("2_3ygai")])
+hover_scale = 1.1
+stiffness = 500.0
+damping = 15.0
+mass = 1.0
+image_base_scale = 0.4

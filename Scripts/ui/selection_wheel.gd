@@ -6,36 +6,70 @@ extends Control
 @export var inner_radius: int = 64
 @export var padding: int = 2
 @export var border_radius: int = 10
-@export var options: Array = []
+
+@export var options: Array[Texture2D] 
 
 @export var hover_scale: float = 1.2
-@export var hover_time: float = 0.2 
+@export var stiffness: float = 300.0
+@export var damping: float = 10.0
+@export var mass: float = 2.0
+@export var image_base_scale: float = 0.6
 
 # --- Stats ---
+var segment_nodes: Array = []
+var image_nodes: Array = []
+var segment_velocities: Array = []
 var segment_scales: Array = []
 var hovered_index: int = -1
 
 # --------------------------------------------------------------------
-# Life Cycle
-# --------------------------------------------------------------------
-
 func _ready() -> void:
-	segment_scales.clear()
-	for _i in range(len(options)):
-		segment_scales.append(1.0)
+	_create_segments()
 
 func _process(delta: float) -> void:
-	queue_redraw()
 	_handle_hover()
 	_update_scales(delta)
 
 # --------------------------------------------------------------------
-# Draw
-# --------------------------------------------------------------------
+func _create_segments() -> void:
+	# Clear previous nodes
+	for node in segment_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
+	for node in image_nodes:
+		if is_instance_valid(node):
+			node.queue_free()
 
-func _draw() -> void:
+	segment_nodes.clear()
+	image_nodes.clear()
+	segment_scales.clear()
+	segment_velocities.clear()
+
 	var segment_count = len(options)
-	if segment_count < 1:
+	if segment_count == 0:
+		return
+
+	for i in range(segment_count):
+		var polygon = Polygon2D.new()
+		polygon.z_index = -10
+		add_child(polygon)
+		segment_nodes.append(polygon)
+		segment_scales.append(1.0)
+		segment_velocities.append(0.0)
+
+		var sprite = Sprite2D.new()
+		if options[i]:
+			sprite.texture = options[i]
+			sprite.centered = true
+		add_child(sprite)
+		image_nodes.append(sprite)
+
+	_update_segments_points()
+
+# --------------------------------------------------------------------
+func _update_segments_points() -> void:
+	var segment_count = len(segment_nodes)
+	if segment_count == 0:
 		return
 
 	var segment_angle = TAU / float(segment_count)
@@ -46,8 +80,6 @@ func _draw() -> void:
 	for i in range(segment_count):
 		var start_angle = i * segment_angle + padding_angle
 		var end_angle = (i + 1) * segment_angle - padding_angle
-		var scale = segment_scales[i]
-
 		var points = []
 
 		# Outer arc
@@ -59,8 +91,8 @@ func _draw() -> void:
 				r = outer_radius - border_radius * (1.0 - float(s) / radius_steps)
 			elif s > steps - radius_steps:
 				r = outer_radius - border_radius * (1.0 - float(steps - s) / radius_steps)
-			points.append(Vector2(cos(angle), sin(angle)) * r * scale)
-		
+			points.append(Vector2(cos(angle), sin(angle)) * r)
+
 		# Inner arc
 		for s in range(steps, -1, -1):
 			var t = float(s) / float(steps)
@@ -70,17 +102,19 @@ func _draw() -> void:
 				r = inner_radius + border_radius * (1.0 - float(s) / radius_steps)
 			elif s > steps - radius_steps:
 				r = inner_radius + border_radius * (1.0 - float(steps - s) / radius_steps)
-			points.append(Vector2(cos(angle), sin(angle)) * r * scale)
+			points.append(Vector2(cos(angle), sin(angle)) * r)
 
-		draw_polygon(points, [options[i]])
+		segment_nodes[i].polygon = points
+		segment_nodes[i].position = Vector2.ZERO
+
+		var mid_angle = (start_angle + end_angle) / 2
+		var mid_radius = (inner_radius + outer_radius) / 2
+		image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
 
 # --------------------------------------------------------------------
-# Tween
-# --------------------------------------------------------------------
-
 func _handle_hover() -> void:
 	var mouse_pos = get_local_mouse_position()
-	var segment_count = len(options)
+	var segment_count = len(segment_nodes)
 	if segment_count == 0:
 		return
 
@@ -101,9 +135,19 @@ func _handle_hover() -> void:
 	if found_hover != hovered_index:
 		hovered_index = found_hover
 
+# --------------------------------------------------------------------
 func _update_scales(delta: float) -> void:
-	for i in range(len(segment_scales)):
+	for i in range(len(segment_nodes)):
 		var target = 1.0
 		if i == hovered_index:
 			target = hover_scale
-		segment_scales[i] = lerp(segment_scales[i], target, delta / hover_time)
+
+		var x = segment_scales[i] - target
+		var force = -stiffness * x - damping * segment_velocities[i]
+		var acceleration = force / mass
+
+		segment_velocities[i] += acceleration * delta
+		segment_scales[i] += segment_velocities[i] * delta
+
+		segment_nodes[i].scale = Vector2.ONE * segment_scales[i]
+		image_nodes[i].scale = Vector2.ONE * segment_scales[i] * image_base_scale
