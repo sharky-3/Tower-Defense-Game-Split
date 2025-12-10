@@ -26,10 +26,10 @@ const ATTACK_TOWERS := ["basic_tower", "cannon_tower", "laser_tower", "slow_towe
 # --------------------------------------------------------------------
 
 func _ready():
-	card1.pressed.connect(func(): start_placing(0))
-	card2.pressed.connect(func(): start_placing(1))
-	card3.pressed.connect(func(): start_placing(2))
-	card4.pressed.connect(func(): start_placing(3))
+	card1.pressed.connect(func(): start_placing("basic_tower"))
+	card2.pressed.connect(func(): start_placing("basic_tower"))
+	card3.pressed.connect(func(): start_placing("basic_tower"))
+	card4.pressed.connect(func(): start_placing("basic_tower"))
 
 func _process(_delta) -> void:
 	if current_building:
@@ -48,19 +48,25 @@ func _tower_can_be_placed():
 	if current_building.has_method("tower_can_be_upgraded"):
 		current_building.tower_can_be_upgraded()
 
-func start_placing(_card_id: int):
-	if current_building: current_building.queue_free()
-
-	current_building = Global.get_base_mesh(tower_name).instantiate()
-	get_tree().current_scene.add_child(current_building)
-
-	var pos = snap_to_hex_grid(get_mouse_world_position())
-	current_building.global_transform.origin = pos
+func start_placing(_card_id: String):
 	
-	var random_angle = deg_to_rad(rng.randf_range(0, 360))
-	current_building.rotate(Vector3(0, 1, 0), random_angle)
+	if current_building: 
+		current_building.queue_free()
 	
-	_update_player_game_stats("towers_built", 1)
+	var player_gold = _get_looking_value("currency", "gold")
+	var data = _get_tower_upgrade(_card_id, 0)
+	
+	if player_gold >= data["price"]:
+		current_building = Global.get_base_mesh(tower_name).instantiate()
+		get_tree().current_scene.add_child(current_building)
+
+		var pos = snap_to_hex_grid(get_mouse_world_position())
+		current_building.global_transform.origin = pos
+		
+		var random_angle = deg_to_rad(rng.randf_range(0, 360))
+		current_building.rotate(Vector3(0, 1, 0), random_angle)
+		
+		_update_player_game_stats("towers_built", 1)
 
 func get_mouse_world_position() -> Vector3:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -146,6 +152,12 @@ func _unhandled_input(event):
 func _update_player_game_stats(stat_name: String, value: int):
 	Global.update_player_game_stats("stats", stat_name, value)
 
+func _get_looking_value(directory_name: String, stat_name: String):
+	return Global.get_looking_value(directory_name, stat_name)
+	
+func _get_tower_upgrade(stat_name: String, level: int):
+	return Global.get_tower_upgrade(stat_name, level)
+	
 func _get_tile_height(x: int, z: int):
 	return Global.get_terrain_height_at_hex(x, z)
 

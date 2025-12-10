@@ -6,7 +6,7 @@ extends Node
 
 var game_data: Dictionary = {
 	"player": {
-		"currency": { "gold": 0 },
+		"currency": { "gold": 50 },
 		"progression": { "exp": 0, "level": 1, "max_level": 15, "exp_to_next_level": 50 },
 		"bonuses": { "damage_multiplier": 1.0, "range_multiplier": 1.0, "attack_speed_multiplier": 1.0 },
 		"stats": {
@@ -20,37 +20,44 @@ var game_data: Dictionary = {
 		"basic_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 5, "damage": 3 },
+
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3 },
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 4 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6 }
+				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3, "price": 50 },  
+				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 4, "price": 60 },
+				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6, "price": 90 }
 			]
 		},
+
 		"cannon_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 6, "damage": 10 },
+
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 3, "damage": 5 },
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 8 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 6, "damage": 10 }
+				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 3, "damage": 5, "price": 100 }, 
+				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 8, "price": 110 },
+				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 6, "damage": 10, "price": 150 }
 			]
 		},
+
 		"laser_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 8, "damage": 6 },
+
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3 },
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 6, "damage": 5 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6 }
+				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3, "price": 120 },  
+				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 6, "damage": 5, "price": 100 },
+				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6, "price": 140 }
 			]
 		},
+
 		"slow_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 7, "damage": 3 },
+
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 2 },
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 3 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 4 }
+				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 2, "price": 80 }, 
+				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 3, "price": 70 },
+				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 4, "price": 100 }
 			]
 		}
 	},

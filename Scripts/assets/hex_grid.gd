@@ -100,7 +100,7 @@ func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
 			return max(base + (randf() - 0.5) * 0.25, 0.0)
 		"Dunes":
 			center_offset = Vector3.ZERO
-			var wave := sin(x * 0.7) * 0.8 + cos(y * 1.2) * 0.4
+			var wave := sin(x * 0.7) * 0.8 + cos(y * 0.8) * 0.4
 			return wave * norm
 		"Valleys":
 			center_offset = Vector3.ZERO

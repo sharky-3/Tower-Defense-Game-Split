@@ -86,21 +86,27 @@ func _get_tower_stats():
 	tower_range = stats["range"]
 	tower_damage = stats["damage"]
 
-func _load_upgrade_level(level: int) -> void:
-	if not Global.get_tower_upgrade(tower_name, level): 
+func _load_upgrade_level(level: int) -> void:	
+	if not _get_tower_upgrade(tower_name, level): 
 		return
-	current_upgrade = level
 	
-	var data = Global.get_tower_upgrade(tower_name, current_upgrade)
-	tower_range += data["range"]
-	tower_damage += data["damage"]
+	var player_gold = _get_looking_value("currency", "gold")
+	var data = _get_tower_upgrade(tower_name, level)
+	var tower_price = data["price"]
+	
+	if player_gold >= tower_price:
+		tower_range += data["range"]
+		tower_damage += data["damage"] 
+		current_upgrade = level
+		
+		_update_player_game_stats("currency", "gold", -tower_price)
+	
+		_update_range_mesh(tower_range)
+		_upgrade_tower_animation(tower_body_mesh, data["mesh"])
+		tower_body_mesh.mesh = data["mesh"]
 
-	_update_range_mesh(tower_range)
-	_upgrade_tower_animation(tower_body_mesh, data["mesh"])
-	tower_body_mesh.mesh = data["mesh"]
-
-	_update_player_game_stats("towers_upgraded", +1)
-	_play_audio(PLACE_TOWER_SOUND, 0.7)
+		_update_player_game_stats("stats", "towers_upgraded", +1)
+		_play_audio(PLACE_TOWER_SOUND, 0.7)
 
 func _attemp_upgrade() -> void:
 	if not can_upgrade: return
@@ -171,8 +177,14 @@ func _play_audio(stream: AudioStream, starting_time: float):
 # Global Player Stats
 # --------------------------------------------------------------------
 
-func _update_player_game_stats(stat_name: String, value: int):
-	Global.update_player_game_stats("stats", stat_name, value)
+func _update_player_game_stats(dictionary_name: String ,stat_name: String, value: int):
+	Global.update_player_game_stats(dictionary_name, stat_name, value)
+	
+func _get_looking_value(directory_name: String, stat_name: String):
+	return Global.get_looking_value(directory_name, stat_name)
+	
+func _get_tower_upgrade(stat_name: String, level: int):
+	return Global.get_tower_upgrade(stat_name, level)
 
 func _upgrade_tower_animation(tower_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
 	Global.play_upgrade_animation(tower_mesh, new_mesh)
