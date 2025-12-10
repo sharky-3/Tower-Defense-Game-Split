@@ -19,3 +19,4 @@ inner_radius = 100
 padding = 5
 border_radius = 5
 options = [Color(0.9019608, 0.9019608, 0.9019608, 0), Color(0, 0, 0, 0), Color(0.69411767, 0.34901962, 0.4509804, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+hover_time = 0.1
