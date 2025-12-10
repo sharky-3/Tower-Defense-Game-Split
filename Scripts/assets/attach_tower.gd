@@ -36,7 +36,6 @@ func _ready() -> void:
 
 	area_3d.body_entered.connect(Callable(self, "_on_area_3d_body_entered"))
 	area_3d.body_exited.connect(Callable(self, "_on_area_3d_body_exited"))
-
 	
 func _process(_delta):
 	_tower_alive()
@@ -156,7 +155,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 			if enemies_in_range.is_empty(): current_target = null
 			else: current_target = enemies_in_range[0]
 
-# --------------------------------------------------------------------s
+# --------------------------------------------------------------------
 # Input
 # --------------------------------------------------------------------
 

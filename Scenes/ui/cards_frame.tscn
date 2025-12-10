@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://duu1tsc7gf3kk"]
+[gd_scene load_steps=3 format=3 uid="uid://duu1tsc7gf3kk"]
 
 [ext_resource type="Script" uid="uid://bpxdukoduq7tg" path="res://Scripts/systems/placing_system.gd" id="1_j46x2"]
-[ext_resource type="Texture2D" uid="uid://dtph1gg4ahqkc" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_xos3w"]
-[ext_resource type="PackedScene" uid="uid://cvq5oa37c1bkt" path="res://Scenes/models/towers/attack_tower.tscn" id="3_yvmry"]
-[ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="4_7gatc"]
+[ext_resource type="Texture2D" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_xos3w"]
 
 [node name="PlacingSystem" type="Control"]
 layout_mode = 3
@@ -30,43 +28,6 @@ scale = Vector2(0.9, 0.9)
 pivot_offset = Vector2(100, 140)
 icon = ExtResource("2_xos3w")
 expand_icon = true
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Card1"]
-layout_mode = 0
-offset_right = 200.0
-offset_bottom = 280.0
-stretch = true
-metadata/_edit_use_anchors_ = true
-
-[node name="SubViewport" type="SubViewport" parent="Card1/SubViewportContainer"]
-own_world_3d = true
-handle_input_locally = false
-size = Vector2i(200, 280)
-render_target_update_mode = 4
-
-[node name="Node3D" type="Node3D" parent="Card1/SubViewportContainer/SubViewport"]
-
-[node name="Tower" parent="Card1/SubViewportContainer/SubViewport/Node3D" instance=ExtResource("3_yvmry")]
-transform = Transform3D(-0.49149126, 0, 0.3441459, 0, 0.6, 0, -0.3441459, 0, -0.49149126, 0, 0, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Card1/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(-4.371139e-08, 0.5, -0.8660254, 0, 0.8660254, 0.5, 1, 2.1855694e-08, -3.7855173e-08, -1.2, 0.8, 0)
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Card1/SubViewportContainer/SubViewport/Node3D"]
-environment = ExtResource("4_7gatc")
-
-[node name="Lights" type="Node3D" parent="Card1/SubViewportContainer/SubViewport/Node3D"]
-transform = Transform3D(-0.52521276, -0.5167623, 0.67609763, 0.8509572, -0.32339656, 0.4138672, 0.0047766254, 0.7926981, 0.60959524, 0, 0, 0)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Card1/SubViewportContainer/SubViewport/Node3D/Lights"]
-transform = Transform3D(0.330514, 0, 0.943801, 0, 1, 0, -0.943801, 0, 0.330514, 100, 0, 0)
-light_color = Color(0.839429, 0.9176236, 0.9965243, 1)
-light_energy = 7.0
-light_volumetric_fog_energy = 5.0
-shadow_enabled = true
-shadow_bias = 0.008
-shadow_blur = 4.0
-directional_shadow_max_distance = 400.0
 
 [node name="Card2" type="Button" parent="."]
 layout_mode = 0

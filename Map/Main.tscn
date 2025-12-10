@@ -53,7 +53,6 @@ transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.
 [node name="User Interface" type="Node" parent="."]
 
 [node name="PlacingSystem" parent="User Interface" instance=ExtResource("5_xg4kd")]
-visible = false
 offset_left = 6.1035156e-05
 offset_top = -148.99994
 offset_right = 6.1035156e-05
@@ -88,3 +87,4 @@ text = "Gold: 0"
 metadata/_edit_use_anchors_ = true
 
 [node name="SelectionWheel" parent="." instance=ExtResource("8_jm71a")]
+visible = false

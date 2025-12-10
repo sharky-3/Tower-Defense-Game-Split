@@ -215,3 +215,10 @@ func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 	var tween = create_tween()
 	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	tween.tween_callback(Callable(self, "_on_placing_animation_complete"))
+	
+# --------------------------------------------------------------------
+# User Interface
+# --------------------------------------------------------------------
+
+func open_tower_upgrade_ui(tower_name: String):
+	pass
