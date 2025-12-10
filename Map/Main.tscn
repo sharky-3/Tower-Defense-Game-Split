@@ -87,4 +87,3 @@ text = "Gold: 0"
 metadata/_edit_use_anchors_ = true
 
 [node name="SelectionWheel" parent="." instance=ExtResource("8_jm71a")]
-visible = false
