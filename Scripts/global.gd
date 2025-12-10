@@ -6,7 +6,7 @@ extends Node
 
 var game_data: Dictionary = {
 	"player": {
-		"currency": { "gold": 50 },
+		"currency": { "gold": 100 },
 		"progression": { "exp": 0, "level": 1, "max_level": 15, "exp_to_next_level": 50 },
 		"bonuses": { "damage_multiplier": 1.0, "range_multiplier": 1.0, "attack_speed_multiplier": 1.0 },
 		"stats": {
@@ -28,7 +28,7 @@ var game_data: Dictionary = {
 			]
 		},
 
-		"cannon_tower": {
+			"cannon_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 6, "damage": 10 },
 

@@ -52,6 +52,11 @@ transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.
 [node name="User Interface" type="Node" parent="."]
 
 [node name="PlacingSystem" parent="User Interface" instance=ExtResource("5_xg4kd")]
+offset_left = 6.1035156e-05
+offset_top = -148.99994
+offset_right = 6.1035156e-05
+offset_bottom = -148.99994
+metadata/_edit_use_anchors_ = true
 
 [node name="Stats" type="Control" parent="User Interface"]
 layout_mode = 3
@@ -64,6 +69,7 @@ offset_bottom = 84.0
 grow_horizontal = 2
 size_flags_vertical = 0
 script = ExtResource("7_jcr5e")
+metadata/_edit_use_anchors_ = true
 
 [node name="Gold" type="Label" parent="User Interface/Stats"]
 layout_mode = 1
@@ -77,3 +83,4 @@ grow_horizontal = 2
 scale = Vector2(4, 4)
 pivot_offset = Vector2(30, 0)
 text = "Gold: 0"
+metadata/_edit_use_anchors_ = true
