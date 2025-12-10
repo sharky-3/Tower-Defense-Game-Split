@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtph1gg4ahqkc"
-path="res://.godot/imported/tower_0-removebg-preview.png-6ef0581e6a7d29a794356188a1500e22.ctex"
+uid="uid://b3h1becsutw1t"
+path="res://.godot/imported/tower-upgrade-2.png-5457cc451fcd696263c2a85aabb62297.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/icons/tower_0-removebg-preview.png"
-dest_files=["res://.godot/imported/tower_0-removebg-preview.png-6ef0581e6a7d29a794356188a1500e22.ctex"]
+source_file="res://assets/texture/icons/tower-upgrade-2.png"
+dest_files=["res://.godot/imported/tower-upgrade-2.png-5457cc451fcd696263c2a85aabb62297.ctex"]
 
 [params]
 

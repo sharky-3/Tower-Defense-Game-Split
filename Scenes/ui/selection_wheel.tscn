@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dyfoj51ed4r7l"]
+[gd_scene load_steps=5 format=3 uid="uid://dyfoj51ed4r7l"]
 
 [ext_resource type="Script" uid="uid://bbs5y4cd2alok" path="res://Scripts/ui/selection_wheel.gd" id="1_a2tva"]
-[ext_resource type="Texture2D" uid="uid://dtph1gg4ahqkc" path="res://assets/texture/icons/tower_0-removebg-preview.png" id="2_3ygai"]
+[ext_resource type="Texture2D" uid="uid://cfn2o6b6yy7v1" path="res://assets/texture/icons/tower-upgrade-0.png" id="2_dx74i"]
+[ext_resource type="Texture2D" uid="uid://dg1onheyp0rij" path="res://assets/texture/icons/tower-upgrade-1.png" id="3_nevdg"]
+[ext_resource type="Texture2D" uid="uid://b3h1becsutw1t" path="res://assets/texture/icons/tower-upgrade-2.png" id="4_k2rtk"]
 
 [node name="SelectionWheel" type="Control"]
 layout_mode = 3
@@ -19,7 +21,8 @@ inner_radius = 100
 padding = 7
 border_radius = 5
 hover_color = Color(0.5647059, 0.93333334, 0.5647059, 1)
-options = Array[Texture2D]([ExtResource("2_3ygai"), ExtResource("2_3ygai"), ExtResource("2_3ygai"), ExtResource("2_3ygai")])
+options = Array[Texture2D]([ExtResource("2_dx74i"), ExtResource("3_nevdg"), ExtResource("4_k2rtk"), ExtResource("3_nevdg")])
 stiffness = 500.0
 damping = 15.0
 mass = 1.0
+image_base_scale = 0.4

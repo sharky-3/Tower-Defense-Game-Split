@@ -167,5 +167,6 @@ func _update_scales(delta: float) -> void:
 
 		if i == hovered_index:
 			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * (mid_radius - hover_offset)
+			image_nodes[i].scale = scale_vec * image_base_scale * 1.3
 		else:
 			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
