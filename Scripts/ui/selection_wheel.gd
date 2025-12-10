@@ -7,6 +7,8 @@ extends Control
 @export var padding: int = 2
 @export var border_radius: int = 10
 
+@export var base_color: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var hover_color: Color = Color(0.267, 0.685, 0.55, 1.0)
 @export var options: Array[Texture2D] 
 
 @export var hover_scale: float = 1.2
@@ -32,7 +34,6 @@ func _process(delta: float) -> void:
 
 # --------------------------------------------------------------------
 func _create_segments() -> void:
-	# Clear previous nodes
 	for node in segment_nodes:
 		if is_instance_valid(node):
 			node.queue_free()
@@ -52,6 +53,7 @@ func _create_segments() -> void:
 	for i in range(segment_count):
 		var polygon = Polygon2D.new()
 		polygon.z_index = -10
+		polygon.modulate = base_color
 		add_child(polygon)
 		segment_nodes.append(polygon)
 		segment_scales.append(1.0)
@@ -141,7 +143,11 @@ func _update_scales(delta: float) -> void:
 		var target = 1.0
 		if i == hovered_index:
 			target = hover_scale
+			segment_nodes[i].modulate = hover_color
+		else:
+			segment_nodes[i].modulate = base_color
 
+		# Physics-based scaling
 		var x = segment_scales[i] - target
 		var force = -stiffness * x - damping * segment_velocities[i]
 		var acceleration = force / mass
@@ -149,5 +155,17 @@ func _update_scales(delta: float) -> void:
 		segment_velocities[i] += acceleration * delta
 		segment_scales[i] += segment_velocities[i] * delta
 
-		segment_nodes[i].scale = Vector2.ONE * segment_scales[i]
-		image_nodes[i].scale = Vector2.ONE * segment_scales[i] * image_base_scale
+		# Apply scale
+		var scale_vec = Vector2.ONE * segment_scales[i]
+		segment_nodes[i].scale = scale_vec
+		image_nodes[i].scale = scale_vec * image_base_scale
+
+		# Update image position
+		var mid_angle = atan2(image_nodes[i].position.y, image_nodes[i].position.x)
+		var mid_radius = (inner_radius + outer_radius) / 2
+		var hover_offset = (segment_scales[i] - 1.0) * -3 * mid_radius
+
+		if i == hovered_index:
+			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * (mid_radius - hover_offset)
+		else:
+			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
