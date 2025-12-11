@@ -3,11 +3,6 @@ extends Control
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 # --- Node references ---
-@onready var card1: Button = $Card1
-@onready var card2: Button = $Card2
-@onready var card3: Button = $Card3
-@onready var card4: Button = $Card4
-
 @onready var camera := get_viewport().get_camera_3d()
 
 # --- Stats ---
@@ -26,11 +21,8 @@ const ATTACK_TOWERS := ["basic_tower", "cannon_tower", "laser_tower", "slow_towe
 # --------------------------------------------------------------------
 
 func _ready():
-	card1.pressed.connect(func(): start_placing("basic_tower"))
-	card2.pressed.connect(func(): start_placing("basic_tower"))
-	card3.pressed.connect(func(): start_placing("basic_tower"))
-	card4.pressed.connect(func(): start_placing("basic_tower"))
-
+	pass
+	
 func _process(_delta) -> void:
 	if current_building:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
@@ -38,7 +30,6 @@ func _process(_delta) -> void:
 
 		var tile_coords := _world_to_grid(pos)
 		current_target_coords = tile_coords
-
 
 # --------------------------------------------------------------------
 # Tower placing system
@@ -144,6 +135,31 @@ func _unhandled_input(event):
 				current_building = null
 			else:
 				push_warning("Cannot place tower here: invalid tile or already occupied")
+
+# --------------------------------------------------------------------
+# Get Placing Tower
+# --------------------------------------------------------------------
+
+func chosen_placing_tower(_index: int):
+	print(_index)
+
+	if current_building: 
+		current_building.queue_free()
+	
+	var player_gold = _get_looking_value("currency", "gold")
+	var data = _get_tower_upgrade(ATTACK_TOWERS[_index], 0)
+	
+	if player_gold >= data["price"]:
+		current_building = Global.get_base_mesh(tower_name).instantiate()
+		get_tree().current_scene.add_child(current_building)
+
+		var pos = snap_to_hex_grid(get_mouse_world_position())
+		current_building.global_transform.origin = pos
+		
+		var random_angle = deg_to_rad(rng.randf_range(0, 360))
+		current_building.rotate(Vector3(0, 1, 0), random_angle)
+		
+		_update_player_game_stats("towers_built", 1)
 
 # --------------------------------------------------------------------
 # Global Player Stats

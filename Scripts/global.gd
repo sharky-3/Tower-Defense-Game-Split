@@ -6,7 +6,7 @@ extends Node
 
 var game_data: Dictionary = {
 	"player": {
-		"currency": { "gold": 100 },
+		"currency": { "gold": 50 },
 		"progression": { "exp": 0, "level": 1, "max_level": 15, "exp_to_next_level": 50 },
 		"bonuses": { "damage_multiplier": 1.0, "range_multiplier": 1.0, "attack_speed_multiplier": 1.0 },
 		"stats": {
@@ -201,6 +201,8 @@ func get_terrain_height_at_hex(x: int, z: int) -> float:
 # Animation Functions
 # --------------------------------------------------------------------
 
+# --- Tower ---
+
 func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
 	var original_scale = tower_body_mesh.scale
 	tower_body_mesh.scale = original_scale * 0.7
@@ -212,13 +214,44 @@ func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> 
 func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 	var original_scale = tower_body_mesh.scale
 	tower_body_mesh.scale = original_scale * 0.7
-	var tween = create_tween()
-	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tween.tween_callback(Callable(self, "_on_placing_animation_complete"))
 	
-# --------------------------------------------------------------------
-# User Interface
-# --------------------------------------------------------------------
+	var tween = create_tween()
+	tween.tween_property(
+		tower_body_mesh, 
+		"scale", original_scale, 0.3
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tween.tween_callback(
+		Callable(self, "_on_placing_animation_complete")
+	)
+	
+# --- User Interface ---
 
-func open_tower_upgrade_ui(tower_name: String):
-	pass
+func open_ui(panel: Control):
+	var full_scale = Vector2(0.4, 0.4)
+	
+	var tween := create_tween()
+	var builder = tween.tween_property(
+		panel,
+		"scale",
+		full_scale,
+		0.25
+	)
+
+	builder.set_trans(Tween.TRANS_BACK)
+	builder.set_ease(Tween.EASE_IN)
+
+	tween.tween_callback(Callable(self, "_on_ui_close_complete"))
+
+func close_ui(panel: Control):
+	var tween := create_tween()
+	var builder = tween.tween_property(
+		panel,
+		"scale",
+		Vector2.ZERO,
+		0.25
+	)
+
+	builder.set_trans(Tween.TRANS_BACK)
+	builder.set_ease(Tween.EASE_IN)
+
+	tween.tween_callback(Callable(self, "_on_ui_close_complete"))

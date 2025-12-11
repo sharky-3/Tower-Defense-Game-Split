@@ -11,6 +11,9 @@ const PLACE_TOWER_SOUND: AudioStream = preload("uid://c8ac13k1jtjbe")
 @onready var ray_cast: RayCast3D = $Mesh/RayCast3D
 @onready var target_check_timer: Timer = $TargetCheckTimer
 
+@onready var quad: MeshInstance3D = $UI/Quad
+@onready var selection_wheel: Control = $UI/SubViewport/SelectionWheel
+
 # --- State ---
 var current_upgrade: int = 0
 var can_upgrade: bool = false
@@ -22,6 +25,7 @@ var tower_range: float = 0.0
 var tower_damage: float = 0.0
 
 var tower_name: String = "basic_tower"
+var opened_ui: bool = true
 
 # --------------------------------------------------------------------
 # Life Cycle
@@ -107,9 +111,10 @@ func _load_upgrade_level(level: int) -> void:
 		_update_player_game_stats("stats", "towers_upgraded", +1)
 		_play_audio(PLACE_TOWER_SOUND, 0.7)
 
-func _attemp_upgrade() -> void:
+func _attemp_upgrade(index) -> void:
 	if not can_upgrade: return
-	_load_upgrade_level(current_upgrade + 1)
+	current_upgrade = index
+	_load_upgrade_level(current_upgrade)
 	
 func _update_range_mesh(value: float) -> void:
 	if tower_is_placed:
@@ -162,7 +167,7 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event and InputEventMouseButton:
 		if event.is_action_pressed("LEFT_MOUSE_CLICK") and event.is_pressed() and can_upgrade:
-			_attemp_upgrade()
+			_attamp_show_ui()
 			
 # --------------------------------------------------------------------
 # Audio
@@ -171,6 +176,22 @@ func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Ve
 func _play_audio(stream: AudioStream, starting_time: float):
 	$AudioStreamPlayer3D.stream = stream
 	$AudioStreamPlayer3D.play(starting_time)
+
+# --------------------------------------------------------------------
+# User Interface
+# --------------------------------------------------------------------
+	
+func _attamp_show_ui():
+	if not opened_ui:
+		Global.open_ui(selection_wheel)
+		
+		selection_wheel.set_meta("tower_ref", self)
+		selection_wheel.add_to_group("tower_upgrade")
+		
+		opened_ui = true
+	else:
+		Global.close_ui(selection_wheel)
+		opened_ui = false
 
 # --------------------------------------------------------------------
 # Global Player Stats

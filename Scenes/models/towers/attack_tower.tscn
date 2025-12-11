@@ -75,7 +75,7 @@ debug_shape_thickness = 5
 transform = Transform3D(1.6666665, 0, 0, 0, 1.6666665, 0, 0, 0, 1.6666665, 0, 0, 0)
 
 [node name="UI" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 script = ExtResource("4_aybl1")
 
 [node name="Quad" type="MeshInstance3D" parent="UI"]
@@ -95,8 +95,8 @@ handle_input_locally = false
 canvas_item_default_texture_filter = 0
 render_target_update_mode = 4
 
-[node name="SelectionWheel" parent="UI/SubViewport" instance=ExtResource("4_hiffb")]
-scale = Vector2(0.4, 0.4)
+[node name="SelectionWheel" parent="UI/SubViewport" groups=["tower_upgrade"] instance=ExtResource("4_hiffb")]
+scale = Vector2(1e-05, 1e-05)
 options = Array[Texture2D]([ExtResource("5_chsi2"), ExtResource("6_aybl1"), ExtResource("7_xokaj")])
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

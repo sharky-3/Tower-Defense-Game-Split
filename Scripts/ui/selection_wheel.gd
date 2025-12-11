@@ -1,6 +1,8 @@
 @tool
 extends Control
 
+@onready var selection_wheel: Control = $"."
+
 # --- Constants / Exported Data ---
 @export var outer_radius: int = 256
 @export var inner_radius: int = 64
@@ -25,6 +27,9 @@ var segment_scales: Array = []
 var hovered_index: int = -1
 
 # --------------------------------------------------------------------
+# Life Cycle
+# --------------------------------------------------------------------
+
 func _ready() -> void:
 	_create_segments()
 
@@ -33,6 +38,9 @@ func _process(delta: float) -> void:
 	_update_scales(delta)
 
 # --------------------------------------------------------------------
+# Create UI
+# --------------------------------------------------------------------
+
 func _create_segments() -> void:
 	for node in segment_nodes:
 		if is_instance_valid(node):
@@ -69,6 +77,9 @@ func _create_segments() -> void:
 	_update_segments_points()
 
 # --------------------------------------------------------------------
+# Buttons
+# --------------------------------------------------------------------
+
 func _update_segments_points() -> void:
 	var segment_count = len(segment_nodes)
 	if segment_count == 0:
@@ -114,6 +125,9 @@ func _update_segments_points() -> void:
 		image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
 
 # --------------------------------------------------------------------
+# Interact
+# --------------------------------------------------------------------
+
 func _handle_hover() -> void:
 	var mouse_pos = get_local_mouse_position()
 	var segment_count = len(segment_nodes)
@@ -136,8 +150,24 @@ func _handle_hover() -> void:
 
 	if found_hover != hovered_index:
 		hovered_index = found_hover
-
+		
+func _input(event: InputEvent):
+	if event and InputEventMouseButton and event.is_action_pressed("LEFT_MOUSE_CLICK") and event.is_pressed():
+		var get_control_group = selection_wheel.get_groups()[0]
+		
+		if hovered_index >= 0 and get_control_group == "placing_tower":
+			PlacingSystem.chosen_placing_tower(hovered_index)
+			
+		elif hovered_index >= 0 and get_control_group == "tower_upgrade":
+			var tower = get_meta("tower_ref")
+			if tower and is_instance_valid(tower):
+				tower._attemp_upgrade(hovered_index)
+				Global.close_ui(selection_wheel)
+			
 # --------------------------------------------------------------------
+# Animation
+# --------------------------------------------------------------------
+
 func _update_scales(delta: float) -> void:
 	for i in range(len(segment_nodes)):
 		var target = 1.0
@@ -147,7 +177,6 @@ func _update_scales(delta: float) -> void:
 		else:
 			segment_nodes[i].modulate = base_color
 
-		# Physics-based scaling
 		var x = segment_scales[i] - target
 		var force = -stiffness * x - damping * segment_velocities[i]
 		var acceleration = force / mass
@@ -155,12 +184,10 @@ func _update_scales(delta: float) -> void:
 		segment_velocities[i] += acceleration * delta
 		segment_scales[i] += segment_velocities[i] * delta
 
-		# Apply scale
 		var scale_vec = Vector2.ONE * segment_scales[i]
 		segment_nodes[i].scale = scale_vec
 		image_nodes[i].scale = scale_vec * image_base_scale
 
-		# Update image position
 		var mid_angle = atan2(image_nodes[i].position.y, image_nodes[i].position.x)
 		var mid_radius = (inner_radius + outer_radius) / 2
 		var hover_offset = (segment_scales[i] - 1.0) * -3 * mid_radius
