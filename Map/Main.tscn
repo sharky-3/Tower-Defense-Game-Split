@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://ccebti0ataiqd"]
+[gd_scene load_steps=13 format=3 uid="uid://ccebti0ataiqd"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_g7ehh"]
 [ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="2_jcr5e"]
 [ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="3_jm71a"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Scenes/characters/player_camera.tscn" id="4_jcr5e"]
-[ext_resource type="PackedScene" uid="uid://duu1tsc7gf3kk" path="res://Scenes/ui/cards_frame.tscn" id="5_xg4kd"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Scenes/models/towers/player_tower/player_tower.tscn" id="6_luu0p"]
 [ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Scripts/ui/stats.gd" id="7_jcr5e"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Scenes/ui/selection_wheel.tscn" id="8_jm71a"]
@@ -56,13 +55,6 @@ transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.
 
 [node name="User Interface" type="Node" parent="."]
 
-[node name="PlacingSystem" parent="User Interface" instance=ExtResource("5_xg4kd")]
-offset_left = 6.1035156e-05
-offset_top = -148.99994
-offset_right = 6.1035156e-05
-offset_bottom = -148.99994
-metadata/_edit_use_anchors_ = true
-
 [node name="Stats" type="Control" parent="User Interface"]
 layout_mode = 3
 anchors_preset = 5
@@ -91,16 +83,5 @@ text = "Gold: 0"
 metadata/_edit_use_anchors_ = true
 
 [node name="SelectionWheel" parent="." groups=["placing_tower"] instance=ExtResource("8_jm71a")]
-anchors_preset = 2
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 0.0
-anchor_bottom = 1.0
-offset_left = 400.0
-offset_top = -400.0
-offset_right = 400.0
-offset_bottom = -400.0
-grow_horizontal = 1
-grow_vertical = 0
 scale = Vector2(0.7, 0.7)
 options = Array[Texture2D]([ExtResource("9_ce33l"), ExtResource("10_jfxw6"), ExtResource("11_0x3we"), ExtResource("12_hhbe4")])
