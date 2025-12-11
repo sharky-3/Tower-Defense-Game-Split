@@ -4,9 +4,13 @@ extends Node
 # Game Data
 # --------------------------------------------------------------------
 
+var tower_name = "basic_tower"
+func set_new_tower_name(new_name: String):
+	tower_name = new_name
+
 var game_data: Dictionary = {
 	"player": {
-		"currency": { "gold": 50 },
+		"currency": { "gold": 1000 },
 		"progression": { "exp": 0, "level": 1, "max_level": 15, "exp_to_next_level": 50 },
 		"bonuses": { "damage_multiplier": 1.0, "range_multiplier": 1.0, "attack_speed_multiplier": 1.0 },
 		"stats": {
@@ -22,24 +26,24 @@ var game_data: Dictionary = {
 			"stats": { "range": 5, "damage": 3 },
 
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3, "price": 50 },  
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 4, "price": 60 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6, "price": 90 }
+				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 6, "damage": 3, "price": 50 },
+				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 8, "damage": 4, "price": 60 },
+				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 11, "damage": 6, "price": 90 }
 			]
 		},
 
-			"cannon_tower": {
-			"mesh": preload("uid://cvq5oa37c1bkt"),
+		"turret_tower": {
+			"mesh": preload("uid://c4lillreyucf4"),
 			"stats": { "range": 6, "damage": 10 },
 
 			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 3, "damage": 5, "price": 100 }, 
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 8, "price": 110 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 6, "damage": 10, "price": 150 }
+				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 5, "damage": 5, "price": 100 },
+				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 8, "damage": 8, "price": 110 },
+				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 9, "damage": 10, "price": 150 }
 			]
 		},
 
-		"laser_tower": {
+		"cannon_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 8, "damage": 6 },
 
@@ -114,20 +118,21 @@ func get_looking_value(directory_name: String, stat_name: String):
 # Tower Functions
 # --------------------------------------------------------------------
 
-func get_base_mesh(tower_name: String) -> PackedScene:
-	if not game_data["towers"].has(tower_name): 
+func get_base_mesh(_name: String) -> PackedScene:
+	print(_name)
+	if not game_data["towers"].has(_name): 
 		return null
-	return game_data["towers"][tower_name]["mesh"]
+	return game_data["towers"][_name]["mesh"]
 
-func get_tower_base_stats(tower_name: String):
-	if not game_data["towers"].has(tower_name): 
+func get_tower_base_stats(_name: String):
+	if not game_data["towers"].has(_name): 
 		return {}
-	return game_data["towers"][tower_name]["stats"]
+	return game_data["towers"][_name]["stats"]
 
-func get_tower_upgrade(tower_name: String, level: int) -> Dictionary:
-	if not game_data["towers"].has(tower_name): 
+func get_tower_upgrade(_name: String, level: int) -> Dictionary:
+	if not game_data["towers"].has(_name): 
 		return {}
-	var upgrades = game_data["towers"][tower_name]["upgrades"]
+	var upgrades = game_data["towers"][_name]["upgrades"]
 	if level < 0 or level >= upgrades.size(): 
 		return {}
 	return upgrades[level]

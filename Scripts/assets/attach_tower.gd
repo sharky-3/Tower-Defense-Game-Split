@@ -24,7 +24,7 @@ var current_target: Node3D = null
 var tower_range: float = 0.0
 var tower_damage: float = 0.0
 
-var tower_name: String = "basic_tower"
+var tower_name: String = Global.tower_name
 var opened_ui: bool = true
 
 # --------------------------------------------------------------------
@@ -86,6 +86,7 @@ func tower_can_be_upgraded():
 	
 func _get_tower_stats():
 	var stats = Global.get_tower_base_stats(tower_name)
+	print("Attach tower script: ", tower_name)
 	tower_range = stats["range"]
 	tower_damage = stats["damage"]
 
@@ -98,8 +99,8 @@ func _load_upgrade_level(level: int) -> void:
 	var tower_price = data["price"]
 	
 	if player_gold >= tower_price:
-		tower_range += data["range"]
-		tower_damage += data["damage"] 
+		tower_range = data["range"]
+		tower_damage = data["damage"] 
 		current_upgrade = level
 		
 		_update_player_game_stats("currency", "gold", -tower_price)

@@ -9,12 +9,12 @@ var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 const TILE_SIZE: float = 1.5
 const SPACING: float = 1
 var TOWER_OFFSET: Vector3 = Vector3(0, 0.6, 0)
-var tower_name: String = "basic_tower"
+var tower_name: String = Global.tower_name
 
 var current_building: Node3D = null
 var current_target_coords: Vector2 = Vector2.ZERO
 
-const ATTACK_TOWERS := ["basic_tower", "cannon_tower", "laser_tower", "slow_tower"]
+const ATTACK_TOWERS = ["basic_tower", "turret_tower", "cannon_tower", "slow_tower"]
 
 # --------------------------------------------------------------------
 # Life Cycle
@@ -141,13 +141,13 @@ func _unhandled_input(event):
 # --------------------------------------------------------------------
 
 func chosen_placing_tower(_index: int):
-	print(_index)
-
 	if current_building: 
 		current_building.queue_free()
 	
 	var player_gold = _get_looking_value("currency", "gold")
 	var data = _get_tower_upgrade(ATTACK_TOWERS[_index], 0)
+	Global.set_new_tower_name(ATTACK_TOWERS[_index])
+	tower_name = Global.tower_name
 	
 	if player_gold >= data["price"]:
 		current_building = Global.get_base_mesh(tower_name).instantiate()
