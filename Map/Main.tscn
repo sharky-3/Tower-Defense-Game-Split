@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://ccebti0ataiqd"]
+[gd_scene load_steps=14 format=3 uid="uid://ccebti0ataiqd"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_g7ehh"]
 [ext_resource type="Script" uid="uid://2ct3uvp1kmk2" path="res://Scripts/assets/hex_grid.gd" id="2_jcr5e"]
 [ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="3_jm71a"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Scenes/characters/player_camera.tscn" id="4_jcr5e"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Scenes/models/towers/player_tower/player_tower.tscn" id="6_luu0p"]
+[ext_resource type="PackedScene" uid="uid://befyiqnv66nro" path="res://Scenes/ui/carouse_container.tscn" id="7_ce33l"]
 [ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Scripts/ui/stats.gd" id="7_jcr5e"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Scenes/ui/selection_wheel.tscn" id="8_jm71a"]
 [ext_resource type="Texture2D" uid="uid://cfn2o6b6yy7v1" path="res://assets/texture/icons/tower-upgrade-0.png" id="9_ce33l"]
@@ -81,6 +82,8 @@ scale = Vector2(4, 4)
 pivot_offset = Vector2(30, 0)
 text = "Gold: 0"
 metadata/_edit_use_anchors_ = true
+
+[node name="CarouseContainer" parent="User Interface" instance=ExtResource("7_ce33l")]
 
 [node name="SelectionWheel" parent="." groups=["placing_tower"] instance=ExtResource("8_jm71a")]
 scale = Vector2(0.7, 0.7)

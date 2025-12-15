@@ -4,10 +4,6 @@ extends Node
 # Game Data
 # --------------------------------------------------------------------
 
-var tower_name = "basic_tower"
-func set_new_tower_name(new_name: String):
-	tower_name = new_name
-
 var game_data: Dictionary = {
 	"player": {
 		"currency": { "gold": 1000 },
@@ -118,8 +114,12 @@ func get_looking_value(directory_name: String, stat_name: String):
 # Tower Functions
 # --------------------------------------------------------------------
 
+var tower_name = "basic_tower"
+
+func set_new_tower_name(new_name: String):
+	tower_name = new_name
+	
 func get_base_mesh(_name: String) -> PackedScene:
-	print(_name)
 	if not game_data["towers"].has(_name): 
 		return null
 	return game_data["towers"][_name]["mesh"]

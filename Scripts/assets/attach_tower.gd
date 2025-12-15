@@ -86,7 +86,6 @@ func tower_can_be_upgraded():
 	
 func _get_tower_stats():
 	var stats = Global.get_tower_base_stats(tower_name)
-	print("Attach tower script: ", tower_name)
 	tower_range = stats["range"]
 	tower_damage = stats["damage"]
 

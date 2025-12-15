@@ -1,0 +1,133 @@
+[gd_scene load_steps=2 format=3 uid="uid://befyiqnv66nro"]
+
+[ext_resource type="Script" uid="uid://bdl4jhp1faxde" path="res://Scripts/ui/carouse_container.gd" id="1_goutl"]
+
+[node name="Game" type="Node2D"]
+
+[node name="CarouseContainer" type="Node2D" parent="." node_paths=PackedStringArray("position_offset_node")]
+script = ExtResource("1_goutl")
+wraparound_enabled = true
+selected_index = 3
+position_offset_node = NodePath("Control")
+
+[node name="Control" type="Control" parent="CarouseContainer"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 8e-45)
+z_index = -3
+layout_mode = 0
+offset_left = -359.80743
+offset_top = -200.00009
+offset_right = -159.80743
+offset_bottom = 49.99991
+scale = Vector2(0.24999991, 0.24999991)
+pivot_offset = Vector2(100, 125)
+
+[node name="Panel2" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 0.29999983)
+z_index = -2
+layout_mode = 0
+offset_left = -395.44193
+offset_top = -166.31769
+offset_right = -195.44235
+offset_bottom = 83.68231
+scale = Vector2(0.49999982, 0.49999982)
+pivot_offset = Vector2(99.99979, 125)
+
+[node name="Panel3" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 0.6499997)
+z_index = -1
+layout_mode = 0
+offset_left = -292.83597
+offset_top = -136.69788
+offset_right = -92.836975
+offset_bottom = 113.302124
+scale = Vector2(0.74999964, 0.74999964)
+pivot_offset = Vector2(99.9995, 125)
+
+[node name="Panel4" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 0.99999964)
+z_index = 1
+layout_mode = 0
+offset_left = -99.99968
+offset_top = -125.000046
+offset_right = 99.99959
+offset_bottom = 124.999954
+scale = Vector2(0.99999964, 0.99999964)
+pivot_offset = Vector2(99.99963, 125)
+
+[node name="Panel5" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 0.65000033)
+z_index = -1
+layout_mode = 0
+offset_left = 92.837494
+offset_top = -136.6977
+offset_right = 292.83496
+offset_bottom = 113.30231
+scale = Vector2(0.75000036, 0.75000036)
+pivot_offset = Vector2(99.99873, 125)
+
+[node name="Panel6" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 0.30000016)
+z_index = -2
+layout_mode = 0
+offset_left = 195.44078
+offset_top = -166.3175
+offset_right = 395.44366
+offset_bottom = 83.682495
+scale = Vector2(0.50000036, 0.50000036)
+pivot_offset = Vector2(100.00145, 125)
+
+[node name="Panel7" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 1e-44)
+z_index = -3
+layout_mode = 0
+offset_left = 159.80789
+offset_top = -199.99991
+offset_right = 359.80756
+offset_bottom = 50.00009
+scale = Vector2(0.25000018, 0.25000018)
+pivot_offset = Vector2(99.999825, 125)
+
+[node name="Panel8" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 8e-45)
+z_index = -4
+layout_mode = 0
+offset_left = 2.6065786
+offset_top = -221.98454
+offset_right = 202.60551
+offset_bottom = 28.015457
+scale = Vector2(0.100000046, 0.100000046)
+pivot_offset = Vector2(99.999466, 125)
+
+[node name="Panel9" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 8e-45)
+z_index = -5
+layout_mode = 0
+offset_left = -100.00015
+offset_top = -224.99991
+offset_right = 100.000244
+offset_bottom = 25.000092
+scale = Vector2(0.100000046, 0.100000046)
+pivot_offset = Vector2(100.0002, 125)
+
+[node name="Panel10" type="Panel" parent="CarouseContainer/Control"]
+modulate = Color(1, 1, 1, 8e-45)
+z_index = -6
+layout_mode = 0
+offset_left = -99.998566
+offset_top = -224.99991
+offset_right = 99.99866
+offset_bottom = 25.000092
+scale = Vector2(0.100000046, 0.100000046)
+pivot_offset = Vector2(99.99861, 125)

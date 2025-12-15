@@ -65,7 +65,6 @@ func _spawn_enemy(difficulty: float) -> void:
 	add_child(enemy_instance)
 	enemy_instance.add_enemy_to_group()
 
-	# Set position
 	if is_instance_valid(spawn_enemy_position):
 		enemy_instance.global_transform.origin = (
 			spawn_enemy_position.global_transform.origin + _get_random_spawn_offset()
