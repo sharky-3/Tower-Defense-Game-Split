@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 class_name CarouselContainer
 
@@ -27,6 +26,10 @@ var item_scales: Array = []
 var item_velocities: Array = []
 var original_colors: Array = []
 
+# --- Click Tracking ---
+var clicked_towers: Array = []
+var max_selected_towers: int = 4
+
 # --------------------------------------------------------------------
 # Life Cycle
 # --------------------------------------------------------------------
@@ -44,7 +47,6 @@ func _process(delta: float) -> void:
 
 	selected_index = clamp(selected_index, 0, children.size() - 1)
 
-	# ---------------- PROCESS CHILDREN ----------------
 	for i in range(children.size()):
 		var child := children[i]
 		if not child is Control:
@@ -77,21 +79,23 @@ func _process(delta: float) -> void:
 
 		child.position = child.position.lerp(target_position, smoothing_speed * delta)
 
-		# ---------------- OPACITY ----------------
+		# ---------------- OPACITY + CLICK COLOR ----------------
 		var target_alpha = 1.0 - opacity_strength * abs(i - selected_index)
 		target_alpha = clamp(target_alpha, 0.0, 1.0)
 
-		if original_colors.size() == children.size():
-			var mod = original_colors[i]
-			mod.a = lerp(child.modulate.a, target_alpha, smoothing_speed * delta)
-			child.modulate = mod
+		var mod = child.modulate
+
+		if clicked_towers != null and clicked_towers.has(i):
+			mod.r = 0.7
+			mod.g = 1.0
+			mod.b = 0.7
 		else:
-			var mod = child.modulate
 			mod.r = 1.0
 			mod.g = 1.0
 			mod.b = 1.0
-			mod.a = lerp(mod.a, target_alpha, smoothing_speed * delta)
-			child.modulate = mod
+
+		mod.a = lerp(mod.a, target_alpha, smoothing_speed * delta)
+		child.modulate = mod
 
 		# ---------------- Z-ORDER ----------------
 		child.z_index = -abs(i - selected_index)
@@ -130,6 +134,9 @@ func _setup_child_images() -> void:
 		var child := children[i]
 		if not child is Control:
 			continue
+
+		# Correct signal connection with bind()
+		child.connect("gui_input", Callable(self, "_on_child_gui_input").bind(i))
 
 		item_scales.append(1.0)
 		item_velocities.append(0.0)
@@ -201,9 +208,33 @@ func _update_selected_item_physics(delta: float) -> void:
 
 		child.scale = Vector2.ONE * item_scales[i]
 
+		var tex_rect: TextureRect = null
+		for c in child.get_children():
+			if c is TextureRect:
+				tex_rect = c
+				break
+
+		if tex_rect:
+			if i == selected_index:
+				var image_offset_y = -100.0
+				tex_rect.position.y = lerp(tex_rect.position.y, image_offset_y, smoothing_speed * delta)
+			else:
+				tex_rect.position.y = lerp(tex_rect.position.y, 0.0, smoothing_speed * delta)
+
 # --------------------------------------------------------------------
 # Inputs
 # --------------------------------------------------------------------
+
+func _on_child_gui_input(event: InputEvent, index: int) -> void:
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if clicked_towers.has(index):
+			# Already clicked, remove
+			clicked_towers.erase(index)
+		elif clicked_towers.size() < max_selected_towers:
+			# Add new click if limit not reached
+			clicked_towers.append(index)
+		else:
+			return # Max clicks reached
 
 func move_left() -> void:
 	selected_index = max(selected_index - 1, 0)
