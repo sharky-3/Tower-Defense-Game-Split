@@ -35,7 +35,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_handle_hover()
-	_update_scales(delta)
+	_global_hover_animation(delta)
 
 # --------------------------------------------------------------------
 # Create UI
@@ -197,3 +197,22 @@ func _update_scales(delta: float) -> void:
 			image_nodes[i].scale = scale_vec * image_base_scale * 1.3
 		else:
 			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
+
+func _global_hover_animation(_delta: float) -> void:
+	UIAnimations.update_segment_hover_physics(
+		_delta,
+		segment_nodes,
+		image_nodes,
+		segment_scales,
+		segment_velocities,
+		hovered_index,
+		hover_scale,
+		base_color,
+		hover_color,
+		stiffness,
+		damping,
+		mass,
+		inner_radius,
+		outer_radius,
+		image_base_scale
+	)

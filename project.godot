@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 PlacingSystem="*res://Scripts/systems/placing_system.gd"
+GlobalTween="*res://Scripts/ui/tween.gd"
 
 [display]
 
