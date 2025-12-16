@@ -2,6 +2,12 @@ extends Node
 
 class_name UIAnimations
 
+static var hover_scale: float = 1.2
+static var stiffness: float = 300.0
+static var damping: float = 10.0
+static var mass: float = 2.0
+static var image_base_scale: float = 0.6
+	
 static func update_segment_hover_physics(
 	delta: float,
 	segment_nodes: Array,
@@ -9,16 +15,12 @@ static func update_segment_hover_physics(
 	segment_scales: Array,
 	segment_velocities: Array,
 	hovered_index: int,
-	hover_scale: float,
 	base_color: Color,
 	hover_color: Color,
-	stiffness: float,
-	damping: float,
-	mass: float,
 	inner_radius: float,
 	outer_radius: float,
-	image_base_scale: float
 ) -> void:
+
 	for i in range(segment_nodes.size()):
 		var target := 1.0
 		if i == hovered_index:

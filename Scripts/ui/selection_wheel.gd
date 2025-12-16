@@ -13,12 +13,6 @@ extends Control
 @export var hover_color: Color = Color(0.267, 0.685, 0.55, 1.0)
 @export var options: Array[Texture2D] 
 
-@export var hover_scale: float = 1.2
-@export var stiffness: float = 300.0
-@export var damping: float = 10.0
-@export var mass: float = 2.0
-@export var image_base_scale: float = 0.6
-
 # --- Stats ---
 var segment_nodes: Array = []
 var image_nodes: Array = []
@@ -168,36 +162,6 @@ func _input(event: InputEvent):
 # Animation
 # --------------------------------------------------------------------
 
-func _update_scales(delta: float) -> void:
-	for i in range(len(segment_nodes)):
-		var target = 1.0
-		if i == hovered_index:
-			target = hover_scale
-			segment_nodes[i].modulate = hover_color
-		else:
-			segment_nodes[i].modulate = base_color
-
-		var x = segment_scales[i] - target
-		var force = -stiffness * x - damping * segment_velocities[i]
-		var acceleration = force / mass
-
-		segment_velocities[i] += acceleration * delta
-		segment_scales[i] += segment_velocities[i] * delta
-
-		var scale_vec = Vector2.ONE * segment_scales[i]
-		segment_nodes[i].scale = scale_vec
-		image_nodes[i].scale = scale_vec * image_base_scale
-
-		var mid_angle = atan2(image_nodes[i].position.y, image_nodes[i].position.x)
-		var mid_radius = (inner_radius + outer_radius) / 2
-		var hover_offset = (segment_scales[i] - 1.0) * -3 * mid_radius
-
-		if i == hovered_index:
-			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * (mid_radius - hover_offset)
-			image_nodes[i].scale = scale_vec * image_base_scale * 1.3
-		else:
-			image_nodes[i].position = Vector2(cos(mid_angle), sin(mid_angle)) * mid_radius
-
 func _global_hover_animation(_delta: float) -> void:
 	UIAnimations.update_segment_hover_physics(
 		_delta,
@@ -206,13 +170,8 @@ func _global_hover_animation(_delta: float) -> void:
 		segment_scales,
 		segment_velocities,
 		hovered_index,
-		hover_scale,
 		base_color,
 		hover_color,
-		stiffness,
-		damping,
-		mass,
 		inner_radius,
 		outer_radius,
-		image_base_scale
 	)

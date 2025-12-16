@@ -29,6 +29,10 @@ window/size/mode=3
 
 Enemy=""
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [input]
 
 left={

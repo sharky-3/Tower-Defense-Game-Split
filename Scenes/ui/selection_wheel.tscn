@@ -22,7 +22,3 @@ padding = 7
 border_radius = 5
 hover_color = Color(0.5647059, 0.93333334, 0.5647059, 1)
 options = Array[Texture2D]([ExtResource("2_dx74i"), ExtResource("3_nevdg"), ExtResource("4_k2rtk"), ExtResource("3_nevdg")])
-stiffness = 500.0
-damping = 15.0
-mass = 1.0
-image_base_scale = 0.4

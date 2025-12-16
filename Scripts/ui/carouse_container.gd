@@ -22,13 +22,16 @@ class_name CarouselContainer
 
 @export var position_offset_node: Control
 
+# --- Stats ---
+var item_scales: Array = []
+var item_velocities: Array = []
+var original_colors: Array = []
+
 # --------------------------------------------------------------------
 # Life Cycle
 # --------------------------------------------------------------------
 
 func _ready():
-	var viewport_size = get_viewport_rect().size
-	global_position = viewport_size * 0.5
 	_setup_child_images()
 
 func _process(delta: float) -> void:
@@ -41,26 +44,18 @@ func _process(delta: float) -> void:
 
 	selected_index = clamp(selected_index, 0, children.size() - 1)
 
-	for child in children:
+	# ---------------- PROCESS CHILDREN ----------------
+	for i in range(children.size()):
+		var child := children[i]
 		if not child is Control:
 			continue
-
-		var index := child.get_index()
-
-		if child.get_rect().has_point(child.get_local_mouse_position()):
-			on_index_hovered(index)
 		child.pivot_offset = child.size * 0.5
 
 		# ---------------- POSITION ----------------
 		var target_position: Vector2
-
 		if wraparound_enabled:
 			var max_range = max(1.0, (children.size() - 1) / 2.0)
-			var angle = clamp(
-				(index - selected_index) / max_range,
-				-1.0,
-				1.0
-			) * PI
+			var angle = clamp((i - selected_index) / max_range, -1.0, 1.0) * PI
 
 			var x := sin(angle) * wraparound_radius
 			var y := cos(angle) * wraparound_height
@@ -71,8 +66,8 @@ func _process(delta: float) -> void:
 			)
 		else:
 			var x := 0.0
-			if index > 0:
-				var prev := children[index - 1] as Control
+			if i > 0:
+				var prev := children[i - 1] as Control
 				x = prev.position.x + prev.size.x + spacing
 
 			target_position = Vector2(
@@ -80,53 +75,43 @@ func _process(delta: float) -> void:
 				-child.size.y * 0.5
 			)
 
-		child.position = child.position.lerp(
-			target_position,
-			smoothing_speed * delta
-		)
-
-		# ---------------- SCALE ----------------
-		var target_scale = 1.0 - scale_strength * abs(index - selected_index)
-		target_scale = clamp(target_scale, scale_min, 1.0)
-
-		child.scale = child.scale.lerp(
-			Vector2.ONE * target_scale,
-			smoothing_speed * delta
-		)
+		child.position = child.position.lerp(target_position, smoothing_speed * delta)
 
 		# ---------------- OPACITY ----------------
-		var target_alpha = 1.0 - opacity_strength * abs(index - selected_index)
+		var target_alpha = 1.0 - opacity_strength * abs(i - selected_index)
 		target_alpha = clamp(target_alpha, 0.0, 1.0)
 
-		var mod = child.modulate
-		mod.a = lerp(mod.a, target_alpha, smoothing_speed * delta)
-		child.modulate = mod
+		if original_colors.size() == children.size():
+			var mod = original_colors[i]
+			mod.a = lerp(child.modulate.a, target_alpha, smoothing_speed * delta)
+			child.modulate = mod
+		else:
+			var mod = child.modulate
+			mod.r = 1.0
+			mod.g = 1.0
+			mod.b = 1.0
+			mod.a = lerp(mod.a, target_alpha, smoothing_speed * delta)
+			child.modulate = mod
 
 		# ---------------- Z-ORDER ----------------
-		child.z_index = -abs(index - selected_index)
-		if index == selected_index:
+		child.z_index = -abs(i - selected_index)
+		if i == selected_index:
 			child.z_index = 1
 
 		# ---------------- FOCUS FOLLOW ----------------
 		if follow_button_focus and child.has_focus():
-			selected_index = index
+			selected_index = i
+
+	# ---------------- SCALE (SPRING-BASED) ----------------
+	_update_selected_item_physics(delta)
 
 	# ---------------- CONTAINER OFFSET ----------------
 	if wraparound_enabled:
-		position_offset_node.position.x = lerp(
-			position_offset_node.position.x,
-			0.0,
-			smoothing_speed * delta
-		)
+		position_offset_node.position.x = lerp(position_offset_node.position.x, 0.0, smoothing_speed * delta)
 	else:
 		var selected := children[selected_index] as Control
 		var target_x := -(selected.position.x + selected.size.x * 0.5)
-
-		position_offset_node.position.x = lerp(
-			position_offset_node.position.x,
-			target_x,
-			smoothing_speed * delta
-		)
+		position_offset_node.position.x = lerp(position_offset_node.position.x, target_x, smoothing_speed * delta)
 
 # --------------------------------------------------------------------
 # Set Up Images
@@ -138,11 +123,18 @@ func _setup_child_images() -> void:
 
 	var children := position_offset_node.get_children()
 
-	for i in children.size():
+	item_scales.clear()
+	item_velocities.clear()
+
+	for i in range(children.size()):
 		var child := children[i]
 		if not child is Control:
 			continue
 
+		item_scales.append(1.0)
+		item_velocities.append(0.0)
+
+		# --- Add / Configure TextureRect ---
 		var tex_rect: TextureRect = null
 		for c in child.get_children():
 			if c is TextureRect:
@@ -171,19 +163,44 @@ func _setup_child_images() -> void:
 			tex_rect.expand = true
 			child.add_child(tex_rect)
 
-
 		tex_rect.stretch_mode = image_stretch_mode
 
 		if i < images.size():
 			tex_rect.texture = images[i]
 
 # --------------------------------------------------------------------
-# Hover
+# Spring Physics for Selected Item
 # --------------------------------------------------------------------
 
-func on_index_hovered(index: int) -> void:
-	pass
-	
+func _update_selected_item_physics(delta: float) -> void:
+	if position_offset_node == null:
+		return
+
+	var children := position_offset_node.get_children()
+	if children.is_empty():
+		return
+
+	for i in range(children.size()):
+		var child := children[i]
+		if not child is Control:
+			continue
+
+		var base_scale = 1.0 - scale_strength * abs(i - selected_index)
+		base_scale = clamp(base_scale, scale_min, 1.0)
+
+		var target_scale = base_scale
+		if i == selected_index:
+			target_scale = UIAnimations.hover_scale
+
+		var x = item_scales[i] - target_scale
+		var force = -UIAnimations.stiffness * x - UIAnimations.damping * item_velocities[i]
+		var acceleration = force / UIAnimations.mass
+
+		item_velocities[i] += acceleration * delta
+		item_scales[i] += item_velocities[i] * delta
+
+		child.scale = Vector2.ONE * item_scales[i]
+
 # --------------------------------------------------------------------
 # Inputs
 # --------------------------------------------------------------------
@@ -194,7 +211,7 @@ func move_left() -> void:
 func move_right() -> void:
 	if position_offset_node == null:
 		return
-	selected_index = min(
-		selected_index + 1,
-		position_offset_node.get_child_count() - 1
-	)
+
+	var max_index = position_offset_node.get_child_count() - 1
+	if selected_index < max_index:
+		selected_index += 1

@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://befyiqnv66nro"]
+[gd_scene load_steps=6 format=3 uid="uid://befyiqnv66nro"]
 
+[ext_resource type="Script" uid="uid://dft4h27ftj6ch" path="res://Scripts/ui/game_ui.gd" id="1_dj25w"]
 [ext_resource type="Script" uid="uid://bdl4jhp1faxde" path="res://Scripts/ui/carouse_container.gd" id="1_goutl"]
 [ext_resource type="Texture2D" uid="uid://cfn2o6b6yy7v1" path="res://assets/texture/icons/tower-upgrade-0.png" id="2_u7opm"]
 [ext_resource type="Texture2D" uid="uid://dg1onheyp0rij" path="res://assets/texture/icons/tower-upgrade-1.png" id="3_dj25w"]
 [ext_resource type="Texture2D" uid="uid://b3h1becsutw1t" path="res://assets/texture/icons/tower-upgrade-2.png" id="4_8mn0b"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_dj25w")
 
 [node name="CarouseContainer" type="Node2D" parent="." node_paths=PackedStringArray("position_offset_node")]
-position = Vector2(1052.5, 640.5)
+position = Vector2(1, 1)
 script = ExtResource("1_goutl")
 wraparound_enabled = true
 wraparound_height = 100.0
@@ -29,111 +31,146 @@ scale = Vector2(3, 3)
 size_flags_horizontal = 4
 
 [node name="Panel" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 0.9999998)
+modulate = Color(0.267, 0.685, 0.55, 1)
 z_index = 1
 layout_mode = 0
 offset_left = -100.0
-offset_top = -125.00002
+offset_top = -125.0
 offset_right = 100.0
-offset_bottom = 124.99998
-scale = Vector2(0.9999998, 0.9999998)
+offset_bottom = 125.0
+scale = Vector2(nan, nan)
 pivot_offset = Vector2(100, 125)
 
 [node name="Panel2" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 0.6499998)
+modulate = Color(0, 0, 0, 0.65)
 z_index = -1
 layout_mode = 0
-offset_left = 92.83692
-offset_top = -148.3956
-offset_right = 292.83557
-offset_bottom = 101.6044
-scale = Vector2(0.7499998, 0.7499998)
-pivot_offset = Vector2(99.99933, 125)
+offset_left = 92.83608
+offset_top = -148.39555
+offset_right = 292.8365
+offset_bottom = 101.60445
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100.0002, 125)
 
 [node name="Panel3" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 0.2999999)
+modulate = Color(0.865, 0.453, 0.529, 0.3)
 z_index = -2
 layout_mode = 0
-offset_left = 195.4433
-offset_top = -207.63522
-offset_right = 395.44122
-offset_bottom = 42.364777
-scale = Vector2(0.4999999, 0.4999999)
-pivot_offset = Vector2(99.99896, 125)
+offset_left = 195.44228
+offset_top = -207.63518
+offset_right = 395.44238
+offset_bottom = 42.364822
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100.00005, 125)
 
 [node name="Panel4" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 4.72106e-34)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -3
 layout_mode = 0
-offset_left = 159.8089
-offset_top = -274.9999
-offset_right = 359.8062
-offset_bottom = -24.999908
-scale = Vector2(0.2500001, 0.2500001)
-pivot_offset = Vector2(99.99866, 125)
+offset_left = 159.80774
+offset_top = -275.0
+offset_right = 359.8075
+offset_bottom = -25.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(99.99988, 125)
 
 [node name="Panel5" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 1.02289755e-33)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -4
 layout_mode = 0
-offset_left = 2.6080565
-offset_top = -318.96918
-offset_right = 202.60403
-offset_bottom = -68.96918
-scale = Vector2(0.100000024, 0.100000024)
-pivot_offset = Vector2(99.997986, 125)
+offset_left = 2.606043
+offset_top = -318.96927
+offset_right = 202.60605
+offset_bottom = -68.96927
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
 
 [node name="Panel6" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 1.573689e-33)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -5
 layout_mode = 0
-offset_left = -100.00142
-offset_top = -324.9999
-offset_right = 100.00142
-offset_bottom = -74.99991
-scale = Vector2(0.100000024, 0.100000024)
-pivot_offset = Vector2(100.00142, 125)
+offset_left = -100.0
+offset_top = -325.0
+offset_right = 100.0
+offset_bottom = -75.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
 
 [node name="Panel7" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 1.02289755e-33)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -6
 layout_mode = 0
-offset_left = -99.99969
-offset_top = -324.9999
-offset_right = 99.99973
-offset_bottom = -74.99991
-scale = Vector2(0.100000024, 0.100000024)
-pivot_offset = Vector2(99.99971, 125)
+offset_left = -100.0
+offset_top = -325.0
+offset_right = 100.0
+offset_bottom = -75.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
 
 [node name="Panel8" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 4.72106e-34)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -7
 layout_mode = 0
-offset_left = -99.99781
-offset_top = -324.9999
-offset_right = 99.997856
-offset_bottom = -74.99991
-scale = Vector2(0.100000024, 0.100000024)
-pivot_offset = Vector2(99.99783, 125)
+offset_left = -100.0
+offset_top = -325.0
+offset_right = 100.0
+offset_bottom = -75.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
 
 [node name="Panel9" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -8
 layout_mode = 0
-offset_left = -99.99906
-offset_top = -324.9999
-offset_right = 99.99911
-offset_bottom = -74.99991
-scale = Vector2(0.100000024, 0.100000024)
-pivot_offset = Vector2(99.999084, 125)
+offset_left = -100.0
+offset_top = -325.0
+offset_right = 100.0
+offset_bottom = -75.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
 
 [node name="Panel10" type="Panel" parent="CarouseContainer/Control"]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(0.865, 0.453, 0.529, 0)
 z_index = -9
 layout_mode = 0
-offset_left = -99.99885
-offset_top = -324.9999
-offset_right = 99.99889
-offset_bottom = -74.99991
-scale = Vector2(0.1, 0.1)
-pivot_offset = Vector2(99.99887, 125)
+offset_left = -100.0
+offset_top = -325.0
+offset_right = 100.0
+offset_bottom = -75.0
+scale = Vector2(nan, nan)
+pivot_offset = Vector2(100, 125)
+
+[node name="right" type="Button" parent="."]
+z_index = 1000
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 15.5
+offset_top = 600.0
+offset_right = 64.5
+offset_bottom = 631.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Right
+"
+
+[node name="left" type="Button" parent="."]
+z_index = 1000
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = 600.0
+offset_right = -15.5
+offset_bottom = 631.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Left
+"
+
+[connection signal="pressed" from="right" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="left" to="." method="_on_left_pressed"]
