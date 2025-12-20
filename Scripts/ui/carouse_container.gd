@@ -135,7 +135,6 @@ func _setup_child_images() -> void:
 		if not child is Control:
 			continue
 
-		# Correct signal connection with bind()
 		child.connect("gui_input", Callable(self, "_on_child_gui_input").bind(i))
 
 		item_scales.append(1.0)
@@ -228,13 +227,11 @@ func _update_selected_item_physics(delta: float) -> void:
 func _on_child_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if clicked_towers.has(index):
-			# Already clicked, remove
 			clicked_towers.erase(index)
 		elif clicked_towers.size() < max_selected_towers:
-			# Add new click if limit not reached
 			clicked_towers.append(index)
 		else:
-			return # Max clicks reached
+			return
 
 func move_left() -> void:
 	selected_index = max(selected_index - 1, 0)
