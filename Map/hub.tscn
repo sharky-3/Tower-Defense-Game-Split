@@ -51,6 +51,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Editor" type="Control" parent="UserInterface"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSlider" type="HSlider" parent="UserInterface/Editor"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 20.0
+scale = Vector2(3, 3)
+min_value = 10.0
+max_value = 25.0
+value = 10.0
+
 [node name="MapDesign" type="Button" parent="UserInterface"]
 layout_mode = 1
 anchors_preset = 4
@@ -64,4 +81,5 @@ grow_vertical = 2
 scale = Vector2(2, 2)
 text = "Click"
 
+[connection signal="value_changed" from="UserInterface/Editor/HSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="UserInterface/MapDesign" to="." method="_on_map_design_pressed"]

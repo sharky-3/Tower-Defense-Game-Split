@@ -13,13 +13,12 @@ var environment: Dictionary = {
 }
 
 # --- Constants / Exported Data ---
-@export_range(10, 100) var grid_size_x: int = 25
-@export_range(10, 100) var grid_size_z: int = 25
+@export_range(10, 100) var world_map_scale: int = 25
 @export_enum("Flat", "Hills", "Dunes", "Valleys", "Rough") var terrain_type: String = "Hills"
 @export_enum("Square", "Circle", "Island", "Oval", "Ring", "Diamond") var terrain_shape: String = "Circle"
 
-var world_radius_x: float = grid_size_x / 2.0
-var world_radius_z: float = grid_size_z / 2.0
+var world_radius_x: float = world_map_scale / 2
+var world_radius_z: float = world_map_scale / 2
 
 # --- Node references ---
 @onready var nav_region: NavigationRegion3D = $".."
@@ -43,6 +42,19 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	pass
+
+# -----------------------------------------------------------
+# Helpers
+# -----------------------------------------------------------
+
+func _update_world_radius(new) -> void:
+	world_radius_x = new / 2
+	world_radius_z = new / 2
+
+func _clear_map() -> void:
+	for child in get_children():
+		if child is Node3D:
+			child.queue_free()
 
 # -----------------------------------------------------------
 # Tile Type Checks
@@ -135,9 +147,8 @@ func _generate_grid():
 	var center := Vector2(world_radius_x, world_radius_z)
 	var max_dist = max(world_radius_x, world_radius_z)
 
-	# Calculate start/end ranges so the grid expands around (0,0)
-	var half_x = grid_size_x / 2.0
-	var half_z = grid_size_z / 2.0
+	var half_x = world_map_scale / 2
+	var half_z = world_map_scale / 2
 
 	for x_offset in range(-int(half_x), int(half_x) + 1):
 		for z_offset in range(-int(half_z), int(half_z) + 1):
@@ -205,3 +216,13 @@ func _generate_grid():
 
 func _set_terrain_coordinates(x: int, z: int, y: float):
 	Global.set_terrain_coordinates(x, z, y)
+
+# -----------------------------------------------------------
+# PUBLIC API
+# -----------------------------------------------------------
+
+func regenerate_map_with_scale(new_scale: float) -> void:
+	print(new_scale)
+	_update_world_radius(new_scale)
+	_clear_map()
+	_generate_grid()
