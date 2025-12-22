@@ -65,7 +65,7 @@ offset_right = 150.0
 offset_bottom = 20.0
 scale = Vector2(3, 3)
 min_value = 10.0
-max_value = 25.0
+max_value = 50.0
 value = 10.0
 
 [node name="MapDesign" type="Button" parent="UserInterface"]

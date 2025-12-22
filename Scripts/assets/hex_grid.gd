@@ -1,228 +1,215 @@
 extends Node3D
 
-var rng = RandomNumberGenerator.new()
+var rng := RandomNumberGenerator.new()
 
-# --- Resources ---
-var tile_types: Dictionary = {
+# -----------------------------------------------------------
+# Resources
+# -----------------------------------------------------------
+
+var tile_types := {
 	"grass": preload("uid://bqr2nia2wo1lm"),
 	"water": preload("uid://c5nkt4wxc0rs6"),
 	"stone": preload("uid://12fnbjcnq5k4")
 }
-var environment: Dictionary = {
+
+var environment := {
 	"tree": preload("uid://bcuitu4oaj6xu")
 }
 
-# --- Constants / Exported Data ---
-@export_range(10, 100) var world_map_scale: int = 25
-@export_enum("Flat", "Hills", "Dunes", "Valleys", "Rough") var terrain_type: String = "Hills"
-@export_enum("Square", "Circle", "Island", "Oval", "Ring", "Diamond") var terrain_shape: String = "Circle"
+# -----------------------------------------------------------
+# Exported Data
+# -----------------------------------------------------------
 
-var world_radius_x: float = world_map_scale / 2
-var world_radius_z: float = world_map_scale / 2
+@export_range(10, 100) var world_map_scale := 25
+@export_enum("Flat", "Hills", "Dunes") var terrain_type := "Hills"
+@export_enum("Square", "Circle", "Diamond") var terrain_shape := "Circle"
 
-# --- Node references ---
+# -----------------------------------------------------------
+# Constants
+# -----------------------------------------------------------
+
+const TILE_SIZE := 1.5
+const SPACING := 1.0
+const WATER_LEVEL := -1.1
+const TILE_BATCH_SIZE := 25
+const TILE_BATCH_DELAY := 0.02
+
+# -----------------------------------------------------------
+# Runtime
+# -----------------------------------------------------------
+
+var world_radius_x := world_map_scale / 2.0
+var world_radius_z := world_map_scale / 2.0
+
 @onready var nav_region: NavigationRegion3D = $".."
 @onready var player_tower: Node3D = $"../../Map/PlayerTower"
 @onready var spawn_enemy_pos: Node3D = $"../../Map/spawn_enemy_position"
 
-# --- Stats ---
-const TILE_SIZE := 1.5
-const SPACING := 1.0
-const WATER_LEVEL := -1.1
-
-var center_offset := Vector3(0, 0.2, 0)
-
 # -----------------------------------------------------------
-# Life Cycle
+# Lifecycle
 # -----------------------------------------------------------
 
 func _ready() -> void:
-	randomize()
+	rng.randomize()
 	_generate_grid()
-
-func _process(_delta) -> void:
-	pass
 
 # -----------------------------------------------------------
 # Helpers
 # -----------------------------------------------------------
 
-func _update_world_radius(new) -> void:
-	world_radius_x = new / 2
-	world_radius_z = new / 2
+func _update_world_radius(new_scale: float) -> void:
+	world_radius_x = new_scale / 2.0
+	world_radius_z = new_scale / 2.0
 
 func _clear_map() -> void:
-	for child in get_children():
-		if child is Node3D:
-			child.queue_free()
+	for c in get_children():
+		if c is Node3D:
+			c.queue_free()
+
+func _animate_tile_placement(tile: Node3D) -> void:
+	var start_scale := Vector3.ONE * 0.001
+	tile.scale = start_scale
+
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_BACK)
+	tween.set_ease(Tween.EASE_OUT)
+
+	var delay := rng.randf_range(0.0, 0.15)
+	tween.tween_property(tile, "scale", Vector3.ONE, 0.35).set_delay(delay)
 
 # -----------------------------------------------------------
-# Tile Type Checks
+# Navigation (RUNS ONLY AFTER MAP IS DONE)
 # -----------------------------------------------------------
 
-func is_water(
-	x: int,
-	y: int,
-	_center: Vector2,
-	dist: float,
-	max_dist: float
-) -> bool:
+func _finish_generation() -> void:
+	await get_tree().process_frame
+	nav_region.enabled = true
+	nav_region.bake_navigation_mesh()
 
-	# Water near edges for some shapes
-	match terrain_shape:
-		"Circle", "Island", "Oval", "Ring", "Diamond":
-			if dist > max_dist * 0.85: return true
+# -----------------------------------------------------------
+# Tile Logic
+# -----------------------------------------------------------
 
-	# Random water patches
-	if dist > 5:
-		var n = (hash(x * 928371 + y * 192837) % 1000) / 1000.0
-		if n < 0.15: return true
-	return false
+func is_water(dist: float, max_dist: float) -> bool:
+	if dist > max_dist:
+		return false
+	return dist > max_dist * 0.85
 
-func is_stone(
-	x: int,
-	y: int,
-	_center: Vector2,
-	dist: float,
-	max_dist: float
-) -> bool:
-
+func is_stone(x: int, z: int, dist: float, max_dist: float) -> bool:
 	if dist < max_dist * 0.35:
-		var n = (hash(x * 12891 + y * 77213) % 1000) / 1000.0
-		if n < 0.20:
-			return true
-
-	var n2 = (hash(x * 99127 + y * 44111) % 1000) / 1000.0
-	return n2 < 0.05
+		return (hash(x * 12891 + z * 77213) % 1000) / 1000.0 < 0.2
+	return (hash(x * 99127 + z * 44111) % 1000) / 1000.0 < 0.05
 
 # -----------------------------------------------------------
-# Heightmap / Terrain Generation
+# Heightmap
 # -----------------------------------------------------------
 
-func get_land_height(dist: float, max_dist: float, x: float, y: float) -> float:
-	var norm := 1.0 - (dist / max_dist)
+func get_land_height(dist: float, max_dist: float, x: float, z: float) -> float:
+	var norm = clamp(1.0 - dist / max_dist, 0.0, 1.0)
 
 	match terrain_type:
 		"Flat":
-			center_offset = Vector3.ZERO
-			return (randf() - 0.5) * 0.05
+			return (rng.randf() - 0.5) * 0.05
 		"Hills":
-			center_offset = Vector3.ZERO
-			var base := norm * 1.2
-			return max(base + (randf() - 0.5) * 0.25, 0.0)
+			return max(norm * 1.2 + (rng.randf() - 0.5) * 0.25, 0.0)
 		"Dunes":
-			center_offset = Vector3.ZERO
-			var wave := sin(x * 0.7) * 0.8 + cos(y * 0.8) * 0.4
-			return wave * norm
-		"Valleys":
-			center_offset = Vector3.ZERO
-			var base := pow(dist / max_dist, 1.5)
-			return -(base + (randf() - 0.5) * 0.2)
-		"Rough":
-			center_offset = Vector3.ZERO
-			return (randf() - 0.5) * 1.5
+			return (sin(x * 0.7) * 0.8 + cos(z * 0.8) * 0.4) * norm
+
 	return 0.0
 
 # -----------------------------------------------------------
-# Grid Generation with Shapes
+# Environment
 # -----------------------------------------------------------
 
-func _generate_environment(tile, type: String) -> void:
-	var get_random_seed = rng.randi_range(0, 10)
-	var get_random_rotation = rng.randf_range(0, 360)
-	if get_random_seed == 2 and type == "grass":
-		if environment.size() != 0:
-			var environment_keys = environment.keys()
-			var chosen_item = environment_keys[randi() % environment_keys.size()]
-			var chosen_mesh = environment[chosen_item]
-			var env_mesh = MeshInstance3D.new()
-			
-			env_mesh.mesh = chosen_mesh
-			env_mesh.position = tile.position
-			env_mesh.scale = Vector3(0.2, 0.2, 0.2)
-			env_mesh.rotate(Vector3(0, 1, 0), get_random_rotation)
-			add_child(env_mesh)
-			
-func _generate_grid():
-	var center := Vector2(world_radius_x, world_radius_z)
-	var max_dist = max(world_radius_x, world_radius_z)
+func _generate_environment(tile: Node3D, type: String) -> void:
+	if type != "grass":
+		return
 
-	var half_x = world_map_scale / 2
-	var half_z = world_map_scale / 2
+	if rng.randi_range(0, 10) != 2:
+		return
 
-	for x_offset in range(-int(half_x), int(half_x) + 1):
-		for z_offset in range(-int(half_z), int(half_z) + 1):
-			var grid_x = int(center.x + x_offset)
-			var grid_z = int(center.y + z_offset)
-			
-			# Distance from center
-			var dist := Vector2(grid_x, grid_z).distance_to(center)
+	if environment.is_empty():
+		return
 
-			# Skip tiles outside the shape
+	var key = environment.keys()[rng.randi() % environment.size()]
+	var mesh = environment[key]
+
+	var env := MeshInstance3D.new()
+	env.mesh = mesh
+	env.position = tile.position
+	env.scale = Vector3.ONE * 0.2
+	env.rotation.y = rng.randf_range(0, TAU)
+	add_child(env)
+
+# -----------------------------------------------------------
+# Grid Generation (MAP FIRST)
+# -----------------------------------------------------------
+
+func _generate_grid() -> void:
+	nav_region.enabled = false
+
+	var max_dist = min(world_radius_x, world_radius_z)
+	var batch_count := 0
+
+	for x in range(-int(world_radius_x), int(world_radius_x) + 1):
+		for z in range(-int(world_radius_z), int(world_radius_z) + 1):
+
+			var dist := Vector2(x, z).length()
+
 			match terrain_shape:
-				"Circle", "Island":
-					if dist > max_dist: continue
-				"Oval":
-					var dx = abs(grid_x - center.x) / world_radius_x
-					var dz = abs(grid_z - center.y) / world_radius_z
-					if dx*dx + dz*dz > 1: continue
-				"Ring":
-					if dist < max_dist * 0.4 or dist > max_dist: continue
+				"Circle":
+					if dist > max_dist:
+						continue
 				"Diamond":
-					var dx = abs(grid_x - center.x)
-					var dz = abs(grid_z - center.y)
-					if dx + dz > max_dist: continue
+					if abs(x) + abs(z) > max_dist:
+						continue
 
-			var water := is_water(grid_x, grid_z, center, dist, max_dist)
 			var tile_type := "grass"
-			if water: 
+
+			if is_water(dist, max_dist):
 				tile_type = "water"
-			elif is_stone(grid_x, grid_z, center, dist, max_dist):
+			elif is_stone(x, z, dist, max_dist):
 				tile_type = "stone"
 
-			var tile: Node3D = tile_types[tile_type].instantiate()
-					
-			var tile_pos := Vector3(
-				x_offset * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
-				0,
-				z_offset * TILE_SIZE * SPACING + (0.0 if grid_x % 2 == 0 else (TILE_SIZE * SPACING) / 2)
+			var tile = tile_types[tile_type].instantiate()
+
+			var height := WATER_LEVEL if tile_type == "water" else get_land_height(dist, max_dist, x, z)
+
+			tile.position = Vector3(
+				x * TILE_SIZE * SPACING * cos(deg_to_rad(30)),
+				height,
+				z * TILE_SIZE * SPACING + (0.0 if x % 2 == 0 else (TILE_SIZE * SPACING) / 2.0)
 			)
 
-			var height := WATER_LEVEL if water else get_land_height(dist, max_dist, grid_x, grid_z)
-			_set_terrain_coordinates(x_offset, z_offset, height)
-
-			tile_pos.y = height
-			tile.position = tile_pos
 			add_child(tile)
+			_animate_tile_placement(tile)
 
-			Global.set_tile_node(x_offset, z_offset, tile)
-			
+			Global.set_tile_node(x, z, tile)
+			Global.set_terrain_coordinates(x, z, height)
+
 			tile.set_meta("tile_type", tile_type)
-			tile.set_meta("is_center", x_offset == 0 and z_offset == 0)
+			tile.set_meta("grid_coords", Vector2(x, z))
 			tile.set_meta("is_taken", false)
-			tile.set_meta("grid_coords", Vector2(x_offset, z_offset))
+			tile.set_meta("is_center", x == 0 and z == 0)
 
-			if x_offset == 0 and z_offset == 0:
+			if x == 0 and z == 0:
 				player_tower.position = Vector3(0, height, 0)
-				spawn_enemy_pos.position = Vector3(0, height + 1, 0)
+				spawn_enemy_pos.position = Vector3(0, height + 1.0, 0)
 			else:
 				_generate_environment(tile, tile_type)
-				
-	nav_region.bake_navigation_mesh()
 
-# --------------------------------------------------------------------
-# Global Terrain
-# --------------------------------------------------------------------
+			batch_count += 1
+			if batch_count >= TILE_BATCH_SIZE:
+				batch_count = 0
+				await get_tree().create_timer(TILE_BATCH_DELAY).timeout
 
-func _set_terrain_coordinates(x: int, z: int, y: float):
-	Global.set_terrain_coordinates(x, z, y)
+	call_deferred("_finish_generation")
 
 # -----------------------------------------------------------
-# PUBLIC API
+# Public API
 # -----------------------------------------------------------
 
 func regenerate_map_with_scale(new_scale: float) -> void:
-	print(new_scale)
 	_update_world_radius(new_scale)
 	_clear_map()
 	_generate_grid()
