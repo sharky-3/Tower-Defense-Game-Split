@@ -203,7 +203,8 @@ func _generate_grid() -> void:
 				batch_count = 0
 				await get_tree().create_timer(TILE_BATCH_DELAY).timeout
 
-	call_deferred("_finish_generation")
+	await get_tree().create_timer(1).timeout
+	_finish_generation()
 
 # -----------------------------------------------------------
 # Public API

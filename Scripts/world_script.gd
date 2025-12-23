@@ -7,7 +7,8 @@ const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
 @export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
 @export var time_between_waves: float = 15.0
 @export var difficulty_per_wave: Array[float] = [1, 1.2, 1.5, 1.8, 2.0]
-@export var spawn_radius: float = 10
+@export var max_distance: float = 10
+@export var min_distance: float = 5.0
 
 # --- Node references ---
 @onready var player_tower: Node3D = $Map/PlayerTower
@@ -24,9 +25,6 @@ var wave_cooldown_timer: float = 0.0
 
 func _ready() -> void:
 	_wave_system()
-
-func _process(_delta) -> void:
-	pass
 
 # --------------------------------------------------------------------
 # Round System
@@ -50,26 +48,25 @@ func _wave_system() -> void:
 # --------------------------------------------------------------------
 
 func _get_random_spawn_offset() -> Vector3:
-		var min_distance = 6.0
-		var max_distance = spawn_radius
-		var distance = randf_range(min_distance, max_distance)
-		
-		var angle = randf_range(0, TAU) 
-		var random_offset = Vector3( 
-			cos(angle) * distance, 0, sin(angle) * distance
-		)
-		return random_offset
+	var distance = randf_range(min_distance, max_distance)
+	var angle = randf_range(0, TAU) 
+	var random_offset = Vector3( 
+		cos(angle) * distance, 0, sin(angle) * distance
+	)
+	return random_offset
 
 func _spawn_enemy(difficulty: float) -> void:
 	var enemy_instance = Enemy.instantiate()
+	var spawn_pos = spawn_enemy_position.global_position
+	spawn_pos.y = 1
+
 	add_child(enemy_instance)
 	enemy_instance.add_enemy_to_group()
 
 	if is_instance_valid(spawn_enemy_position):
 		enemy_instance.global_transform.origin = (
 			spawn_enemy_position.global_transform.origin + _get_random_spawn_offset()
-		)
-
+	)
 	enemy_instance.set_difficulty(difficulty)
 
 	var enemy_types_array = Global.get_enemies_type_array()

@@ -182,9 +182,12 @@ func _play_audio(stream: AudioStream, starting_time: float):
 # --------------------------------------------------------------------
 	
 func _attamp_show_ui():
+	
+	var tower_pos: Vector3 = tower_body_mesh.global_transform.origin
+	var offset: Vector3 = Vector3(5, 0, 5)
+	
 	if not opened_ui:
 		Global.open_ui(selection_wheel)
-		
 		selection_wheel.set_meta("tower_ref", self)
 		selection_wheel.add_to_group("tower_upgrade")
 		
