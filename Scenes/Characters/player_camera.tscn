@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="1_awhkn"]
 [ext_resource type="Script" uid="uid://cevsen3owsbr5" path="res://Scripts/systems/camera.gd" id="2_7xgpr"]
-[ext_resource type="Shader" uid="uid://b2ylk81k4jyfk" path="res://Scenes/shader/player_camera.gdshader" id="3_b4wiv"]
+[ext_resource type="Shader" uid="uid://cjshekta461yc" path="res://Scenes/shader/soft_pencil.gdshader" id="3_b4wiv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4wiv"]
 shader = ExtResource("3_b4wiv")
