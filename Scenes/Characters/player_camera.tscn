@@ -2,13 +2,11 @@
 
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="1_awhkn"]
 [ext_resource type="Script" uid="uid://cevsen3owsbr5" path="res://Scripts/systems/camera.gd" id="2_7xgpr"]
-[ext_resource type="Shader" uid="uid://cjshekta461yc" path="res://Scenes/shader/soft_pencil.gdshader" id="3_b4wiv"]
+[ext_resource type="Shader" uid="uid://cqtyldb6peeki" path="res://Scenes/shader/pixel.gdshader" id="3_b4wiv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4wiv"]
 shader = ExtResource("3_b4wiv")
-shader_parameter/outline_strength = 0.8
-shader_parameter/softness = 1.5
-shader_parameter/noise_strength = 0.08
+shader_parameter/pixel_size = 5.0
 
 [node name="CameraPosition" type="Node3D"]
 script = ExtResource("1_awhkn")
