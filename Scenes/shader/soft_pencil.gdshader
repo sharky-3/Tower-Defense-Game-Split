@@ -15,13 +15,12 @@ void fragment() {
     vec2 px = 1.0 / res;
 
     vec3 col = texture(screen_texture, uv).rgb;
-    float gray = dot(col, vec3(0.299, 0.587, 0.114));
+    float gray = dot(col, vec3(0.2, 0.5, 0.1));
 
-    // Edge detection from color difference
     vec3 right = texture(screen_texture, uv + vec2(px.x,0)).rgb;
     vec3 up    = texture(screen_texture, uv + vec2(0,px.y)).rgb;
     float edge = length(col - right) + length(col - up);
-    edge = smoothstep(0.05, 0.15, edge); // tweak thresholds
+    edge = smoothstep(0.05, 0.15, edge); 
 
     float n = rand(uv * res);
     gray += (n - 0.5) * noise_strength;

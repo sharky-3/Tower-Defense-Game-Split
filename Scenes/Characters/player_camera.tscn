@@ -6,6 +6,9 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4wiv"]
 shader = ExtResource("3_b4wiv")
+shader_parameter/outline_strength = 0.8
+shader_parameter/softness = 1.5
+shader_parameter/noise_strength = 0.08
 
 [node name="CameraPosition" type="Node3D"]
 script = ExtResource("1_awhkn")
