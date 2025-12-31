@@ -4,11 +4,12 @@ extends Node3D
 const PLACE_TOWER_SOUND: AudioStream = preload("uid://c8ac13k1jtjbe")
 
 # --- Node references ---
-@onready var tower_body_mesh: MeshInstance3D = $Mesh
+@onready var head: MeshInstance3D = $Head
+@onready var tower_body_mesh: MeshInstance3D = $Body
 @onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
 @onready var timer: Timer = $Timer
-@onready var ray_cast: RayCast3D = $Mesh/RayCast3D
+@onready var ray_cast: RayCast3D = $Body/RayCast3D
 @onready var target_check_timer: Timer = $TargetCheckTimer
 
 @onready var quad: MeshInstance3D = $UI/Quad
@@ -23,6 +24,7 @@ var enemies_in_range: Array = []
 var current_target: Node3D = null
 var tower_range: float = 0.0
 var tower_damage: float = 0.0
+var rotation_speed: float = 6.0
 
 var tower_name: String = Global.tower_name
 var opened_ui: bool = true
@@ -46,6 +48,8 @@ func _process(_delta):
 	_update_range_mesh(tower_range)
 	
 	if current_target:
+		_rotate_towards_target(_delta)
+		
 		var target_global_pos = current_target.global_transform.origin
 		var origin = ray_cast.global_transform.origin
 		var direction = (target_global_pos - origin)
@@ -123,6 +127,25 @@ func _update_range_mesh(value: float) -> void:
 # --------------------------------------------------------------------
 # Combat
 # --------------------------------------------------------------------
+
+func _rotate_towards_target(delta: float) -> void:
+	if not current_target: return
+
+	var tower_pos: Vector3 = head.global_transform.origin
+	var target_pos: Vector3 = current_target.global_transform.origin
+
+	var direction: Vector3 = target_pos - tower_pos
+	direction.y = 0.0
+
+	if direction.length() < 0.01: return
+	direction = direction.normalized()
+
+	var target_yaw: float = atan2(direction.x, direction.z)
+
+	var current_rot: Vector3 = head.rotation
+	current_rot.y = -lerp_angle(current_rot.y, target_yaw, delta * rotation_speed)
+	head.rotation = -current_rot
+
 
 func _on_timer_timeout():
 	if not tower_is_placed: return

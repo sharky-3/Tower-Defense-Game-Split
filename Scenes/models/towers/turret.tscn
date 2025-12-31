@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://c4lillreyucf4"]
+[gd_scene load_steps=15 format=3 uid="uid://c4lillreyucf4"]
 
 [ext_resource type="Script" uid="uid://bjwr71vjwbwhw" path="res://Scripts/assets/attach_tower.gd" id="1_f6h0j"]
 [ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="2_fqfbj"]
+[ext_resource type="ArrayMesh" uid="uid://enjot11j5w4o" path="res://assets/meshes/tower/2/turret_head_upgrade_0.obj" id="3_83lw8"]
 [ext_resource type="ArrayMesh" uid="uid://ck84po6xd3hpv" path="res://assets/meshes/tower/2/turret_upgrade_0.obj" id="3_pwl7p"]
 [ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/ui/3D_GUI.gd" id="4_k66dt"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Scenes/ui/selection_wheel.tscn" id="5_w5t2c"]
@@ -42,21 +43,28 @@ collision_mask = 4
 [node name="Collision" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_t47gw")
 
-[node name="Mesh" type="MeshInstance3D" parent="."]
+[node name="Head" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.5, 0, -4.371139e-08, 0, 0.5, 0, 4.371139e-08, 0, -0.5, 0, -0.6, 0)
+layers = 9
+material_override = SubResource("StandardMaterial3D_1y2ym")
+mesh = ExtResource("3_83lw8")
+skeleton = NodePath("../Body")
+
+[node name="Body" type="MeshInstance3D" parent="."]
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, -0.7, 0)
 layers = 9
 material_override = SubResource("StandardMaterial3D_1y2ym")
 mesh = ExtResource("3_pwl7p")
 
-[node name="Area3D" type="Area3D" parent="Mesh"]
+[node name="Area3D" type="Area3D" parent="Body"]
 collision_layer = 9
 collision_mask = 9
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/Area3D"]
 transform = Transform3D(0.9999999, 0, 2.1316282e-14, 0, 0.9999999, 0, -2.1316282e-14, 0, 0.9999999, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_nbapu")
 
-[node name="RayCast3D" type="RayCast3D" parent="Mesh"]
+[node name="RayCast3D" type="RayCast3D" parent="Body"]
 transform = Transform3D(0.9999999, 0, 2.1316282e-14, 0, 0.9999999, 0, -2.1316282e-14, 0, 0.9999999, 0, 3.961896, 0)
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
@@ -96,4 +104,4 @@ options = Array[Texture2D]([ExtResource("6_nbapu"), ExtResource("6_nbapu"), ExtR
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
-[connection signal="input_event" from="Mesh/Area3D" to="." method="_on_area_3d_input_event"]
+[connection signal="input_event" from="Body/Area3D" to="." method="_on_area_3d_input_event"]

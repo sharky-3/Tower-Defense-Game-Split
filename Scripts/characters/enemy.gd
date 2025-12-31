@@ -75,8 +75,9 @@ func _move_along_path(delta):
 		animator.play("Walking")
 
 func _rotate_towards(move_dir: Vector3):
-	var look_pos = global_position + move_dir
-	look_at(Vector3(look_pos.x, global_position.y, look_pos.z), Vector3.UP)
+	pass
+	#var look_pos = global_position + move_dir
+	#look_at(Vector3(look_pos.x, global_position.y, look_pos.z), Vector3.UP)
 
 # --------------------------------------------------------------------
 # Attack
