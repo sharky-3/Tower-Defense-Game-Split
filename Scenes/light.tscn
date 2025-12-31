@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://2qfqe3pkv812"]
+
+[ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="1_veqsg"]
+
+[node name="Light" type="Node"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_veqsg")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8116917, -0.5167626, -0.27223694, -0.10935499, -0.32339674, 0.93992347, -0.57375777, 0.79269856, 0.20598792, -52.52128, 85.09572, 0.47766253)
+light_color = Color(0.839429, 0.9176236, 0.9965243, 1)
+light_energy = 7.0
+light_volumetric_fog_energy = 5.0
+shadow_enabled = true
+shadow_bias = 0.008
+shadow_blur = 4.0
+directional_shadow_max_distance = 400.0

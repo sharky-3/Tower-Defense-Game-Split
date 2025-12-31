@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cfn2o6b6yy7v1" path="res://assets/texture/icons/tower-upgrade-0.png" id="9_ce33l"]
 [ext_resource type="Texture2D" uid="uid://byehq0ucf0e4v" path="res://assets/texture/icons/turret_0.png" id="10_jfxw6"]
 [ext_resource type="Texture2D" uid="uid://b3h1becsutw1t" path="res://assets/texture/icons/tower-upgrade-2.png" id="11_0x3we"]
-[ext_resource type="Environment" uid="uid://e4rx6eoag2x8" path="res://assets/resources/raffa_environment2.tres" id="12_ce33l"]
+[ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Scenes/light.tscn" id="12_ce33l"]
 [ext_resource type="Texture2D" uid="uid://dg1onheyp0rij" path="res://assets/texture/icons/tower-upgrade-1.png" id="12_hhbe4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o4np1"]
@@ -19,6 +19,8 @@
 script = ExtResource("1_g7ehh")
 enemies_per_wave = Array[int]([10, 15, 20, 30, 45])
 min_distance = 7.0
+
+[node name="Light" parent="." instance=ExtResource("12_ce33l")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_o4np1")
@@ -71,21 +73,6 @@ metadata/_edit_use_anchors_ = true
 [node name="CarouseContainer" parent="User Interface" instance=ExtResource("7_ce33l")]
 visible = false
 
-[node name="SelectionWheel" parent="." groups=["placing_tower"] instance=ExtResource("8_jm71a")]
+[node name="SelectionWheel" parent="User Interface" groups=["placing_tower"] instance=ExtResource("8_jm71a")]
 scale = Vector2(0.7, 0.7)
 options = Array[Texture2D]([ExtResource("9_ce33l"), ExtResource("10_jfxw6"), ExtResource("11_0x3we"), ExtResource("12_hhbe4")])
-
-[node name="Light" type="Node" parent="."]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Light"]
-environment = ExtResource("12_ce33l")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Light"]
-transform = Transform3D(-0.8116917, -0.5167626, -0.27223694, -0.10935499, -0.32339674, 0.93992347, -0.57375777, 0.79269856, 0.20598792, -52.52128, 85.09572, 0.47766253)
-light_color = Color(0.839429, 0.9176236, 0.9965243, 1)
-light_energy = 7.0
-light_volumetric_fog_energy = 5.0
-shadow_enabled = true
-shadow_bias = 0.008
-shadow_blur = 4.0
-directional_shadow_max_distance = 400.0
