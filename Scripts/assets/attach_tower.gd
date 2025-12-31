@@ -48,7 +48,7 @@ func _process(_delta):
 	_update_range_mesh(tower_range)
 	
 	if current_target:
-		_rotate_towards_target(_delta)
+		#_rotate_towards_target(_delta)
 		
 		var target_global_pos = current_target.global_transform.origin
 		var origin = ray_cast.global_transform.origin
@@ -129,7 +129,7 @@ func _update_range_mesh(value: float) -> void:
 # --------------------------------------------------------------------
 
 func _rotate_towards_target(delta: float) -> void:
-	if not current_target: return
+	if not current_target and not head: return
 
 	var tower_pos: Vector3 = head.global_transform.origin
 	var target_pos: Vector3 = current_target.global_transform.origin

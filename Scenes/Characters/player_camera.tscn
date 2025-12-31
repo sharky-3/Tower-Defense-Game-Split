@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvv2hyffbjekj"]
+[gd_scene load_steps=6 format=3 uid="uid://cvv2hyffbjekj"]
 
 [ext_resource type="Script" uid="uid://y5ybwh71oect" path="res://Scripts/characters/camera_position.gd" id="1_awhkn"]
 [ext_resource type="Script" uid="uid://cevsen3owsbr5" path="res://Scripts/systems/camera.gd" id="2_7xgpr"]
+[ext_resource type="Shader" uid="uid://b2ylk81k4jyfk" path="res://Scenes/shader/player_camera.gdshader" id="3_b4wiv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_mv15v"]
+size = Vector2(2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k3t1g"]
+render_priority = 0
+shader = ExtResource("3_b4wiv")
+shader_parameter/pixel_size = 4.0
 
 [node name="CameraPosition" type="Node3D"]
 script = ExtResource("1_awhkn")
@@ -13,3 +22,10 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraRotationX/CameraZoomPivot"]
 script = ExtResource("2_7xgpr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraRotationX/CameraZoomPivot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+extra_cull_margin = 100.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_mv15v")
+surface_material_override/0 = SubResource("ShaderMaterial_k3t1g")
