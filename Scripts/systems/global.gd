@@ -5,10 +5,24 @@ extends Node
 # --------------------------------------------------------------------
 
 var game_data: Dictionary = {
+	
+	# --------------------------------------------------------------------
+	# --- Player stats ---
 	"player": {
-		"currency": { "gold": 1000 },
-		"progression": { "exp": 0, "level": 1, "max_level": 15, "exp_to_next_level": 50 },
-		"bonuses": { "damage_multiplier": 1.0, "range_multiplier": 1.0, "attack_speed_multiplier": 1.0 },
+		"currency": { 
+			"gold": 1000 
+		},
+		"progression": { 
+			"exp": 0, 
+			"level": 1, 
+			"max_level": 15, 
+			"exp_to_next_level": 50 
+		},
+		"bonuses": { 
+			"damage_multiplier": 1.0, 
+			"range_multiplier": 1.0, 
+			"attack_speed_multiplier": 1.0 
+		},
 		"stats": {
 			"game_won": 0, "game_lost": 0, "waves_played": 0,
 			"enemies_killed": 0, "enemies_spawn": 0, "damage_taken": 0, "damage_deald": 0,
@@ -16,7 +30,10 @@ var game_data: Dictionary = {
 		}
 	},
 
+	# --------------------------------------------------------------------
+	# --- Towers ---
 	"towers": {
+		# --- Basic tower
 		"basic_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 5, "damage": 3 },
@@ -28,6 +45,7 @@ var game_data: Dictionary = {
 			]
 		},
 
+		# --- Turret tower
 		"turret_tower": {
 			"mesh": preload("uid://c4lillreyucf4"),
 			"stats": { "range": 6, "damage": 10 },
@@ -39,6 +57,7 @@ var game_data: Dictionary = {
 			]
 		},
 
+		# --- Cannon tower ---
 		"cannon_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 8, "damage": 6 },
@@ -49,7 +68,8 @@ var game_data: Dictionary = {
 				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6, "price": 140 }
 			]
 		},
-
+		
+		# --- Slow tower ---
 		"slow_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 7, "damage": 3 },
@@ -62,18 +82,30 @@ var game_data: Dictionary = {
 		}
 	},
 
+	# --------------------------------------------------------------------
+	# --- Enemies ---
 	"enemies": {
+		
+		# --------------------------------------------------------------------
+		# --- Normal Enemies ---
+		
+		# --- Goblins ---
 		"goblins": {
 			1: { "mesh": preload("uid://bfygdhktxcdvx"), "stats": {"speed": 1.0, "health": 4, "attack_damage": 6, "scale": 0.4}, "rewards": {"gold": 3, "exp": 2} },
 			2: { "mesh": preload("uid://dgan33wtxphvc"), "stats": {"speed": 1.1, "health": 5, "attack_damage": 7, "scale": 0.4}, "rewards": {"gold": 4, "exp": 3} },
 			3: { "mesh": preload("uid://bw7tyjpxy3ku8"), "stats": {"speed": 1.2, "health": 6, "attack_damage": 8, "scale": 0.4}, "rewards": {"gold": 5, "exp": 4} },
 			4: { "mesh": preload("uid://dnih7xrttht20"), "stats": {"speed": 1.3, "health": 7, "attack_damage": 9, "scale": 0.4}, "rewards": {"gold": 6, "exp": 5} }
 		},
+		
+		# --- Skeleton ---
 		"skeletons": {
 			1: { "mesh": preload("uid://ddj4r3bygamt8"), "stats": {"speed": 0.9, "health": 5, "attack_damage": 5, "scale": 0.4}, "rewards": {"gold": 3, "exp": 2} },
 			2: { "mesh": preload("uid://u23q3r8bpqan"), "stats": {"speed": 1.0, "health": 6, "attack_damage": 6, "scale": 0.4}, "rewards": {"gold": 4, "exp": 3} },
 			3: { "mesh": preload("uid://conmtsecxcsp8"), "stats": {"speed": 1.1, "health": 7, "attack_damage": 7, "scale": 0.4}, "rewards": {"gold": 5, "exp": 4} }
 		},
+		
+		# --------------------------------------------------------------------
+		# --- Giants ---
 		"giants": {
 			
 			# --- Skeleton ---
@@ -87,9 +119,9 @@ var game_data: Dictionary = {
 			6: { "mesh": preload("uid://bw7tyjpxy3ku8"), "stats": {"speed": 1.5, "health": 32, "attack_damage": 32, "scale": 0.7}, "rewards": {"gold": 20, "exp": 18} },
 			7: { "mesh": preload("uid://dnih7xrttht20"), "stats": {"speed": 1.6, "health": 36, "attack_damage": 36, "scale": 0.7}, "rewards": {"gold": 24, "exp": 22} }
 		}
-
 	},
 
+	# --- Terrian ---
 	"terrain": {
 		"tile_map": {},  
 		"terrain_heights": {}  
