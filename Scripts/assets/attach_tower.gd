@@ -146,7 +146,6 @@ func _rotate_towards_target(delta: float) -> void:
 	current_rot.y = -lerp_angle(current_rot.y, target_yaw, delta * rotation_speed)
 	head.rotation = -current_rot
 
-
 func _on_timer_timeout():
 	if not tower_is_placed: return
 	if not can_upgrade:
