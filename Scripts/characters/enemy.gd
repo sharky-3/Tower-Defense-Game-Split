@@ -16,7 +16,7 @@ const DAMAGE_FLASH_MAT = preload("uid://dlnxbyrt6u5g1")
 @onready var enemy: Node3D = self
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var target: Node3D = $"../Map/PlayerTower"
+@onready var target: Node3D = $"../SubViewportContainer/SubViewport/Map/PlayerTower"
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
 

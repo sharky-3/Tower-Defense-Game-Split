@@ -51,7 +51,7 @@ var world_radius_z := world_map_scale / 2.0
 
 func _ready() -> void:
 	rng.randomize()
-	_generate_grid()
+	#_generate_grid()
 
 # -----------------------------------------------------------
 # Helpers
@@ -193,7 +193,7 @@ func _generate_grid() -> void:
 			tile.set_meta("is_center", x == 0 and z == 0)
 
 			if x == 0 and z == 0:
-				player_tower.position = Vector3(0, height, 0)
+s				player_tower.position = Vector3(0, height, 0)
 				spawn_enemy_pos.position = Vector3(0, height + 1.0, 0)
 			else:
 				_generate_environment(tile, tile_type)
@@ -213,4 +213,4 @@ func _generate_grid() -> void:
 func regenerate_map_with_scale(new_scale: float) -> void:
 	_update_world_radius(new_scale)
 	_clear_map()
-	_generate_grid()
+	#_generate_grid()

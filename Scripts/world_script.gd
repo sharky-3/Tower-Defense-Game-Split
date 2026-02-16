@@ -11,8 +11,8 @@ const Enemy = preload("res://Scenes/Characters/enemy_character.tscn")
 @export var min_distance: float = 5.0
 
 # --- Node references ---
-@onready var player_tower: Node3D = $Map/PlayerTower
-@onready var spawn_enemy_position: Node3D = $Map/spawn_enemy_position
+@onready var player_tower: Node3D = $SubViewportContainer/SubViewport/Map/PlayerTower
+@onready var spawn_enemy_position: Node3D = $SubViewportContainer/SubViewport/Map/spawn_enemy_position
 
 # --- Stats ---
 var current_wave: int = 0

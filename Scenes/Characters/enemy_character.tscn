@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://qpx5ico661eo"]
 
 [ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Scripts/characters/enemy.gd" id="1_sdh2x"]
-[ext_resource type="Texture2D" uid="uid://bslwepj7a4ioh" path="res://assets/texture/color_palet.png" id="2_najb4"]
-[ext_resource type="ArrayMesh" uid="uid://bfygdhktxcdvx" path="res://assets/meshes/characters/enemy/goblin/Goblin1.obj" id="3_f31sj"]
+[ext_resource type="Texture2D" uid="uid://bxhtyqs0vjwh" path="res://Assets/texture/color_palet.png" id="2_najb4"]
+[ext_resource type="ArrayMesh" uid="uid://bnc5o7d66ecl2" path="res://Assets/meshes/characters/enemy/goblin/Goblin1.obj" id="3_f31sj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nraa5"]
 albedo_texture = ExtResource("2_najb4")
@@ -48,7 +48,7 @@ _data = {
 }
 
 [node name="Enemy" type="Node3D"]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_sdh2x")
 move_speed = null
 enemy_health = null

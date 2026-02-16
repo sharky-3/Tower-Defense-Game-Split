@@ -1,6 +1,7 @@
-[gd_scene load_steps=37 format=4 uid="uid://nbh0nuuxu0hr"]
+[gd_scene load_steps=43 format=4 uid="uid://nbh0nuuxu0hr"]
 
-[ext_resource type="Script" path="res://Scripts/edge_detection_compositor.gd" id="1_72hat"]
+[ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Scripts/world_script.gd" id="1_80fwj"]
+[ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Scenes/light.tscn" id="1_jhds8"]
 [ext_resource type="ArrayMesh" uid="uid://dii43dejxwbal" path="res://Assets/meshes/environment/grass_plane_mesh.res" id="1_qi5x8"]
 [ext_resource type="PackedScene" uid="uid://dyfp7otjg80q5" path="res://Assets/meshes/environment/tree.glb" id="2_6el2q"]
 [ext_resource type="ArrayMesh" uid="uid://cmj5tvjjvysjm" path="res://Assets/meshes/environment/grassTall_plane_mesh.res" id="2_75b2y"]
@@ -13,14 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://dey5onb6mwp3f" path="res://Assets/texture/environment/leaf_particle.png" id="14_o35ae"]
 [ext_resource type="Texture2D" uid="uid://8sdgkykyg5l5" path="res://Assets/texture/environment/rock_color.png" id="14_uen4s"]
 [ext_resource type="PackedScene" uid="uid://dbxq5u60ic26l" path="res://Assets/meshes/environment/rock2.glb" id="15_twefy"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_6el2q"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o35ae"]
-render_priority = 0
-shader = ExtResource("3_gb871")
-shader_parameter/ground_color = Color(0.101960786, 0.6901961, 0.21176471, 1)
-shader_parameter/outline_mask = 1.0
+[ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Scenes/models/towers/player_tower/player_tower.tscn" id="15_xjipq"]
+[ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Scripts/ui/stats.gd" id="16_jfpsf"]
+[ext_resource type="PackedScene" uid="uid://befyiqnv66nro" path="res://Scenes/ui/carouse_container.tscn" id="17_10fbe"]
+[ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Scenes/ui/selection_wheel.tscn" id="18_2rl0u"]
+[ext_resource type="Texture2D" uid="uid://bwotbmtjs5qad" path="res://assets/texture/icons/tower-upgrade-0.png" id="19_qqnw7"]
+[ext_resource type="Texture2D" uid="uid://blvjrft3yblr3" path="res://assets/texture/icons/turret_0.png" id="20_h0pi8"]
+[ext_resource type="Texture2D" uid="uid://deey3fcliquvk" path="res://assets/texture/icons/tower-upgrade-2.png" id="21_54p3t"]
+[ext_resource type="Texture2D" uid="uid://daliqemf24k1q" path="res://assets/texture/icons/tower-upgrade-1.png" id="22_cudan"]
 
 [sub_resource type="MultiMesh" id="MultiMesh_72hat"]
 transform_format = 1
@@ -187,36 +188,20 @@ material = SubResource("ShaderMaterial_gpe07")
 subdivide_depth = 3
 orientation = 1
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_km8ws"]
-sky_top_color = Color(0.5635199, 0.39360002, 0.96, 1)
-sky_horizon_color = Color(0.53690004, 0.6799216, 0.91, 1)
+[sub_resource type="NavigationMesh" id="NavigationMesh_gsfny"]
 
-[sub_resource type="Sky" id="Sky_75b2y"]
-sky_material = SubResource("ProceduralSkyMaterial_km8ws")
+[sub_resource type="BoxMesh" id="BoxMesh_jhds8"]
 
-[sub_resource type="Environment" id="Environment_igfsh"]
-background_mode = 2
-sky = SubResource("Sky_75b2y")
-tonemap_mode = 2
-tonemap_exposure = 1.2
-ssil_radius = 8.61
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o35ae"]
+render_priority = 0
+shader = ExtResource("3_gb871")
+shader_parameter/ground_color = Color(0.101960786, 0.6901961, 0.21176471, 1)
+shader_parameter/outline_mask = 1.0
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_k8itn"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 1
-access_resolved_color = false
-access_resolved_depth = false
-needs_motion_vectors = false
-needs_normal_roughness = true
-script = ExtResource("1_72hat")
-metadata/_custom_type_script = "uid://brcimd12tx3dm"
-
-[sub_resource type="Compositor" id="Compositor_75b2y"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_k8itn")])
+[sub_resource type="BoxShape3D" id="BoxShape3D_80fwj"]
 
 [node name="DemoForest" type="Node3D"]
+script = ExtResource("1_80fwj")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -234,16 +219,9 @@ handle_input_locally = false
 size = Vector2i(288, 162)
 render_target_update_mode = 4
 
-[node name="CameraPosition" parent="SubViewportContainer/SubViewport" instance=ExtResource("13_a8thi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+[node name="Light" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_jhds8")]
 
 [node name="World" type="Node3D" parent="SubViewportContainer/SubViewport"]
-
-[node name="Ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
-transform = Transform3D(22.955803, 0, 0, 0, 1, 0, 0, 0, 15.514657, 1.6411829, 0, 0)
-mesh = SubResource("PlaneMesh_6el2q")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_o35ae")
 
 [node name="MultiMeshGrass" type="MultiMeshInstance3D" parent="SubViewportContainer/SubViewport/World"]
 cast_shadow = 0
@@ -362,17 +340,71 @@ preprocess = 5.0
 process_material = SubResource("ParticleProcessMaterial_cl46v")
 draw_pass_1 = SubResource("QuadMesh_twefy")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(0.98618174, -0.093293354, 0.1369013, 7.566612e-08, 0.82636356, 0.56313676, -0.16566719, -0.5553552, 0.8149447, 0, 4.540125, -5.9411197)
-light_color = Color(1, 0.685, 0.37, 1)
-light_energy = 1.2
-shadow_enabled = true
-directional_shadow_mode = 1
-directional_shadow_pancake_size = 400.0
+[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("13_a8thi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
-environment = SubResource("Environment_igfsh")
-compositor = SubResource("Compositor_75b2y")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.526381, 0)
+navigation_mesh = SubResource("NavigationMesh_gsfny")
+
+[node name="Ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D"]
+transform = Transform3D(56.76691, 0, 0, 0, 1, 0, 0, 0, 41.55215, 1.6411829, 0, 0)
+mesh = SubResource("BoxMesh_jhds8")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_o35ae")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/NavigationRegion3D/Ground/RigidBody3D"]
+shape = SubResource("BoxShape3D_80fwj")
+
+[node name="Map" type="Node" parent="SubViewportContainer/SubViewport"]
+
+[node name="PlayerTower" parent="SubViewportContainer/SubViewport/Map" instance=ExtResource("15_xjipq")]
+transform = Transform3D(1.5, 0, 0, 0, 2.25, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Node" type="Node" parent="SubViewportContainer/SubViewport/Map/PlayerTower"]
+
+[node name="spawn_enemy_position" type="Node3D" parent="SubViewportContainer/SubViewport/Map"]
+transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)
+
+[node name="User Interface" type="Node" parent="SubViewportContainer/SubViewport"]
+
+[node name="Stats" type="Control" parent="SubViewportContainer/SubViewport/User Interface"]
+visible = false
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -119.0
+offset_right = 119.0
+offset_bottom = 84.0
+grow_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource("16_jfpsf")
+metadata/_edit_use_anchors_ = true
+
+[node name="Gold" type="Label" parent="SubViewportContainer/SubViewport/User Interface/Stats"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.0
+offset_right = 30.0
+offset_bottom = 25.0
+grow_horizontal = 2
+scale = Vector2(4, 4)
+pivot_offset = Vector2(30, 0)
+text = "Gold: 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="CarouseContainer" parent="SubViewportContainer/SubViewport/User Interface" instance=ExtResource("17_10fbe")]
+visible = false
+
+[node name="SelectionWheel" parent="SubViewportContainer/SubViewport/User Interface" groups=["placing_tower"] instance=ExtResource("18_2rl0u")]
+visible = false
+scale = Vector2(0.7, 0.7)
+options = Array[Texture2D]([ExtResource("19_qqnw7"), ExtResource("20_h0pi8"), ExtResource("21_54p3t"), ExtResource("22_cudan")])
 
 [editable path="SubViewportContainer/SubViewport/World/tree"]
 [editable path="SubViewportContainer/SubViewport/World/tree2"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var button: Button = $Button
+#@onready var button: Button = $Button
 
 func _ready() -> void:
 	var viewport_size = get_viewport_rect().size
