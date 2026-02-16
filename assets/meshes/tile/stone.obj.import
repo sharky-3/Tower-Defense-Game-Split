@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://dob5ltn1ikbbe"
-path="res://.godot/imported/stone.obj-98e86d9a38c87b642e06811a3e808822.mesh"
+uid="uid://ggx3vgi0tsdb"
+path="res://.godot/imported/stone.obj-27e414c30545638abeb8db9519e6a6c9.mesh"
 
 [deps]
 
-files=["res://.godot/imported/stone.obj-98e86d9a38c87b642e06811a3e808822.mesh"]
+files=["res://.godot/imported/stone.obj-27e414c30545638abeb8db9519e6a6c9.mesh"]
 
-source_file="res://assets/meshes/tile/stone.obj"
-dest_files=["res://.godot/imported/stone.obj-98e86d9a38c87b642e06811a3e808822.mesh", "res://.godot/imported/stone.obj-98e86d9a38c87b642e06811a3e808822.mesh"]
+source_file="res://Assets/meshes/tile/stone.obj"
+dest_files=["res://.godot/imported/stone.obj-27e414c30545638abeb8db9519e6a6c9.mesh", "res://.godot/imported/stone.obj-27e414c30545638abeb8db9519e6a6c9.mesh"]
 
 [params]
 

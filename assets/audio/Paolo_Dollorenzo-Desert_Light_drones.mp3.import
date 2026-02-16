@@ -2,17 +2,17 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://tw6e63fufm2q"
-path="res://.godot/imported/Paolo_Dollorenzo-Desert_Light_drones.mp3-621e6e8aaa7cf14d6844edaa03241ba5.mp3str"
+uid="uid://qyei5iet5vx7"
+path="res://.godot/imported/Paolo_Dollorenzo-Desert_Light_drones.mp3-c235ca0c9a650ce8e2994ffc5dca544e.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/Paolo_Dollorenzo-Desert_Light_drones.mp3"
-dest_files=["res://.godot/imported/Paolo_Dollorenzo-Desert_Light_drones.mp3-621e6e8aaa7cf14d6844edaa03241ba5.mp3str"]
+source_file="res://Assets/audio/Paolo_Dollorenzo-Desert_Light_drones.mp3"
+dest_files=["res://.godot/imported/Paolo_Dollorenzo-Desert_Light_drones.mp3-c235ca0c9a650ce8e2994ffc5dca544e.mp3str"]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0

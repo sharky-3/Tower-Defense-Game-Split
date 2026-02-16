@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chrwlfi532yrt"
-path="res://.godot/imported/greybox_dark_solid.png-5262ebe52a4e90344954db734daa7aaa.ctex"
+uid="uid://drx16uqcfiyef"
+path="res://.godot/imported/greybox_dark_solid.png-14befc2916758901cb251e5288cad16e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/GreyboxTextures/greybox_dark_solid.png"
-dest_files=["res://.godot/imported/greybox_dark_solid.png-5262ebe52a4e90344954db734daa7aaa.ctex"]
+source_file="res://Assets/texture/GreyboxTextures/greybox_dark_solid.png"
+dest_files=["res://.godot/imported/greybox_dark_solid.png-14befc2916758901cb251e5288cad16e.ctex"]
 
 [params]
 

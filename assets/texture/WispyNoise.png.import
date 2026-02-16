@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bq77fvux6gu4d"
-path="res://.godot/imported/WispyNoise.png-ff1e37147fcaf637135dab6aec251e7d.ctex"
+uid="uid://b8t5ortfeikhg"
+path="res://.godot/imported/WispyNoise.png-3bcfac12d66349367294192c4c1e8087.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/WispyNoise.png"
-dest_files=["res://.godot/imported/WispyNoise.png-ff1e37147fcaf637135dab6aec251e7d.ctex"]
+source_file="res://Assets/texture/WispyNoise.png"
+dest_files=["res://.godot/imported/WispyNoise.png-3bcfac12d66349367294192c4c1e8087.ctex"]
 
 [params]
 
@@ -37,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -260,7 +260,7 @@ func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 	tween.tween_callback(
 		Callable(self, "_on_placing_animation_complete")
 	)
-	
+
 # --- User Interface ---
 
 func open_ui(panel: Control):

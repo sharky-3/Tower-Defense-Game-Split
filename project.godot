@@ -106,3 +106,26 @@ LEFT_MOUSE_CLICK={
 
 environment/volumetric_fog/volume_size=124
 environment/volumetric_fog/use_filter=0
+
+[shader_globals]
+
+wind_scale={
+"type": "float",
+"value": 0.025
+}
+wind_speed={
+"type": "float",
+"value": 0.075
+}
+wind_strength={
+"type": "float",
+"value": 0.4
+}
+wind_direction={
+"type": "vec3",
+"value": Vector3(0, 0, 1)
+}
+wind_noise={
+"type": "sampler2D",
+"value": "res://Assets/texture/environment/noise.tres"
+}

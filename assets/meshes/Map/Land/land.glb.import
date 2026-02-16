@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://dg4iq4qgfjbex"
-path="res://.godot/imported/land.glb-ec944f14b8f6b5fe7bcfcd7b9f6af691.scn"
+uid="uid://ci52bt335jr1y"
+path="res://.godot/imported/land.glb-ea0b98575ec3441b09a5e2e88373fcdd.scn"
 
 [deps]
 
-source_file="res://assets/meshes/Map/Land/land.glb"
-dest_files=["res://.godot/imported/land.glb-ec944f14b8f6b5fe7bcfcd7b9f6af691.scn"]
+source_file="res://Assets/meshes/Map/Land/land.glb"
+dest_files=["res://.godot/imported/land.glb-ea0b98575ec3441b09a5e2e88373fcdd.scn"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://ck84po6xd3hpv"
-path="res://.godot/imported/turret_upgrade_0.obj-d1fc9588f3b9ee0a788399fc1d35a573.mesh"
+uid="uid://ea3raawdolip"
+path="res://.godot/imported/turret_upgrade_0.obj-b00a8e23554bca53ea5c350074b34063.mesh"
 
 [deps]
 
-files=["res://.godot/imported/turret_upgrade_0.obj-d1fc9588f3b9ee0a788399fc1d35a573.mesh"]
+files=["res://.godot/imported/turret_upgrade_0.obj-b00a8e23554bca53ea5c350074b34063.mesh"]
 
-source_file="res://assets/meshes/tower/2/turret_upgrade_0.obj"
-dest_files=["res://.godot/imported/turret_upgrade_0.obj-d1fc9588f3b9ee0a788399fc1d35a573.mesh", "res://.godot/imported/turret_upgrade_0.obj-d1fc9588f3b9ee0a788399fc1d35a573.mesh"]
+source_file="res://Assets/meshes/tower/2/turret_upgrade_0.obj"
+dest_files=["res://.godot/imported/turret_upgrade_0.obj-b00a8e23554bca53ea5c350074b34063.mesh", "res://.godot/imported/turret_upgrade_0.obj-b00a8e23554bca53ea5c350074b34063.mesh"]
 
 [params]
 

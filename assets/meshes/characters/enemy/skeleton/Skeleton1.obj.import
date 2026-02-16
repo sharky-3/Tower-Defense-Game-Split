@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://ddj4r3bygamt8"
-path="res://.godot/imported/Skeleton1.obj-e4e9eac25a907754cdefebe84343c728.mesh"
+uid="uid://buvy0pwnlka7o"
+path="res://.godot/imported/Skeleton1.obj-9fe0abd636d3e89e94492656f832ede3.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Skeleton1.obj-e4e9eac25a907754cdefebe84343c728.mesh"]
+files=["res://.godot/imported/Skeleton1.obj-9fe0abd636d3e89e94492656f832ede3.mesh"]
 
-source_file="res://assets/meshes/characters/enemy/skeleton/Skeleton1.obj"
-dest_files=["res://.godot/imported/Skeleton1.obj-e4e9eac25a907754cdefebe84343c728.mesh", "res://.godot/imported/Skeleton1.obj-e4e9eac25a907754cdefebe84343c728.mesh"]
+source_file="res://Assets/meshes/characters/enemy/skeleton/Skeleton1.obj"
+dest_files=["res://.godot/imported/Skeleton1.obj-9fe0abd636d3e89e94492656f832ede3.mesh", "res://.godot/imported/Skeleton1.obj-9fe0abd636d3e89e94492656f832ede3.mesh"]
 
 [params]
 

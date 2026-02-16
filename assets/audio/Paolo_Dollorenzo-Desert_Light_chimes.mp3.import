@@ -2,17 +2,17 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://djr485yl6haam"
-path="res://.godot/imported/Paolo_Dollorenzo-Desert_Light_chimes.mp3-dd07585e7520c417d1355a5ea8412d16.mp3str"
+uid="uid://ccgytdqp1bq28"
+path="res://.godot/imported/Paolo_Dollorenzo-Desert_Light_chimes.mp3-c4ac36fdd0df2c43c11cc2cbaa7b05a0.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/Paolo_Dollorenzo-Desert_Light_chimes.mp3"
-dest_files=["res://.godot/imported/Paolo_Dollorenzo-Desert_Light_chimes.mp3-dd07585e7520c417d1355a5ea8412d16.mp3str"]
+source_file="res://Assets/audio/Paolo_Dollorenzo-Desert_Light_chimes.mp3"
+dest_files=["res://.godot/imported/Paolo_Dollorenzo-Desert_Light_chimes.mp3-c4ac36fdd0df2c43c11cc2cbaa7b05a0.mp3str"]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0

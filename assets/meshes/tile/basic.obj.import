@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://bdpahb7huo4w1"
-path="res://.godot/imported/basic.obj-ecc8dee14b23fc3ded401d6f8722174f.mesh"
+uid="uid://dpcmgjy0ddj6x"
+path="res://.godot/imported/basic.obj-0aa4f7fb1740dc1748e955c194f6ace5.mesh"
 
 [deps]
 
-files=["res://.godot/imported/basic.obj-ecc8dee14b23fc3ded401d6f8722174f.mesh"]
+files=["res://.godot/imported/basic.obj-0aa4f7fb1740dc1748e955c194f6ace5.mesh"]
 
-source_file="res://assets/meshes/tile/basic.obj"
-dest_files=["res://.godot/imported/basic.obj-ecc8dee14b23fc3ded401d6f8722174f.mesh", "res://.godot/imported/basic.obj-ecc8dee14b23fc3ded401d6f8722174f.mesh"]
+source_file="res://Assets/meshes/tile/basic.obj"
+dest_files=["res://.godot/imported/basic.obj-0aa4f7fb1740dc1748e955c194f6ace5.mesh", "res://.godot/imported/basic.obj-0aa4f7fb1740dc1748e955c194f6ace5.mesh"]
 
 [params]
 

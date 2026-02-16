@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bws6vbvepos58"
-path.s3tc="res://.godot/imported/Tower_color_palet.png-73b4eab7f9563ff3d1d666589bd4afd5.s3tc.ctex"
+uid="uid://hlhllrq6nnox"
+path.s3tc="res://.godot/imported/Tower_color_palet.png-3d95ba084a0839bcab3e5d78573acdfa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "952de835ee840fdfbcbd3dce2ed98ad3"
-}
 
 [deps]
 
-source_file="res://assets/meshes/Map/Towers/Player_Tower/Tower_color_palet.png"
-dest_files=["res://.godot/imported/Tower_color_palet.png-73b4eab7f9563ff3d1d666589bd4afd5.s3tc.ctex"]
+source_file="res://Assets/meshes/Map/Towers/Player_Tower/Tower_color_palet.png"
+dest_files=["res://.godot/imported/Tower_color_palet.png-3d95ba084a0839bcab3e5d78573acdfa.s3tc.ctex"]
 
 [params]
 

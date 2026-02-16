@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://1p735803ethj"
-path.s3tc="res://.godot/imported/tower_placment_posicions_color_palet.png-fcb38ebd4f502026d73a6e8d458e9335.s3tc.ctex"
+uid="uid://dayskcu2qrbow"
+path.s3tc="res://.godot/imported/tower_placment_posicions_color_palet.png-f94fa3becfd1c938e744ad4c66357166.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "952de835ee840fdfbcbd3dce2ed98ad3"
-}
 
 [deps]
 
-source_file="res://assets/meshes/Map/Land/tower_placment_posicions_color_palet.png"
-dest_files=["res://.godot/imported/tower_placment_posicions_color_palet.png-fcb38ebd4f502026d73a6e8d458e9335.s3tc.ctex"]
+source_file="res://Assets/meshes/Map/Land/tower_placment_posicions_color_palet.png"
+dest_files=["res://.godot/imported/tower_placment_posicions_color_palet.png-f94fa3becfd1c938e744ad4c66357166.s3tc.ctex"]
 
 [params]
 

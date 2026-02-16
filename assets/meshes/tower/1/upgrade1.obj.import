@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://u0rl2763vgxr"
-path="res://.godot/imported/upgrade1.obj-49b4d8771981ff44911c90b086ce992f.mesh"
+uid="uid://cas0ngd6hfn3p"
+path="res://.godot/imported/upgrade1.obj-61518511c834c9aaf7c5451a63b83412.mesh"
 
 [deps]
 
-files=["res://.godot/imported/upgrade1.obj-49b4d8771981ff44911c90b086ce992f.mesh"]
+files=["res://.godot/imported/upgrade1.obj-61518511c834c9aaf7c5451a63b83412.mesh"]
 
-source_file="res://assets/meshes/tower/1/upgrade1.obj"
-dest_files=["res://.godot/imported/upgrade1.obj-49b4d8771981ff44911c90b086ce992f.mesh", "res://.godot/imported/upgrade1.obj-49b4d8771981ff44911c90b086ce992f.mesh"]
+source_file="res://Assets/meshes/tower/1/upgrade1.obj"
+dest_files=["res://.godot/imported/upgrade1.obj-61518511c834c9aaf7c5451a63b83412.mesh", "res://.godot/imported/upgrade1.obj-61518511c834c9aaf7c5451a63b83412.mesh"]
 
 [params]
 

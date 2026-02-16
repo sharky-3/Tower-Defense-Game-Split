@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://c60kiolkbm8"
-path="res://.godot/imported/water.glb-beeac1d347f9e42eae2a4de74d3bd11a.scn"
+uid="uid://dlgkscojo0ugq"
+path="res://.godot/imported/water.glb-2f024315c38412d4e9e307aac81a97f4.scn"
 
 [deps]
 
-source_file="res://assets/meshes/Map/Land/water.glb"
-dest_files=["res://.godot/imported/water.glb-beeac1d347f9e42eae2a4de74d3bd11a.scn"]
+source_file="res://Assets/meshes/Map/Land/water.glb"
+dest_files=["res://.godot/imported/water.glb-2f024315c38412d4e9e307aac81a97f4.scn"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://bfygdhktxcdvx"
-path="res://.godot/imported/Goblin1.obj-8d79704b3dc30f00647f1d28fe7fbb68.mesh"
+uid="uid://bnc5o7d66ecl2"
+path="res://.godot/imported/Goblin1.obj-ca261b133fcc74d599fac93a92b0cd58.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Goblin1.obj-8d79704b3dc30f00647f1d28fe7fbb68.mesh"]
+files=["res://.godot/imported/Goblin1.obj-ca261b133fcc74d599fac93a92b0cd58.mesh"]
 
-source_file="res://assets/meshes/characters/enemy/goblin/Goblin1.obj"
-dest_files=["res://.godot/imported/Goblin1.obj-8d79704b3dc30f00647f1d28fe7fbb68.mesh", "res://.godot/imported/Goblin1.obj-8d79704b3dc30f00647f1d28fe7fbb68.mesh"]
+source_file="res://Assets/meshes/characters/enemy/goblin/Goblin1.obj"
+dest_files=["res://.godot/imported/Goblin1.obj-ca261b133fcc74d599fac93a92b0cd58.mesh", "res://.godot/imported/Goblin1.obj-ca261b133fcc74d599fac93a92b0cd58.mesh"]
 
 [params]
 

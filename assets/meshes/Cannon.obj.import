@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://bkhpj7f2soctq"
-path="res://.godot/imported/Cannon.obj-044c408ce0a54cc6adc54b5bdc9e1e08.mesh"
+uid="uid://bt67s363temgx"
+path="res://.godot/imported/Cannon.obj-41c0f086293169871e3870e993312292.mesh"
 
 [deps]
 
-files=["res://.godot/imported/Cannon.obj-044c408ce0a54cc6adc54b5bdc9e1e08.mesh"]
+files=["res://.godot/imported/Cannon.obj-41c0f086293169871e3870e993312292.mesh"]
 
-source_file="res://assets/meshes/Cannon.obj"
-dest_files=["res://.godot/imported/Cannon.obj-044c408ce0a54cc6adc54b5bdc9e1e08.mesh", "res://.godot/imported/Cannon.obj-044c408ce0a54cc6adc54b5bdc9e1e08.mesh"]
+source_file="res://Assets/meshes/Cannon.obj"
+dest_files=["res://.godot/imported/Cannon.obj-41c0f086293169871e3870e993312292.mesh", "res://.godot/imported/Cannon.obj-41c0f086293169871e3870e993312292.mesh"]
 
 [params]
 

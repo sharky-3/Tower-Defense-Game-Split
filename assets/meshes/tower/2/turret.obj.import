@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://dxajn47o8sm3n"
-path="res://.godot/imported/turret.obj-68da978de38fdf508711ab222fe87d7b.mesh"
+uid="uid://boscafpqq7cxs"
+path="res://.godot/imported/turret.obj-3ef7740363779fa01d2e6005873b64b9.mesh"
 
 [deps]
 
-files=["res://.godot/imported/turret.obj-68da978de38fdf508711ab222fe87d7b.mesh"]
+files=["res://.godot/imported/turret.obj-3ef7740363779fa01d2e6005873b64b9.mesh"]
 
-source_file="res://assets/meshes/tower/2/turret.obj"
-dest_files=["res://.godot/imported/turret.obj-68da978de38fdf508711ab222fe87d7b.mesh", "res://.godot/imported/turret.obj-68da978de38fdf508711ab222fe87d7b.mesh"]
+source_file="res://Assets/meshes/tower/2/turret.obj"
+dest_files=["res://.godot/imported/turret.obj-3ef7740363779fa01d2e6005873b64b9.mesh", "res://.godot/imported/turret.obj-3ef7740363779fa01d2e6005873b64b9.mesh"]
 
 [params]
 

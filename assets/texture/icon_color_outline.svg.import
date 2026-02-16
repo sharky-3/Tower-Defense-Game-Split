@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wo8i8o3dwyol"
-path="res://.godot/imported/icon_color_outline.svg-cd0fb8879a06d32e156767448d5adc3d.ctex"
+uid="uid://dihq5v6a4nuay"
+path="res://.godot/imported/icon_color_outline.svg-1bbc092d95e7e38fd070f5eac079e57d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/icon_color_outline.svg"
-dest_files=["res://.godot/imported/icon_color_outline.svg-cd0fb8879a06d32e156767448d5adc3d.ctex"]
+source_file="res://Assets/texture/icon_color_outline.svg"
+dest_files=["res://.godot/imported/icon_color_outline.svg-1bbc092d95e7e38fd070f5eac079e57d.ctex"]
 
 [params]
 

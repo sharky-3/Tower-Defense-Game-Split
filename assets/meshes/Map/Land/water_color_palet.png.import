@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc2ndpjx08ahy"
-path.s3tc="res://.godot/imported/water_color_palet.png-b2b1ce267b1b62e6972b7ac34a54e5cc.s3tc.ctex"
+uid="uid://b3stxp42kwnjf"
+path.s3tc="res://.godot/imported/water_color_palet.png-bbeb1bb7ee39907a676cbca0041abf53.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "952de835ee840fdfbcbd3dce2ed98ad3"
-}
 
 [deps]
 
-source_file="res://assets/meshes/Map/Land/water_color_palet.png"
-dest_files=["res://.godot/imported/water_color_palet.png-b2b1ce267b1b62e6972b7ac34a54e5cc.s3tc.ctex"]
+source_file="res://Assets/meshes/Map/Land/water_color_palet.png"
+dest_files=["res://.godot/imported/water_color_palet.png-bbeb1bb7ee39907a676cbca0041abf53.s3tc.ctex"]
 
 [params]
 

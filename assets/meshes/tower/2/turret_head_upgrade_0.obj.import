@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://enjot11j5w4o"
-path="res://.godot/imported/turret_head_upgrade_0.obj-aeed1e9699fb1f655a9253e16a74add4.mesh"
+uid="uid://1o7qwhndv64j"
+path="res://.godot/imported/turret_head_upgrade_0.obj-2062e73cffea764e5e73b0f8c1e4b3ff.mesh"
 
 [deps]
 
-files=["res://.godot/imported/turret_head_upgrade_0.obj-aeed1e9699fb1f655a9253e16a74add4.mesh"]
+files=["res://.godot/imported/turret_head_upgrade_0.obj-2062e73cffea764e5e73b0f8c1e4b3ff.mesh"]
 
-source_file="res://assets/meshes/tower/2/turret_head_upgrade_0.obj"
-dest_files=["res://.godot/imported/turret_head_upgrade_0.obj-aeed1e9699fb1f655a9253e16a74add4.mesh", "res://.godot/imported/turret_head_upgrade_0.obj-aeed1e9699fb1f655a9253e16a74add4.mesh"]
+source_file="res://Assets/meshes/tower/2/turret_head_upgrade_0.obj"
+dest_files=["res://.godot/imported/turret_head_upgrade_0.obj-2062e73cffea764e5e73b0f8c1e4b3ff.mesh", "res://.godot/imported/turret_head_upgrade_0.obj-2062e73cffea764e5e73b0f8c1e4b3ff.mesh"]
 
 [params]
 

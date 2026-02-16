@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://d3naf5r5ljvya"
-path="res://.godot/imported/water.obj-ea399379b01125f5a3f786bc26afd2b7.mesh"
+uid="uid://di2k14njemh38"
+path="res://.godot/imported/water.obj-e76b43401fd24a6c51bc88a1f0148c66.mesh"
 
 [deps]
 
-files=["res://.godot/imported/water.obj-ea399379b01125f5a3f786bc26afd2b7.mesh"]
+files=["res://.godot/imported/water.obj-e76b43401fd24a6c51bc88a1f0148c66.mesh"]
 
-source_file="res://assets/meshes/tile/water.obj"
-dest_files=["res://.godot/imported/water.obj-ea399379b01125f5a3f786bc26afd2b7.mesh", "res://.godot/imported/water.obj-ea399379b01125f5a3f786bc26afd2b7.mesh"]
+source_file="res://Assets/meshes/tile/water.obj"
+dest_files=["res://.godot/imported/water.obj-e76b43401fd24a6c51bc88a1f0148c66.mesh", "res://.godot/imported/water.obj-e76b43401fd24a6c51bc88a1f0148c66.mesh"]
 
 [params]
 

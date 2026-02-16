@@ -20,6 +20,7 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 script = ExtResource("2_7xgpr")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="CameraRotationX/CameraZoomPivot/Camera3D"]
+visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CameraRotationX/CameraZoomPivot/Camera3D/CanvasLayer"]
 material = SubResource("ShaderMaterial_b4wiv")

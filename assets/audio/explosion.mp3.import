@@ -2,13 +2,13 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://domd0kckv0mom"
-path="res://.godot/imported/explosion.mp3-8319b299f741c266d5908e4feef0754b.mp3str"
+uid="uid://c3qpxelyupd2l"
+path="res://.godot/imported/explosion.mp3-951dcd1b67a515e5d533be55bd847bf0.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/explosion.mp3"
-dest_files=["res://.godot/imported/explosion.mp3-8319b299f741c266d5908e4feef0754b.mp3str"]
+source_file="res://Assets/audio/explosion.mp3"
+dest_files=["res://.godot/imported/explosion.mp3-951dcd1b67a515e5d533be55bd847bf0.mp3str"]
 
 [params]
 

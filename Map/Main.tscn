@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://befyiqnv66nro" path="res://Scenes/ui/carouse_container.tscn" id="7_ce33l"]
 [ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Scripts/ui/stats.gd" id="7_jcr5e"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Scenes/ui/selection_wheel.tscn" id="8_jm71a"]
-[ext_resource type="Texture2D" uid="uid://cfn2o6b6yy7v1" path="res://assets/texture/icons/tower-upgrade-0.png" id="9_ce33l"]
-[ext_resource type="Texture2D" uid="uid://byehq0ucf0e4v" path="res://assets/texture/icons/turret_0.png" id="10_jfxw6"]
-[ext_resource type="Texture2D" uid="uid://b3h1becsutw1t" path="res://assets/texture/icons/tower-upgrade-2.png" id="11_0x3we"]
+[ext_resource type="Texture2D" uid="uid://bwotbmtjs5qad" path="res://assets/texture/icons/tower-upgrade-0.png" id="9_ce33l"]
+[ext_resource type="Texture2D" uid="uid://blvjrft3yblr3" path="res://assets/texture/icons/turret_0.png" id="10_jfxw6"]
+[ext_resource type="Texture2D" uid="uid://deey3fcliquvk" path="res://assets/texture/icons/tower-upgrade-2.png" id="11_0x3we"]
 [ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Scenes/light.tscn" id="12_ce33l"]
-[ext_resource type="Texture2D" uid="uid://dg1onheyp0rij" path="res://assets/texture/icons/tower-upgrade-1.png" id="12_hhbe4"]
+[ext_resource type="Texture2D" uid="uid://daliqemf24k1q" path="res://assets/texture/icons/tower-upgrade-1.png" id="12_hhbe4"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_o4np1"]
 
@@ -36,6 +36,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
 
 [node name="PlayerTower" parent="Map" instance=ExtResource("6_luu0p")]
 transform = Transform3D(0.4, 0, 0, 0, 0.6, 0, 0, 0, 0.4, 0, 0, 0)
+
+[node name="Node" type="Node" parent="Map/PlayerTower"]
 
 [node name="spawn_enemy_position" type="Node3D" parent="Map"]
 transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 14.8386135, 4.2247524, 13.571913)

@@ -2,17 +2,17 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-uid="uid://dk3bdxw4f1k0t"
-path="res://.godot/imported/WhatInTheSound_Torches.mp3-1b5336251c551ae59b8545881879585b.mp3str"
+uid="uid://7jxxylxub2mh"
+path="res://.godot/imported/WhatInTheSound_Torches.mp3-f75dc8187ab14620d6961b695e46bc02.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/WhatInTheSound_Torches.mp3"
-dest_files=["res://.godot/imported/WhatInTheSound_Torches.mp3-1b5336251c551ae59b8545881879585b.mp3str"]
+source_file="res://Assets/audio/WhatInTheSound_Torches.mp3"
+dest_files=["res://.godot/imported/WhatInTheSound_Torches.mp3-f75dc8187ab14620d6961b695e46bc02.mp3str"]
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
 bpm=0
 beat_count=0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh7dl5vve706k"
-path="res://.godot/imported/greybox_yellow_grid.png-975d0c3b261f65a7896d5eb2f3d80dc2.ctex"
+uid="uid://dekijp5txjkle"
+path="res://.godot/imported/greybox_yellow_grid.png-03fa05e97d4a15fba03453f80e595d04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/texture/GreyboxTextures/greybox_yellow_grid.png"
-dest_files=["res://.godot/imported/greybox_yellow_grid.png-975d0c3b261f65a7896d5eb2f3d80dc2.ctex"]
+source_file="res://Assets/texture/GreyboxTextures/greybox_yellow_grid.png"
+dest_files=["res://.godot/imported/greybox_yellow_grid.png-03fa05e97d4a15fba03453f80e595d04.ctex"]
 
 [params]
 

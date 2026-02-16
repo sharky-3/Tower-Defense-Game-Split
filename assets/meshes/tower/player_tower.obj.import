@@ -3,15 +3,15 @@
 importer="wavefront_obj"
 importer_version=1
 type="Mesh"
-uid="uid://dt45885lh8ul2"
-path="res://.godot/imported/player_tower.obj-2fbb3d3ec580538e79adff5b44713ca1.mesh"
+uid="uid://cxfrcmwj4rm3n"
+path="res://.godot/imported/player_tower.obj-1a65cfa3c4244b6bf061cd14b3fdf997.mesh"
 
 [deps]
 
-files=["res://.godot/imported/player_tower.obj-2fbb3d3ec580538e79adff5b44713ca1.mesh"]
+files=["res://.godot/imported/player_tower.obj-1a65cfa3c4244b6bf061cd14b3fdf997.mesh"]
 
-source_file="res://assets/meshes/tower/player_tower.obj"
-dest_files=["res://.godot/imported/player_tower.obj-2fbb3d3ec580538e79adff5b44713ca1.mesh", "res://.godot/imported/player_tower.obj-2fbb3d3ec580538e79adff5b44713ca1.mesh"]
+source_file="res://Assets/meshes/tower/player_tower.obj"
+dest_files=["res://.godot/imported/player_tower.obj-1a65cfa3c4244b6bf061cd14b3fdf997.mesh", "res://.godot/imported/player_tower.obj-1a65cfa3c4244b6bf061cd14b3fdf997.mesh"]
 
 [params]
 

@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://cfeks6s4ox2m6"
-path="res://.godot/imported/tower_placment_posicions.glb-0837fcb216b725088afa5ced0849cc2e.scn"
+uid="uid://b8uh0oaep3ef0"
+path="res://.godot/imported/tower_placment_posicions.glb-f911bdbac41a3fb9ab9236605fc51183.scn"
 
 [deps]
 
-source_file="res://assets/meshes/Map/Land/tower_placment_posicions.glb"
-dest_files=["res://.godot/imported/tower_placment_posicions.glb-0837fcb216b725088afa5ced0849cc2e.scn"]
+source_file="res://Assets/meshes/Map/Land/tower_placment_posicions.glb"
+dest_files=["res://.godot/imported/tower_placment_posicions.glb-f911bdbac41a3fb9ab9236605fc51183.scn"]
 
 [params]
 
