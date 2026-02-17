@@ -3,7 +3,8 @@ extends Node
 # --------------------------------------------------------------------
 # Game Data
 # --------------------------------------------------------------------
-
+var NORMAL_SIZE: float = 2.0
+var GIAN_SIZE: float = 3.0
 var game_data: Dictionary = {
 	
 	# --------------------------------------------------------------------
@@ -37,48 +38,24 @@ var game_data: Dictionary = {
 		"basic_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 5, "damage": 3 },
-
-			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 6, "damage": 3, "price": 50 },
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 8, "damage": 4, "price": 60 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 11, "damage": 6, "price": 90 }
-			]
 		},
 
 		# --- Turret tower
 		"turret_tower": {
 			"mesh": preload("uid://c4lillreyucf4"),
 			"stats": { "range": 6, "damage": 10 },
-
-			"upgrades": [
-				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 5, "damage": 5, "price": 100 },
-				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 8, "damage": 8, "price": 110 },
-				{ "mesh": preload("uid://ck84po6xd3hpv"), "range": 9, "damage": 10, "price": 150 }
-			]
 		},
 
 		# --- Cannon tower ---
 		"cannon_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 8, "damage": 6 },
-
-			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 3, "price": 120 },  
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 6, "damage": 5, "price": 100 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 6, "price": 140 }
-			]
 		},
 		
 		# --- Slow tower ---
 		"slow_tower": {
 			"mesh": preload("uid://cvq5oa37c1bkt"),
 			"stats": { "range": 7, "damage": 3 },
-
-			"upgrades": [
-				{ "mesh": preload("uid://b6v01fbf56avq"), "range": 4, "damage": 2, "price": 80 }, 
-				{ "mesh": preload("uid://u0rl2763vgxr"), "range": 5, "damage": 3, "price": 70 },
-				{ "mesh": preload("uid://bvuqt0fd5kq1y"), "range": 7, "damage": 4, "price": 100 }
-			]
 		}
 	},
 
@@ -91,17 +68,17 @@ var game_data: Dictionary = {
 		
 		# --- Goblins ---
 		"goblins": {
-			1: { "mesh": preload("uid://bfygdhktxcdvx"), "stats": {"speed": 1.0, "health": 4, "attack_damage": 6, "scale": 0.4}, "rewards": {"gold": 3, "exp": 2} },
-			2: { "mesh": preload("uid://dgan33wtxphvc"), "stats": {"speed": 1.1, "health": 5, "attack_damage": 7, "scale": 0.4}, "rewards": {"gold": 4, "exp": 3} },
-			3: { "mesh": preload("uid://bw7tyjpxy3ku8"), "stats": {"speed": 1.2, "health": 6, "attack_damage": 8, "scale": 0.4}, "rewards": {"gold": 5, "exp": 4} },
-			4: { "mesh": preload("uid://dnih7xrttht20"), "stats": {"speed": 1.3, "health": 7, "attack_damage": 9, "scale": 0.4}, "rewards": {"gold": 6, "exp": 5} }
+			1: { "mesh": preload("uid://bnc5o7d66ecl2"), "stats": {"speed": 1.0, "health": 4, "attack_damage": 6, "scale": NORMAL_SIZE}, "rewards": {"gold": 3, "exp": 2} },
+			2: { "mesh": preload("uid://ujvqmayejrnf"), "stats": {"speed": 1.1, "health": 5, "attack_damage": 7, "scale": NORMAL_SIZE}, "rewards": {"gold": 4, "exp": 3} },
+			3: { "mesh": preload("uid://nigrfyigt3f"), "stats": {"speed": 1.2, "health": 6, "attack_damage": 8, "scale": NORMAL_SIZE}, "rewards": {"gold": 5, "exp": 4} },
+			4: { "mesh": preload("uid://b5ik3k6qomfg1"), "stats": {"speed": 1.3, "health": 7, "attack_damage": 9, "scale": NORMAL_SIZE}, "rewards": {"gold": 6, "exp": 5} }
 		},
 		
 		# --- Skeleton ---
 		"skeletons": {
-			1: { "mesh": preload("uid://ddj4r3bygamt8"), "stats": {"speed": 0.9, "health": 5, "attack_damage": 5, "scale": 0.4}, "rewards": {"gold": 3, "exp": 2} },
-			2: { "mesh": preload("uid://u23q3r8bpqan"), "stats": {"speed": 1.0, "health": 6, "attack_damage": 6, "scale": 0.4}, "rewards": {"gold": 4, "exp": 3} },
-			3: { "mesh": preload("uid://conmtsecxcsp8"), "stats": {"speed": 1.1, "health": 7, "attack_damage": 7, "scale": 0.4}, "rewards": {"gold": 5, "exp": 4} }
+			1: { "mesh": preload("uid://buvy0pwnlka7o"), "stats": {"speed": 0.9, "health": 5, "attack_damage": 5, "scale": NORMAL_SIZE}, "rewards": {"gold": 3, "exp": 2} },
+			2: { "mesh": preload("uid://dlie226iuvyhf"), "stats": {"speed": 1.0, "health": 6, "attack_damage": 6, "scale": NORMAL_SIZE}, "rewards": {"gold": 4, "exp": 3} },
+			3: { "mesh": preload("uid://dck10wdwme0i3"), "stats": {"speed": 1.1, "health": 7, "attack_damage": 7, "scale": NORMAL_SIZE}, "rewards": {"gold": 5, "exp": 4} }
 		},
 		
 		# --------------------------------------------------------------------
@@ -109,15 +86,15 @@ var game_data: Dictionary = {
 		"giants": {
 			
 			# --- Skeleton ---
-			1: { "mesh": preload("uid://ddj4r3bygamt8"), "stats": {"speed": 1.0, "health": 15, "attack_damage": 15, "scale": 0.7}, "rewards": {"gold": 10, "exp": 8} },
-			2: { "mesh": preload("uid://u23q3r8bpqan"), "stats": {"speed": 1.1, "health": 18, "attack_damage": 18, "scale": 0.7}, "rewards": {"gold": 12, "exp": 10} },
-			3: { "mesh": preload("uid://conmtsecxcsp8"), "stats": {"speed": 1.2, "health": 21, "attack_damage": 21, "scale": 0.7}, "rewards": {"gold": 14, "exp": 12} },
+			1: { "mesh": preload("uid://buvy0pwnlka7o"), "stats": {"speed": 1.0, "health": 15, "attack_damage": 15, "scale": GIAN_SIZE}, "rewards": {"gold": 10, "exp": 8} },
+			2: { "mesh": preload("uid://dlie226iuvyhf"), "stats": {"speed": 1.1, "health": 18, "attack_damage": 18, "scale": GIAN_SIZE}, "rewards": {"gold": 12, "exp": 10} },
+			3: { "mesh": preload("uid://dck10wdwme0i3"), "stats": {"speed": 1.2, "health": 21, "attack_damage": 21, "scale": GIAN_SIZE}, "rewards": {"gold": 14, "exp": 12} },
 			
 			# --- Goblins ----
-			4: { "mesh": preload("uid://bfygdhktxcdvx"), "stats": {"speed": 1.3, "health": 24, "attack_damage": 24, "scale": 0.7}, "rewards": {"gold": 16, "exp": 14} },
-			5: { "mesh": preload("uid://dgan33wtxphvc"), "stats": {"speed": 1.4, "health": 28, "attack_damage": 28, "scale": 0.7}, "rewards": {"gold": 18, "exp": 16} },
-			6: { "mesh": preload("uid://bw7tyjpxy3ku8"), "stats": {"speed": 1.5, "health": 32, "attack_damage": 32, "scale": 0.7}, "rewards": {"gold": 20, "exp": 18} },
-			7: { "mesh": preload("uid://dnih7xrttht20"), "stats": {"speed": 1.6, "health": 36, "attack_damage": 36, "scale": 0.7}, "rewards": {"gold": 24, "exp": 22} }
+			4: { "mesh": preload("uid://bnc5o7d66ecl2"), "stats": {"speed": 1.3, "health": 24, "attack_damage": 24, "scale": GIAN_SIZE}, "rewards": {"gold": 16, "exp": 14} },
+			5: { "mesh": preload("uid://ujvqmayejrnf"), "stats": {"speed": 1.4, "health": 28, "attack_damage": 28, "scale": GIAN_SIZE}, "rewards": {"gold": 18, "exp": 16} },
+			6: { "mesh": preload("uid://nigrfyigt3f"), "stats": {"speed": 1.5, "health": 32, "attack_damage": 32, "scale": GIAN_SIZE}, "rewards": {"gold": 20, "exp": 18} },
+			7: { "mesh": preload("uid://b5ik3k6qomfg1"), "stats": {"speed": 1.6, "health": 36, "attack_damage": 36, "scale": GIAN_SIZE}, "rewards": {"gold": 24, "exp": 22} }
 		}
 	},
 
@@ -160,14 +137,6 @@ func get_tower_base_stats(_name: String):
 	if not game_data["towers"].has(_name): 
 		return {}
 	return game_data["towers"][_name]["stats"]
-
-func get_tower_upgrade(_name: String, level: int) -> Dictionary:
-	if not game_data["towers"].has(_name): 
-		return {}
-	var upgrades = game_data["towers"][_name]["upgrades"]
-	if level < 0 or level >= upgrades.size(): 
-		return {}
-	return upgrades[level]
 
 # --------------------------------------------------------------------
 # Enemy Functions
@@ -242,7 +211,7 @@ func get_terrain_height_at_hex(x: int, z: int) -> float:
 
 func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> void:
 	var original_scale = tower_body_mesh.scale
-	tower_body_mesh.scale = original_scale * 0.7
+	tower_body_mesh.scale = original_scale * GIAN_SIZE
 	tower_body_mesh.mesh = new_mesh
 	var tween = create_tween()
 	tween.tween_property(tower_body_mesh, "scale", original_scale, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
@@ -250,7 +219,7 @@ func play_upgrade_animation(tower_body_mesh: MeshInstance3D, new_mesh: Mesh) -> 
 
 func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 	var original_scale = tower_body_mesh.scale
-	tower_body_mesh.scale = original_scale * 0.7
+	tower_body_mesh.scale = original_scale * GIAN_SIZE
 	
 	var tween = create_tween()
 	tween.tween_property(
@@ -264,7 +233,7 @@ func play_placing_animation(tower_body_mesh: MeshInstance3D) -> void:
 # --- User Interface ---
 
 func open_ui(panel: Control):
-	var full_scale = Vector2(0.4, 0.4)
+	var full_scale = Vector2(NORMAL_SIZE, NORMAL_SIZE)
 	
 	var tween := create_tween()
 	var builder = tween.tween_property(

@@ -1,7 +1,7 @@
 extends Node3D
 
 # --- Imports ---
-const PLACE_TOWER_SOUND: AudioStream = preload("uid://c8ac13k1jtjbe")
+const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 
 # --- Node references ---
 @onready var head: MeshInstance3D = $Head
