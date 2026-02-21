@@ -181,6 +181,12 @@ transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 28, 0, -16)
 [node name="Tree23" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
 transform = Transform3D(1.0393147, 0, 1.3452982, 0, 1.6999999, 0, -1.3452982, 0, 1.0393147, 9.939088, 0, -43.697144)
 
+[node name="Tree24" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.6521515, 0, -1.569936, 0, 1.7, 0, 1.569936, 0, 0.6521515, 38.09349, 0, -47.422424)
+
+[node name="Tree25" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.572622, 0, 1.3863999, 0, 1.5, 0, -1.3863999, 0, 0.572622, 31.741352, 0, -34.47444)
+
 [node name="Rocks" type="Node3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D"]
 transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0.526381, 0)
 
@@ -272,9 +278,3 @@ metadata/_edit_use_anchors_ = true
 visible = false
 scale = Vector2(0.7, 0.7)
 options = Array[Texture2D]([ExtResource("13_4k7sa"), ExtResource("14_6t5kk"), ExtResource("15_bnmam"), ExtResource("16_qnntv")])
-
-[node name="Tree" parent="." instance=ExtResource("6_tf230")]
-transform = Transform3D(0.43999243, 0, -1.6420739, 0, 1.7, 0, 1.6420739, 0, 0.43999243, 44, 0, -42)
-
-[node name="Tree2" parent="." instance=ExtResource("6_tf230")]
-transform = Transform3D(0.74999994, 0, 1.2990382, 0, 1.5, 0, -1.2990382, 0, 0.74999994, 36, 0, -30)
