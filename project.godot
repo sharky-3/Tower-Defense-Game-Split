@@ -11,15 +11,15 @@ config_version=5
 [application]
 
 config/name="Split"
-run/main_scene="uid://c60kiolkbm8"
+run/main_scene="uid://nbh0nuuxu0hr"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://Scripts/systems/global.gd"
-PlacingSystem="*res://Scripts/systems/placing_system.gd"
-GlobalTween="*res://Scripts/ui/tween.gd"
+Global="*res://Stages/GlobalScript.gd"
+PlacingSystem="*res://_Scripts/systems/placing_system.gd"
+GlobalTween="*res://_Scripts/ui/tween.gd"
 GameSystem="*res://Scripts/systems/game_system.gd"
 
 [display]
@@ -127,5 +127,5 @@ wind_direction={
 }
 wind_noise={
 "type": "sampler2D",
-"value": "res://Assets/texture/environment/noise.tres"
+"value": "res://Entities/Environment/Wind/noise.tres"
 }

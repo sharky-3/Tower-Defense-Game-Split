@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://7jxxylxub2mh"
-path="res://.godot/imported/WhatInTheSound_Torches.mp3-f75dc8187ab14620d6961b695e46bc02.mp3str"
+path="res://.godot/imported/WhatInTheSound_Torches.mp3-a3ea2717f4d73269987f6d9eb7d11ee2.mp3str"
 
 [deps]
 
-source_file="res://Assets/audio/WhatInTheSound_Torches.mp3"
-dest_files=["res://.godot/imported/WhatInTheSound_Torches.mp3-f75dc8187ab14620d6961b695e46bc02.mp3str"]
+source_file="res://Assets/Audio/WhatInTheSound_Torches.mp3"
+dest_files=["res://.godot/imported/WhatInTheSound_Torches.mp3-a3ea2717f4d73269987f6d9eb7d11ee2.mp3str"]
 
 [params]
 

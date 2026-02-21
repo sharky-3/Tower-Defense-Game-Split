@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ea3raawdolip"
+path="res://.godot/imported/Body.obj-c3e504d6b8fe2b4f71fab9762bbd44b0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Body.obj-c3e504d6b8fe2b4f71fab9762bbd44b0.mesh"]
+
+source_file="res://Entities/Items/Placeable/Towers/Turret/Mesh/Body.obj"
+dest_files=["res://.godot/imported/Body.obj-c3e504d6b8fe2b4f71fab9762bbd44b0.mesh", "res://.godot/imported/Body.obj-c3e504d6b8fe2b4f71fab9762bbd44b0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
