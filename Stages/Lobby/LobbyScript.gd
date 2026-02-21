@@ -1,8 +1,6 @@
 extends Node3D
 
-@onready var camera_3d: Camera3D = $Camera3D
-@onready var map_design: Button = $UserInterface/MapDesign
-@onready var hex_grid: Node3D = $NavigationRegion3D/HexGrid
+@onready var camera_3d: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
 @export var smooth_speed := 6.0
 @export var max_yaw := 10.0      
@@ -83,6 +81,3 @@ func _on_map_design_pressed() -> void:
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	is_spectating = !is_spectating
-	
-func _on_h_slider_value_changed(value: float) -> void:
-	hex_grid.regenerate_map_with_scale(value)
