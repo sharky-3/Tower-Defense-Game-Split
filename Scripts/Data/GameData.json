@@ -1,5 +1,4 @@
 {
-	
 	"PlayerStats": [
 		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
 		{ "Name": "Exp", "Value": 0, "Parent": "leaderstats" },
@@ -8,7 +7,7 @@
 		{ "Name": "Games_Won", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Games_Lost", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Total_Games", "Value": 0, "Parent": "Stats" },
-		{ "Name": "Win_Rate", "Value": 0, "Pare	nt": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
 		
 		{ "Name": "Waves_Played", "Value": 0, "Parent": "Stats" },
@@ -33,7 +32,10 @@
 	"Enemy": [
 		{ "Goblins": [
 			{ "Normal": [
-				
+				{ "Basic": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Speed": 1.0, "Health": 5, "Scale": 3, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Basic": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Speed": 1.0, "Health": 5, "Scale": 3, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Basic": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Speed": 1.0, "Health": 5, "Scale": 3, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Basic": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Speed": 1.0, "Health": 5, "Scale": 3, "Rewards": { "Gold": 3, "Exp": 2 } } } },
 			] },
 			
 			{ "Giants": [
