@@ -22,5 +22,24 @@
 	"GameStats": [
 		{ "Progression": { "MaxLvl": 15, "ExpToNextLvl": 50 } },
 		{ "Bonuses": { "DamageMultiplier": 1.0, "RangeMultiplier": 1.0, "AttackSpeedMultiplier": 1.0 } },
+	],
+	
+	"Towers": [
+		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Stats": { "Range": 5, "Damage": 3 } } },
+		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Stats": { "Range": 6, "Damage": 10 } } },
+		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Stats": { "Range": 8, "Damage": 6 } } },
+	],
+	
+	"Enemy": [
+		{ "Goblins": [
+			{ "Normal": [
+				
+			] },
+			
+			{ "Giants": [
+				
+			] }
+		] }
 	]
+	
 }
