@@ -13,9 +13,10 @@
 		{ "Name": "Waves_Played", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Enemies_Killed", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Enimies_Spawned", "Value": 0, "Parent": "Stats" },
+
 		{ "Name": "Total_Damage_Taken", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Total_Damage_Dealed", "Value": 0, "Parent": "Stats" },
-		{ "Name": "TOtal_Towers_Placed", "Value": 0, "Parent": "Stats" }
+		{ "Name": "Total_Towers_Placed", "Value": 0, "Parent": "Stats" }
 	],
 	
 	"GameStats": [
@@ -24,9 +25,21 @@
 	],
 	
 	"Towers": [
-		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Stats": { "Range": 5, "Damage": 3 } } },
-		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Stats": { "Range": 6, "Damage": 10 } } },
-		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Stats": { "Range": 8, "Damage": 6 } } }
+		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Price": 100, "Stats": { "Range": 5, "Damage": 3 }, "Upgrades": [
+			{ "Upgrade_0": { "Mesh": "uid://cvq5oa37c1bkt", "Price": 150, "Stats": { "Range": 6, "Damage": 10 } } },
+			{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Price": 200, "Stats": { "Range": 8, "Damage": 6 } } }
+		] } },
+
+		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Price": 150, "Stats": { "Range": 6, "Damage": 10 }, 
+		"Upgrades": [
+			{ "Upgrade_0": { "Mesh": "uid://c4lillreyucf4", "Price": 200, "Stats": { "Range": 8, "Damage": 6 } } },
+			{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Price": 250, "Stats": { "Range": 10, "Damage": 8 } } }
+		] } },
+		
+		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Price": 200, "Stats": { "Range": 8, "Damage": 6 }, "Upgrades": [
+			{ "Upgrade_0": { "Mesh": "uid://c4lillreyucf4", "Price": 250, "Stats": { "Range": 10, "Damage": 8 } } },
+			{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Price": 300, "Stats": { "Range": 12, "Damage": 10 } } }
+		] } }
 	],
 	
 	"Enemy": [
