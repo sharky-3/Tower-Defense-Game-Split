@@ -1,7 +1,26 @@
 {
+	
 	"PlayerStats": [
-		{ "Name": "Gold", "Value": 0 },
-		{ "Name": "Exp", "Value": 0 },
-		{ "Name": "Lvl", "Value": 1 },
+		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Exp", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Lvl", "Value": 1, "Parent": "leaderstats" },
+		
+		{ "Name": "Games_Won", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Games_Lost", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Games", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Pare	nt": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
+		
+		{ "Name": "Waves_Played", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enemies_Killed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enimies_Spawned", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Damage_Taken", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Damage_Dealed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "TOtal_Towers_Placed", "Value": 0, "Parent": "Stats" },
+	],
+	
+	"GameStats": [
+		{ "Progression": { "MaxLvl": 15, "ExpToNextLvl": 50 } },
+		{ "Bonuses": { "DamageMultiplier": 1.0, "RangeMultiplier": 1.0, "AttackSpeedMultiplier": 1.0 } },
 	]
 }
