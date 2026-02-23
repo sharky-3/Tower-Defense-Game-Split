@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://befyiqnv66nro"]
 
-[ext_resource type="Script" uid="uid://dft4h27ftj6ch" path="res://Stages/GameScript.gd" id="1_dj25w"]
+[ext_resource type="Script" uid="uid://dft4h27ftj6ch" path="res://Common/UI/Selection/MoveList.gd" id="1_dj25w"]
 [ext_resource type="Script" uid="uid://bdl4jhp1faxde" path="res://Common/UI/Selection/CarouseContainerScript.gd" id="1_goutl"]
 [ext_resource type="Texture2D" path="res://assets/texture/icons/tower-upgrade-0.png" id="2_u7opm"]
 [ext_resource type="Texture2D" path="res://assets/texture/icons/tower-upgrade-1.png" id="3_dj25w"]
