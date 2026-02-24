@@ -5,6 +5,29 @@ extends Node
 # --------------------------------------------------------------------
 var NORMAL_SIZE: float = 2.0
 var GIAN_SIZE: float = 3.0
+
+var GameData = {}
+const GAME_DATA_FILE = "res://Scripts/Data/GameData.json"
+
+func _ready() -> void:
+	var file = FileAccess.open(GAME_DATA_FILE, FileAccess.READ)
+	var json = JSON.parse_string(file.get_as_text())
+	GameData = json
+	
+func game_data_search(target_name: String, data = GameData):
+	if typeof(data) == TYPE_DICTIONARY:
+		for key in data.keys():
+			if key == target_name: return data[key]
+			var result = game_data_search(target_name, data[key])
+			if result != null: return result
+	
+	elif typeof(data) == TYPE_ARRAY:
+		for item in data:
+			var result = game_data_search(target_name, item)
+			if result != null: return result
+	
+	return null
+
 var game_data: Dictionary = {
 	
 	# --------------------------------------------------------------------

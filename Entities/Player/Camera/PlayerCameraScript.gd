@@ -97,11 +97,8 @@ func handle_zoom():
 func handle_mouse_rotation(event):
 	if event is InputEventMouseMotion and Input.is_action_pressed("rotate"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-		# yaw
 		rotate_keys_target -= event.relative.x * mouse_sensitivity
 
-		# pitch
 		pitch_target -= event.relative.y * mouse_sensitivity
 		pitch_target = clamp(pitch_target, deg_to_rad(-90), deg_to_rad(20))
 

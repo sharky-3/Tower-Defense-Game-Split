@@ -1,0 +1,90 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsc038qvvrd4h"]
+
+[ext_resource type="Script" uid="uid://bhsdwmi24pkn" path="res://Common/UI/Card/Card.gd" id="1_g2v63"]
+[ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
+[ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l4v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_24bux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_voj27"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_twfbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2k72"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t66y0"]
+resource_local_to_scene = true
+shader = ExtResource("3_yowvl")
+shader_parameter/rect_size = Vector2(300, 420)
+shader_parameter/fov = 90.0
+shader_parameter/cull_back = true
+shader_parameter/y_rot = 0.0
+shader_parameter/x_rot = 0.0
+shader_parameter/inset = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wd0qj"]
+
+[node name="Card" type="Button"]
+custom_minimum_size = Vector2(300, 420)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -210.0
+offset_right = 150.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 0)
+size_flags_horizontal = 4
+theme_override_styles/normal = SubResource("StyleBoxEmpty_m2l4v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_24bux")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_voj27")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_twfbq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h2k72")
+script = ExtResource("1_g2v63")
+max_offset_shadow = 15.0
+spring = 200.0
+damp = 5.0
+velocity_multiplier = 1.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Shadow" type="TextureRect" parent="."]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(1, 1, 1, 0.16862746)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yowvl")
+expand_mode = 1
+
+[node name="CardTexture" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_t66y0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_yowvl")
+expand_mode = 1
+
+[node name="DestroyArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+position = Vector2(150, 210)
+shape = SubResource("RectangleShape2D_wd0qj")
+disabled = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
