@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://bwsye514hjd4"]
+[gd_scene load_steps=22 format=4 uid="uid://bwsye514hjd4"]
 
 [ext_resource type="Shader" uid="uid://c0dy1aqj1b4q3" path="res://Entities/Environment/Tree/Shader/trunk_shader.gdshader" id="1_fja6i"]
 [ext_resource type="Texture2D" uid="uid://cy7kh4dvdd34v" path="res://Entities/Environment/Tree/Texture/tree_bark.png" id="2_1dm5l"]
@@ -189,10 +189,6 @@ material = SubResource("ShaderMaterial_gpe07")
 subdivide_depth = 3
 orientation = 1
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_g5plq"]
-height = 9.872803
-radius = 4.4677734
-
 [node name="Tree" type="Node3D"]
 
 [node name="trunk" type="MeshInstance3D" parent="."]
@@ -221,9 +217,3 @@ lifetime = 10.0
 preprocess = 5.0
 process_material = SubResource("ParticleProcessMaterial_hhp21")
 draw_pass_1 = SubResource("QuadMesh_0y78o")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.551972, 0)
-shape = SubResource("CylinderShape3D_g5plq")

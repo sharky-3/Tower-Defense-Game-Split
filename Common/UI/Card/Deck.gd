@@ -16,7 +16,7 @@ extends Control
 """ [[ ============================================================ ]] """
 """ [[ Ready ]] """
 func _ready() -> void:
-	draw_card(5, null)
+	draw_card(2)
 
 """ [[ ============================================================ ]] """
 """ [[ Move Card ]] """
@@ -35,46 +35,48 @@ func move_card(card: Button, start_position: Vector2, target_position: Vector2, 
 	
 """ [[ ============================================================ ]] """
 """ [[ Create Deck ]] """
-func draw_card(amount: int, card_data) -> void:
-	var spacing: float = 300
-	var center_offset: float = (amount - 1) / 2.0
-	var start_pos: Vector2 = Vector2(500, 0)
-	
+func draw_card(amount: int) -> void:
 	for i in range(amount):
-		var card_scene: Button = load("res://Common/UI/Card/Card.tscn").instantiate()
-		hand.add_child(card_scene)
+		var card: Button = load("res://Common/UI/Card/Card.tscn").instantiate()
+		hand.add_child(card)
 		
-		card_scene.pivot_offset = card_scene.size / 2
-		
-		var target_x: float = (i - center_offset) * spacing - card_scene.size.x / 2
-		var target_y: float = hand.get_size().y / 2  
-		var target_pos: Vector2 = Vector2(target_x, target_y)
+		card.pivot_offset = card.size / 2.0
+		card.set_meta("original_parent", hand)
+	
 	await arrange_hand()
 
 """ [[ Arrange Deck ]] """
 func arrange_hand() -> void:
-	var offset: int = 700
-	var final_position: Vector2
-	var final_rotation: float
-
-	var tween: Tween = get_tree().create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
-	for card in hand.get_children():
-		var hand_ratio: float = 0.5
+	var spacing: float = 250
+	var count: int = hand.get_child_count()
+	
+	if count == 0:
+		return
+	
+	var card_size: Vector2 = hand.get_child(0).size
+	var total_width: float = spacing * (count - 1)
+	var start_x: float = -total_width / 2.0 - card_size.x / 2.0
+	
+	var bottom_y: float = get_viewport_rect().size.y - hand.global_position.y - card_size.y - 100.0
+	
+	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	
+	for i in range(count):
+		var card: Control = hand.get_child(i)
 		
-		if hand.get_child_count() > 1:
-			hand_ratio = float(card.get_index()) / (float(hand.get_child_count()) - 1.0)
-			final_position = Vector2(hand_ratio * offset, 0)
-			final_rotation = lerp_angle(-0.2, 0.2, hand_ratio)
-		else:
-			final_rotation = 0
-			final_position = Vector2(50, 0)
+		var ratio := 0.5 if count == 1 else float(i) / (count - 1)
 		
-		tween.parallel().tween_property(
-			card, "position", final_position, 0.03 + (card.get_index() * 0.075)
+		var final_position := Vector2(
+			start_x + i * spacing,
+			bottom_y
 		)
-		tween.parallel().tween_property(
-			card, "rotation", final_rotation, 0.2 + (card.get_index() * 0.075)
-		)
-
+		
+		var final_rotation := lerp_angle(-0.25, 0.25, ratio)
+		
+		card.in_hand_pos = final_position
+		card.in_hand_rot = final_rotation
+		
+		tween.parallel().tween_property(card, "position", final_position, 0.25)
+		tween.parallel().tween_property(card, "rotation", final_rotation, 0.25)
+	
 	await tween.finished

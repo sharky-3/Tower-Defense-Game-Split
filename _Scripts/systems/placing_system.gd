@@ -22,14 +22,13 @@ const ATTACK_TOWERS = ["basic_tower", "turret_tower", "cannon_tower", "slow_towe
 
 func _ready():
 	pass
-	
+
 func _process(_delta) -> void:
 	if current_building:
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos
 
-		var tile_coords := _world_to_grid(pos)
-		current_target_coords = tile_coords
+		current_target_coords = _world_to_grid(pos)
 
 # --------------------------------------------------------------------
 # Tower placing system
@@ -40,40 +39,33 @@ func _tower_can_be_placed():
 		current_building.tower_placed()
 
 func start_placing(_card_id: String):
-	print(_card_id)
-	
 	if current_building: 
 		current_building.queue_free()
 	
-	var player_gold = _get_looking_value("currency", "gold")
+	var player_gold = _get_looking_value("Gold")
 	var data = _get_tower_base_stats(_card_id)
 	
-	if player_gold >= data["price"]:
-		current_building = Global.get_base_mesh(tower_name).instantiate()
+	if player_gold >= data.get("Cost", 0):
+		current_building = load(data["Mesh"]).instantiate()
 		get_tree().current_scene.add_child(current_building)
 
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos
 		
 		var random_angle = deg_to_rad(rng.randf_range(0, 360))
-		current_building.rotate(Vector3(0, 1, 0), random_angle)
+		current_building.rotate(Vector3.UP, random_angle)
 		
-		_update_player_game_stats("towers_built", 1)
+		_update_player_game_stats("Total_Towers_Placed", 1)
 
 func get_mouse_world_position() -> Vector3:
 	if camera == null:
 		push_error("Camera is NULL")
 		return Vector3.ZERO
 
-	var viewport := camera.get_viewport()
-
-	var mouse_pos := viewport.get_mouse_position()
-
-	var origin := camera.project_ray_origin(mouse_pos)
-	var direction := camera.project_ray_normal(mouse_pos)
-
-	var t := -origin.y / direction.y
-
+	var mouse_pos = camera.get_viewport().get_mouse_position()
+	var origin = camera.project_ray_origin(mouse_pos)
+	var direction = camera.project_ray_normal(mouse_pos)
+	var t = -origin.y / direction.y
 	return origin + direction * t
 
 func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
@@ -88,14 +80,12 @@ func snap_to_hex_grid(world_pos: Vector3) -> Vector3:
 	var rq = iq
 	var rr = int(round(r))
 
-	var _snapped = Vector3.ZERO
-	_snapped.x = rq * tile_size * cos30
-	_snapped.z = rr * tile_size + (half_shift if rq % 2 != 0 else 0.0)
+	var snapped = Vector3.ZERO
+	snapped.x = rq * tile_size * cos30
+	snapped.z = rr * tile_size + (half_shift if rq % 2 != 0 else 0.0)
+	snapped.y = Global.get_terrain_height_at_hex(rq, rr) + TOWER_OFFSET.y
 	
-	var terrain_height = Global.get_terrain_height_at_hex(rq, rr)
-	_snapped.y = terrain_height + TOWER_OFFSET.y
-	
-	return _snapped
+	return snapped
 
 func _world_to_grid(world_pos: Vector3) -> Vector2:
 	var tile_size = TILE_SIZE * SPACING
@@ -106,10 +96,7 @@ func _world_to_grid(world_pos: Vector3) -> Vector2:
 	var iq = int(round(q))
 	var r = (world_pos.z - (half_shift if iq % 2 != 0 else 0.0)) / tile_size
 
-	var rq = iq
-	var rr = int(round(r))
-
-	return Vector2(rq, rr)
+	return Vector2(iq, int(round(r)))
 
 func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
 	var tile_node = Global.get_tile_node(x, z)
@@ -123,7 +110,7 @@ func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
 		return false
 
 	if _tower_name in ATTACK_TOWERS:
-		if not (tile_type == "stone"):
+		if tile_type != "stone":
 			return false
 	return true
 
@@ -134,7 +121,6 @@ func _can_place_at(x: int, z: int, _tower_name: String) -> bool:
 func _unhandled_input(event):
 	if current_building and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			
 			var rq = int(current_target_coords.x)
 			var rr = int(current_target_coords.y)
 			
@@ -143,59 +129,56 @@ func _unhandled_input(event):
 				_tower_can_be_placed()
 				current_building = null
 			else:
-				push_warning("Cannot place tower here: invalid tile or already occupied")
+				push_warning("Cannot place tower here")
 
 # --------------------------------------------------------------------
 # Get Placing Tower
 # --------------------------------------------------------------------
 
 func chosen_placing_tower(_index: int):
-	print(_index)
-
 	if current_building: 
 		current_building.queue_free()
 	
-	var player_gold = _get_looking_value("currency", "gold")
 	var tower_id = ATTACK_TOWERS[_index]
 	var data = _get_tower_base_stats(tower_id)
-
+	var player_gold = _get_looking_value("Gold")
+	
 	Global.set_new_tower_name(tower_id)
 	tower_name = Global.tower_name
 	
-	if player_gold >= data.get("price", 0):
-
-		current_building = Global.get_base_mesh(tower_name).instantiate()
+	if player_gold >= data.get("Cost", 0):
+		current_building = load(data["Mesh"]).instantiate()
 		get_tree().current_scene.add_child(current_building)
 
 		var pos = snap_to_hex_grid(get_mouse_world_position())
 		current_building.global_transform.origin = pos
 		
 		var random_angle = deg_to_rad(rng.randf_range(0, 360))
-		current_building.rotate(Vector3(0, 1, 0), random_angle)
+		current_building.rotate(Vector3.UP, random_angle)
 		
-		_update_player_game_stats("towers_built", 1)
+		_update_player_game_stats("Total_Towers_Placed", 1)
 
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
 
 func _update_player_game_stats(stat_name: String, value: int):
-	Global.update_player_game_stats("stats", stat_name, value)
+	Global.update_player_game_stats(stat_name, value)
 
-func _get_looking_value(directory_name: String, stat_name: String):
-	return Global.get_looking_value(directory_name, stat_name)
+func _get_looking_value(stat_name: String) -> int:
+	return Global.get_looking_value(stat_name)
 	
-func _get_tower_base_stats(stat_name: String):
-	return Global.get_tower_base_stats(stat_name)
+func _get_tower_base_stats(tower_name: String) -> Dictionary:
+	return Global.get_tower_base_stats(tower_name)
 	
-func _get_tile_height(x: int, z: int):
+func _get_tile_height(x: int, z: int) -> float:
 	return Global.get_terrain_height_at_hex(x, z)
 
-func _get_tile_type(x: int, z: int):
+func _get_tile_type(x: int, z: int) -> String:
 	return Global.get_tile_type(x, z)
 
-func _is_tile_taken(x: int, z: int):
+func _is_tile_taken(x: int, z: int) -> bool:
 	return Global.is_tile_taken(x, z)
 
-func _is_tile_center(x: int, z: int):
+func _is_tile_center(x: int, z: int) -> bool:
 	return Global.is_tile_center(x, z)

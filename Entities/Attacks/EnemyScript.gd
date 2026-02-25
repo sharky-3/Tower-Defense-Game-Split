@@ -10,7 +10,6 @@ extends Node3D
 @export var reward_exp: int = 1
 
 # --- Node references ---
-@onready var enemy: Node3D = self
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var target: Node3D = $"../SubViewportContainer/SubViewport/Map/PlayerTower"
@@ -26,13 +25,14 @@ const PATH_UPDATE_INTERVAL := 0.75
 # --------------------------------------------------------------------
 
 func _ready():
-	_find_target()
+	if not target:
+		_find_target()
 	if not target: return
 	if target.has_method("is_tower_dead") and target.is_tower_dead(): return
 
 	nav_agent.target_position = target.global_position
 	nav_agent.connect("target_reached", Callable(self, "_on_target_reached"))
-	enemy.add_to_group("Enemy")
+	add_to_group("Enemy")
 
 # --------------------------------------------------------------------
 # Target Handling
@@ -61,7 +61,6 @@ func _update_path_target(delta):
 func _move_along_path(delta):
 	var next_point = nav_agent.get_next_path_position()
 	var dir = next_point - global_position
-
 	if dir.length_squared() < 0.00001: return
 
 	var move_dir = dir.normalized()
@@ -73,12 +72,8 @@ func _move_along_path(delta):
 
 func _rotate_towards(move_dir: Vector3):
 	var flat_dir = Vector3(move_dir.x, 0.0, move_dir.z)
-	
 	if flat_dir.length_squared() < 0.000001: return
-	var look_pos = global_position + flat_dir
-	if global_position.is_equal_approx(look_pos): return
-	
-	look_at(look_pos, Vector3.UP)
+	look_at(global_position + flat_dir, Vector3.UP)
 
 # --------------------------------------------------------------------
 # Attack
@@ -95,15 +90,14 @@ func _on_target_reached():
 
 func take_damage(amount: float):
 	enemy_health -= amount
-
 	if enemy_health <= 0: _die()
-	_update_player_game_stats("stats", "damage_deald", amount)
+	_update_player_game_stats("Total_Damage_Dealed", amount)
 
 func _die():
-	enemy.queue_free()
-	_update_player_game_stats("stats", "enemies_killed", +1)
-	_update_player_game_stats("progression", "exp", reward_exp)
-	_update_player_game_stats("currency", "gold", reward_gold)
+	queue_free()
+	_update_player_game_stats("Enemies_Killed", 1)
+	_update_player_game_stats("Exp", reward_exp)
+	_update_player_game_stats("Gold", reward_gold)
 
 # --------------------------------------------------------------------
 # Cosmetic / Utility
@@ -111,19 +105,18 @@ func _die():
 
 func set_enemy_mesh(new_mesh: Mesh):
 	mesh.mesh = new_mesh
-	self.scale = Vector3(character_scale, character_scale, character_scale)
+	scale = Vector3(character_scale, character_scale, character_scale)
 
 func set_enemy_stats(enemy_stats: Dictionary):
-	move_speed = enemy_stats["speed"]
-	enemy_health = enemy_stats["health"]
-	attack_damage = enemy_stats["attack_damage"]
-	character_scale = enemy_stats["scale"]
-	
-	set_enemy_mesh(mesh.mesh)  
+	move_speed = enemy_stats.get("speed", 1.0)
+	enemy_health = enemy_stats.get("health", 4.0)
+	attack_damage = enemy_stats.get("attack_damage", 6.0)
+	character_scale = enemy_stats.get("scale", 0.4)
+	set_enemy_mesh(mesh.mesh)
 
-func set_enemy_rewards(enemy_rewards):
-	reward_gold = enemy_rewards["gold"]
-	reward_exp = enemy_rewards["exp"]
+func set_enemy_rewards(enemy_rewards: Dictionary):
+	reward_gold = enemy_rewards.get("Gold", 0)
+	reward_exp = enemy_rewards.get("Exp", 0)
 
 func set_difficulty(multiplier: float):
 	move_speed *= multiplier
@@ -136,6 +129,6 @@ func add_enemy_to_group():
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
-	
-func _update_player_game_stats(disctionary_name: String, stat_name: String, value: float):
-	Global.update_player_game_stats(disctionary_name, stat_name, value)
+
+func _update_player_game_stats(stat_name: String, value: float):
+	Global.update_player_game_stats(stat_name, value)

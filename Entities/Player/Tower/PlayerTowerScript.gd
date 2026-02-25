@@ -2,7 +2,7 @@ extends Node3D
 
 # --- Constants / Exported Data ---
 @export_category("Main")
-@export var tower_healt: float
+@export var tower_health: float
 @export var max_health: float
 
 @export_category("Visual/Audio")
@@ -30,10 +30,10 @@ func take_attack_damage(amount: float) -> void:
 	_attempt_damage(amount)
 
 func _attempt_damage(damage: float) -> void:
-	tower_healt -= damage
-	_update_player_game_stats("damage_taken", damage)
+	tower_health -= damage
+	_update_player_game_stats("Total_Damage_Taken", damage)
 
-	if _tower_health(tower_healt):
+	if _tower_health(tower_health):
 		if death_effect and death_sound:
 			$AudioStreamPlayer.stream = death_sound
 			$AudioStreamPlayer.play()
@@ -55,11 +55,11 @@ func _tower_health(health: float) -> bool:
 	return health <= 0
 
 func is_tower_dead() -> bool:
-	return _tower_health(tower_healt)
+	return _tower_health(tower_health)
 
 # --------------------------------------------------------------------
 # Global Player Stats
 # --------------------------------------------------------------------
 
 func _update_player_game_stats(stat_name: String, value: float):
-	Global.update_player_game_stats("stats", stat_name, value)
+	Global.update_player_game_stats(stat_name, value)

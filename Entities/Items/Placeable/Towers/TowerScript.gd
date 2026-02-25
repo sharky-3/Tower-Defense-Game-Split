@@ -4,7 +4,6 @@ extends Node3D
 const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 
 # --- Node references ---
-@onready var head: MeshInstance3D = $Head
 @onready var tower_body_mesh: MeshInstance3D = $Body
 @onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
@@ -15,7 +14,7 @@ const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 @onready var selection_wheel: Control = $UI/SubViewport/SelectionWheel
 
 # --- State ---
-var tower_is_placed: bool = false
+var tower_is_placed: bool = true
 var enemies_in_range: Array = []
 var current_target: Node3D = null
 
@@ -36,30 +35,52 @@ func _ready() -> void:
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	timer.start()
 
-	area_3d.body_entered.connect(Callable(self, "_on_area_3d_body_entered"))
-	area_3d.body_exited.connect(Callable(self, "_on_area_3d_body_exited"))
+	if not area_3d.is_connected("body_entered", Callable(self, "_on_area_3d_body_entered")):
+		area_3d.body_entered.connect(Callable(self, "_on_area_3d_body_entered"))
+
+	if not area_3d.is_connected("body_exited", Callable(self, "_on_area_3d_body_exited")):
+		area_3d.body_exited.connect(Callable(self, "_on_area_3d_body_exited"))
 
 func _process(delta):
-
-	if not tower_is_placed:
-		return
+	if not tower_is_placed: return
 
 	_tower_alive()
 	_update_range_mesh(tower_range)
 
 	if current_target:
-
 		var target_global_pos = current_target.global_transform.origin
 		var origin = ray_cast.global_transform.origin
 		var direction = target_global_pos - origin
 
 		_set_target_position_raycast(direction)
+		_rotate_toward_target(delta)
 
 
 # --------------------------------------------------------------------
 # Placement
 # --------------------------------------------------------------------
 
+func _rotate_toward_target(delta: float):
+	if current_target == null:
+		return
+
+	var tower_pos = tower_body_mesh.global_transform.origin
+	var target_pos = current_target.global_transform.origin
+
+	# Only rotate on the Y axis (ignore vertical)
+	var direction = (target_pos - tower_pos)
+	direction.y = 0
+
+	if direction.length() < 0.01:
+		return
+
+	var target_rotation = direction.normalized().angle_to(Vector3.FORWARD)
+	var current_rotation = tower_body_mesh.global_transform.basis.get_euler().y
+
+	# Smoothly rotate toward the target
+	var new_y = lerp_angle(current_rotation, direction.angle_to(Vector3.FORWARD), rotation_speed * delta)
+	tower_body_mesh.rotate_y(new_y - current_rotation)
+	
 func tower_placed():
 
 	tower_is_placed = true
@@ -74,10 +95,10 @@ func tower_placed():
 func _get_tower_stats():
 
 	var stats = Global.get_tower_base_stats(tower_name)
+	print(stats)
 
-	tower_range = stats.get("range", 5.0)
-	tower_damage = stats.get("damage", 1.0)
-
+	tower_range = stats.get("Range", 5.0)
+	tower_damage = stats.get("Damage", 1.0)
 
 func _update_range_mesh(value: float):
 

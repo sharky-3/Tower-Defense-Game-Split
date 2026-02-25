@@ -1,9 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsc038qvvrd4h"]
+[gd_scene load_steps=14 format=3 uid="uid://bsc038qvvrd4h"]
 
 [ext_resource type="Script" uid="uid://bd5u3fco5kbkc" path="res://Common/UI/Card/Card.gd" id="1_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
 [ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
-[ext_resource type="Texture2D" uid="uid://bwotbmtjs5qad" path="res://Entities/Items/Placeable/Towers/Default/Icon/Default.png" id="4_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://chuhsymkxr8bx" path="res://Common/UI/Card/Texture/Lvl.png" id="4_wd0qj"]
 [ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]
 [ext_resource type="Texture2D" uid="uid://fmpnevmgi1gs" path="res://Common/UI/Card/Texture/Time.png" id="6_twk8o"]
@@ -18,7 +17,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2k72"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t66y0"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q2jb2"]
 resource_local_to_scene = true
 shader = ExtResource("3_yowvl")
 shader_parameter/rect_size = Vector2(450, 630)
@@ -69,7 +68,7 @@ texture = ExtResource("2_yowvl")
 expand_mode = 1
 
 [node name="CardTexture" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_t66y0")
+material = SubResource("ShaderMaterial_q2jb2")
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
@@ -78,22 +77,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_yowvl")
-expand_mode = 1
-
-[node name="Icon" type="TextureRect" parent="CardTexture"]
-visible = false
-material = SubResource("ShaderMaterial_t66y0")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -228.0
-offset_top = -56.0
-offset_right = 227.0
-offset_bottom = -49.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("4_q2jb2")
 expand_mode = 1
 
 [node name="Stats" type="Control" parent="."]

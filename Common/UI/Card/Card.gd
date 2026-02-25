@@ -27,6 +27,10 @@ var tween_rot: Tween
 ]] """
 
 """ [[ ============================================================ ]] """
+""" [[ Ready ]] """
+func _ready() -> void:
+	pass
+
 """ [[ Process ]] """
 func _process(delta: float) -> void:
 	if state == 1:

@@ -21,6 +21,7 @@ Global="*res://Scripts/AutoLoad/Global.gd"
 PlacingSystem="*res://_Scripts/systems/placing_system.gd"
 GlobalTween="*res://_Scripts/ui/tween.gd"
 GameSystem="*res://Scripts/systems/game_system.gd"
+GameData="*res://Scripts/Data/GameData.gd"
 
 [display]
 

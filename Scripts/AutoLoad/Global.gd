@@ -1,182 +1,167 @@
 extends Node
 
-# --------------------------------------------------------------------
-# Game Data
-# --------------------------------------------------------------------
 var NORMAL_SIZE: float = 2.0
-var GIAN_SIZE: float = 3.0
+var GIANT_SIZE: float = 3.0
 var IS_DRAGGING_CARD: bool = false
 
-var GameData = {}
-const GAME_DATA_FILE = "res://Scripts/Data/GameData.json"
-
-func _ready() -> void:
-	var file = FileAccess.open(GAME_DATA_FILE, FileAccess.READ)
-	var json = JSON.parse_string(file.get_as_text())
-	GameData = json
-	
-func game_data_search(target_name: String, data = GameData):
-	if typeof(data) == TYPE_DICTIONARY:
-		for key in data.keys():
-			if key == target_name: return data[key]
-			var result = game_data_search(target_name, data[key])
-			if result != null: return result
-	
-	elif typeof(data) == TYPE_ARRAY:
-		for item in data:
-			var result = game_data_search(target_name, item)
-			if result != null: return result
-	
-	return null
-
-var game_data: Dictionary = {
-	
-	# --------------------------------------------------------------------
-	# --- Player stats ---
-	"player": {
-		"currency": { 
-			"gold": 1000 
-		},
-		"progression": { 
-			"exp": 0, 
-			"level": 1, 
-			"max_level": 15, 
-			"exp_to_next_level": 50 
-		},
-		"bonuses": { 
-			"damage_multiplier": 1.0, 
-			"range_multiplier": 1.0, 
-			"attack_speed_multiplier": 1.0 
-		},
-		"stats": {
-			"game_won": 0, "game_lost": 0, "waves_played": 0,
-			"enemies_killed": 0, "enemies_spawn": 0, "damage_taken": 0, "damage_deald": 0,
-			"towers_built": 0
-		}
-	},
-	
-	# --------------------------------------------------------------------
-	# --- Towers ---
-	"towers": {
-		# --- Basic tower
-		"basic_tower": {
-			"mesh": preload("uid://cvq5oa37c1bkt"),
-			"stats": { "range": 5, "damage": 3 },
-		},
-
-		# --- Turret tower
-		"turret_tower": {
-			"mesh": preload("uid://c4lillreyucf4"),
-			"stats": { "range": 6, "damage": 10 },
-		},
-
-		# --- Cannon tower ---
-		"cannon_tower": {
-			"mesh": preload("uid://cvq5oa37c1bkt"),
-			"stats": { "range": 8, "damage": 6 },
-		},
+var GAME_DATA = {
+	"PlayerStats": [
+		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Exp", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Lvl", "Value": 1, "Parent": "leaderstats" },
 		
-		# --- Slow tower ---
-		"slow_tower": {
-			"mesh": preload("uid://cvq5oa37c1bkt"),
-			"stats": { "range": 7, "damage": 3 },
-		}
-	},
+		{ "Name": "Games_Won", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Games_Lost", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Games", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
 
-	# --------------------------------------------------------------------
-	# --- Enemies ---
-	"enemies": {
+		{ "Name": "Highest_Wave_Reached", "Value": 0, "Parent": "Stats" },
 		
-		# --------------------------------------------------------------------
-		# --- Normal Enemies ---
-		
-		# --- Goblins ---
-		"goblins": {
-			1: { "mesh": preload("uid://bnc5o7d66ecl2"), "stats": {"speed": 1.0, "health": 4, "attack_damage": 6, "scale": NORMAL_SIZE}, "rewards": {"gold": 3, "exp": 2} },
-			2: { "mesh": preload("uid://ujvqmayejrnf"), "stats": {"speed": 1.1, "health": 5, "attack_damage": 7, "scale": NORMAL_SIZE}, "rewards": {"gold": 4, "exp": 3} },
-			3: { "mesh": preload("uid://nigrfyigt3f"), "stats": {"speed": 1.2, "health": 6, "attack_damage": 8, "scale": NORMAL_SIZE}, "rewards": {"gold": 5, "exp": 4} },
-			4: { "mesh": preload("uid://b5ik3k6qomfg1"), "stats": {"speed": 1.3, "health": 7, "attack_damage": 9, "scale": NORMAL_SIZE}, "rewards": {"gold": 6, "exp": 5} }
-		},
-		
-		# --- Skeleton ---
-		"skeletons": {
-			1: { "mesh": preload("uid://buvy0pwnlka7o"), "stats": {"speed": 0.9, "health": 5, "attack_damage": 5, "scale": NORMAL_SIZE}, "rewards": {"gold": 3, "exp": 2} },
-			2: { "mesh": preload("uid://dlie226iuvyhf"), "stats": {"speed": 1.0, "health": 6, "attack_damage": 6, "scale": NORMAL_SIZE}, "rewards": {"gold": 4, "exp": 3} },
-			3: { "mesh": preload("uid://dck10wdwme0i3"), "stats": {"speed": 1.1, "health": 7, "attack_damage": 7, "scale": NORMAL_SIZE}, "rewards": {"gold": 5, "exp": 4} }
-		},
-		
-		# --------------------------------------------------------------------
-		# --- Giants ---
-		"giants": {
+		{ "Name": "Waves_Played", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enemies_Killed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enimies_Spawned", "Value": 0, "Parent": "Stats" },
+
+		{ "Name": "Total_Damage_Taken", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Damage_Dealed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Towers_Placed", "Value": 0, "Parent": "Stats" }
+	],
+	
+	"GameStats": [
+		{ "Progression": { "MaxLvl": 15, "ExpToNextLvl": 50 } },
+		{ "Difficulty": { "WaveMultiplier": 1.2, "EnemySpawnRate": 1.5 } },
+		{ "Bonuses": { "DamageMultiplier": 1.0, "RangeMultiplier": 1.0, "AttackSpeedMultiplier": 1.0 } }
+	],
+	
+	"Towers": [
+		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 100, "Stats": { "Range": 50, "Damage": 10, "AttackSpeed": 1.0, "CanHitMultipleEnemies": false }, 
+			 "Upgrades": [
+				{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 150, "Stats": { "Range": 6, "Damage": 10 } } },
+				{ "Upgrade_2": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } }
+			] 
+		} },
+
+		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Cost": 150, "Stats": { "Range": 6, "Damage": 10, "AttackSpeed": 0.8, "CanHitMultipleEnemies": true }, 
+			"Upgrades": [
+				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } },
+				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } }
+			] 
+		} },
+
+		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 25, "AttackSpeed": 2.5, "CanHitMultipleEnemies": false }, 
+			"Upgrades": [
+				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } },
+				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 300, "Stats": { "Range": 12, "Damage": 10 } } }
+			]
+		} }
+	],
+	
+	"Enemy": [
+		{ "Goblins": [
+			{ "Normal": [
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 2, "Speed": 1.0, "Health": 5, "Attack_Damage": 6, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 2, "Speed": 1.1, "Health": 5, "Attack_Damage": 7, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 2, "Speed": 1.2, "Health": 5, "Attack_Damage": 8, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 2, "Speed": 1.3, "Health": 5, "Attack_Damage": 9, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+			] },
 			
-			# --- Skeleton ---
-			1: { "mesh": preload("uid://buvy0pwnlka7o"), "stats": {"speed": 2.0, "health": 15, "attack_damage": 15, "scale": GIAN_SIZE}, "rewards": {"gold": 10, "exp": 8} },
-			2: { "mesh": preload("uid://dlie226iuvyhf"), "stats": {"speed": 2.1, "health": 18, "attack_damage": 18, "scale": GIAN_SIZE}, "rewards": {"gold": 12, "exp": 10} },
-			3: { "mesh": preload("uid://dck10wdwme0i3"), "stats": {"speed": 2.2, "health": 21, "attack_damage": 21, "scale": GIAN_SIZE}, "rewards": {"gold": 14, "exp": 12} },
+			{ "Giants": [
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 3, "Speed": 2.3, "Health": 24, "Attack_Damage": 24, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 3, "Speed": 2.4, "Health": 28, "Attack_Damage": 28, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 3, "Speed": 2.5, "Health": 32, "Attack_Damage": 32, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 3, "Speed": 2.6, "Health": 36, "Attack_Damage": 36, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+			] }
+		] },
+
+		{ "Skeletons": [
+			{  "Normal": [
+				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 2, "Speed": 0.9, "Health": 5, "Attack_Damage": 5, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 2, "Speed": 1.0, "Health": 6, "Attack_Damage": 6, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 2, "Speed": 1.1, "Health": 7, "Attack_Damage": 7, "Rewards": { "Gold": 5, "Exp": 4 } } } }
+			] },
 			
-			# --- Goblins ----
-			4: { "mesh": preload("uid://bnc5o7d66ecl2"), "stats": {"speed": 2.3, "health": 24, "attack_damage": 24, "scale": GIAN_SIZE}, "rewards": {"gold": 16, "exp": 14} },
-			5: { "mesh": preload("uid://ujvqmayejrnf"), "stats": {"speed": 2.4, "health": 28, "attack_damage": 28, "scale": GIAN_SIZE}, "rewards": {"gold": 18, "exp": 16} },
-			6: { "mesh": preload("uid://nigrfyigt3f"), "stats": {"speed": 2.5, "health": 32, "attack_damage": 32, "scale": GIAN_SIZE}, "rewards": {"gold": 20, "exp": 18} },
-			7: { "mesh": preload("uid://b5ik3k6qomfg1"), "stats": {"speed": 2.6, "health": 36, "attack_damage": 36, "scale": GIAN_SIZE}, "rewards": {"gold": 24, "exp": 22} }
-		}
-	},
+			{ "Giants": [
+				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 3, "Speed": 2.0, "Health": 15, "Attack_Damage": 15, "Rewards": { "Gold": 10, "Exp": 8 } } } },
+				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 3, "Speed": 2.1, "Health": 18, "Attack_Damage": 18, "Rewards": { "Gold": 12, "Exp": 10 } } } },
+				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 3, "Speed": 2.2, "Health": 21, "Attack_Damage": 21, "Rewards": { "Gold": 14, "Exp": 12 } } } }
+			] }
+		] }
+	]
 }
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
+# --------------------------------------------------------------------
+# --- Game Data ---
+# --------------------------------------------------------------------
 
-""" [[ ============================================================ ]] """
-""" [[ Update Player Stats ]] """
-func update_player_game_stats(directory_name: String, stat_name: String, value: float):
-	if not game_data["player"].has(directory_name) or not game_data["player"][directory_name].has(stat_name):
-		return
-	game_data["player"][directory_name][stat_name] += value
 
-""" [[ Get Looking Value ]] """
-func get_looking_value(directory_name: String, stat_name: String):
-	if not game_data["player"].has(directory_name) or not game_data["player"][directory_name].has(stat_name):
-		return null
-	return game_data["player"][directory_name][stat_name]
+# --------------------------------------------------------------------
+# --- Player Stats ---
+# --------------------------------------------------------------------
+func update_player_game_stats(stat_name: String, value: float) -> void:
+	var stats = GAME_DATA["PlayerStats"]
+	for item in stats:
+		if item.get("Name", "") == stat_name:
+			item["Value"] += value
+			return
 
-""" [[ ============================================================ ]] """
-""" [[ Enemies ]] """
-var tower_name = "basic_tower"
+func get_looking_value(stat_name: String) -> float:
+	var stats = GAME_DATA["PlayerStats"]
+	for item in stats:
+		if item.get("Name", "") == stat_name:
+			return item["Value"]
+	return 0.0
 
-func set_new_tower_name(new_name: String):
+# --------------------------------------------------------------------
+# --- Towers ---
+# --------------------------------------------------------------------
+var tower_name = "Basic"
+
+func set_new_tower_name(new_name: String) -> void:
 	tower_name = new_name
-	
+
 func get_base_mesh(_name: String) -> PackedScene:
-	if not game_data["towers"].has(_name): 
-		return null
-	return game_data["towers"][_name]["mesh"]
+	var towers = GAME_DATA["Towers"]
+	for t in towers:
+		if t.has(_name):
+			return load(t[_name]["Mesh"])
+	return null
 
-func get_tower_base_stats(_name: String):
-	if not game_data["towers"].has(_name): 
-		return {}
-	return game_data["towers"][_name]["stats"]
- 
-""" [[ ============================================================
-	// ENTITIES
-]] """
+func get_tower_base_stats(_name: String) -> Dictionary:
+	var towers = GAME_DATA["Towers"]
+	for t in towers:
+		if t.has(_name):
+			return t[_name]["Stats"]
+	return {}
 
-""" [[ ============================================================ ]] """
-""" [[ Enemies ]] """
-func get_enemies_type_array() -> Dictionary:
-	return game_data["enemies"]
+# --------------------------------------------------------------------
+# --- Enemies ---
+# --------------------------------------------------------------------
+func get_enemies_type_array() -> Array:
+	return GAME_DATA["Enemy"]
+	
+func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
+	return {
+		"speed": stats.get("Speed", 1.0),
+		"health": stats.get("Health", 5.0),
+		"attack_damage": stats.get("Attack_Damage", 1.0),
+		"scale": stats.get("Scale", 1.0),
+	}
 
-func get_base_enemy(enemy_name: String, level: int) -> Dictionary:
-	if not game_data["enemies"].has(enemy_name) or not game_data["enemies"][enemy_name].has(level):
-		return {}
-	return game_data["enemies"][enemy_name][level]
+func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
+	var enemies = GAME_DATA["Enemy"]
+	for e in enemies:
+		if e.has(enemy_type):
+			for size_group in e[enemy_type]:
+				if size_group.has(enemy_size):
+					for enemy in size_group[enemy_size]:
+						if enemy.has(enemy_name):
+							return enemy[enemy_name]
+	return {}
 
-func get_enemy_stats(enemy_name: String, level: int) -> Dictionary:
-	if not game_data["enemies"].has(enemy_name) or not game_data["enemies"][enemy_name].has(level):
-		return {}
-	return game_data["enemies"][enemy_name][level]["stats"]
+func get_enemy_stats(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
+	var base = get_base_enemy(enemy_type, enemy_size, enemy_name)
+	return base.get("Stats", {})
 
-func get_enemy_reward(enemy_name: String, level: int) -> Dictionary:
-	if not game_data["enemies"].has(enemy_name) or not game_data["enemies"][enemy_name].has(level):
-		return {}
-	return game_data["enemies"][enemy_name][level]["rewards"]
+func get_enemy_reward(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
+	var stats = get_base_enemy(enemy_type, enemy_size, enemy_name)
+	return stats.get("Stats", {}).get("Rewards", {})
