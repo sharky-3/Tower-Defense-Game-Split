@@ -1,9 +1,16 @@
 extends Button
 
+@export var angle_x_max: float = 15
+@export var angle_y_max: float = 15
+
+@onready var card_texture = $CardTexture
+
 var state: int = 0
 var offset: Vector2 = Vector2.ZERO
 var in_hand_pos: Vector2
 var in_hand_rot: float
+
+var tween_rot: Tween
 
 func _process(delta: float) -> void:
 	if state == 1:
@@ -13,18 +20,31 @@ func _process(delta: float) -> void:
 		Global.IS_DRAGGING_CARD = true
 		rotation = 0
 		if Input.is_action_just_released("left_click"): 
-			state = 0
 			Global.IS_DRAGGING_CARD = false
+			state = 0
 			position = in_hand_pos
 			rotation = in_hand_rot
-
+			
 func _on_gui_input(event: InputEvent) -> void:
-	if state == 1: 
-		return
+	if state == 1: return
 	if event.is_action_pressed("left_click"):
 		state = 1
 		offset = get_global_mouse_position() - position
 		z_index = 10
+	
+	if not event is InputEventMouseMotion: return
+	
+	var mouse_pos: Vector2 = get_local_mouse_position()
+	var diff: Vector2 = (position + size) - mouse_pos
+
+	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
+	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
+
+	var rot_x: float = lerp(-angle_x_max, angle_x_max, lerp_val_x)
+	var rot_y: float = lerp(angle_y_max, -angle_y_max, lerp_val_y)
+	
+	card_texture.material.set_shader_parameter("x_rot", rot_y)
+	card_texture.material.set_shader_parameter("y_rot", rot_x)
 
 func card_is_focused(value: bool):
 	if Global.IS_DRAGGING_CARD: 
@@ -54,3 +74,8 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	card_is_focused(false)
+	
+	if tween_rot and tween_rot.is_running(): tween_rot.kill()
+	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
+	tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)
