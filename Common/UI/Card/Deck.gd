@@ -41,16 +41,12 @@ func draw_card() -> void:
 	var i = 1
 	
 	for t in towers:
-		# Each 't' is a dictionary with one key: the tower name
 		for tower_name in t.keys():
 			var tower_data = t[tower_name]
-			
-			# Load and instantiate the card scene
 			var card_scene: PackedScene = load("res://Common/UI/Card/Card.tscn")
 			var card_instance: Control = card_scene.instantiate()
 			hand.add_child(card_instance)
 			
-			# Set up the card using tower data
 			if card_instance.has_method("set_up_card"):
 				var cost = tower_data.get("Cost", 0)
 				
@@ -62,21 +58,15 @@ func draw_card() -> void:
 				
 				card_instance.set_up_card(i, attack_speed, tower_name, cost)
 			
-			# Pivot at center
 			if card_instance.has_method("size") and card_instance.size:
 				card_instance.pivot_offset = card_instance.size / 2.0
-			
-			# Store original parent for dragging
 			card_instance.set_meta("original_parent", hand)
-			
 			i += 1
-	
-	# Arrange all the cards in the hand
 	await arrange_hand()
 
 """ [[ Arrange Deck ]] """
 func arrange_hand() -> void:
-	var spacing: float = 250
+	var spacing: float = 350
 	var count: int = hand.get_child_count()
 	
 	if count == 0:
