@@ -5,6 +5,7 @@ extends Node
 # --------------------------------------------------------------------
 var NORMAL_SIZE: float = 2.0
 var GIAN_SIZE: float = 3.0
+var IS_DRAGGING_CARD: bool = false
 
 var GameData = {}
 const GAME_DATA_FILE = "res://Scripts/Data/GameData.json"

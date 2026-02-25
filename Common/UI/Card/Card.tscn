@@ -1,8 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsc038qvvrd4h"]
+[gd_scene load_steps=15 format=3 uid="uid://bsc038qvvrd4h"]
 
-[ext_resource type="Script" uid="uid://bhsdwmi24pkn" path="res://Common/UI/Card/Card.gd" id="1_g2v63"]
+[ext_resource type="Script" uid="uid://bd5u3fco5kbkc" path="res://Common/UI/Card/Card.gd" id="1_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
 [ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
+[ext_resource type="Texture2D" uid="uid://bwotbmtjs5qad" path="res://Entities/Items/Placeable/Towers/Default/Icon/Default.png" id="4_q2jb2"]
+[ext_resource type="Texture2D" uid="uid://chuhsymkxr8bx" path="res://Common/UI/Card/Texture/Lvl.png" id="4_wd0qj"]
+[ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]
+[ext_resource type="Texture2D" uid="uid://fmpnevmgi1gs" path="res://Common/UI/Card/Texture/Time.png" id="6_twk8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l4v"]
 
@@ -17,7 +21,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t66y0"]
 resource_local_to_scene = true
 shader = ExtResource("3_yowvl")
-shader_parameter/rect_size = Vector2(300, 420)
+shader_parameter/rect_size = Vector2(450, 630)
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
@@ -25,33 +29,30 @@ shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd0qj"]
+size = Vector2(420, 590)
 
 [node name="Card" type="Button"]
-custom_minimum_size = Vector2(300, 420)
+custom_minimum_size = Vector2(450, 630)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -210.0
-offset_right = 150.0
-offset_bottom = 210.0
+offset_left = -225.0
+offset_top = -315.0
+offset_right = 225.0
+offset_bottom = 315.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(150, 0)
+pivot_offset = Vector2(225, 0)
 size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_m2l4v")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_24bux")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_voj27")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_twfbq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h2k72")
-script = ExtResource("1_g2v63")
-max_offset_shadow = 15.0
-spring = 200.0
-damp = 5.0
-velocity_multiplier = 1.0
-metadata/_edit_use_anchors_ = true
+script = ExtResource("1_q2jb2")
 
 [node name="Shadow" type="TextureRect" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -60,8 +61,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 15.0
-offset_bottom = 15.0
+offset_top = 25.0
+offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_yowvl")
@@ -69,6 +70,7 @@ expand_mode = 1
 
 [node name="CardTexture" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_t66y0")
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -78,10 +80,98 @@ grow_vertical = 2
 texture = ExtResource("2_yowvl")
 expand_mode = 1
 
+[node name="Icon" type="TextureRect" parent="CardTexture"]
+material = SubResource("ShaderMaterial_t66y0")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -228.0
+offset_top = -56.0
+offset_right = 227.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_q2jb2")
+expand_mode = 1
+
+[node name="Stats" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_behavior_recursive = 1
+mouse_force_pass_scroll_events = false
+
+[node name="Lvl" type="TextureRect" parent="Stats"]
+layout_mode = 0
+offset_left = -52.0
+offset_top = -59.0
+offset_right = 157.0
+offset_bottom = 176.0
+texture = ExtResource("4_wd0qj")
+expand_mode = 1
+
+[node name="LvlValue" type="Label" parent="Stats/Lvl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = 22.0
+offset_right = -25.0
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_vs11m")
+theme_override_font_sizes/font_size = 100
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="HBoxContainer" parent="Stats"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -225.0
+offset_top = -150.0
+offset_right = 225.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TimerIcon" type="TextureRect" parent="Stats/Timer"]
+layout_mode = 2
+texture = ExtResource("6_twk8o")
+expand_mode = 2
+
+[node name="TimerValue" type="Label" parent="Stats/Timer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 30
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_vs11m")
+theme_override_font_sizes/font_size = 60
+text = "15s"
+vertical_alignment = 1
+
 [node name="DestroyArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
-position = Vector2(150, 210)
+position = Vector2(220, 310)
 shape = SubResource("RectangleShape2D_wd0qj")
 disabled = true
 
