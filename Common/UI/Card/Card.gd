@@ -1,17 +1,33 @@
+""" [[ ============================================================ ]] """
 extends Button
+""" [[ ============================================================ ]] """
 
+""" [[ ============================================================
+	// VARIABLES
+]] """
+
+""" [[ Card ]] """
+@onready var card_texture = $CardTexture
+
+""" [[ Fake 3D ]] """
 @export var angle_x_max: float = 15
 @export var angle_y_max: float = 15
 
-@onready var card_texture = $CardTexture
-
+""" [[ Card Movement ]] """
 var state: int = 0
 var offset: Vector2 = Vector2.ZERO
 var in_hand_pos: Vector2
 var in_hand_rot: float
 
+""" [[ Tween ]] """
 var tween_rot: Tween
 
+""" [[ ============================================================
+	// FUNCTIONS
+]] """
+
+""" [[ ============================================================ ]] """
+""" [[ Process ]] """
 func _process(delta: float) -> void:
 	if state == 1:
 		var mouse_pos: Vector2 = get_global_mouse_position()
@@ -24,7 +40,9 @@ func _process(delta: float) -> void:
 			state = 0
 			position = in_hand_pos
 			rotation = in_hand_rot
-			
+
+""" [[ ============================================================ ]] """
+""" [[ Card Interaction ]] """
 func _on_gui_input(event: InputEvent) -> void:
 	if state == 1: return
 	if event.is_action_pressed("left_click"):
@@ -46,6 +64,21 @@ func _on_gui_input(event: InputEvent) -> void:
 	card_texture.material.set_shader_parameter("x_rot", rot_y)
 	card_texture.material.set_shader_parameter("y_rot", rot_x)
 
+""" [[ Mouse Entered ]] """
+func _on_mouse_entered() -> void:
+	card_is_focused(true)
+
+""" [[ Mouse Left ]] """
+func _on_mouse_exited() -> void:
+	card_is_focused(false)
+	
+	if tween_rot and tween_rot.is_running(): tween_rot.kill()
+	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
+	tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
+	tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)
+
+""" [[ ============================================================ ]] """
+""" [[ Focus ]] """
 func card_is_focused(value: bool):
 	if Global.IS_DRAGGING_CARD: 
 		return
@@ -55,7 +88,9 @@ func card_is_focused(value: bool):
 	else: 
 		z_index = 0
 		await tween_anim(1)
-	
+
+""" [[ ============================================================ ]] """
+""" [[ Tween ]] """
 func tween_anim(type: int):
 	var tween: Tween = create_tween()
 	match type:
@@ -68,14 +103,3 @@ func tween_anim(type: int):
 				self, "scale", Vector2.ONE, 0.55
 			).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 	await tween.finished
-
-func _on_mouse_entered() -> void:
-	card_is_focused(true)
-
-func _on_mouse_exited() -> void:
-	card_is_focused(false)
-	
-	if tween_rot and tween_rot.is_running(): tween_rot.kill()
-	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
-	tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
-	tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)

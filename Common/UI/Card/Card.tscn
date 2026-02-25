@@ -81,6 +81,7 @@ texture = ExtResource("2_yowvl")
 expand_mode = 1
 
 [node name="Icon" type="TextureRect" parent="CardTexture"]
+visible = false
 material = SubResource("ShaderMaterial_t66y0")
 layout_mode = 1
 anchors_preset = 15
