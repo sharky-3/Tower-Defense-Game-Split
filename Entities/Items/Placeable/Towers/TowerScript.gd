@@ -84,18 +84,14 @@ func _rotate_toward_target(delta: float):
 func tower_placed():
 
 	tower_is_placed = true
-
 	_update_range_mesh(tower_range)
-
 	_play_audio(PLACE_TOWER_SOUND, 0.0)
-
 	_placing_tower_animation(tower_body_mesh)
 
 
 func _get_tower_stats():
 
 	var stats = Global.get_tower_base_stats(tower_name)
-	print(stats)
 
 	tower_range = stats.get("Range", 5.0)
 	tower_damage = stats.get("Damage", 1.0)

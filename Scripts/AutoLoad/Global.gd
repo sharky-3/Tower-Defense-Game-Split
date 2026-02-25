@@ -1,9 +1,15 @@
+""" [[ ============================================================ ]] """
 extends Node
+""" [[ ============================================================ ]] """
 
-var NORMAL_SIZE: float = 2.0
-var GIANT_SIZE: float = 3.0
+""" [[ ============================================================
+	// VARIABLES
+]] """
+
+var tower_name = "Basic"
 var IS_DRAGGING_CARD: bool = false
 
+""" [[ Game Data ]] """
 var GAME_DATA = {
 	"PlayerStats": [
 		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
@@ -38,21 +44,24 @@ var GAME_DATA = {
 			 "Upgrades": [
 				{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 150, "Stats": { "Range": 6, "Damage": 10 } } },
 				{ "Upgrade_2": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } }
-			] 
+			],
+			"Description": "Starter tower."
 		} },
 
 		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Cost": 150, "Stats": { "Range": 6, "Damage": 10, "AttackSpeed": 0.8, "CanHitMultipleEnemies": true }, 
 			"Upgrades": [
 				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } },
 				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } }
-			] 
+			],
+			"Description": "Hits multiple enemies."
 		} },
 
 		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 25, "AttackSpeed": 2.5, "CanHitMultipleEnemies": false }, 
 			"Upgrades": [
 				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } },
 				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 300, "Stats": { "Range": 12, "Damage": 10 } } }
-			]
+			],
+			"Description": "Slow but powerful."
 		} }
 	],
 	
@@ -89,14 +98,12 @@ var GAME_DATA = {
 	]
 }
 
-# --------------------------------------------------------------------
-# --- Game Data ---
-# --------------------------------------------------------------------
+""" [[ ============================================================
+	// FUNCTIONS
+]] """
 
-
-# --------------------------------------------------------------------
-# --- Player Stats ---
-# --------------------------------------------------------------------
+""" [[ ============================================================ ]] """
+""" [[ Update Player Stats ]] """
 func update_player_game_stats(stat_name: String, value: float) -> void:
 	var stats = GAME_DATA["PlayerStats"]
 	for item in stats:
@@ -104,6 +111,7 @@ func update_player_game_stats(stat_name: String, value: float) -> void:
 			item["Value"] += value
 			return
 
+""" [[ Get Looking Value ]] """
 func get_looking_value(stat_name: String) -> float:
 	var stats = GAME_DATA["PlayerStats"]
 	for item in stats:
@@ -111,14 +119,17 @@ func get_looking_value(stat_name: String) -> float:
 			return item["Value"]
 	return 0.0
 
-# --------------------------------------------------------------------
-# --- Towers ---
-# --------------------------------------------------------------------
-var tower_name = "Basic"
+""" [[ ============================================================ ]] """
+""" [[ Get Towers ]] """
+func get_towers_stats():
+	var towers = GAME_DATA["Towers"]
+	return towers
 
+""" [[ Set Tower Name ]] """
 func set_new_tower_name(new_name: String) -> void:
 	tower_name = new_name
 
+""" [[ Get Base Tower Mesh ]] """
 func get_base_mesh(_name: String) -> PackedScene:
 	var towers = GAME_DATA["Towers"]
 	for t in towers:
@@ -126,6 +137,7 @@ func get_base_mesh(_name: String) -> PackedScene:
 			return load(t[_name]["Mesh"])
 	return null
 
+""" [[ Get Base Tower Stats ]] """
 func get_tower_base_stats(_name: String) -> Dictionary:
 	var towers = GAME_DATA["Towers"]
 	for t in towers:
@@ -133,12 +145,12 @@ func get_tower_base_stats(_name: String) -> Dictionary:
 			return t[_name]["Stats"]
 	return {}
 
-# --------------------------------------------------------------------
-# --- Enemies ---
-# --------------------------------------------------------------------
+""" [[ ============================================================ ]] """
+""" [[ Get All Enemies ]] """
 func get_enemies_type_array() -> Array:
 	return GAME_DATA["Enemy"]
 	
+""" [[ Normalize Enemy ]] """
 func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
 	return {
 		"speed": stats.get("Speed", 1.0),
@@ -147,6 +159,7 @@ func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
 		"scale": stats.get("Scale", 1.0),
 	}
 
+""" [[ Get Base Enemy ]] """
 func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var enemies = GAME_DATA["Enemy"]
 	for e in enemies:
@@ -158,10 +171,12 @@ func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) 
 							return enemy[enemy_name]
 	return {}
 
+""" [[ Get Enemy Stats ]] """
 func get_enemy_stats(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var base = get_base_enemy(enemy_type, enemy_size, enemy_name)
 	return base.get("Stats", {})
 
+""" [[ Get Enemy Rewards ]] """
 func get_enemy_reward(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var stats = get_base_enemy(enemy_type, enemy_size, enemy_name)
 	return stats.get("Stats", {}).get("Rewards", {})

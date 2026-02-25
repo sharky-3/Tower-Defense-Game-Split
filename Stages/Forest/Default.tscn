@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://nbh0nuuxu0hr"]
+[gd_scene load_steps=19 format=3 uid="uid://nbh0nuuxu0hr"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Stages/StageScript.gd" id="1_d4gul"]
 [ext_resource type="PackedScene" uid="uid://cvq5oa37c1bkt" path="res://Entities/Items/Placeable/Towers/Default/DefaultTower.tscn" id="2_amb8m"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cpyqypt4q7pnd" path="res://Entities/Environment/Grass/grass.tscn" id="8_cg61v"]
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="8_ik1ra"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Entities/Player/Camera/PlayerCamera.tscn" id="9_skrqh"]
+[ext_resource type="AudioStream" uid="uid://qyei5iet5vx7" path="res://Assets/Audio/Paolo_Dollorenzo-Desert_Light_drones.mp3" id="10_bi7ie"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
 [ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Entities/Player/PlayerStatsScript.gd" id="11_ui4gc"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
@@ -295,3 +296,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_bi7ie")
+volume_db = -30.0
+autoplay = true
+parameters/looping = true

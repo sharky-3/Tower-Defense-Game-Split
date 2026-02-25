@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bsc038qvvrd4h"]
+[gd_scene load_steps=15 format=3 uid="uid://bsc038qvvrd4h"]
 
 [ext_resource type="Script" uid="uid://bd5u3fco5kbkc" path="res://Common/UI/Card/Card.gd" id="1_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
 [ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
+[ext_resource type="Texture2D" uid="uid://chma4hkavoqdw" path="res://Common/UI/Card/Texture/Gold.png" id="4_twk8o"]
 [ext_resource type="Texture2D" uid="uid://chuhsymkxr8bx" path="res://Common/UI/Card/Texture/Lvl.png" id="4_wd0qj"]
 [ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]
 [ext_resource type="Texture2D" uid="uid://fmpnevmgi1gs" path="res://Common/UI/Card/Texture/Time.png" id="6_twk8o"]
@@ -90,6 +91,27 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 mouse_force_pass_scroll_events = false
 
+[node name="Name" type="Label" parent="Stats"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 128.0
+offset_top = 26.0
+offset_right = -16.0
+offset_bottom = -498.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_vs11m")
+theme_override_font_sizes/font_size = 50
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Lvl" type="TextureRect" parent="Stats"]
 layout_mode = 0
 offset_left = -52.0
@@ -99,7 +121,7 @@ offset_bottom = 176.0
 texture = ExtResource("4_wd0qj")
 expand_mode = 1
 
-[node name="LvlValue" type="Label" parent="Stats/Lvl"]
+[node name="lvl_value" type="Label" parent="Stats/Lvl"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,35 +142,56 @@ text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="HBoxContainer" parent="Stats"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -225.0
-offset_top = -150.0
-offset_right = 225.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 10
-alignment = 1
-
-[node name="TimerIcon" type="TextureRect" parent="Stats/Timer"]
-layout_mode = 2
+[node name="Timer" type="TextureRect" parent="Stats"]
+layout_mode = 0
+offset_left = 333.0
+offset_top = 127.0
+offset_right = 533.0
+offset_bottom = 327.0
 texture = ExtResource("6_twk8o")
-expand_mode = 2
+expand_mode = 1
 
-[node name="TimerValue" type="Label" parent="Stats/Timer"]
-layout_mode = 2
+[node name="timer_value" type="Label" parent="Stats/Timer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 30
+theme_override_constants/outline_size = 20
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_vs11m")
 theme_override_font_sizes/font_size = 60
 text = "15s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Gold" type="TextureRect" parent="Stats"]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 271.0
+offset_right = 532.0
+offset_bottom = 471.0
+texture = ExtResource("4_twk8o")
+expand_mode = 1
+
+[node name="gold_value" type="Label" parent="Stats/Gold"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_vs11m")
+theme_override_font_sizes/font_size = 60
+text = "$100"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DestroyArea" type="Area2D" parent="."]

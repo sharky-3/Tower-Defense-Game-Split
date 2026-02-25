@@ -8,6 +8,7 @@ extends Control
 
 """ [[ Hand ]] """
 @onready var hand: Control = $Hand
+var DECK_DEFAULT_LOADOUT: Array = ["Basic", "Turret", "Cannon"]
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -16,7 +17,7 @@ extends Control
 """ [[ ============================================================ ]] """
 """ [[ Ready ]] """
 func _ready() -> void:
-	draw_card(2)
+	draw_card()
 
 """ [[ ============================================================ ]] """
 """ [[ Move Card ]] """
@@ -35,14 +36,42 @@ func move_card(card: Button, start_position: Vector2, target_position: Vector2, 
 	
 """ [[ ============================================================ ]] """
 """ [[ Create Deck ]] """
-func draw_card(amount: int) -> void:
-	for i in range(amount):
-		var card: Button = load("res://Common/UI/Card/Card.tscn").instantiate()
-		hand.add_child(card)
-		
-		card.pivot_offset = card.size / 2.0
-		card.set_meta("original_parent", hand)
+func draw_card() -> void:
+	var towers = Global.get_towers_stats()
+	var i = 1
 	
+	for t in towers:
+		# Each 't' is a dictionary with one key: the tower name
+		for tower_name in t.keys():
+			var tower_data = t[tower_name]
+			
+			# Load and instantiate the card scene
+			var card_scene: PackedScene = load("res://Common/UI/Card/Card.tscn")
+			var card_instance: Control = card_scene.instantiate()
+			hand.add_child(card_instance)
+			
+			# Set up the card using tower data
+			if card_instance.has_method("set_up_card"):
+				var cost = tower_data.get("Cost", 0)
+				
+				var stats = tower_data.get("Stats", {})
+				var damage = stats.get("Damage", 0)
+				var range = stats.get("Range", 0)
+				var attack_speed = stats.get("AttackSpeed", 0)
+				var can_hit_multiple = stats.get("CanHitMultipleEnemies", false)
+				
+				card_instance.set_up_card(i, attack_speed, tower_name, cost)
+			
+			# Pivot at center
+			if card_instance.has_method("size") and card_instance.size:
+				card_instance.pivot_offset = card_instance.size / 2.0
+			
+			# Store original parent for dragging
+			card_instance.set_meta("original_parent", hand)
+			
+			i += 1
+	
+	# Arrange all the cards in the hand
 	await arrange_hand()
 
 """ [[ Arrange Deck ]] """

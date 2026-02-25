@@ -9,6 +9,11 @@ extends Button
 """ [[ Card ]] """
 @onready var card_texture = $CardTexture
 
+@onready var tower_name: Label = $Stats/Name
+@onready var lvl_value: Label = $Stats/Lvl/lvl_value
+@onready var timer_value: Label = $Stats/Timer/timer_value
+@onready var gold_value: Label = $Stats/Gold/gold_value
+
 """ [[ Fake 3D ]] """
 @export var angle_x_max: float = 15
 @export var angle_y_max: float = 15
@@ -92,6 +97,19 @@ func card_is_focused(value: bool):
 	else: 
 		z_index = 0
 		await tween_anim(1)
+
+""" [[ ============================================================ ]] """
+""" [[ Set Up Card ]] """
+func set_up_card(
+	lvl: int = 1, 
+	timer: float = 1.5,
+	towerName: String = "Name",
+	gold: int = 100
+):
+	tower_name.text = towerName
+	lvl_value.text = str(lvl)
+	timer_value.text = str(timer)
+	gold_value.text = "$%d" % gold
 
 """ [[ ============================================================ ]] """
 """ [[ Tween ]] """
