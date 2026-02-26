@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://nbh0nuuxu0hr"]
+[gd_scene format=3 uid="uid://nbh0nuuxu0hr"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Stages/StageScript.gd" id="1_d4gul"]
 [ext_resource type="PackedScene" uid="uid://cvq5oa37c1bkt" path="res://Entities/Items/Placeable/Towers/Default/DefaultTower.tscn" id="2_amb8m"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cpyqypt4q7pnd" path="res://Entities/Environment/Grass/grass.tscn" id="8_cg61v"]
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="8_ik1ra"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Entities/Player/Camera/PlayerCamera.tscn" id="9_skrqh"]
-[ext_resource type="AudioStream" uid="uid://qyei5iet5vx7" path="res://Assets/Audio/Paolo_Dollorenzo-Desert_Light_drones.mp3" id="10_bi7ie"]
+[ext_resource type="AudioStream" uid="uid://qyei5iet5vx7" path="res://assets/audio/Paolo_Dollorenzo-Desert_Light_drones.mp3" id="10_bi7ie"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
 [ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Entities/Player/PlayerStatsScript.gd" id="11_ui4gc"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
@@ -29,13 +29,13 @@ shader_parameter/outline_mask = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fwj"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=132878859]
 script = ExtResource("1_d4gul")
 enemies_per_wave = Array[int]([10, 15, 20, 30, 45])
 max_distance = 50.0
 min_distance = 25.0
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1005113862]
 texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,210 +45,210 @@ grow_vertical = 2
 stretch = true
 mouse_target = true
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=742516504]
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Tower" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_amb8m")]
+[node name="Tower" parent="SubViewportContainer/SubViewport" unique_id=635202682 instance=ExtResource("2_amb8m")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 7.1193852, 1.7877796, 3.197247)
 
-[node name="Environment" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="Environment" type="Node3D" parent="SubViewportContainer/SubViewport" unique_id=842477172]
 
-[node name="EnvironmentLight" parent="SubViewportContainer/SubViewport/Environment" instance=ExtResource("2_cg61v")]
+[node name="EnvironmentLight" parent="SubViewportContainer/SubViewport/Environment" unique_id=701144212 instance=ExtResource("2_cg61v")]
 
-[node name="Grass" type="Node3D" parent="SubViewportContainer/SubViewport/Environment"]
+[node name="Grass" type="Node3D" parent="SubViewportContainer/SubViewport/Environment" unique_id=1904369749]
 
-[node name="Grass" parent="SubViewportContainer/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
+[node name="Grass" parent="SubViewportContainer/SubViewport/Environment/Grass" unique_id=224822707 instance=ExtResource("8_cg61v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
 
-[node name="Grass2" parent="SubViewportContainer/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
+[node name="Grass2" parent="SubViewportContainer/SubViewport/Environment/Grass" unique_id=1366883277 instance=ExtResource("8_cg61v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
 
-[node name="Grass3" parent="SubViewportContainer/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
+[node name="Grass3" parent="SubViewportContainer/SubViewport/Environment/Grass" unique_id=1242164877 instance=ExtResource("8_cg61v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
 
-[node name="Grass4" parent="SubViewportContainer/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
+[node name="Grass4" parent="SubViewportContainer/SubViewport/Environment/Grass" unique_id=926161180 instance=ExtResource("8_cg61v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
 
-[node name="Flowers" type="Node3D" parent="SubViewportContainer/SubViewport/Environment"]
+[node name="Flowers" type="Node3D" parent="SubViewportContainer/SubViewport/Environment" unique_id=1555644213]
 transform = Transform3D(0.9868275, 0, -0.16177607, 0, 1, 0, 0.16177607, 0, 0.9868275, 0, 0, 0)
 
-[node name="Flower" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1913738563 instance=ExtResource("4_d4gul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1874905, 0, -19.583303)
 
-[node name="Flower2" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower2" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=2082955262 instance=ExtResource("4_d4gul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3411503, 0, 13.4779)
 
-[node name="Flower3" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower3" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1576100375 instance=ExtResource("4_d4gul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.515423, 0, 0.8275242)
 
-[node name="Flower4" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower4" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1363863862 instance=ExtResource("4_d4gul")]
 transform = Transform3D(0.59587455, 0, -0.8030775, 0, 1, 0, 0.8030775, 0, 0.59587455, -16.79652, 0, -25.584759)
 
-[node name="Flower5" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower5" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1751004382 instance=ExtResource("4_d4gul")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.61291, 0, -42.100094)
 
-[node name="Flower6" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower6" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1936526771 instance=ExtResource("4_d4gul")]
 transform = Transform3D(0.79986274, 0, 0.60018295, 0, 1, 0, -0.60018295, 0, 0.79986274, 32.535645, 0, 27.031414)
 
-[node name="Flower7" parent="SubViewportContainer/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
+[node name="Flower7" parent="SubViewportContainer/SubViewport/Environment/Flowers" unique_id=1595798334 instance=ExtResource("4_d4gul")]
 transform = Transform3D(0.33836022, 0, 0.9410167, 0, 1, 0, -0.9410167, 0, 0.33836022, -33.02269, 0, 27.031414)
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport/Environment"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="SubViewportContainer/SubViewport/Environment" unique_id=520154011]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.526381, 0)
 navigation_mesh = SubResource("NavigationMesh_gsfny")
 
-[node name="Ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D"]
+[node name="Ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D" unique_id=404143828]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 mesh = SubResource("BoxMesh_jhds8")
 skeleton = NodePath("../../../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_o35ae")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Ground"]
+[node name="RigidBody3D" type="RigidBody3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Ground" unique_id=763901595]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Ground/RigidBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Ground/RigidBody3D" unique_id=113157697]
 shape = SubResource("BoxShape3D_80fwj")
 
-[node name="Trees" type="Node3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D"]
+[node name="Trees" type="Node3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D" unique_id=374257090]
 transform = Transform3D(0.9913122, 0, -0.13152975, 0, 1, 0, 0.13152975, 0, 0.9913122, 0, 0.526381, 0)
 
-[node name="Tree" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1769536090 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.165327, 0, -34.56225)
 
-[node name="Tree2" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree2" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=474316037 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.74999994, 0, -1.2990382, 0, 1.5, 0, 1.2990382, 0, 0.74999994, 41.954964, 0, -17.67115)
 
-[node name="Tree3" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree3" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1051506170 instance=ExtResource("6_tf230")]
 transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -1.7350101, 0, 42.33092)
 
-[node name="Tree4" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree4" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=301042022 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.84999996, 0, -1.4722433, 0, 1.7, 0, 1.4722433, 0, 0.84999996, 44.675705, 0, 7.9818964)
 
-[node name="Tree5" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree5" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1196519107 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.299038, 0, 0.75, 0, 1.5, 0, -0.75, 0, 1.299038, 31.098108, 0, 17.893478)
 
-[node name="Tree6" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree6" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=913304849 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.0606601, 0, 1.0606601, 0, 1.5, 0, -1.0606601, 0, 1.0606601, 11.144161, 0, -5.0069294)
 
-[node name="Tree7" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree7" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1974071095 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.4722432, 0, 0.85, 0, 1.7, 0, -0.85, 0, 1.4722432, 13.395106, 0, -22.129253)
 
-[node name="Tree8" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree8" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=702950668 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.51763815, 0, -1.9318516, 0, 2, 0, 1.9318516, 0, 0.51763815, -38.961525, 0, -31.432753)
 
-[node name="Tree9" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree9" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1247405375 instance=ExtResource("6_tf230")]
 transform = Transform3D(-0.38822857, 0, -1.4488888, 0, 1.5, 0, 1.4488888, 0, -0.38822857, -37.1512, 0, 38.725464)
 
-[node name="Tree10" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree10" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1992957927 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.74999994, 0, 1.2990382, 0, 1.5, 0, -1.2990382, 0, 0.74999994, -15.845476, 0, 9.740686)
 
-[node name="Tree11" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree11" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1180894792 instance=ExtResource("6_tf230")]
 transform = Transform3D(-7.430936e-08, 0, -1.7, 0, 1.7, 0, 1.7, 0, -7.430936e-08, -30.711395, 0, 11.953223)
 
-[node name="Tree12" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree12" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=233625318 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.0606601, 0, 1.0606601, 0, 1.5, 0, -1.0606601, 0, 1.0606601, -20.798311, 0, 22.117947)
 
-[node name="Tree13" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree13" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1006129834 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.7, 0, 6.755192e-08, 0, 1.7, 0, -6.755192e-08, 0, 1.7, -38.332935, 0, -3.5501041)
 
-[node name="Tree14" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree14" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1712830066 instance=ExtResource("6_tf230")]
 transform = Transform3D(-0.7500001, 0, 1.299038, 0, 1.5, 0, -1.299038, 0, -0.7500001, -17.851692, 0, -14.143847)
 
-[node name="Tree15" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree15" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=764078446 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -10.129915, 0, -1.1197739)
 
-[node name="Tree16" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
+[node name="Tree16" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1852414222 instance=ExtResource("6_qv1uj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2974257, 0, 8.324589)
 
-[node name="Tree17" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree17" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=755493351 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 17.059082, 9.536743e-07, 11.827114)
 
-[node name="Tree18" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
+[node name="Tree18" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=723780653 instance=ExtResource("6_qv1uj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.013177, 0, 26.79803)
 
-[node name="Tree19" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
+[node name="Tree19" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=394088877 instance=ExtResource("6_qv1uj")]
 transform = Transform3D(0.68541175, 0, -0.7281557, 0, 1, 0, 0.7281557, 0, 0.68541175, 32.196983, 0, 40.136894)
 
-[node name="Tree20" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree20" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1256566796 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.4548105, 0, 0.87950355, 0, 1.7, 0, -0.87950355, 0, 1.4548105, 9, 0, 33.46223)
 
-[node name="Tree21" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree21" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=1885143802 instance=ExtResource("6_tf230")]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 31, 0, 2)
 
-[node name="Tree22" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
+[node name="Tree22" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=627313335 instance=ExtResource("6_qv1uj")]
 transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 28, 0, -16)
 
-[node name="Tree23" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_qv1uj")]
+[node name="Tree23" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=944922 instance=ExtResource("6_qv1uj")]
 transform = Transform3D(1.0393147, 0, 1.3452982, 0, 1.6999999, 0, -1.3452982, 0, 1.0393147, 9.939088, 0, -43.697144)
 
-[node name="Tree24" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree24" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=946772120 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.6521515, 0, -1.569936, 0, 1.7, 0, 1.569936, 0, 0.6521515, 38.09349, 0, -47.422424)
 
-[node name="Tree25" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" instance=ExtResource("6_tf230")]
+[node name="Tree25" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Trees" unique_id=502144914 instance=ExtResource("6_tf230")]
 transform = Transform3D(0.572622, 0, 1.3863999, 0, 1.5, 0, -1.3863999, 0, 0.572622, 31.741352, 0, -34.47444)
 
-[node name="Rocks" type="Node3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D"]
+[node name="Rocks" type="Node3D" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D" unique_id=1222984465]
 transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0.526381, 0)
 
-[node name="Rock" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1428861873 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.7811719, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.7811719, 7.8109694, 9.536743e-07, 9.628949)
 
-[node name="Rock2" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock2" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1654943348 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.50683135, 0, 0.8620452, 0, 1, 0, -0.8620452, 0, 0.50683135, 9.036694, 9.536743e-07, -1.3849134)
 
-[node name="Rock3" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock3" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=466481579 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
 
-[node name="Rock4" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock4" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1976717604 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
 
-[node name="Rock5" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock5" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1599081522 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
 
-[node name="Rock6" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock6" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1483717536 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
 
-[node name="Rock7" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock7" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=996851028 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
 
-[node name="Rock8" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock8" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=759867217 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
 
-[node name="Rock9" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock9" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=957658092 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
 
-[node name="Rock10" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock10" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=744834801 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
 
-[node name="Rock11" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock11" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=601620151 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
 
-[node name="Rock12" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock12" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=316531477 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
 
-[node name="Rock13" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock13" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1838356054 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
 
-[node name="Rock14" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock14" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=1412943705 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
 
-[node name="Rock15" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
+[node name="Rock15" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" unique_id=2125222564 instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
 
-[node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("9_skrqh")]
+[node name="Player" parent="SubViewportContainer/SubViewport" unique_id=1099324471 instance=ExtResource("9_skrqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
 
-[node name="Map" type="Node" parent="SubViewportContainer/SubViewport"]
+[node name="Map" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1567051910]
 
-[node name="spawn_enemy_position" type="Node3D" parent="SubViewportContainer/SubViewport/Map"]
+[node name="spawn_enemy_position" type="Node3D" parent="SubViewportContainer/SubViewport/Map" unique_id=133153791]
 transform = Transform3D(0.99997103, 0, 0.007609562, 0, 1, 0, -0.007609562, 0, 0.99997103, 0, 2, 0)
 
-[node name="PlayerTower" parent="SubViewportContainer/SubViewport/Map" instance=ExtResource("10_sal2d")]
+[node name="PlayerTower" parent="SubViewportContainer/SubViewport/Map" unique_id=1825449119 instance=ExtResource("10_sal2d")]
 
-[node name="User Interface" type="Node" parent="SubViewportContainer/SubViewport"]
+[node name="User Interface" type="Node" parent="SubViewportContainer/SubViewport" unique_id=1062443630]
 
-[node name="Stats" type="Control" parent="SubViewportContainer/SubViewport/User Interface"]
+[node name="Stats" type="Control" parent="SubViewportContainer/SubViewport/User Interface" unique_id=1092981148]
 visible = false
 layout_mode = 3
 anchors_preset = 5
@@ -262,7 +262,7 @@ size_flags_vertical = 0
 script = ExtResource("11_ui4gc")
 metadata/_edit_use_anchors_ = true
 
-[node name="Gold" type="Label" parent="SubViewportContainer/SubViewport/User Interface/Stats"]
+[node name="Gold" type="Label" parent="SubViewportContainer/SubViewport/User Interface/Stats" unique_id=517290534]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -276,7 +276,7 @@ pivot_offset = Vector2(30, 0)
 text = "Gold: 0"
 metadata/_edit_use_anchors_ = true
 
-[node name="Deck" type="Control" parent="SubViewportContainer/SubViewport/User Interface"]
+[node name="Deck" type="Control" parent="SubViewportContainer/SubViewport/User Interface" unique_id=373161434]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -286,18 +286,14 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("12_yg8k5")
+spacing = 150.0
 
-[node name="Hand" type="Control" parent="SubViewportContainer/SubViewport/User Interface/Deck"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+[node name="Hand" type="Control" parent="SubViewportContainer/SubViewport/User Interface/Deck" unique_id=674452700]
+anchors_preset = 0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=835942944]
 stream = ExtResource("10_bi7ie")
 volume_db = -30.0
 autoplay = true

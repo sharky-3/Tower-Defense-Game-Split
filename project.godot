@@ -8,11 +8,15 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Split"
 run/main_scene="uid://nbh0nuuxu0hr"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -25,7 +29,8 @@ GameData="*res://Scripts/Data/GameData.gd"
 
 [display]
 
-window/size/mode=3
+window/size/mode=4
+window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://3mduw6x4yo1v"
 
 [global_group]

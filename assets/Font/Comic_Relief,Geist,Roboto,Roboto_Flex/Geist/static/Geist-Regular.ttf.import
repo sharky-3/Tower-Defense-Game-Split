@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dpmg0ts32inlj"
-path="res://.godot/imported/Geist-Regular.ttf-a6681368046dc2b68b4c42871142d92a.fontdata"
+path="res://.godot/imported/Geist-Regular.ttf-d7b3f4b1c0c6a8e52df69609562f9ee9.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/static/Geist-Regular.ttf"
-dest_files=["res://.godot/imported/Geist-Regular.ttf-a6681368046dc2b68b4c42871142d92a.fontdata"]
+source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/static/Geist-Regular.ttf"
+dest_files=["res://.godot/imported/Geist-Regular.ttf-d7b3f4b1c0c6a8e52df69609562f9ee9.fontdata"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://couuj18vx8kbg"
-path="res://.godot/imported/ComicRelief-Regular.ttf-fd6a10163f5de45feb98b99620e68a82.fontdata"
+path="res://.godot/imported/ComicRelief-Regular.ttf-259b8d9ae190dc70b5815cf9356167cd.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Regular.ttf"
-dest_files=["res://.godot/imported/ComicRelief-Regular.ttf-fd6a10163f5de45feb98b99620e68a82.fontdata"]
+source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Regular.ttf"
+dest_files=["res://.godot/imported/ComicRelief-Regular.ttf-259b8d9ae190dc70b5815cf9356167cd.fontdata"]
 
 [params]
 

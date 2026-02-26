@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cx4s76f181non"
-path="res://.godot/imported/Roboto-Bold.ttf-41ac12c40c7ef5820016e7b131cf60fd.fontdata"
+path="res://.godot/imported/Roboto-Bold.ttf-7a87c825fde2135c6de62df36224a861.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto-Bold.ttf"
-dest_files=["res://.godot/imported/Roboto-Bold.ttf-41ac12c40c7ef5820016e7b131cf60fd.fontdata"]
+source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto-Bold.ttf"
+dest_files=["res://.godot/imported/Roboto-Bold.ttf-7a87c825fde2135c6de62df36224a861.fontdata"]
 
 [params]
 

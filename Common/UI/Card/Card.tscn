@@ -1,11 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bsc038qvvrd4h"]
+[gd_scene format=3 uid="uid://bsc038qvvrd4h"]
 
 [ext_resource type="Script" uid="uid://bd5u3fco5kbkc" path="res://Common/UI/Card/Card.gd" id="1_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
 [ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
 [ext_resource type="Texture2D" uid="uid://chma4hkavoqdw" path="res://Common/UI/Card/Texture/Gold.png" id="4_twk8o"]
 [ext_resource type="Texture2D" uid="uid://chuhsymkxr8bx" path="res://Common/UI/Card/Texture/Lvl.png" id="4_wd0qj"]
-[ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]
+[ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]
 [ext_resource type="Texture2D" uid="uid://fmpnevmgi1gs" path="res://Common/UI/Card/Texture/Time.png" id="6_twk8o"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m2l4v"]
@@ -21,7 +21,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q2jb2"]
 resource_local_to_scene = true
 shader = ExtResource("3_yowvl")
-shader_parameter/rect_size = Vector2(450, 630)
+shader_parameter/rect_size = Vector2(150, 200)
 shader_parameter/fov = 90.0
 shader_parameter/cull_back = true
 shader_parameter/y_rot = 0.0
@@ -31,20 +31,20 @@ shader_parameter/inset = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wd0qj"]
 size = Vector2(420, 590)
 
-[node name="Card" type="Button"]
-custom_minimum_size = Vector2(450, 630)
+[node name="Card" type="Button" unique_id=1751632203]
+custom_minimum_size = Vector2(150, 200)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -225.0
-offset_top = -315.0
-offset_right = 225.0
-offset_bottom = 315.0
+offset_left = -75.0
+offset_top = -100.0
+offset_right = 75.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(225, 0)
+pivot_offset = Vector2(75, 0)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxEmpty_m2l4v")
@@ -54,21 +54,21 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_twfbq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h2k72")
 script = ExtResource("1_q2jb2")
 
-[node name="Shadow" type="TextureRect" parent="."]
+[node name="Shadow" type="TextureRect" parent="." unique_id=187748668]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(1, 1, 1, 0.16862746)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 25.0
-offset_bottom = 25.0
+offset_top = 10.0
+offset_bottom = 10.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_yowvl")
 expand_mode = 1
 
-[node name="CardTexture" type="TextureRect" parent="."]
+[node name="CardTexture" type="TextureRect" parent="." unique_id=362592195]
 material = SubResource("ShaderMaterial_q2jb2")
 clip_contents = true
 layout_mode = 1
@@ -80,7 +80,7 @@ grow_vertical = 2
 texture = ExtResource("2_yowvl")
 expand_mode = 1
 
-[node name="Stats" type="Control" parent="."]
+[node name="Stats" type="Control" parent="." unique_id=1901895749]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -91,67 +91,69 @@ mouse_filter = 2
 mouse_behavior_recursive = 1
 mouse_force_pass_scroll_events = false
 
-[node name="Name" type="Label" parent="Stats"]
+[node name="Name" type="Label" parent="Stats" unique_id=1584427593]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 128.0
-offset_top = 26.0
-offset_right = -16.0
-offset_bottom = -498.0
+offset_left = 43.0
+offset_top = 9.0
+offset_right = -6.0
+offset_bottom = -155.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_vs11m")
-theme_override_font_sizes/font_size = 50
+theme_override_font_sizes/font_size = 20
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Lvl" type="TextureRect" parent="Stats"]
+[node name="Lvl" type="TextureRect" parent="Stats" unique_id=1857373849]
 layout_mode = 0
-offset_left = -52.0
-offset_top = -59.0
-offset_right = 157.0
-offset_bottom = 176.0
+offset_left = -24.0
+offset_top = -25.0
+offset_right = 55.0
+offset_bottom = 63.82775
 texture = ExtResource("4_wd0qj")
 expand_mode = 1
 
-[node name="lvl_value" type="Label" parent="Stats/Lvl"]
+[node name="lvl_value" type="Label" parent="Stats/Lvl" unique_id=1993304411]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 26.0
-offset_top = 22.0
-offset_right = -25.0
-offset_bottom = -38.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.5
+offset_top = -24.5
+offset_right = 10.5
+offset_bottom = 24.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_vs11m")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 35
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Timer" type="TextureRect" parent="Stats"]
+[node name="Timer" type="TextureRect" parent="Stats" unique_id=1461251560]
 layout_mode = 0
-offset_left = 333.0
-offset_top = 127.0
-offset_right = 533.0
-offset_bottom = 327.0
+offset_left = 112.0
+offset_top = 54.0
+offset_right = 172.0
+offset_bottom = 114.0
 texture = ExtResource("6_twk8o")
 expand_mode = 1
 
-[node name="timer_value" type="Label" parent="Stats/Timer"]
+[node name="timer_value" type="Label" parent="Stats/Timer" unique_id=1865544293]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -160,24 +162,24 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_vs11m")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 20
 text = "15s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Gold" type="TextureRect" parent="Stats"]
+[node name="Gold" type="TextureRect" parent="Stats" unique_id=1862050730]
 layout_mode = 0
-offset_left = 332.0
-offset_top = 271.0
-offset_right = 532.0
-offset_bottom = 471.0
+offset_left = 111.0
+offset_top = 98.0
+offset_right = 171.0
+offset_bottom = 158.0
 texture = ExtResource("4_twk8o")
 expand_mode = 1
 
-[node name="gold_value" type="Label" parent="Stats/Gold"]
+[node name="gold_value" type="Label" parent="Stats/Gold" unique_id=1095613590]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,18 +188,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.28045467, 0.2804547, 0.28045467, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 20
+theme_override_constants/outline_size = 10
 theme_override_constants/shadow_outline_size = 0
 theme_override_fonts/font = ExtResource("5_vs11m")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 20
 text = "$100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DestroyArea" type="Area2D" parent="."]
+[node name="DestroyArea" type="Area2D" parent="." unique_id=1132053388]
 visible = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea" unique_id=50892291]
 position = Vector2(220, 310)
 shape = SubResource("RectangleShape2D_wd0qj")
 disabled = true

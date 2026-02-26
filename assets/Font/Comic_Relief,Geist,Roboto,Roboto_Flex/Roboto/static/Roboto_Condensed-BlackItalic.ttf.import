@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dyvemjpmkgaah"
-path="res://.godot/imported/Roboto_Condensed-BlackItalic.ttf-4ee1762d9215d4eef4fed5e0ea2e4956.fontdata"
+path="res://.godot/imported/Roboto_Condensed-BlackItalic.ttf-78e674c339671bb72beb15d5ee0d9044.fontdata"
 
 [deps]
 
-source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_Condensed-BlackItalic.ttf"
-dest_files=["res://.godot/imported/Roboto_Condensed-BlackItalic.ttf-4ee1762d9215d4eef4fed5e0ea2e4956.fontdata"]
+source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_Condensed-BlackItalic.ttf"
+dest_files=["res://.godot/imported/Roboto_Condensed-BlackItalic.ttf-78e674c339671bb72beb15d5ee0d9044.fontdata"]
 
 [params]
 

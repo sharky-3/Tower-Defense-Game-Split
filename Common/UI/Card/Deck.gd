@@ -6,9 +6,11 @@ extends Control
 	// VARIABLES
 ]] """
 
+@export var spacing: float = 350
+@export var bottom_margin: float = 25
+
 """ [[ Hand ]] """
 @onready var hand: Control = $Hand
-var DECK_DEFAULT_LOADOUT: Array = ["Basic", "Turret", "Cannon"]
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -43,6 +45,7 @@ func draw_card() -> void:
 	for t in towers:
 		for tower_name in t.keys():
 			var tower_data = t[tower_name]
+			
 			var card_scene: PackedScene = load("res://Common/UI/Card/Card.tscn")
 			var card_instance: Control = card_scene.instantiate()
 			hand.add_child(card_instance)
@@ -66,17 +69,15 @@ func draw_card() -> void:
 
 """ [[ Arrange Deck ]] """
 func arrange_hand() -> void:
-	var spacing: float = 350
 	var count: int = hand.get_child_count()
 	
-	if count == 0:
-		return
+	if count == 0: return
 	
 	var card_size: Vector2 = hand.get_child(0).size
 	var total_width: float = spacing * (count - 1)
 	var start_x: float = -total_width / 2.0 - card_size.x / 2.0
 	
-	var bottom_y: float = get_viewport_rect().size.y - hand.global_position.y - card_size.y - 100.0
+	var bottom_y: float = get_viewport_rect().size.y - hand.global_position.y - card_size.y - bottom_margin
 	
 	var tween := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 	
