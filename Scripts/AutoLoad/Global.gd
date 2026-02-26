@@ -40,7 +40,7 @@ var GAME_DATA = {
 	],
 	
 	"Towers": [
-		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 100, "Stats": { "Range": 50, "Damage": 10, "AttackSpeed": 1.0, "CanHitMultipleEnemies": false }, 
+		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 100, "Stats": { "Range": 5, "Damage": 10, "AttackSpeed": 1.0, "CanHitMultipleEnemies": false }, 
 			 "Upgrades": [
 				{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 150, "Stats": { "Range": 6, "Damage": 10 } } },
 				{ "Upgrade_2": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } }

@@ -34,12 +34,12 @@ func _mouse_entered_area():
 	is_mouse_inside = true
 func _mouse_exited_area():
 	is_mouse_inside = false
-
-func _unhandled_input(event):
-	for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
-		if is_instance_of(event, mouse_event):
-			return
-	node_viewport.push_input(event)
+	
+#func _unhandled_input(event):
+	#for mouse_event in [InputEventMouseButton, InputEventMouseMotion, InputEventScreenDrag, InputEventScreenTouch]:
+		#if is_instance_of(event, mouse_event):
+			#return
+	#node_viewport.push_input(event)
 
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	var quad_mesh_size = node_quad.mesh.size

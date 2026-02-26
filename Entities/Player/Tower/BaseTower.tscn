@@ -52,7 +52,6 @@ _data = {
 [node name="PlayerTower" type="Node3D" groups=["PlayerTower"]]
 transform = Transform3D(1.5, 0, 0, 0, 2.25, 0, 0, 0, 1.5, 0, 0, 0)
 script = ExtResource("1_v3u6p")
-tower_healt = 100.0
 max_health = 100.0
 
 [node name="PlayerTower" type="MeshInstance3D" parent="."]
