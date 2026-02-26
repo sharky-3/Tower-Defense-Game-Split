@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://bi7psknl1naq4"
-path="res://.godot/imported/place_tower.mp3-b6fc1194917329ca95d86f63e3c90e1e.mp3str"
+path="res://.godot/imported/place_tower.mp3-6aaa335fe26e38dc20bdb3a01434916a.mp3str"
 
 [deps]
 
-source_file="res://assets/audio/place_tower.mp3"
-dest_files=["res://.godot/imported/place_tower.mp3-b6fc1194917329ca95d86f63e3c90e1e.mp3str"]
+source_file="res://Assets/Audio/place_tower.mp3"
+dest_files=["res://.godot/imported/place_tower.mp3-6aaa335fe26e38dc20bdb3a01434916a.mp3str"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c6vjndqgegsu4"
-path="res://.godot/imported/Geist-VariableFont_wght.ttf-fa876fdbe2949d0a3b5ce00ecd361e9d.fontdata"
+path="res://.godot/imported/Geist-VariableFont_wght.ttf-4f4d9dfd574d81ebb9251a534d5bf48b.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/Geist-VariableFont_wght.ttf"
-dest_files=["res://.godot/imported/Geist-VariableFont_wght.ttf-fa876fdbe2949d0a3b5ce00ecd361e9d.fontdata"]
+source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/Geist-VariableFont_wght.ttf"
+dest_files=["res://.godot/imported/Geist-VariableFont_wght.ttf-4f4d9dfd574d81ebb9251a534d5bf48b.fontdata"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://lenqowkcp1yg"
-path="res://.godot/imported/Roboto_Condensed-ExtraLight.ttf-8d8d78503c5bd32977cc04af4dd5e2e0.fontdata"
+path="res://.godot/imported/Roboto_Condensed-ExtraLight.ttf-161cdc64cc825fcfaef2acf249ae91b6.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_Condensed-ExtraLight.ttf"
-dest_files=["res://.godot/imported/Roboto_Condensed-ExtraLight.ttf-8d8d78503c5bd32977cc04af4dd5e2e0.fontdata"]
+source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_Condensed-ExtraLight.ttf"
+dest_files=["res://.godot/imported/Roboto_Condensed-ExtraLight.ttf-161cdc64cc825fcfaef2acf249ae91b6.fontdata"]
 
 [params]
 

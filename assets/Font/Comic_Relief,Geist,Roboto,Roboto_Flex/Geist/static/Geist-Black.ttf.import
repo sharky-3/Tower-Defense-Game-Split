@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://n6l1nuymac11"
-path="res://.godot/imported/Geist-Black.ttf-0a1856b2da69f90a5d4c644514a30f76.fontdata"
+path="res://.godot/imported/Geist-Black.ttf-45df70ca3ffacf3b34a505b1b5144eae.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/static/Geist-Black.ttf"
-dest_files=["res://.godot/imported/Geist-Black.ttf-0a1856b2da69f90a5d4c644514a30f76.fontdata"]
+source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Geist/static/Geist-Black.ttf"
+dest_files=["res://.godot/imported/Geist-Black.ttf-45df70ca3ffacf3b34a505b1b5144eae.fontdata"]
 
 [params]
 

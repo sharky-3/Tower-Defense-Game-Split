@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://vkxidp1c0seu"
-path="res://.godot/imported/Roboto_SemiCondensed-ExtraLightItalic.ttf-a4404dab767e04d00251474ab050b076.fontdata"
+path="res://.godot/imported/Roboto_SemiCondensed-ExtraLightItalic.ttf-be88cb7cab6c759ee5baf24b7c9267fe.fontdata"
 
 [deps]
 
-source_file="res://assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_SemiCondensed-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/Roboto_SemiCondensed-ExtraLightItalic.ttf-a4404dab767e04d00251474ab050b076.fontdata"]
+source_file="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Roboto/static/Roboto_SemiCondensed-ExtraLightItalic.ttf"
+dest_files=["res://.godot/imported/Roboto_SemiCondensed-ExtraLightItalic.ttf-be88cb7cab6c759ee5baf24b7c9267fe.fontdata"]
 
 [params]
 
