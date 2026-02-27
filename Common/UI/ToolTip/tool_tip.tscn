@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://xeyl6w62dtwx"]
 
-[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/Systems/UI/3D_GUI.gd" id="1_1wtfk"]
-[ext_resource type="Texture2D" uid="uid://idalc7w0g5ve" path="res://Assets/Icon/ToolTip.png" id="2_4cq8h"]
+[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/Systems/UI/3D_GUI.gd" id="1_84jmj"]
+[ext_resource type="Texture2D" uid="uid://c4ru2aeos3t1r" path="res://Common/UI/ToolTip/Texture/Background.png" id="2_4ncvb"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1wtfk"]
-size = Vector2(10, 4)
+size = Vector2(6.5, 4)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4cq8h"]
 viewport_path = NodePath("SubViewport")
@@ -20,9 +20,10 @@ billboard_mode = 1
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1wtfk"]
 
 [node name="ToolTip" type="Node3D"]
-script = ExtResource("1_1wtfk")
+script = ExtResource("1_84jmj")
 
 [node name="Quad" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("QuadMesh_1wtfk")
 surface_material_override/0 = SubResource("StandardMaterial3D_psudd")
 
@@ -33,7 +34,7 @@ shape = SubResource("ConcavePolygonShape3D_1wtfk")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(1460, 512)
+size = Vector2i(600, 400)
 
 [node name="TextureRect" type="TextureRect" parent="SubViewport"]
 show_behind_parent = true
@@ -42,5 +43,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4cq8h")
+texture = ExtResource("2_4ncvb")
 expand_mode = 3

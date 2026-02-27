@@ -195,6 +195,7 @@ transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.781172
 
 [node name="Rock2" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
 transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
+visible = false
 
 [node name="Rock3" parent="SubViewportContainer/SubViewport/Environment/NavigationRegion3D/Rocks" instance=ExtResource("7_e6oa1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
