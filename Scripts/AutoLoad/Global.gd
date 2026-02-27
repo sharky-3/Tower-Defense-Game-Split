@@ -2,11 +2,8 @@
 extends Node
 """ [[ ============================================================ ]] """
 
-""" [[ ============================================================
-	// VARIABLES
-]] """
-
-var tower_name = "Basic"
+""" [[ Stats ]] """
+var tower_name: String = "Basic"
 var IS_DRAGGING_CARD: bool = false
 
 """ [[ Game Data ]] """
@@ -68,17 +65,17 @@ var GAME_DATA = {
 	"Enemy": [
 		{ "Goblins": [
 			{ "Normal": [
-				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 2, "Speed": 1.0, "Health": 5, "Attack_Damage": 6, "Rewards": { "Gold": 3, "Exp": 2 } } } },
-				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 2, "Speed": 1.1, "Health": 5, "Attack_Damage": 7, "Rewards": { "Gold": 4, "Exp": 3 } } } },
-				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 2, "Speed": 1.2, "Health": 5, "Attack_Damage": 8, "Rewards": { "Gold": 5, "Exp": 4 } } } },
-				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 2, "Speed": 1.3, "Health": 5, "Attack_Damage": 9, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 3, "Speed": 1.0, "Health": 5, "Attack_Damage": 6, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 3, "Speed": 1.1, "Health": 5, "Attack_Damage": 7, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 3, "Speed": 1.2, "Health": 5, "Attack_Damage": 8, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 3, "Speed": 1.3, "Health": 5, "Attack_Damage": 9, "Rewards": { "Gold": 6, "Exp": 5 } } } }
 			] },
 			
 			{ "Giants": [
-				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 3, "Speed": 2.3, "Health": 24, "Attack_Damage": 24, "Rewards": { "Gold": 3, "Exp": 2 } } } },
-				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 3, "Speed": 2.4, "Health": 28, "Attack_Damage": 28, "Rewards": { "Gold": 4, "Exp": 3 } } } },
-				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 3, "Speed": 2.5, "Health": 32, "Attack_Damage": 32, "Rewards": { "Gold": 5, "Exp": 4 } } } },
-				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 3, "Speed": 2.6, "Health": 36, "Attack_Damage": 36, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 4, "Speed": 2.3, "Health": 24, "Attack_Damage": 24, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 4, "Speed": 2.4, "Health": 28, "Attack_Damage": 28, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 4, "Speed": 2.5, "Health": 32, "Attack_Damage": 32, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 4, "Speed": 2.6, "Health": 36, "Attack_Damage": 36, "Rewards": { "Gold": 6, "Exp": 5 } } } }
 			] }
 		] },
 

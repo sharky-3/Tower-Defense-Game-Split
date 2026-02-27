@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qpx5ico661eo"]
 
-[ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Entities/Attacks/EnemyScript.gd" id="1_sdh2x"]
+[ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Entities/Attacks/Enemy.gd" id="1_sdh2x"]
 [ext_resource type="Texture2D" uid="uid://bcs0cxmjcsq8i" path="res://Entities/Attacks/Small/Texture/Pallet.png" id="2_6ecjg"]
 [ext_resource type="ArrayMesh" uid="uid://bnc5o7d66ecl2" path="res://Entities/Attacks/Small/Goblin/Mesh/Goblin1.obj" id="3_f31sj"]
 
@@ -50,11 +50,7 @@ _data = {
 [node name="Enemy" type="Node3D"]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_sdh2x")
-move_speed = null
-enemy_health = null
-attack_damage = null
-reward_gold = null
-reward_exp = null
+character_scale = 1.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.5, 0)
@@ -63,7 +59,7 @@ material_override = SubResource("StandardMaterial3D_nraa5")
 mesh = ExtResource("3_f31sj")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2.5, 0)
+transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 0, 2.5, 0)
 collision_layer = 4
 collision_mask = 4
 freeze = true
@@ -78,3 +74,5 @@ shape = SubResource("ConvexPolygonShape3D_sdh2x")
 libraries = {
 &"": SubResource("AnimationLibrary_jgk6k")
 }
+
+[connection signal="mouse_entered" from="Mesh/RigidBody3D" to="." method="_on_rigid_body_3d_mouse_entered"]

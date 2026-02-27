@@ -2,11 +2,11 @@
 extends Button
 """ [[ ============================================================ ]] """
 
-""" [[ ============================================================
-	// VARIABLES
-]] """
+""" [[ Constants / Exported Data ]] """
+@export var angle_x_max: float = 15
+@export var angle_y_max: float = 15
 
-""" [[ Card ]] """
+""" [[ Node references ]] """
 @onready var card_texture = $CardTexture
 
 @onready var tower_name: Label = $Stats/Name
@@ -14,17 +14,12 @@ extends Button
 @onready var timer_value: Label = $Stats/Timer/timer_value
 @onready var gold_value: Label = $Stats/Gold/gold_value
 
-""" [[ Fake 3D ]] """
-@export var angle_x_max: float = 15
-@export var angle_y_max: float = 15
-
-""" [[ Card Movement ]] """
+""" [[ Stats ]] """
 var state: int = 0
 var offset: Vector2 = Vector2.ZERO
 var in_hand_pos: Vector2
 var in_hand_rot: float
 
-""" [[ Tween ]] """
 var tween_rot: Tween
 
 """ [[ ============================================================

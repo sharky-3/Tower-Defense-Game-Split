@@ -1,20 +1,24 @@
+""" [[ ============================================================ ]] """
 extends Node3D
+""" [[ ============================================================ ]] """
 
-# --- Node references ---
+""" [[ Node references ]] """
 @onready var ui: Node3D = $"."
 @onready var node_viewport = $SubViewport
 @onready var node_quad = $Quad
 @onready var node_area = $Quad/Area3D
 
-# --- State ---
-var is_mouse_inside = false
+""" [[ Stats ]] """
+var is_mouse_inside: bool = false
 var last_event_pos2D = null
 var last_event_time: float = -1.0
 
-# --------------------------------------------------------------------
-# Life Cycle
-# --------------------------------------------------------------------
+""" [[ ============================================================
+	// FUNCTIONS
+]] """
 
+""" [[ ============================================================ ]] """
+""" [[ Ready ]] """
 func _ready():
 	node_area.mouse_entered.connect(_mouse_entered_area)
 	node_area.mouse_exited.connect(_mouse_exited_area)
@@ -23,15 +27,16 @@ func _ready():
 	if node_quad.get_surface_override_material(0).billboard_mode == BaseMaterial3D.BillboardMode.BILLBOARD_DISABLED:
 		set_process(false)
 
+""" [[ Process ]] """
 func _process(_delta):
 	rotate_area_to_billboard()
 
-# --------------------------------------------------------------------
-# Mouse / Input Handling
-# --------------------------------------------------------------------
-
+""" [[ ============================================================ ]] """
+""" [[ Mouse Entered ]] """
 func _mouse_entered_area():
 	is_mouse_inside = true
+
+""" [[ Mouse Left ]] """
 func _mouse_exited_area():
 	is_mouse_inside = false
 	
@@ -41,6 +46,7 @@ func _mouse_exited_area():
 			#return
 	#node_viewport.push_input(event)
 
+""" [[ Mouse Event / Ineraction With UI ]] """
 func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Vector3, _normal: Vector3, _shape_idx: int):
 	var quad_mesh_size = node_quad.mesh.size
 	var event_pos2D = Vector2()
@@ -74,10 +80,8 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 
 	node_viewport.push_input(event)
 
-# --------------------------------------------------------------------
-# Billboard / Orientation
-# --------------------------------------------------------------------
-
+""" [[ ============================================================ ]] """
+""" [[ Rotate BillBoard ]] """
 func rotate_area_to_billboard():
 	var material = node_quad.get_surface_override_material(0)
 	var billboard_mode = material.billboard_mode if material else BaseMaterial3D.BILLBOARD_DISABLED

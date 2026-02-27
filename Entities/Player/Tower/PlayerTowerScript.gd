@@ -1,6 +1,8 @@
+""" [[ ============================================================ ]] """
 extends Node3D
+""" [[ ============================================================ ]] """
 
-# --- Constants / Exported Data ---
+""" [[ Constants / Exported Data ]] """
 @export_category("Main")
 @export var tower_health: float
 @export var max_health: float
@@ -11,24 +13,25 @@ extends Node3D
 @export var hit_sound: AudioStream
 @export var death_sound: AudioStream
 
-# --- Node references ---
+""" [[ Node references ]] """
 @onready var player_tower: Node3D = $"."
 @onready var tower_animation: AnimationPlayer = $AnimationPlayer
 
-# --------------------------------------------------------------------
-# Life Cycle
-# --------------------------------------------------------------------
+""" [[ ============================================================
+	// FUNCTIONS
+]] """
 
+""" [[ ============================================================ ]] """
+""" [[ Ready ]] """
 func _ready():
 	tower_animation.animation_finished.connect(Callable(self, "_on_animation_finished"))
 
-# --------------------------------------------------------------------
-# Take Damage
-# --------------------------------------------------------------------
-
+""" [[ ============================================================ ]] """
+""" [[ Take Enemy Damage ]] """
 func take_attack_damage(amount: float) -> void:
 	_attempt_damage(amount)
 
+""" [[ Attampt To Take Damage ]] """
 func _attempt_damage(damage: float) -> void:
 	tower_health -= damage
 	_update_player_game_stats("Total_Damage_Taken", damage)
@@ -39,27 +42,30 @@ func _attempt_damage(damage: float) -> void:
 			$AudioStreamPlayer.play()
 		tower_animation.play("death")
 
-# --------------------------------------------------------------------
-# Animation Finished
-# --------------------------------------------------------------------
-
+""" [[ ============================================================ ]] """
+""" [[ Death Animation ]] """
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "death":
 		player_tower.queue_free()
 
-# --------------------------------------------------------------------
-# Health Check
-# --------------------------------------------------------------------
-
+""" [[ ============================================================ ]] """
+""" [[ Tower Health ]] """
 func _tower_health(health: float) -> bool:
 	return health <= 0
 
+""" [[ Check If Tower Is Dead ]] """
 func is_tower_dead() -> bool:
 	return _tower_health(tower_health)
+	
+""" [[ ============================================================ ]] """
+""" [[ Interaction Test ]] """
+func on_clicked():
+	print("Clicked Player Tower")
 
-# --------------------------------------------------------------------
-# Global Player Stats
-# --------------------------------------------------------------------
+""" [[ ============================================================
+	// GLOBAL
+]] """
 
+""" [[ Update Player Stats ]] """
 func _update_player_game_stats(stat_name: String, value: float):
 	Global.update_player_game_stats(stat_name, value)

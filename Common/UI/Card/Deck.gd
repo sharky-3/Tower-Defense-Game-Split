@@ -2,14 +2,11 @@
 extends Control
 """ [[ ============================================================ ]] """
 
-""" [[ ============================================================
-	// VARIABLES
-]] """
-
+""" [[ Constants / Exported Data ]] """
 @export var spacing: float = 350
 @export var bottom_margin: float = 25
 
-""" [[ Hand ]] """
+""" [[ Node references ]] """
 @onready var hand: Control = $Hand
 
 """ [[ ============================================================
