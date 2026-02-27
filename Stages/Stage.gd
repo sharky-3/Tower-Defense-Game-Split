@@ -25,6 +25,24 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 var current_wave: int = 0
 
 """ [[ ============================================================
+	// HELPER FUNCTIONS
+]] """
+
+func get_node_height(node: Node3D) -> float:
+	var parent: Node3D = node.get_parent().get_parent()
+	var mesh_instance = null
+	
+	for child in parent.get_children():
+		if child is MeshInstance3D:
+			mesh_instance = child
+			break
+			
+	if mesh_instance and mesh_instance.mesh:
+		var aabb = mesh_instance.mesh.get_aabb()
+		return aabb.size.y
+	return 0.0
+	
+""" [[ ============================================================
 	// FUNCTIONS
 ]] """
 
@@ -130,9 +148,9 @@ func _input(event):
 			if tooltip_node: tooltip_node.queue_free(); break
 			else:
 				var tooltip_instance: Node3D = TOOL_TIP.instantiate()
-				var height: float = node.scale.y + 1.5
+				var height = get_node_height(node)
 				print(height)
-				tooltip_instance.position.y = height
+				tooltip_instance.position = Vector3(0, height * 0.8, 0)
 				node.add_child(tooltip_instance)
 				break
 			node = node.get_parent()
