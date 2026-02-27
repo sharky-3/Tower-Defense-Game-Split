@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cchfl65kj6nay" path="res://Entities/Items/Placeable/Towers/Turret/Texture/Pallet.png" id="2_3gsn4"]
 [ext_resource type="ArrayMesh" uid="uid://1o7qwhndv64j" path="res://Entities/Items/Placeable/Towers/Turret/Mesh/Head.obj" id="3_83lw8"]
 [ext_resource type="ArrayMesh" uid="uid://ea3raawdolip" path="res://Entities/Items/Placeable/Towers/Turret/Mesh/Body.obj" id="3_pwl7p"]
-[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://_Scripts/ui/3D_GUI.gd" id="4_k66dt"]
+[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/Systems/UI/3D_GUI.gd" id="4_k66dt"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Common/UI/Selection/SelectionWheelScript.tscn" id="5_w5t2c"]
 [ext_resource type="Texture2D" uid="uid://blvjrft3yblr3" path="res://Entities/Items/Placeable/Towers/Turret/icon/Default.png" id="6_nbapu"]
 

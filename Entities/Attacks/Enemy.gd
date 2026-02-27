@@ -109,7 +109,7 @@ func set_enemy_stats(enemy_stats: Dictionary):
 	move_speed = enemy_stats.get("speed", 1.0)
 	enemy_health = enemy_stats.get("health", 4.0)
 	attack_damage = enemy_stats.get("attack_damage", 6.0)
-	character_scale = enemy_stats.get("scale", 0.4)
+	character_scale = enemy_stats.get("scale", 3)
 	set_enemy_mesh(mesh.mesh)
 	
 """ [[ Set Enemy Rewards ]] """

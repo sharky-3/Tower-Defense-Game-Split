@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bjwr71vjwbwhw" path="res://Entities/Items/Placeable/Towers/TowerScript.gd" id="1_n5jiu"]
 [ext_resource type="Texture2D" uid="uid://bjxo0bmrvecd" path="res://Entities/Items/Placeable/Towers/Default/Texture/Pallet.png" id="2_xq5hq"]
 [ext_resource type="ArrayMesh" uid="uid://baqb6glhatf8c" path="res://Entities/Items/Placeable/Towers/Default/Mesh/upgrade0.obj" id="3_j8b76"]
-[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://_Scripts/ui/3D_GUI.gd" id="4_l1jc4"]
+[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/Systems/UI/3D_GUI.gd" id="4_l1jc4"]
 [ext_resource type="PackedScene" uid="uid://dyfoj51ed4r7l" path="res://Common/UI/Selection/SelectionWheelScript.tscn" id="5_jystw"]
 [ext_resource type="Texture2D" uid="uid://bwotbmtjs5qad" path="res://Entities/Items/Placeable/Towers/Default/Icon/Default.png" id="6_iwrqp"]
 [ext_resource type="Texture2D" uid="uid://daliqemf24k1q" path="res://Entities/Items/Placeable/Towers/Default/Icon/Upg1.png" id="7_ldgeh"]

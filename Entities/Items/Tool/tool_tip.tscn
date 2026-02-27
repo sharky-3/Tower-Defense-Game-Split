@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://xeyl6w62dtwx"]
 
-[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://_Scripts/ui/3D_GUI.gd" id="1_1wtfk"]
+[ext_resource type="Script" uid="uid://dm2pm8h4hucpb" path="res://Scripts/Systems/UI/3D_GUI.gd" id="1_1wtfk"]
 [ext_resource type="Texture2D" uid="uid://idalc7w0g5ve" path="res://Assets/Icon/ToolTip.png" id="2_4cq8h"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1wtfk"]
@@ -22,7 +22,7 @@ billboard_mode = 1
 script = ExtResource("1_1wtfk")
 
 [node name="Quad" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0)
 mesh = SubResource("QuadMesh_1wtfk")
 surface_material_override/0 = SubResource("StandardMaterial3D_psudd")
 
