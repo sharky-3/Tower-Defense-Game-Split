@@ -22,7 +22,6 @@ billboard_mode = 1
 script = ExtResource("1_1wtfk")
 
 [node name="Quad" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 3, 0)
 mesh = SubResource("QuadMesh_1wtfk")
 surface_material_override/0 = SubResource("StandardMaterial3D_psudd")
 

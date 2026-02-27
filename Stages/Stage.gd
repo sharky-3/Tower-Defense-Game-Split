@@ -23,7 +23,6 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 """ [[ Stats ]] """
 var current_wave: int = 0
-var TOOL_TIP_ADDED: bool = false
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -120,23 +119,21 @@ func _input(event):
 		)
 
 		var result = world.direct_space_state.intersect_ray(query); if not result: return
-		var node = result.collider
+		var node: Node3D = result.collider
 		
 		while node != null:
 			if node.has_method("on_clicked"): 
 				node.on_clicked()
 				break
 
-			for child in node.get_children():
-				if child.name == "ToolTip" and TOOL_TIP_ADDED:
-					child.queue_free()
-					TOOL_TIP_ADDED = false
-					break
-					
-			if not node.has_node("ToolTip") and !TOOL_TIP_ADDED:
-				var ToolTip = TOOL_TIP.instantiate()
-				node.add_child(ToolTip)
-				TOOL_TIP_ADDED = true
+			var tooltip_node = node.get_node_or_null("ToolTip")
+			if tooltip_node: tooltip_node.queue_free(); break
+			else:
+				var tooltip_instance: Node3D = TOOL_TIP.instantiate()
+				var height: float = node.scale.y + 1.5
+				print(height)
+				tooltip_instance.position.y = height
+				node.add_child(tooltip_instance)
 				break
 			node = node.get_parent()
 
