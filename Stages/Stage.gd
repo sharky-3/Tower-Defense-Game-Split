@@ -28,6 +28,8 @@ var current_wave: int = 0
 	// HELPER FUNCTIONS
 ]] """
 
+""" [[ ============================================================ ]] """
+""" [[ Get Node Height ]] """
 func get_node_height(node: Node3D) -> float:
 	var mesh_instance = null
 	

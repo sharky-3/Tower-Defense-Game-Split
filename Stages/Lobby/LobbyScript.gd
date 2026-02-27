@@ -1,13 +1,18 @@
+""" [[ ============================================================ ]] """
 extends Node3D
+""" [[ ============================================================ ]] """
 
+""" [[ Constants / Exported Data ]] """
+@export var smooth_speed: float = 6.0
+@export var max_yaw: float = 10.0      
+@export var max_pitch: float = 7.0  
+
+""" [[ Node references ]] """
 @onready var camera_3d: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
-@export var smooth_speed := 6.0
-@export var max_yaw := 10.0      
-@export var max_pitch := 7.0  
-
+""" [[ Stats ]] """
 var screen_center: Vector2
-
+var is_spectating := false
 var camera_transform := {
 	"position": {
 		"original": Vector3.ZERO,
@@ -19,14 +24,19 @@ var camera_transform := {
 	}
 }
 
-var is_spectating := false
+""" [[ ============================================================
+	// FUNCTIONS
+]] """
 
+""" [[ ============================================================ ]] """
+""" [[ Ready ]] """
 func _ready() -> void:
 	camera_transform["position"]["original"] = camera_3d.position
 	camera_transform["rotation"]["original"] = camera_3d.rotation_degrees
 
 	screen_center = get_viewport().get_visible_rect().size / 2
 
+""" [[ Process ]] """
 func _process(delta: float) -> void:
 	var mouse_pos = get_viewport().get_mouse_position()
 
@@ -52,6 +62,8 @@ func _process(delta: float) -> void:
 		smooth_speed * delta
 	)
 
+""" [[ ============================================================ ]] """
+""" [[ Map Design ]] """
 func _on_map_design_pressed() -> void:
 	var tween := create_tween()
 	tween.set_parallel(true)
