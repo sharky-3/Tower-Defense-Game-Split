@@ -29,6 +29,7 @@ GameData="*res://Scripts/Data/GameData.gd"
 
 [display]
 
+window/size/mode=3
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://3mduw6x4yo1v"
 

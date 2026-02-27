@@ -14,6 +14,7 @@ extends Node3D
 @export var death_sound: AudioStream
 
 """ [[ Node references ]] """
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var player_tower: Node3D = $"."
 @onready var tower_animation: AnimationPlayer = $AnimationPlayer
 
@@ -34,6 +35,7 @@ func take_attack_damage(amount: float) -> void:
 """ [[ Attampt To Take Damage ]] """
 func _attempt_damage(damage: float) -> void:
 	tower_health -= damage
+	#audio_stream_player.play()
 	_update_player_game_stats("Total_Damage_Taken", damage)
 
 	if _tower_health(tower_health):

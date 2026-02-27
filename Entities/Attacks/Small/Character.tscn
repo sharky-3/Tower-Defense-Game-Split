@@ -47,7 +47,7 @@ _data = {
 &"Walking": SubResource("Animation_f2e6v")
 }
 
-[node name="Enemy" type="Node3D"]
+[node name="Enemy" type="Node3D" groups=["ToolTip"]]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 script = ExtResource("1_sdh2x")
 character_scale = 1.0
@@ -74,5 +74,7 @@ shape = SubResource("ConvexPolygonShape3D_sdh2x")
 libraries = {
 &"": SubResource("AnimationLibrary_jgk6k")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 
 [connection signal="mouse_entered" from="Mesh/RigidBody3D" to="." method="_on_rigid_body_3d_mouse_entered"]

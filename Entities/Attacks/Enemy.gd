@@ -11,7 +11,10 @@ extends Node3D
 @export var reward_gold: int = 5
 @export var reward_exp: int = 1
 
+@export var death_sound: AudioStream
+
 """ [[ Node references ]] """
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
 @onready var target: Node3D = $"../SubViewportContainer/SubViewport/Map/PlayerTower"
@@ -48,9 +51,10 @@ func _find_target():
 """ [[ Physics ]] """
 func _physics_process(delta):
 	if not target: return
-
 	_update_path_target(delta)
 	_move_along_path(delta)
+	if nav_agent.is_navigation_finished():
+		_on_target_reached()
 
 """ [[ Update Path To Target ]] """
 func _update_path_target(delta):
@@ -88,15 +92,16 @@ func _on_target_reached():
 """ [[ Take Damage ]] """
 func take_damage(amount: float):
 	enemy_health -= amount
-	if enemy_health <= 0: _die()
+	if enemy_health <= 0: 
+		_die()
 	_update_player_game_stats("Total_Damage_Dealed", amount)
 
 """ [[ Die ]] """
 func _die():
-	queue_free()
 	_update_player_game_stats("Enemies_Killed", 1)
 	_update_player_game_stats("Exp", reward_exp)
 	_update_player_game_stats("Gold", reward_gold)
+	queue_free()
 
 """ [[ ============================================================ ]] """
 """ [[ Set Enemy Mesh ]] """

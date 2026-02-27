@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://drloc1w2f0v3v"]
+[gd_scene load_steps=10 format=3 uid="uid://drloc1w2f0v3v"]
 
 [ext_resource type="Script" uid="uid://5i2krnuovkov" path="res://Entities/Player/Tower/PlayerTowerScript.gd" id="1_v3u6p"]
 [ext_resource type="Texture2D" uid="uid://bs60sk8timg5g" path="res://Entities/Player/Tower/Texture/Pallet.png" id="2_i3qed"]
 [ext_resource type="ArrayMesh" uid="uid://cxfrcmwj4rm3n" path="res://Entities/Player/Tower/Mesh/Default.obj" id="3_i3qed"]
+[ext_resource type="AudioStream" uid="uid://doyc2h063mw1s" path="res://Assets/Audio/Damage/tower_take_damage.mp3" id="4_eac7r"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vswji"]
 cull_mode = 2
@@ -49,9 +50,10 @@ _data = {
 &"death": SubResource("Animation_2jumv")
 }
 
-[node name="PlayerTower" type="Node3D" groups=["PlayerTower"]]
+[node name="PlayerTower" type="Node3D" groups=["PlayerTower", "ToolTip"]]
 transform = Transform3D(1.7, 0, 0, 0, 2.833, 0, 0, 0, 1.7, 0, 0, 0)
 script = ExtResource("1_v3u6p")
+tower_health = 100.0
 max_health = 100.0
 
 [node name="PlayerTower" type="MeshInstance3D" parent="."]
@@ -71,3 +73,6 @@ shape = SubResource("ConvexPolygonShape3D_hxvxc")
 libraries = {
 &"": SubResource("AnimationLibrary_vbxwt")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_eac7r")

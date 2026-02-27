@@ -29,10 +29,9 @@ var current_wave: int = 0
 ]] """
 
 func get_node_height(node: Node3D) -> float:
-	var parent: Node3D = node.get_parent().get_parent()
 	var mesh_instance = null
 	
-	for child in parent.get_children():
+	for child in node.get_children():
 		if child is MeshInstance3D:
 			mesh_instance = child
 			break
@@ -123,7 +122,7 @@ func _spawn_enemy(difficulty: float) -> void:
 """ [[ ============================================================ ]] """
 """ [[ Input ]] """
 func _input(event):
-	if event is InputEventMouseButton and event.pressed:
+	if event is InputEventMouseButton and event.pressed and event.is_action("LEFT_MOUSE_CLICK"):
 		var mouse_pos = subviewport.get_mouse_position()
 		var ray_origin = camera.project_ray_origin(mouse_pos)
 		var ray_dir = camera.project_ray_normal(mouse_pos)
@@ -138,6 +137,8 @@ func _input(event):
 
 		var result = world.direct_space_state.intersect_ray(query); if not result: return
 		var node: Node3D = result.collider
+		var parent: Node3D = node.get_parent().get_parent()
+		if not parent.is_in_group("ToolTip"): return
 		
 		while node != null:
 			if node.has_method("on_clicked"): 
@@ -145,14 +146,18 @@ func _input(event):
 				break
 
 			var tooltip_node = node.get_node_or_null("ToolTip")
-			if tooltip_node: tooltip_node.queue_free(); break
+			if tooltip_node: 
+				tooltip_node.queue_free()
+				break
+
 			else:
 				var tooltip_instance: Node3D = TOOL_TIP.instantiate()
-				var height = get_node_height(node)
-				print(height)
+				var height: int = roundf(get_node_height(parent))
+				
 				tooltip_instance.position = Vector3(0, height * 0.8, 0)
 				node.add_child(tooltip_instance)
 				break
+				
 			node = node.get_parent()
 
 """ [[ ============================================================

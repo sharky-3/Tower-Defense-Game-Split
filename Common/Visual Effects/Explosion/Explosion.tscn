@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://1xjnsdcqq5uq"]
 
 [ext_resource type="Script" uid="uid://jlbsfw5llgm5" path="res://Common/Visual Effects/Explosion/ExplosionScript.gd" id="1_vidy7"]
-[ext_resource type="AudioStream" uid="uid://c3qpxelyupd2l" path="res://Assets/Audio/explosion.mp3" id="2_0qg3f"]
+[ext_resource type="AudioStream" uid="uid://c3qpxelyupd2l" path="res://Assets/Audio/Effects/explosion.mp3" id="2_0qg3f"]
 
 [sub_resource type="Curve" id="Curve_454x2"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.6860987, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

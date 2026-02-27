@@ -85,18 +85,24 @@ func _mouse_input_event(_camera: Camera3D, event: InputEvent, event_position: Ve
 func rotate_area_to_billboard():
 	var material = node_quad.get_surface_override_material(0)
 	var billboard_mode = material.billboard_mode if material else BaseMaterial3D.BILLBOARD_DISABLED
-	if billboard_mode == BaseMaterial3D.BILLBOARD_DISABLED:
-		return
+	
+	if billboard_mode == BaseMaterial3D.BILLBOARD_DISABLED: return
 
 	var camera = get_viewport().get_camera_3d()
-	if camera == null:
-		return 
+	if camera == null: return
 
-	var look = camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
-	look = ui.position + look
+	var look_dir = camera.to_global(Vector3(0, 0, -100)) - camera.global_transform.origin
+	if look_dir.length_squared() == 0: return
+	var look = ui.global_transform.origin + look_dir
 
 	if billboard_mode == BaseMaterial3D.BILLBOARD_FIXED_Y:
-		look = Vector3(look.x, 0, look.z)
+		look = Vector3(look.x, ui.global_transform.origin.y, look.z)
+	var forward = look - ui.global_transform.origin
+	
+	if forward.length_squared() == 0: return
+	forward = forward.normalized()
 
+	var dot = abs(forward.dot(Vector3.UP))
+	if dot > 0.999: return
 	ui.look_at(look, Vector3.UP)
 	ui.rotate_object_local(Vector3.BACK, camera.rotation.z)
