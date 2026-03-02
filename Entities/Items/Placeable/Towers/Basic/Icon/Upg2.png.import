@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://daliqemf24k1q"
-path="res://.godot/imported/Upg1.png-2a61bbb34d539b397aa66171d9fb675b.ctex"
+uid="uid://deey3fcliquvk"
+path="res://.godot/imported/Upg2.png-327da71b0d241d9687428d5cb8acbb08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Items/Placeable/Towers/Default/Icon/Upg1.png"
-dest_files=["res://.godot/imported/Upg1.png-2a61bbb34d539b397aa66171d9fb675b.ctex"]
+source_file="res://Entities/Items/Placeable/Towers/Basic/Icon/Upg2.png"
+dest_files=["res://.godot/imported/Upg2.png-327da71b0d241d9687428d5cb8acbb08.ctex"]
 
 [params]
 

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwotbmtjs5qad"
-path="res://.godot/imported/Default.png-869773700877bb3a996aa513be5ab395.ctex"
+path="res://.godot/imported/Default.png-394abc4904da27dfad2391db890ecfbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Entities/Items/Placeable/Towers/Default/Icon/Default.png"
-dest_files=["res://.godot/imported/Default.png-869773700877bb3a996aa513be5ab395.ctex"]
+source_file="res://Entities/Items/Placeable/Towers/Basic/Icon/Default.png"
+dest_files=["res://.godot/imported/Default.png-394abc4904da27dfad2391db890ecfbf.ctex"]
 
 [params]
 

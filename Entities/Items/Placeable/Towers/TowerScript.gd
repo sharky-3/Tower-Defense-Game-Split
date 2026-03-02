@@ -5,12 +5,17 @@ extends Node3D
 """ [[ Resources ]] """
 const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 
+""" [[ Constants / Exported Data ]] """
+@export var apply_head_tilt: bool = false
+
 """ [[ Node references ]] """
-@onready var tower_body_mesh: MeshInstance3D = $Body
+@onready var body: MeshInstance3D = $Body
+@onready var head = $Head
+
 @onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
 @onready var timer: Timer = $Timer
-@onready var ray_cast: RayCast3D = $Body/RayCast3D
+@onready var ray_cast: RayCast3D = $Head/RayCast3D
 
 """ [[ Stats ]] """
 var tower_is_placed: bool = true
@@ -49,34 +54,42 @@ func _process(delta):
 	clean_tower()
 	update_range(tower_range)
 
-	if current_target:
-		var target_global_pos = current_target.global_transform.origin
-		var origin = ray_cast.global_transform.origin
-		var direction = target_global_pos - origin
-
-		update_raycast(direction)
-		aim_at_target(delta)
+	if current_target: aim_at_target(delta)
 
 """ [[ ============================================================ ]] """
 """ [[ Rotate Tower To Target ]] """
 func aim_at_target(delta: float):
-	if current_target == null:
-		return
+	if current_target == null: return
 
-	var tower_pos = tower_body_mesh.global_transform.origin
+	var enemy_height = 1.0
 	var target_pos = current_target.global_transform.origin
+	target_pos.y += enemy_height * 0.5
 
-	var direction = (target_pos - tower_pos)
-	direction.y = 0
+	var direction = (target_pos - head.global_transform.origin).normalized()
 
-	if direction.length() < 0.01: return
+	# Yaw and pitch
+	var target_yaw = atan2(direction.x, direction.z) - deg_to_rad(270)
+	var horizontal_distance = sqrt(direction.x * direction.x + direction.z * direction.z)
+	var target_pitch = atan2(-direction.y, horizontal_distance)
 
-	var target_rotation = direction.normalized().angle_to(Vector3.FORWARD)
-	var current_rotation = tower_body_mesh.global_transform.basis.get_euler().y
+	head.rotation.y = lerp_angle(head.rotation.y, target_yaw, rotation_speed * delta)
+	head.rotation.x = lerp_angle(head.rotation.x, target_pitch, rotation_speed * delta) if apply_head_tilt else 0
+	head.rotation.z = 0
 
-	var new_y = lerp_angle(current_rotation, direction.angle_to(Vector3.FORWARD), rotation_speed * delta)
-	tower_body_mesh.rotate_y(new_y - current_rotation)
+	update_raycast(target_pos)
 	
+""" [[ Get Target Position ]] """
+func update_raycast(target_global_pos: Vector3):
+	if not ray_cast or current_target == null: return
+
+	var enemy_height = 1.0
+	var center_pos = target_global_pos
+	center_pos.y += enemy_height * 0.5  
+
+	var local_target = head.to_local(center_pos)
+	ray_cast.target_position = local_target
+	ray_cast.enabled = true
+
 """ [[ ============================================================ ]] """
 """ [[ Tower Had Been Placed ]] """
 func tower_placed():
@@ -93,7 +106,7 @@ func load_stats():
 """ [[ Update Tower Range ]] """
 func update_range(value: float):
 	if tower_is_placed:
-		area_3d.scale = Vector3(value, 2.0, value)
+		area_3d.scale = Vector3(value,2,value)
 
 """ [[ ============================================================ ]] """
 """ [[ Check If Tower is Alive ]] """
@@ -124,11 +137,6 @@ func shoot_enemy(target: Node3D):
 	
 	if enemy_node and enemy_node.has_method("take_damage"):
 		enemy_node.take_damage(tower_damage)
-
-""" [[ Get Target Position ]] """
-func update_raycast(direction_to_enemy: Vector3):
-	if direction_to_enemy.length() > 0.01:
-		ray_cast.target_position = direction_to_enemy.normalized() * 100
 		
 """ [[ ============================================================
 	// SIGNAL FUNCTIONS

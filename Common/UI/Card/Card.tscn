@@ -53,7 +53,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_voj27")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_twfbq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h2k72")
 script = ExtResource("1_q2jb2")
-max_offset_shadow = 25.0
+max_offset_shadow = 30.0
 spring = 300.0
 velocity_multiplier = 1.0
 

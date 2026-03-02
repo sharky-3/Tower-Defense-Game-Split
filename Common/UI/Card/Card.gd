@@ -24,7 +24,6 @@ extends Button
 @onready var gold_value: Label = $Stats/Gold/gold_value
 
 """ [[ Stats ]] """
-var state: int = 0
 var offset: Vector2 = Vector2.ZERO
 var in_hand_pos: Vector2
 var in_hand_rot: float
@@ -46,6 +45,14 @@ var velocity: Vector2
 
 var original_position: Vector2
 
+""" [[ Towers ]] """
+var tower_scene: PackedScene = null
+const TOWERS_NODE3D: Dictionary = {
+	"Basic": preload("uid://cvq5oa37c1bkt"),
+	"Turret": preload("uid://c4lillreyucf4"),
+	"Cannon": preload("uid://cvq5oa37c1bkt"),
+}
+
 """ [[ ============================================================
 	// FUNCTIONS
 ]] """
@@ -57,22 +64,20 @@ func _ready() -> void:
 	angle_y_max = deg_to_rad(angle_y_max)
 	collision_shape.set_deferred("disabled", true)
 
-
 """ [[ Process ]] """
 func _process(delta: float) -> void:
 	rotate_velocity(delta)
 	handle_shadow(delta)
 	follow_mouse(delta)
-	#pick_up_card()
 
 """ [[ ============================================================ ]] """
-""" [[ Place ]] """
-func spawn_cube_at_mouse():
+""" [[ Place Tower ]] """
+func spawn_tower_at_mouse():
 	var camera: Camera3D = get_viewport().get_camera_3d()
-	if camera == null: return
+	if camera == null or tower_scene == null:
+		return false
 
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos)
 	var ray_dir: Vector3 = camera.project_ray_normal(mouse_pos)
 	var ray_end: Vector3 = ray_origin + ray_dir * 1000.0
@@ -88,29 +93,12 @@ func spawn_cube_at_mouse():
 	var result = space_state.intersect_ray(query)
 
 	if result.has("position"):
-		var cube = MeshInstance3D.new()
-		cube.mesh = BoxMesh.new()
-		get_tree().current_scene.add_child(cube)
-		cube.global_position = result.position
-			
-""" [[ ============================================================ ]] """
-""" [[ Pick up ]] """
-func pick_up_card():
-	if state == 1:
-		var mouse_pos: Vector2 = get_global_mouse_position()
-		position = mouse_pos - offset 
-		
-		Global.IS_DRAGGING_CARD = true
-		rotation = 0
-		if Input.is_action_just_released("left_click"): 
-			Global.IS_DRAGGING_CARD = false
-			
-			set_drag_visuals(false)
-			spawn_cube_at_mouse()
-			
-			state = 0
-			position = in_hand_pos
-			rotation = in_hand_rot
+		var tower_instance = tower_scene.instantiate()
+		get_tree().current_scene.add_child(tower_instance)
+		tower_instance.global_position = result.position
+		return true
+	
+	return false
 
 """ [[ Rotate ]] """
 func rotate_velocity(delta: float) -> void:
@@ -157,41 +145,27 @@ func handle_mouse_click(event: InputEvent) -> void:
 	if event.button_index != MOUSE_BUTTON_LEFT: return
 	
 	if event.is_pressed():
-		# Start dragging
 		original_position = global_position
 		following_mouse = true
 		offset = get_global_mouse_position() - global_position
 		
-		# Enable drag visuals
 		set_drag_visuals(true)
 		
-		# Reset wiggle
 		last_pos = global_position
 		displacement = 0.0
 		oscillator_velocity = 0.0
 	else:
-		# Mouse released
 		Global.IS_DRAGGING_CARD = false
 		set_drag_visuals(false)
 		following_mouse = false
+		var tower_spawned = spawn_tower_at_mouse()
 		
-		# Spawn cube if released over world
-		var cube_spawned = spawn_cube_at_mouse()
-		
-		# Tween card back to hand if not placed
 		if tween_handle and tween_handle.is_running():
 			tween_handle.kill()
 		tween_handle = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		if cube_spawned:
-			# Reset wiggle but keep in hand position
-			tween_handle.tween_property(self, "position", in_hand_pos, 0.3)
-			tween_handle.tween_property(self, "rotation", in_hand_rot, 0.3)
-		else:
-			# Return to original hand slot
-			tween_handle.tween_property(self, "position", in_hand_pos, 0.3)
-			tween_handle.tween_property(self, "rotation", in_hand_rot, 0.3)
+		tween_handle.tween_property(self, "position", in_hand_pos, 0.3)
+		tween_handle.tween_property(self, "rotation", in_hand_rot, 0.3)
 		
-		# Reset wiggle values
 		displacement = 0.0
 		oscillator_velocity = 0.0
 
@@ -219,7 +193,6 @@ func _on_mouse_entered() -> void:
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
-	#card_is_focused(true)
 
 """ [[ Mouse Left ]] """
 func _on_mouse_exited() -> void:
@@ -234,20 +207,6 @@ func _on_mouse_exited() -> void:
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
 
-	#card_is_focused(false)
-	#
-	#if tween_rot and tween_rot.is_running(): tween_rot.kill()
-	#tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)
-	#tween_rot.tween_property(card_texture.material, "shader_parameter/x_rot", 0.0, 0.5)
-	#tween_rot.tween_property(card_texture.material, "shader_parameter/y_rot", 0.0, 0.5)
-
-""" [[ ============================================================ ]] """
-""" [[ Focus ]] """
-func card_is_focused(value: bool):
-	if Global.IS_DRAGGING_CARD or state == 1:  return
-	if value:  z_index = 10
-	else: z_index = 0
-
 """ [[ ============================================================ ]] """
 """ [[ Set Up Card ]] """
 func set_up_card(
@@ -256,12 +215,11 @@ func set_up_card(
 	towerName: String = "Name",
 	gold: int = 100
 ):
+	self.name = towerName
 	tower_name.text = towerName
 	lvl_value.text = str(lvl)
 	timer_value.text = str(timer)
 	gold_value.text = "$%d" % gold
 	
-""" [[ ============================================================ ]] """
-""" [[ Interaction ]] """
-func on_card_clicked(name: String) -> void:
-	print("Clicked: ", name)
+	if TOWERS_NODE3D.has(towerName): tower_scene = TOWERS_NODE3D[towerName]
+	else: tower_scene = null
