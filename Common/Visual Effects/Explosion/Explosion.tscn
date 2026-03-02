@@ -86,6 +86,7 @@ emission_curve = SubResource("CurveTexture_idg7g")
 script = ExtResource("1_vidy7")
 
 [node name="Smoke" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 12
 lifetime = 2.0
 one_shot = true
@@ -96,6 +97,7 @@ process_material = SubResource("ParticleProcessMaterial_geyas")
 draw_pass_1 = SubResource("SphereMesh_lhp4v")
 
 [node name="Debris" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 24
 lifetime = 2.0
 one_shot = true
@@ -106,6 +108,7 @@ process_material = SubResource("ParticleProcessMaterial_geyas")
 draw_pass_1 = SubResource("CylinderMesh_3jvej")
 
 [node name="Fire" type="GPUParticles3D" parent="."]
+emitting = false
 amount = 12
 lifetime = 2.0
 one_shot = true
