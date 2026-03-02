@@ -34,11 +34,8 @@ func _notification(what: int) -> void:
 # Compile our shader at initialization.
 func _initialize_compute() -> void:
 	rd = RenderingServer.get_rendering_device()
-	if not rd:
-		return
-
+	if not rd: return
 	pipeline = rd.compute_pipeline_create(shader)
-
 
 # Called by the rendering thread every frame.
 func _render_callback(p_effect_callback_type: EffectCallbackType, p_render_data: RenderData) -> void:
