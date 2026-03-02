@@ -44,6 +44,9 @@ void vertex(){
 void fragment(){
 	if (cull_back && p.z <= 0.0) discard;
 	vec2 uv = (p.xy / p.z).xy - o;
-    COLOR = texture(TEXTURE, uv + 0.5);
+	vec4 tex = texture(TEXTURE, uv + 0.5);
+
+	COLOR.rgb = tex.rgb;
+	COLOR.a = tex.a * COLOR.a;
 	COLOR.a *= step(max(abs(uv.x), abs(uv.y)), 0.5);
 }
