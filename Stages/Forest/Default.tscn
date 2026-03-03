@@ -57,26 +57,15 @@ render_target_update_mode = 4
 
 [node name="Placing Positions" type="Node3D" parent="SubViewportContainer/SubViewport"]
 
-[node name="PlacingPositions" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Placing Positions" groups=["PlacingGrid"]]
-transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 19.929504, 0, 27.317589)
+[node name="PlacingPositions3" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Placing Positions" groups=["PlacingGrid"]]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0.2, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions3"]
 material_override = SubResource("StandardMaterial3D_amb8m")
 transparency = 1.0
 mesh = SubResource("BoxMesh_bi7ie")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions"]
-shape = SubResource("BoxShape3D_qv1uj")
-
-[node name="PlacingPositions2" type="StaticBody3D" parent="SubViewportContainer/SubViewport/Placing Positions" groups=["PlacingGrid"]]
-transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, -28.09356, 0, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions2"]
-material_override = SubResource("StandardMaterial3D_amb8m")
-transparency = 1.0
-mesh = SubResource("BoxMesh_bi7ie")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions2"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Placing Positions/PlacingPositions3"]
 shape = SubResource("BoxShape3D_qv1uj")
 
 [node name="Environment" type="Node3D" parent="SubViewportContainer/SubViewport"]

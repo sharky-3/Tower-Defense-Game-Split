@@ -2,6 +2,9 @@
 extends Button
 """ [[ ============================================================ ]] """
 
+""" [[ Classes ]] """
+var ItemPlacerClass
+
 """ [[ Constants / Exported Data ]] """
 @export var drag_opacity: float = 0.5
 
@@ -46,15 +49,10 @@ var velocity: Vector2
 
 var original_position: Vector2
 var preview_tower: Node3D = null
+var grid_size: float = 5.0
 
 """ [[ Towers ]] """
 var tower_scene: PackedScene = null
-const TOWERS_NODE3D: Dictionary = {
-	"Basic": preload("uid://cvq5oa37c1bkt"),
-	"Turret": preload("uid://c4lillreyucf4"),
-	"Cannon": preload("uid://cvq5oa37c1bkt"),
-}
-const TURRET = preload("uid://c4lillreyucf4")
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -67,11 +65,37 @@ func _ready() -> void:
 	angle_y_max = deg_to_rad(angle_y_max)
 	collision_shape.set_deferred("disabled", true)
 	
+	var camera : Camera3D = get_viewport().get_camera_3d()
+	ItemPlacerClass = ItemPlacer.new(camera, tower_scene, preview_tower, get_tree().current_scene)
+	
 """ [[ Process ]] """
 func _process(delta: float) -> void:
 	rotate_velocity(delta)
 	handle_shadow(delta)
 	follow_mouse(delta)
+
+""" [[ ============================================================ ]] """
+""" [[ Camera ]] """
+
+func get_cursor_position():
+	var camera: Camera3D = get_viewport().get_camera_3d()
+	if camera == null or tower_scene == null: 
+		return false
+
+	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
+	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos)
+	var ray_dir: Vector3 = camera.project_ray_normal(mouse_pos)
+	var ray_end: Vector3 = ray_origin + ray_dir * 1000.0
+
+	var space_state = camera.get_world_3d().direct_space_state
+
+	var query = PhysicsRayQueryParameters3D.new()
+	query.from = ray_origin
+	query.to = ray_end
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+
+	return 
 
 """ [[ ============================================================ ]] """
 """ [[ Rotate ]] """
@@ -106,8 +130,7 @@ func set_drag_visuals(is_dragging: bool) -> void:
 	drag_tween.tween_property(self, "scale", target_scale, 0.15)
 	drag_tween.tween_property(self, "modulate:a", target_alpha, 0.15)
 	drag_tween.tween_property(card_texture, "modulate:a", target_alpha, 0.15)
-
-""" [[ ============================================================ ]] """
+	
 """ [[ Place Tower ]] """
 func spawn_tower_at_mouse():
 	var camera: Camera3D = get_viewport().get_camera_3d()
@@ -128,7 +151,7 @@ func spawn_tower_at_mouse():
 	query.collide_with_bodies = true
 
 	var exclude = []
-	var hit_found = false
+	var hit_found: bool = false
 
 	while true:
 		query.exclude = exclude
@@ -156,40 +179,17 @@ func spawn_tower_at_mouse():
 			if preview_tower:
 				preview_tower.queue_free()
 
-		break  # stop after first hit
+		break
 
 	return hit_found
-		
-""" [[ Tower Preview Fallow Mouse ]] """
-func tower_preview_follow_mouse():
-	var camera: Camera3D = get_viewport().get_camera_3d()
-	if camera == null or tower_scene == null:  return false
-
-	var mouse_pos_3D: Vector2 = get_viewport().get_mouse_position()
-	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos_3D)
-	var ray_dir: Vector3 = camera.project_ray_normal(mouse_pos_3D)
-	var ray_end: Vector3 = ray_origin + ray_dir * 1000.0
-
-	var space_state = camera.get_world_3d().direct_space_state
-
-	var query = PhysicsRayQueryParameters3D.new()
-	query.from = ray_origin
-	query.to = ray_end
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-
-	var result = space_state.intersect_ray(query)
-	
-	if result.has("position"):
-		preview_tower.global_position.x = result.position.x
-		preview_tower.global_position.z = result.position.z
 		
 """ [[ Fallow Mouse ]] """
 func follow_mouse(delta: float) -> void:
 	if not following_mouse: return
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	global_position = mouse_pos - (size/2.0)
-	tower_preview_follow_mouse()
+	
+	ItemPlacerClass.item_preview_follow_mouse(preview_tower)
 
 """ [[ ============================================================ ]] """
 """ [[ Handle Mouse Click ]] """
@@ -214,13 +214,13 @@ func handle_mouse_click(event: InputEvent) -> void:
 			preview_tower = tower_scene.instantiate()
 			get_tree().current_scene.add_child(preview_tower)
 			
-			for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 0.8, 0.5)
+			for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 0.8, 0.2)
 	else:
-		Global.IS_DRAGGING_CARD = false
+		Global.IS_DRAGGING_CARD = false 
 		set_drag_visuals(false)
 		following_mouse = false
 		if preview_tower:
-			if not spawn_tower_at_mouse():
+			if not ItemPlacerClass.place_item_on_ground():
 				preview_tower.queue_free()
 			preview_tower = null
 		
@@ -231,7 +231,7 @@ func handle_mouse_click(event: InputEvent) -> void:
 		tween_handle.tween_property(self, "position", in_hand_pos, 0.3)
 		tween_handle.tween_property(self, "rotation", in_hand_rot, 0.3)
 		
-		for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 1, 0.5)
+		for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 1, 0.2)
 		
 		displacement = 0.0
 		oscillator_velocity = 0.0
@@ -288,5 +288,9 @@ func set_up_card(
 	timer_value.text = str(timer)
 	gold_value.text = "$%d" % gold
 	
-	if TOWERS_NODE3D.has(towerName): tower_scene = TOWERS_NODE3D[towerName]
-	else: tower_scene = null
+	var towers = Global.GAME_DATA["Towers"]
+	tower_scene = null
+	for t in towers:
+		if t.has(towerName):
+			tower_scene = load(t[towerName]["Mesh"])
+			break
