@@ -91,8 +91,8 @@ func update_raycast(target_global_pos: Vector3):
 """ [[ Check if you can place tower ]] """
 func can_tower_be_placed() -> bool:
 	if front_raycast.is_colliding() or left_raycast.is_colliding() or left_raycast.is_colliding() or right_raycast.is_colliding():
-		return true
-	return false
+		return false
+	return true
 	
 """ [[ Tower Had Been Placed ]] """
 func tower_placed():

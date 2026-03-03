@@ -17,7 +17,7 @@ extends Node3D
 @onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var nav_agent: NavigationAgent3D = $NavigationAgent3D
-@onready var target: Node3D = $"../SubViewportContainer/SubViewport/Map/PlayerTower"
+@onready var target: Node3D = get_node_or_null("../SubViewportContainer/SubViewport/Map/PlayerTower")
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var mesh: MeshInstance3D = $Mesh
 

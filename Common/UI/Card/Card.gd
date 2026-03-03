@@ -127,14 +127,16 @@ func spawn_tower_at_mouse():
 
 	var result = space_state.intersect_ray(query)
 	if result.has("position"):
+		if preview_tower == null: return
 		get_tree().current_scene.add_child(preview_tower)
 		
 		if preview_tower.has_method("tower_placed") and preview_tower.has_method("can_tower_be_placed"):
 			var can_place: bool = preview_tower.can_tower_be_placed()
-			if can_place:
-				preview_tower.tower_placed()
-		#preview_tower.global_position = result.position
-		return true
+			
+			if can_place: preview_tower.tower_placed()
+			else: preview_tower.queue_free()
+			
+			return true
 	return false
 		
 """ [[ Tower Preview Fallow Mouse ]] """
