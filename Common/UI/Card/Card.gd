@@ -128,8 +128,11 @@ func spawn_tower_at_mouse():
 	var result = space_state.intersect_ray(query)
 	if result.has("position"):
 		get_tree().current_scene.add_child(preview_tower)
-		if preview_tower.has_method("tower_placed"):
-			preview_tower.tower_placed()
+		
+		if preview_tower.has_method("tower_placed") and preview_tower.has_method("can_tower_be_placed"):
+			var can_place: bool = preview_tower.can_tower_be_placed()
+			if can_place:
+				preview_tower.tower_placed()
 		#preview_tower.global_position = result.position
 		return true
 	return false
@@ -177,6 +180,7 @@ func handle_mouse_click(event: InputEvent) -> void:
 		offset = get_global_mouse_position() - global_position
 		
 		set_drag_visuals(true)
+		Global.tower_name = self.name
 		
 		last_pos = global_position
 		displacement = 0.0

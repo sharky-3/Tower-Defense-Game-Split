@@ -17,6 +17,11 @@ const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 @onready var timer: Timer = $Timer
 @onready var ray_cast: RayCast3D = $Head/RayCast3D
 
+@onready var front_raycast: RayCast3D = $Body/Front
+@onready var left_raycast: RayCast3D = $Body/Left
+@onready var back_raycast: RayCast3D = $Body/Back
+@onready var right_raycast: RayCast3D = $Body/Right
+
 """ [[ Stats ]] """
 var tower_is_placed: bool = false
 var enemies_in_range: Array = []
@@ -83,10 +88,18 @@ func update_raycast(target_global_pos: Vector3):
 	ray_cast.enabled = true
 
 """ [[ ============================================================ ]] """
+""" [[ Check if you can place tower ]] """
+func can_tower_be_placed() -> bool:
+	if front_raycast.is_colliding() or left_raycast.is_colliding() or left_raycast.is_colliding() or right_raycast.is_colliding():
+		return true
+	return false
+	
 """ [[ Tower Had Been Placed ]] """
 func tower_placed():
-	tower_is_placed = true
-	update_range(tower_range)
+	var can_place: bool = can_tower_be_placed()
+	if can_place:
+		tower_is_placed = true
+		update_range(tower_range)
 
 """ [[ ============================================================ ]] """
 """ [[ Get Tower Stats ]] """

@@ -37,26 +37,26 @@ var GAME_DATA = {
 	],
 	
 	"Towers": [
-		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 100, "Stats": { "Range": 50, "Damage": 10, "AttackSpeed": 1.0, "CanHitMultipleEnemies": false }, 
+		{ "Basic": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 100, "Stats": { "Range": 15, "Damage": 10, "AttackSpeed": 1.0, "CanHitMultipleEnemies": false }, 
 			 "Upgrades": [
-				{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 150, "Stats": { "Range": 6, "Damage": 10 } } },
-				{ "Upgrade_2": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } }
+				{ "Upgrade_1": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 150, "Stats": { "Range": 26, "Damage": 10 } } },
+				{ "Upgrade_2": { "Mesh": "uid://cvq5oa37c1bkt", "Cost": 200, "Stats": { "Range": 32, "Damage": 6 } } }
 			],
 			"Description": "Starter tower."
 		} },
 
-		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Cost": 150, "Stats": { "Range": 6, "Damage": 10, "AttackSpeed": 0.8, "CanHitMultipleEnemies": true }, 
+		{ "Turret": { "Mesh": "uid://c4lillreyucf4", "Cost": 150, "Stats": { "Range": 18, "Damage": 10, "AttackSpeed": 0.8, "CanHitMultipleEnemies": true }, 
 			"Upgrades": [
-				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 6 } } },
-				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } }
+				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 20, "Damage": 6 } } },
+				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 30, "Damage": 8 } } }
 			],
 			"Description": "Hits multiple enemies."
 		} },
 
-		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 8, "Damage": 25, "AttackSpeed": 2.5, "CanHitMultipleEnemies": false }, 
+		{ "Cannon": { "Mesh": "uid://c4lillreyucf4", "Cost": 200, "Stats": { "Range": 20, "Damage": 25, "AttackSpeed": 2.5, "CanHitMultipleEnemies": false }, 
 			"Upgrades": [
-				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 10, "Damage": 8 } } },
-				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 300, "Stats": { "Range": 12, "Damage": 10 } } }
+				{ "Upgrade_1": { "Mesh": "uid://c4lillreyucf4", "Cost": 250, "Stats": { "Range": 30, "Damage": 8 } } },
+				{ "Upgrade_2": { "Mesh": "uid://c4lillreyucf4", "Cost": 300, "Stats": { "Range": 42, "Damage": 10 } } }
 			],
 			"Description": "Slow but powerful."
 		} }
