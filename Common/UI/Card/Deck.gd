@@ -8,6 +8,7 @@ extends Control
 
 """ [[ Node references ]] """
 @onready var hand: Control = $Hand
+@onready var placing_positions: Node3D = $"../../Placing Positions"
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -17,7 +18,8 @@ extends Control
 """ [[ Ready ]] """
 func _ready() -> void:
 	draw_card()
-
+	Global.cache_placing_positions(placing_positions)
+	
 """ [[ ============================================================ ]] """
 """ [[ Move Card ]] """
 func move_card(card: Button, start_position: Vector2, target_position: Vector2, duration: float) -> void:

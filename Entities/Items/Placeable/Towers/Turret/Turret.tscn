@@ -26,7 +26,7 @@ collision_mask = 4
 shape = SubResource("CylinderShape3D_t47gw")
 
 [node name="Head" type="MeshInstance3D" parent="."]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, -0.4000001, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5, 0)
 layers = 9
 material_override = SubResource("StandardMaterial3D_1y2ym")
 mesh = ExtResource("3_83lw8")
@@ -39,7 +39,7 @@ collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="Body" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, -0.7, 0)
+transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, 0, 0)
 layers = 9
 material_override = SubResource("StandardMaterial3D_1y2ym")
 mesh = ExtResource("3_pwl7p")
@@ -54,25 +54,25 @@ transform = Transform3D(1, 0, 1.4210855e-14, 0, 1, 0, -1.4210855e-14, 0, 1, 0, 0
 shape = SubResource("ConcavePolygonShape3D_fqm75")
 
 [node name="Front" type="RayCast3D" parent="Body"]
-transform = Transform3D(-0.6666667, 0, 1.0066387e-07, 0, 0.6666667, 0, -1.0066387e-07, 0, -0.6666667, 0, 0.46666667, 0)
+transform = Transform3D(-0.6666667, 0, 1.0066387e-07, 0, 0.6666667, 0, -1.0066387e-07, 0, -0.6666667, 0, 0.5, 0)
 target_position = Vector3(4, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="Left" type="RayCast3D" parent="Body"]
-transform = Transform3D(-7.152294e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -7.152294e-08, 0, 0.46666667, 0)
+transform = Transform3D(-7.1522926e-08, 0, -0.6666667, 0, 0.6666667, 0, 0.6666667, 0, -7.1522926e-08, 0, 0.5, 0.5)
 target_position = Vector3(4, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="Back" type="RayCast3D" parent="Body"]
-transform = Transform3D(0.6666667, 0, -4.2382016e-08, 0, 0.6666667, 0, 4.2382016e-08, 0, 0.6666667, 0, 0.46666667, 0)
+transform = Transform3D(0.6666667, 0, -4.2382016e-08, 0, 0.6666667, 0, 4.2382016e-08, 0, 0.6666667, 0, 0.5, 0)
 target_position = Vector3(4, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5
 
 [node name="Right" type="RayCast3D" parent="Body"]
-transform = Transform3D(9.271395e-08, 0, 0.6666667, 0, 0.6666667, 0, -0.6666667, 0, 9.271395e-08, 0, 0.46666667, 0)
+transform = Transform3D(9.271395e-08, 0, 0.6666667, 0, 0.6666667, 0, -0.6666667, 0, 9.271395e-08, 0, 0.5, -0.5)
 target_position = Vector3(4, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5

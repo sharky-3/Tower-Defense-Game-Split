@@ -139,7 +139,7 @@ func _input(event):
 
 		var result = world.direct_space_state.intersect_ray(query); if not result: return
 		var node: Node3D = result.collider
-		var parent: Node3D = node.get_parent().get_parent()
+		var parent := node.get_parent().get_parent()
 		if not parent.is_in_group("ToolTip"): return
 		
 		while node != null:

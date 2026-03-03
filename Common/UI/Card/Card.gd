@@ -33,6 +33,7 @@ var drag_tween: Tween
 var tween_hover: Tween
 var tween_destroy: Tween
 var tween_handle: Tween
+var tween_placing_position: Tween
 
 var displacement: float = 0.0
 var oscillator_velocity: float = 0.0
@@ -65,7 +66,7 @@ func _ready() -> void:
 	angle_x_max = deg_to_rad(angle_x_max)
 	angle_y_max = deg_to_rad(angle_y_max)
 	collision_shape.set_deferred("disabled", true)
-
+	
 """ [[ Process ]] """
 func _process(delta: float) -> void:
 	rotate_velocity(delta)
@@ -110,7 +111,8 @@ func set_drag_visuals(is_dragging: bool) -> void:
 """ [[ Place Tower ]] """
 func spawn_tower_at_mouse():
 	var camera: Camera3D = get_viewport().get_camera_3d()
-	if camera == null or tower_scene == null: return false
+	if camera == null or tower_scene == null: 
+		return false
 
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos)
@@ -125,19 +127,38 @@ func spawn_tower_at_mouse():
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 
-	var result = space_state.intersect_ray(query)
-	if result.has("position"):
-		if preview_tower == null: return
-		get_tree().current_scene.add_child(preview_tower)
+	var exclude = []
+	var hit_found = false
+
+	while true:
+		query.exclude = exclude
+		var result = space_state.intersect_ray(query)
+		if not result.has("collider"):
+			break
+
+		var hit_object = result["collider"]
+		exclude.append(hit_object)
 		
-		if preview_tower.has_method("tower_placed") and preview_tower.has_method("can_tower_be_placed"):
-			var can_place: bool = preview_tower.can_tower_be_placed()
-			
-			if can_place: preview_tower.tower_placed()
-			else: preview_tower.queue_free()
-			
-			return true
-	return false
+		if hit_object.get_collision_layer() & (1 << 3):
+			continue
+		
+		print(hit_object)
+		hit_found = true
+
+		if hit_object.is_in_group("PlacingGrid") and preview_tower:
+			get_tree().current_scene.add_child(preview_tower)
+			if preview_tower.has_method("tower_placed") and preview_tower.has_method("can_tower_be_placed"):
+				if preview_tower.can_tower_be_placed():
+					preview_tower.tower_placed()
+				else:
+					preview_tower.queue_free()
+		else:
+			if preview_tower:
+				preview_tower.queue_free()
+
+		break  # stop after first hit
+
+	return hit_found
 		
 """ [[ Tower Preview Fallow Mouse ]] """
 func tower_preview_follow_mouse():
@@ -175,6 +196,7 @@ func follow_mouse(delta: float) -> void:
 func handle_mouse_click(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index != MOUSE_BUTTON_LEFT: return
+	tween_placing_position = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	
 	if event.is_pressed():
 		original_position = global_position
@@ -191,6 +213,8 @@ func handle_mouse_click(event: InputEvent) -> void:
 		if tower_scene:
 			preview_tower = tower_scene.instantiate()
 			get_tree().current_scene.add_child(preview_tower)
+			
+			for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 0.8, 0.5)
 	else:
 		Global.IS_DRAGGING_CARD = false
 		set_drag_visuals(false)
@@ -202,9 +226,12 @@ func handle_mouse_click(event: InputEvent) -> void:
 		
 		if tween_handle and tween_handle.is_running():
 			tween_handle.kill()
+			
 		tween_handle = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween_handle.tween_property(self, "position", in_hand_pos, 0.3)
 		tween_handle.tween_property(self, "rotation", in_hand_rot, 0.3)
+		
+		for mesh in Global.placing_meshes: tween_placing_position.tween_property(mesh, "transparency", 1, 0.5)
 		
 		displacement = 0.0
 		oscillator_velocity = 0.0

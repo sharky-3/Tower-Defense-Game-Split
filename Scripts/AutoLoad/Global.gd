@@ -5,6 +5,7 @@ extends Node
 """ [[ Stats ]] """
 var tower_name: String = "Basic"
 var IS_DRAGGING_CARD: bool = false
+var placing_meshes: Array[MeshInstance3D] = []
 
 """ [[ Game Data ]] """
 var GAME_DATA = {
@@ -177,3 +178,11 @@ func get_enemy_stats(enemy_type: String, enemy_size: String, enemy_name: String)
 func get_enemy_reward(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var stats = get_base_enemy(enemy_type, enemy_size, enemy_name)
 	return stats.get("Stats", {}).get("Rewards", {})
+
+""" [[ ============================================================ ]] """
+""" [[ Placing Grid Positions ]] """
+func cache_placing_positions(placing_position: Node3D):
+	for child in placing_position.get_children():
+		if child is StaticBody3D and child.is_in_group("PlacingGrid"):
+			var mesh: MeshInstance3D = child.get_node_or_null("MeshInstance3D")
+			if mesh: placing_meshes.append(mesh)
