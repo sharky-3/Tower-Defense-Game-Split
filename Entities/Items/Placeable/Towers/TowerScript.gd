@@ -18,7 +18,7 @@ const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 @onready var ray_cast: RayCast3D = $Head/RayCast3D
 
 """ [[ Stats ]] """
-var tower_is_placed: bool = true
+var tower_is_placed: bool = false
 var enemies_in_range: Array = []
 var current_target: Node3D = null
 
@@ -27,7 +27,6 @@ var tower_damage: float = 0.0
 var rotation_speed: float = 6.0
 
 var tower_name: String = Global.tower_name
-var opened_ui: bool = false
 
 """ [[ ============================================================
 	// FUNCTIONS
@@ -50,10 +49,8 @@ func _ready() -> void:
 """ [[ Process ]] """
 func _process(delta):
 	if not tower_is_placed: return
-
 	clean_tower()
 	update_range(tower_range)
-
 	if current_target: aim_at_target(delta)
 
 """ [[ ============================================================ ]] """
@@ -67,14 +64,13 @@ func aim_at_target(delta: float):
 
 	var direction = (target_pos - head.global_transform.origin).normalized()
 
-	# Yaw and pitch
 	var target_yaw = atan2(direction.x, direction.z) - deg_to_rad(270)
 	var horizontal_distance = sqrt(direction.x * direction.x + direction.z * direction.z)
 	var target_pitch = atan2(-direction.y, horizontal_distance)
 
 	head.rotation.y = lerp_angle(head.rotation.y, target_yaw, rotation_speed * delta)
 	head.rotation.x = lerp_angle(head.rotation.x, target_pitch, rotation_speed * delta) if apply_head_tilt else 0
-	head.rotation.z = 0
+	head.rotation.z = lerp_angle(head.rotation.z, target_pitch, rotation_speed * delta) if apply_head_tilt else 0
 
 	update_raycast(target_pos)
 	
@@ -82,11 +78,7 @@ func aim_at_target(delta: float):
 func update_raycast(target_global_pos: Vector3):
 	if not ray_cast or current_target == null: return
 
-	var enemy_height = 1.0
-	var center_pos = target_global_pos
-	center_pos.y += enemy_height * 0.5  
-
-	var local_target = head.to_local(center_pos)
+	var local_target = head.to_local(target_global_pos)
 	ray_cast.target_position = local_target
 	ray_cast.enabled = true
 
