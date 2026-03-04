@@ -8,8 +8,8 @@ extends Node3D
 
 """ [[ Stats ]] """
 var rays := {}
-var speed: float = 5.0
-var turn_speed: float = 2.5
+var speed: float = 2.0
+var turn_speed: float = 10
 
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
@@ -23,11 +23,11 @@ func _process(delta: float) -> void:
 	var steer := get_avoidance_steer()
 	
 	if steer != 0.0: rotate_y(steer * turn_speed * delta)
-	look_at_tower(delta)
+	var tower_alive: bool = look_at_tower(delta)
+	if not tower_alive: speed = 0
 	
 	var current_speed = speed
-	if abs(steer) > 0.1:
-		current_speed = 2.5
+	if abs(steer) > 0.1: current_speed = speed * 0.5
 	
 	translate(Vector3.FORWARD * current_speed * delta)
 
@@ -37,15 +37,16 @@ func _process(delta: float) -> void:
 func move_forward(delta: float) -> void:
 	translate(Vector3.FORWARD * speed * delta)
 
-func look_at_tower(delta: float) -> void:
+func look_at_tower(delta: float) -> bool:
+	if not player_tower: return false
 	var dir_to_tower = player_tower.global_position - global_position
 	dir_to_tower.y = 0
 	
-	if dir_to_tower.length_squared() < 0.001:
-		return
-	
+	if dir_to_tower.length_squared() < 0.001: return false
 	var target_angle = atan2(-dir_to_tower.x, -dir_to_tower.z)
 	rotation.y = lerp_angle(rotation.y, target_angle, 3.0 * delta)
+	
+	return true
 	
 func get_avoidance_steer() -> float:
 	var steer := 0.0
@@ -53,7 +54,7 @@ func get_avoidance_steer() -> float:
 	var right  = rays["Right"].is_colliding()
 	var left   = rays["Left"].is_colliding()
 	
-	if right: steer = 3.0
-	elif left: steer = -3.0
+	if right: steer = 1.0
+	elif left: steer = -1.0
 	
 	return steer
