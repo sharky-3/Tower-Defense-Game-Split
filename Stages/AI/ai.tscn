@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dkhie1perrys7" path="res://Entities/Environment/Flower/flower.tscn" id="3_wnsxw"]
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="4_pwrm2"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="6_6rops"]
-[ext_resource type="Script" uid="uid://g017akrfwge6" path="res://Stages/AI/enemy_ai.gd" id="7_wnsxw"]
+[ext_resource type="Script" uid="uid://g017akrfwge6" path="res://Entities/Attacks/ai.gd" id="7_wnsxw"]
 [ext_resource type="Texture2D" uid="uid://bcs0cxmjcsq8i" path="res://Entities/Attacks/Small/Texture/Pallet.png" id="8_pwrm2"]
 [ext_resource type="ArrayMesh" uid="uid://bnc5o7d66ecl2" path="res://Entities/Attacks/Small/Goblin/Mesh/Goblin1.obj" id="9_7byug"]
 
