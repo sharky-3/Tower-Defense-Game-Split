@@ -25,7 +25,6 @@ extends Node3D
 var path_update_timer := 0.0
 const PATH_UPDATE_INTERVAL := 0.75
 
-
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
 

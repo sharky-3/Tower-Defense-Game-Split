@@ -19,7 +19,6 @@ radius = 2.0
 
 [node name="Tower" type="Node3D" groups=["ToolTip"]]
 script = ExtResource("1_x0r5m")
-apply_head_tilt = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)
@@ -35,47 +34,23 @@ layers = 9
 material_override = SubResource("StandardMaterial3D_kbf0e")
 mesh = ExtResource("3_62gqk")
 
-[node name="Area3D" type="Area3D" parent="Head"]
-collision_layer = 9
-collision_mask = 9
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/Area3D"]
-transform = Transform3D(0.9999999, 0, 2.1316282e-14, 0, 0.9999999, 0, -2.1316282e-14, 0, 0.9999999, 0, 0, 0)
-shape = SubResource("ConvexPolygonShape3D_fjl01")
-
 [node name="RayCast3D" type="RayCast3D" parent="Head"]
 transform = Transform3D(0.9999998, 0, 1.4210855e-14, 0, 0.9999998, 0, -1.4210855e-14, 0, 0.9999998, 0, 3.156975, 0)
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5
 
-[node name="Body" type="MeshInstance3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="Head"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Head/StaticBody3D"]
+transform = Transform3D(0.9999999, 0, 2.842171e-14, 0, 0.9999999, 0, -2.842171e-14, 0, 0.9999999, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_fjl01")
+
+[node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Front" type="RayCast3D" parent="Body"]
-target_position = Vector3(4, 0, 0)
-collide_with_areas = true
-debug_shape_thickness = 5
-
-[node name="Left" type="RayCast3D" parent="Body"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
-target_position = Vector3(4, 0, 0)
-collide_with_areas = true
-debug_shape_thickness = 5
-
-[node name="Back" type="RayCast3D" parent="Body"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-target_position = Vector3(4, 0, 0)
-collide_with_areas = true
-debug_shape_thickness = 5
-
-[node name="Right" type="RayCast3D" parent="Body"]
-transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 0, 0, 0)
-target_position = Vector3(4, 0, 0)
-collide_with_areas = true
-debug_shape_thickness = 5
-
 [node name="BodyCollision" type="RigidBody3D" parent="."]
+freeze = true
 
 [node name="Collision" type="CollisionShape3D" parent="BodyCollision"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4506836, 0)
@@ -90,4 +65,3 @@ transform = Transform3D(1.6666665, 0, 0, 0, 1.6666665, 0, 0, 0, 1.6666665, 0, 0,
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
-[connection signal="input_event" from="Head/Area3D" to="." method="_on_area_3d_input_event"]

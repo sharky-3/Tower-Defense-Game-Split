@@ -9,18 +9,13 @@ const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 @export var apply_head_tilt: bool = false
 
 """ [[ Node references ]] """
-@onready var body: MeshInstance3D = $Body
+@onready var base: MeshInstance3D = $Base
 @onready var head = $Head
 
 @onready var collision: CollisionShape3D = $Area3D/Collision
 @onready var area_3d: Area3D = $Area3D
 @onready var timer: Timer = $Timer
 @onready var ray_cast: RayCast3D = $Head/RayCast3D
-
-@onready var front_raycast: RayCast3D = $Body/Front
-@onready var left_raycast: RayCast3D = $Body/Left
-@onready var back_raycast: RayCast3D = $Body/Back
-@onready var right_raycast: RayCast3D = $Body/Right
 
 """ [[ Stats ]] """
 var tower_is_placed: bool = false
@@ -32,7 +27,6 @@ var tower_damage: float = 0.0
 var rotation_speed: float = 6.0
 
 var tower_name: String = Global.tower_name
-
 
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
@@ -79,28 +73,21 @@ func aim_at_target(delta: float):
 	var target_pitch = atan2(-direction.y, horizontal_distance)
 
 	head.rotation.y = lerp_angle(head.rotation.y, target_yaw, rotation_speed * delta)
-	head.rotation.x = lerp_angle(head.rotation.x, target_pitch, rotation_speed * delta) if apply_head_tilt else 0
-	head.rotation.z = lerp_angle(head.rotation.z, target_pitch, rotation_speed * delta) if apply_head_tilt else 0
+	head.rotation.x = lerp_angle(head.rotation.x, target_pitch, rotation_speed * delta) if apply_head_tilt else 0.0
+	head.rotation.z = lerp_angle(head.rotation.z, target_pitch, rotation_speed * delta) if apply_head_tilt else 0.0
 
 	update_raycast(target_pos)
 	
 func update_raycast(target_global_pos: Vector3):
 	if not ray_cast or current_target == null: return
 
-	var local_target = head.to_local(target_global_pos)
+	var local_target = ray_cast.to_local(target_global_pos)
 	ray_cast.target_position = local_target
 	ray_cast.enabled = true
-
-func can_tower_be_placed() -> bool:
-	if front_raycast.is_colliding() or left_raycast.is_colliding() or left_raycast.is_colliding() or right_raycast.is_colliding():
-		return false
-	return true
 	
 func tower_placed():
-	var can_place: bool = can_tower_be_placed()
-	if can_place:
-		tower_is_placed = true
-		update_range(tower_range)
+	tower_is_placed = true
+	update_range(tower_range)
 
 func update_range(value: float):
 	if tower_is_placed:
@@ -125,9 +112,6 @@ func on_shoot_timer_timeout():
 
 func shoot_enemy(target: Node3D):
 	var enemy_node: Node3D = target.get_parent().get_parent()
-	var posX = enemy_node.position.x
-	var posZ = enemy_node.position.z
-	
 	if enemy_node and enemy_node.has_method("take_damage"):
 		enemy_node.take_damage(tower_damage)
 		

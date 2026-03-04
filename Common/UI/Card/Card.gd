@@ -108,8 +108,6 @@ func get_cursor_position():
 	var ray_dir: Vector3 = camera.project_ray_normal(mouse_pos)
 	var ray_end: Vector3 = ray_origin + ray_dir * 1000.0
 
-	var space_state = camera.get_world_3d().direct_space_state
-
 	var query = PhysicsRayQueryParameters3D.new()
 	query.from = ray_origin
 	query.to = ray_end
@@ -120,7 +118,6 @@ func get_cursor_position():
 
 func rotate_velocity(delta: float) -> void:
 	if not following_mouse: return
-	var center_pos: Vector2 = global_position - (size/2)
 	velocity = (position - last_pos) / delta
 	last_pos = position
 	
@@ -132,7 +129,7 @@ func rotate_velocity(delta: float) -> void:
 	
 	rotation = displacement
 
-func handle_shadow(delta: float) -> void:
+func handle_shadow(_delta: float) -> void:
 	var center: Vector2 = get_viewport_rect().size / 2.0
 	var distance: float = global_position.x - center.x
 	shadow.position.x = lerp(0.0, -sign(distance) * max_offset_shadow, abs(distance/(center.x)))
@@ -199,7 +196,7 @@ func spawn_tower_at_mouse():
 
 	return hit_found
 		
-func follow_mouse(delta: float) -> void:
+func follow_mouse(_delta: float) -> void:
 	if not following_mouse: return
 	var mouse_pos: Vector2 = get_global_mouse_position()
 	global_position = mouse_pos - (size/2.0)
@@ -261,7 +258,6 @@ func _on_gui_input(event: InputEvent) -> void:
 	if not event is InputEventMouseMotion: return
 	
 	var mouse_pos: Vector2 = get_local_mouse_position()
-	var diff: Vector2 = (position + size) - mouse_pos
 
 	var lerp_val_x: float = remap(mouse_pos.x, 0.0, size.x, 0, 1)
 	var lerp_val_y: float = remap(mouse_pos.y, 0.0, size.y, 0, 1)
@@ -273,12 +269,14 @@ func _on_gui_input(event: InputEvent) -> void:
 	card_texture.material.set_shader_parameter("y_rot", rot_x)
 
 func _on_mouse_entered() -> void:
+	z_index = 10
 	if tween_hover and tween_hover.is_running():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
 
 func _on_mouse_exited() -> void:
+	z_index = 1
 	if tween_rot and tween_rot.is_running():
 		tween_rot.kill()
 	tween_rot = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK).set_parallel(true)

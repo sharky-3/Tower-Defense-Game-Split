@@ -66,31 +66,31 @@ var GAME_DATA = {
 	"Enemy": [
 		{ "Goblins": [
 			{ "Normal": [
-				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 3, "Speed": 1.0, "Health": 5, "Attack_Damage": 6, "Rewards": { "Gold": 3, "Exp": 2 } } } },
-				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 3, "Speed": 1.1, "Health": 5, "Attack_Damage": 7, "Rewards": { "Gold": 4, "Exp": 3 } } } },
-				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 3, "Speed": 1.2, "Health": 5, "Attack_Damage": 8, "Rewards": { "Gold": 5, "Exp": 4 } } } },
-				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 3, "Speed": 1.3, "Health": 5, "Attack_Damage": 9, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 3, "Speed": 0.5, "Health": 5, "Attack_Damage": 6, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 3, "Speed": 0.5, "Health": 5, "Attack_Damage": 7, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 3, "Speed": 0.5, "Health": 5, "Attack_Damage": 8, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 3, "Speed": 0.5, "Health": 5, "Attack_Damage": 9, "Rewards": { "Gold": 6, "Exp": 5 } } } }
 			] },
 			
 			{ "Giants": [
-				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 4, "Speed": 2.3, "Health": 24, "Attack_Damage": 24, "Rewards": { "Gold": 3, "Exp": 2 } } } },
-				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 4, "Speed": 2.4, "Health": 28, "Attack_Damage": 28, "Rewards": { "Gold": 4, "Exp": 3 } } } },
-				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 4, "Speed": 2.5, "Health": 32, "Attack_Damage": 32, "Rewards": { "Gold": 5, "Exp": 4 } } } },
-				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 4, "Speed": 2.6, "Health": 36, "Attack_Damage": 36, "Rewards": { "Gold": 6, "Exp": 5 } } } }
+				{ "Scrapper Goblin": { "Mesh": "uid://bnc5o7d66ecl2", "Stats": { "Scale": 4, "Speed": 0.45, "Health": 24, "Attack_Damage": 24, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Iron Goblin": { "Mesh": "uid://ujvqmayejrnf", "Stats": { "Scale": 4, "Speed": 0.45, "Health": 28, "Attack_Damage": 28, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Ironclad Goblin": { "Mesh": "uid://nigrfyigt3f", "Stats": { "Scale": 4, "Speed": 0.45, "Health": 32, "Attack_Damage": 32, "Rewards": { "Gold": 5, "Exp": 4 } } } },
+				{ "Armored Juggernaut": { "Mesh": "uid://b5ik3k6qomfg1", "Stats": { "Scale": 4, "Speed": 0.45, "Health": 36, "Attack_Damage": 36, "Rewards": { "Gold": 6, "Exp": 5 } } } }
 			] }
 		] },
 
 		{ "Skeletons": [
 			{  "Normal": [
-				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 2, "Speed": 0.9, "Health": 5, "Attack_Damage": 5, "Rewards": { "Gold": 3, "Exp": 2 } } } },
-				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 2, "Speed": 1.0, "Health": 6, "Attack_Damage": 6, "Rewards": { "Gold": 4, "Exp": 3 } } } },
-				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 2, "Speed": 1.1, "Health": 7, "Attack_Damage": 7, "Rewards": { "Gold": 5, "Exp": 4 } } } }
+				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 2, "Speed": 0.5, "Health": 5, "Attack_Damage": 5, "Rewards": { "Gold": 3, "Exp": 2 } } } },
+				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 2, "Speed": 0.5, "Health": 6, "Attack_Damage": 6, "Rewards": { "Gold": 4, "Exp": 3 } } } },
+				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 2, "Speed": 0.5, "Health": 7, "Attack_Damage": 7, "Rewards": { "Gold": 5, "Exp": 4 } } } }
 			] },
 			
 			{ "Giants": [
-				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 3, "Speed": 2.0, "Health": 15, "Attack_Damage": 15, "Rewards": { "Gold": 10, "Exp": 8 } } } },
-				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 3, "Speed": 2.1, "Health": 18, "Attack_Damage": 18, "Rewards": { "Gold": 12, "Exp": 10 } } } },
-				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 3, "Speed": 2.2, "Health": 21, "Attack_Damage": 21, "Rewards": { "Gold": 14, "Exp": 12 } } } }
+				{ "Bone Grunt": { "Mesh": "uid://buvy0pwnlka7o", "Stats": { "Scale": 3, "Speed": 0.45, "Health": 15, "Attack_Damage": 15, "Rewards": { "Gold": 10, "Exp": 8 } } } },
+				{ "Bone Guard": { "Mesh": "uid://dlie226iuvyhf", "Stats": { "Scale": 3, "Speed": 0.45, "Health": 18, "Attack_Damage": 18, "Rewards": { "Gold": 12, "Exp": 10 } } } },
+				{ "Bone Warden": { "Mesh": "uid://dck10wdwme0i3", "Stats": { "Scale": 3, "Speed": 0.45, "Health": 21, "Attack_Damage": 21, "Rewards": { "Gold": 14, "Exp": 12 } } } }
 			] }
 		] }
 	]
@@ -143,13 +143,11 @@ func get_tower_base_stats(_name: String) -> Dictionary:
 func get_enemies_type_array() -> Array:
 	return GAME_DATA["Enemy"]
 	
-func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
-	return {
-		"speed": stats.get("Speed", 1.0),
-		"health": stats.get("Health", 5.0),
-		"attack_damage": stats.get("Attack_Damage", 1.0),
-		"scale": stats.get("Scale", 1.0),
-	}
+func normalize_enemy_stats(dictionary: Dictionary) -> Dictionary:
+	var enemyStats: Dictionary = {}
+	for stat in dictionary:
+		enemyStats[stat] = dictionary.get(stat, 1.0)
+	return enemyStats
 
 func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var enemies = GAME_DATA["Enemy"]
@@ -158,7 +156,7 @@ func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) 
 			for size_group in e[enemy_type]:
 				if size_group.has(enemy_size):
 					for enemy in size_group[enemy_size]:
-						if enemy.has(enemy_name):
+						if enemy.has(enemy_name): 
 							return enemy[enemy_name]
 	return {}
 

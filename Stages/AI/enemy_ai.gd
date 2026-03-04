@@ -7,6 +7,7 @@ extends Node3D
 @export var health: float = 100.0
 @export var damage: float = 6.0
 @export var size: float = 1.0
+@export var reach_distance: float = 3.0
 
 @export var rewards: Dictionary = {
 	"Gold": 5,
@@ -20,10 +21,14 @@ extends Node3D
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var rayCastGroup: Node = $Ray
 
-@onready var target: Node3D = $"../Map/PlayerTower"
+@onready var target: Node3D = get_node_or_null("../SubViewportContainer/SubViewport/Map/PlayerTower")
 
 """ [[ Stats ]] """
 var rays := {}
+
+var steer_direction: float = 0.0
+var steer_timer: float = 0.0
+var steer_duration: float = 2.0
 var turn_speed: float = 10
 
 """ [[ ============================================================ ]] """
@@ -35,28 +40,49 @@ func _ready() -> void:
 			rays[ray.name] = ray
 
 func _process(delta: float) -> void:
-	var steer := get_avoidance_steer()
-	
-	if steer != 0.0: rotate_y(steer * turn_speed * delta)
+	if not target: return
+
+	var distance_sq = global_position.distance_squared_to(target.global_position)
+	if distance_sq <= self.reach_distance * self.reach_distance:
+		reached_target()
+		return
+
+	var obstacle_steer := get_avoidance_steer()
+
+	if obstacle_steer != 0.0:
+		steer_direction = obstacle_steer
+		steer_timer = steer_duration
+
+	if steer_timer > 0.0:
+		rotation.y = lerp_angle(
+			rotation.y,
+			rotation.y + steer_direction,
+			5.0 * delta
+		)	
+		steer_timer -= delta
+	else: 
+		look_at_tower(delta)
+
 	var tower_alive: bool = look_at_tower(delta)
 	if not tower_alive: speed = 0
-	
 	var current_speed = speed
-	if abs(steer) > 0.1: current_speed = speed * 0.5
+
+	if steer_timer > 0.0: current_speed = speed * 0.6
 	
 	translate(Vector3.FORWARD * current_speed * delta)
 
 """ [[ ============================================================ ]] """
 """ [[ Initialize ]] """
+
 func set_character(mesh: Mesh):
 	self.character.mesh = mesh
-	self.character.scale = Vector3( size, size, size )
+	scale = Vector3( size, size, size )
 
 func set_stats(dictionary: Dictionary):
-	self.speed = dictionary.get("speed", 1.0)
-	self.health = dictionary.get("health", 1.0)
-	self.damage = dictionary.get("damage", 1.0)
-	self.size = dictionary.get("scale", 1.0)
+	self.speed = dictionary.get("Speed", 1.0)
+	self.health = dictionary.get("Health", 1.0)
+	self.damage = dictionary.get("Attack_Damage", 1.0)
+	self.size = dictionary.get("Scale", 1.0)
 	
 	set_character(self.character.mesh)
 
@@ -65,6 +91,11 @@ func set_rewards(dictionary: Dictionary):
 	self.rewards["Exp"] = dictionary.get("Exp", 0.0)
 
 func set_group(): self.rigid_body.add_to_group("Enemy")
+
+func set_difficulty(multiplier: float):
+	self.speed *= multiplier
+	self.health *= multiplier
+	self.damage *= multiplier
 
 """ [[ ============================================================ ]] """
 """ [[ Functions ]] """
@@ -98,7 +129,6 @@ func take_damage(value: float):
 	self.health -= value
 	if self.health <= 0: character_die()
 	_global_update_player_stats("Total_Damage_Dealted", value)
-
 
 func character_die():
 	_global_update_player_stats("Enemies_Killed", 1)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://qpx5ico661eo"]
 
-[ext_resource type="Script" uid="uid://dpjbicokhw3j1" path="res://Entities/Attacks/Enemy.gd" id="1_sdh2x"]
+[ext_resource type="Script" uid="uid://g017akrfwge6" path="res://Stages/AI/enemy_ai.gd" id="1_6ecjg"]
 [ext_resource type="Texture2D" uid="uid://bcs0cxmjcsq8i" path="res://Entities/Attacks/Small/Texture/Pallet.png" id="2_6ecjg"]
 [ext_resource type="ArrayMesh" uid="uid://bnc5o7d66ecl2" path="res://Entities/Attacks/Small/Goblin/Mesh/Goblin1.obj" id="3_f31sj"]
 
@@ -49,17 +49,16 @@ _data = {
 
 [node name="Enemy" type="Node3D" groups=["ToolTip"]]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-script = ExtResource("1_sdh2x")
-character_scale = 1.0
+script = ExtResource("1_6ecjg")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.5, 0)
+transform = Transform3D(-8.742278e-09, 0, 0.2, 0, 0.2, 0, -0.2, 0, -8.742278e-09, 0, -0.0018052101, 0)
 layers = 4
 material_override = SubResource("StandardMaterial3D_nraa5")
 mesh = ExtResource("3_f31sj")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Mesh"]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, 0, 2.5, 0)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 2.5, 0)
 collision_layer = 4
 collision_mask = 4
 freeze = true
@@ -67,6 +66,15 @@ freeze = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/RigidBody3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, -2.5, 0)
 shape = SubResource("ConvexPolygonShape3D_sdh2x")
+
+[node name="Ray" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12499807, 0)
+
+[node name="Left" type="RayCast3D" parent="Ray"]
+transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08, -0.5, -0.35355338, 0.35355338, -1.545431e-08, 0, 0, -0.25)
+
+[node name="Right" type="RayCast3D" parent="Ray"]
+transform = Transform3D(0.35355338, -0.35355338, 1.545431e-08, 0, -2.1855694e-08, -0.5, 0.35355338, 0.35355338, -1.545431e-08, 0, 0, -0.25)
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 

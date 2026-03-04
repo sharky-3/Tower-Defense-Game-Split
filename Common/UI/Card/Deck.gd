@@ -53,10 +53,10 @@ func draw_card() -> void:
 				var cost = tower_data.get("Cost", 0)
 				
 				var stats = tower_data.get("Stats", {})
-				var damage = stats.get("Damage", 0)
-				var range = stats.get("Range", 0)
-				var attack_speed = stats.get("AttackSpeed", 0)
-				var can_hit_multiple = stats.get("CanHitMultipleEnemies", false)
+				var _damage: float = stats.get("Damage", 0)
+				var _range: float = stats.get("Range", 0)
+				var attack_speed: float = stats.get("AttackSpeed", 0)
+				var _can_hit_multiple: float = stats.get("CanHitMultipleEnemies", false)
 				
 				card_instance.set_up_card(i, attack_speed, tower_name, cost)
 			

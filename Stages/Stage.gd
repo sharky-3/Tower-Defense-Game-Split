@@ -73,7 +73,7 @@ func _spawn_enemy(difficulty: float) -> void:
 
 	var enemy_instance = Enemy.instantiate()
 	add_child(enemy_instance)
-	enemy_instance.add_enemy_to_group()
+	enemy_instance.set_group()
 
 	var spawn_pos = spawn_enemy_position.global_position
 	spawn_pos.y = 1
@@ -97,13 +97,13 @@ func _spawn_enemy(difficulty: float) -> void:
 	var chosen_enemy = enemy_data[enemy_name]
 
 	if chosen_enemy.has("Mesh"):
-		enemy_instance.set_enemy_mesh(load(chosen_enemy["Mesh"]))
+		enemy_instance.set_character(load(chosen_enemy["Mesh"]))
 
 	if chosen_enemy.has("Stats"):
 		var normalized_stats = Global.normalize_enemy_stats(chosen_enemy["Stats"])
-		enemy_instance.set_enemy_stats(normalized_stats)
+		enemy_instance.set_stats(normalized_stats)
 		if chosen_enemy["Stats"].has("Rewards"):
-			enemy_instance.set_enemy_rewards(chosen_enemy["Stats"]["Rewards"])
+			enemy_instance.set_rewards(chosen_enemy["Stats"]["Rewards"])
 
 	enemy_instance.set_difficulty(difficulty)
 
@@ -143,7 +143,7 @@ func _input(event):
 
 			else:
 				var tooltip_instance: Node3D = TOOL_TIP.instantiate()
-				var height: int = roundf(get_node_height(parent))
+				var height: float = roundf(get_node_height(parent))
 				
 				tooltip_instance.position = Vector3(0, height * 0.8, 0)
 				node.add_child(tooltip_instance)
