@@ -253,6 +253,7 @@ transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59
 
 [node name="Player" parent="SubViewportContainer/SubViewport" instance=ExtResource("9_skrqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+max_distance_from_center = 50.0
 
 [node name="Map" type="Node" parent="SubViewportContainer/SubViewport"]
 

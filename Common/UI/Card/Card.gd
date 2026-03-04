@@ -54,7 +54,6 @@ var grid_size: float = 5.0
 """ [[ Towers ]] """
 var tower_scene: PackedScene = null
 
-
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
 

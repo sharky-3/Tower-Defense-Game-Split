@@ -78,6 +78,7 @@ func place_item_on_ground():
 
 	while true:
 		var result = cursor_ray.cursor_position()
+		var preview_item: Node3D = self.itemPreview
 		if not result.has("collider"): break
 
 		var hit_object = result["collider"]
