@@ -1,31 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://qpx5ico661eo"]
+[gd_scene load_steps=9 format=3 uid="uid://qpx5ico661eo"]
 
 [ext_resource type="Script" uid="uid://g017akrfwge6" path="res://Entities/Attacks/ai.gd" id="1_6ecjg"]
 [ext_resource type="Texture2D" uid="uid://bcs0cxmjcsq8i" path="res://Entities/Attacks/Small/Texture/Pallet.png" id="2_6ecjg"]
 [ext_resource type="ArrayMesh" uid="uid://bnc5o7d66ecl2" path="res://Entities/Attacks/Small/Goblin/Mesh/Goblin1.obj" id="3_f31sj"]
-[ext_resource type="PackedScene" uid="uid://bb1j5mbl0aysh" path="res://Common/UI/Bar/Health/health_bar.tscn" id="4_efyd7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nraa5"]
 albedo_texture = ExtResource("2_6ecjg")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_sdh2x"]
 points = PackedVector3Array(0.08101988, 4.738219, 1.745649, 0.0981797, 4.7787447, 1.727878, 0.07428634, 4.7820435, 1.7265111, -0.9511697, 3.6986854, 0.3089403, -0.7845684, 0.86894834, 0.78431165, -0.7845684, 0.4038442, 0.78431165, -0.00021719933, 0.4038442, 1.1093141, 0.7843511, 0.4038442, 0.78431165, 0.09774518, 4.814087, 1.694045, 1.0000423, 3.6996276, 0.5204822, 1.019374, 3.763244, 0.4432472, -0.8508179, 4.1529512, -0.00034177303, -0.72374916, 4.085094, 0.5256084, -0.9511697, 3.6986854, -0.30928195, -1.109517, 0.86894834, -0.00034177303, -1.109517, 0.4038442, -0.00034177303, -0.70724106, 0, 0.706735, -0.00021719933, 0, 0.9999548, 0.70702386, 0, 0.706735, 1.109517, 0.4038442, -0.00034177303, 0.8942603, 4.085094, -0.00034177303, 0.52565217, 4.433333, -0.00034177303, 0.09774518, 4.814087, -1.6943867, 1.054128, 3.6996276, 0.37182176, 1.0356649, 3.7745533, 0.3130411, 0.07428634, 4.7820435, -1.7268529, -0.72374916, 4.085094, -0.5259502, 0.08101988, 4.738219, -1.745649, -0.7845684, 0.86894834, -0.7846535, -0.7845684, 0.4038442, -0.7846535, -0.70724106, 0, -0.70741844, -1.0000423, 0, -0.00034177303, 0.9998251, 0, -0.00034177303, 0.70702386, 0, -0.70741844, 0.7843511, 0.4038442, -0.7846535, 1.0558656, 3.6996276, -0.3858335, 1.109517, 0.86894834, -0.00034177303, 1.0426158, 3.7745533, -0.32568586, 0.0981797, 4.7787447, -1.7282199, 1.0152472, 3.763244, -0.45384145, 1.0632509, 3.6996276, -0.24776733, -0.00021719933, 0.4038442, -1.1096559, -0.00021719933, 0, -1.0002966, 0.98896444, 3.6996276, -0.52902603)
-
-[sub_resource type="QuadMesh" id="QuadMesh_efyd7"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_b80tj"]
-viewport_path = NodePath("SubViewport")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g23w0"]
-resource_local_to_scene = true
-transparency = 1
-no_depth_test = true
-albedo_texture = SubResource("ViewportTexture_b80tj")
-texture_repeat = false
-billboard_mode = 1
-billboard_keep_scale = true
-
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_cax42"]
 
 [sub_resource type="Animation" id="Animation_21x0f"]
 length = 0.001
@@ -92,22 +75,6 @@ transform = Transform3D(0.35355338, 0.35355338, -1.545431e-08, 0, -2.1855694e-08
 
 [node name="Right" type="RayCast3D" parent="Ray"]
 transform = Transform3D(0.35355338, -0.35355338, 1.545431e-08, 0, -2.1855694e-08, -0.5, 0.35355338, 0.35355338, -1.545431e-08, 0, 0, -0.25)
-
-[node name="Display" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.531967, 0)
-mesh = SubResource("QuadMesh_efyd7")
-surface_material_override/0 = SubResource("StandardMaterial3D_g23w0")
-
-[node name="Area3D" type="Area3D" parent="Display"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Display/Area3D"]
-shape = SubResource("ConcavePolygonShape3D_cax42")
-
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-size = Vector2i(250, 300)
-
-[node name="HealthBar" parent="SubViewport" instance=ExtResource("4_efyd7")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
