@@ -33,12 +33,10 @@ var rotation_speed: float = 6.0
 
 var tower_name: String = Global.tower_name
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
 
 """ [[ ============================================================ ]] """
-""" [[ Ready ]] """
+""" [[ LifeCycle ]] """
+
 func _ready() -> void:
 	load_stats()
 	timer.connect("timeout", Callable(self, "on_shoot_timer_timeout"))
@@ -50,8 +48,6 @@ func _ready() -> void:
 	if not area_3d.is_connected("body_exited", Callable(self, "_on_area_3d_body_exited")):
 		area_3d.body_exited.connect(Callable(self, "_on_area_3d_body_exited"))
 
-""" [[ ============================================================ ]] """
-""" [[ Process ]] """
 func _process(delta):
 	if not tower_is_placed: return
 	clean_tower()
@@ -59,7 +55,16 @@ func _process(delta):
 	if current_target: aim_at_target(delta)
 
 """ [[ ============================================================ ]] """
-""" [[ Rotate Tower To Target ]] """
+""" [[ Initialize ]] """
+
+func load_stats():
+	var stats = Global.get_tower_base_stats(tower_name)
+	tower_range = stats.get("Range", 5.0)
+	tower_damage = stats.get("Damage", 1.0)
+
+""" [[ ============================================================ ]] """
+""" [[ Functions ]] """
+
 func aim_at_target(delta: float):
 	if current_target == null: return
 
@@ -79,7 +84,6 @@ func aim_at_target(delta: float):
 
 	update_raycast(target_pos)
 	
-""" [[ Get Target Position ]] """
 func update_raycast(target_global_pos: Vector3):
 	if not ray_cast or current_target == null: return
 
@@ -87,34 +91,21 @@ func update_raycast(target_global_pos: Vector3):
 	ray_cast.target_position = local_target
 	ray_cast.enabled = true
 
-""" [[ ============================================================ ]] """
-""" [[ Check if you can place tower ]] """
 func can_tower_be_placed() -> bool:
 	if front_raycast.is_colliding() or left_raycast.is_colliding() or left_raycast.is_colliding() or right_raycast.is_colliding():
 		return false
 	return true
 	
-""" [[ Tower Had Been Placed ]] """
 func tower_placed():
 	var can_place: bool = can_tower_be_placed()
 	if can_place:
 		tower_is_placed = true
 		update_range(tower_range)
 
-""" [[ ============================================================ ]] """
-""" [[ Get Tower Stats ]] """
-func load_stats():
-	var stats = Global.get_tower_base_stats(tower_name)
-	tower_range = stats.get("Range", 5.0)
-	tower_damage = stats.get("Damage", 1.0)
-
-""" [[ Update Tower Range ]] """
 func update_range(value: float):
 	if tower_is_placed:
 		area_3d.scale = Vector3(value,2,value)
 
-""" [[ ============================================================ ]] """
-""" [[ Check If Tower is Alive ]] """
 func clean_tower():
 	for i in range(enemies_in_range.size() - 1, -1, -1):
 		if enemies_in_range[i] == null or !is_instance_valid(enemies_in_range[i]):
@@ -125,8 +116,6 @@ func clean_tower():
 	elif current_target == null or !is_instance_valid(current_target):
 		current_target = enemies_in_range[0]
 
-""" [[ ============================================================ ]] """
-""" [[ Shooting Timer ]] """
 func on_shoot_timer_timeout():
 	if not tower_is_placed: return
 	if enemies_in_range.is_empty(): return
@@ -134,7 +123,6 @@ func on_shoot_timer_timeout():
 	clean_tower()
 	if current_target: shoot_enemy(current_target)
 
-""" [[ Shoot Enemy ]] """
 func shoot_enemy(target: Node3D):
 	var enemy_node: Node3D = target.get_parent().get_parent()
 	var posX = enemy_node.position.x
@@ -143,12 +131,9 @@ func shoot_enemy(target: Node3D):
 	if enemy_node and enemy_node.has_method("take_damage"):
 		enemy_node.take_damage(tower_damage)
 		
-""" [[ ============================================================
-	// SIGNAL FUNCTIONS
-]] """
-
 """ [[ ============================================================ ]] """
-""" [[ Body Entered ]] """
+""" [[ Signals ]] """
+
 func _on_area_3d_body_entered(body: Node3D):
 	if body and body.is_in_group("Enemy"):
 		enemies_in_range.append(body)

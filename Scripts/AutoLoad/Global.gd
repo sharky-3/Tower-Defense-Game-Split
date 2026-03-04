@@ -96,12 +96,9 @@ var GAME_DATA = {
 	]
 }
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
-
 """ [[ ============================================================ ]] """
-""" [[ Update Player Stats ]] """
+""" [[ Player ]] """
+
 func update_player_game_stats(stat_name: String, value: float) -> void:
 	var stats = GAME_DATA["PlayerStats"]
 	for item in stats:
@@ -109,7 +106,6 @@ func update_player_game_stats(stat_name: String, value: float) -> void:
 			item["Value"] += value
 			return
 
-""" [[ Get Looking Value ]] """
 func get_looking_value(stat_name: String) -> float:
 	var stats = GAME_DATA["PlayerStats"]
 	for item in stats:
@@ -118,16 +114,15 @@ func get_looking_value(stat_name: String) -> float:
 	return 0.0
 
 """ [[ ============================================================ ]] """
-""" [[ Get Towers ]] """
+""" [[ Tower ]] """
+
 func get_towers_stats():
 	var towers = GAME_DATA["Towers"]
 	return towers
 
-""" [[ Set Tower Name ]] """
 func set_new_tower_name(new_name: String) -> void:
 	tower_name = new_name
 
-""" [[ Get Base Tower Mesh ]] """
 func get_base_mesh(_name: String) -> PackedScene:
 	var towers = GAME_DATA["Towers"]
 	for t in towers:
@@ -135,7 +130,6 @@ func get_base_mesh(_name: String) -> PackedScene:
 			return load(t[_name]["Mesh"])
 	return null
 
-""" [[ Get Base Tower Stats ]] """
 func get_tower_base_stats(_name: String) -> Dictionary:
 	var towers = GAME_DATA["Towers"]
 	for t in towers:
@@ -144,11 +138,11 @@ func get_tower_base_stats(_name: String) -> Dictionary:
 	return {}
 
 """ [[ ============================================================ ]] """
-""" [[ Get All Enemies ]] """
+""" [[ Enemy ]] """
+
 func get_enemies_type_array() -> Array:
 	return GAME_DATA["Enemy"]
 	
-""" [[ Normalize Enemy ]] """
 func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
 	return {
 		"speed": stats.get("Speed", 1.0),
@@ -157,7 +151,6 @@ func normalize_enemy_stats(stats: Dictionary) -> Dictionary:
 		"scale": stats.get("Scale", 1.0),
 	}
 
-""" [[ Get Base Enemy ]] """
 func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var enemies = GAME_DATA["Enemy"]
 	for e in enemies:
@@ -169,18 +162,17 @@ func get_base_enemy(enemy_type: String, enemy_size: String, enemy_name: String) 
 							return enemy[enemy_name]
 	return {}
 
-""" [[ Get Enemy Stats ]] """
 func get_enemy_stats(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var base = get_base_enemy(enemy_type, enemy_size, enemy_name)
 	return base.get("Stats", {})
 
-""" [[ Get Enemy Rewards ]] """
 func get_enemy_reward(enemy_type: String, enemy_size: String, enemy_name: String) -> Dictionary:
 	var stats = get_base_enemy(enemy_type, enemy_size, enemy_name)
 	return stats.get("Stats", {}).get("Rewards", {})
 
 """ [[ ============================================================ ]] """
-""" [[ Placing Grid Positions ]] """
+""" [[ Environment ]] """
+
 func cache_placing_positions(placing_position: Node3D):
 	for child in placing_position.get_children():
 		if child is StaticBody3D and child.is_in_group("PlacingGrid"):

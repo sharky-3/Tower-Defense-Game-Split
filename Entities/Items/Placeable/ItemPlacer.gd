@@ -12,6 +12,7 @@ var camera: Camera3D = null
 var itemScene: PackedScene = null
 var itemPreview: Node3D = null
 var currentScene = null
+var add_child_function: Callable
 
 """ [[ ============================================================ ]] """
 """ [[ Classes ]] """
@@ -44,14 +45,19 @@ class CursorRay:
 		return result
 
 """ [[ ============================================================ ]] """
-""" [[ Functions ]] """
+""" [[ Initialize ]] """
 
-func _init(camera: Camera3D, scene: PackedScene, preview: Node3D, current) -> void:
+func _init(camera: Camera3D, scene: PackedScene, preview: Node3D, current, callAble: Callable) -> void:
 	self.camera = camera
 	self.itemScene = scene
 	self.itemPreview = preview
-	self.cursor_ray = CursorRay.new(camera)
 	self.currentScene = current
+	self.add_child_function = callAble
+
+	self.cursor_ray = CursorRay.new(camera)
+
+""" [[ ============================================================ ]] """
+""" [[ Functions ]] """
 
 func snap_to_grid(position: Vector3) -> Vector3:
 	return Vector3(
@@ -79,7 +85,9 @@ func place_item_on_ground():
 		hit_found = true
 
 		if hit_object.is_in_group("PlacingGrid") and itemPreview:
-			if itemPreview.get_parent() == null: self.currentScene.add_child(itemPreview)
+			if itemPreview.get_parent() == null:
+				if add_child_function.is_valid(): add_child_function.call(itemPreview)
+				#self.currentScene.add_child(itemPreview)
 
 			if itemPreview.has_method("tower_placed") and itemPreview.has_method("can_tower_be_placed"):
 				if itemPreview.can_tower_be_placed(): itemPreview.tower_placed()

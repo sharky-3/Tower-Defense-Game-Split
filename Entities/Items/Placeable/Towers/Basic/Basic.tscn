@@ -15,7 +15,6 @@ points = PackedVector3Array(-1.228615, 1.190177, -0.21943623, -1.228615, 1.19017
 
 [node name="Tower" type="Node3D" groups=["ToolTip"]]
 script = ExtResource("1_x0r5m")
-apply_head_tilt = true
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1, 0)

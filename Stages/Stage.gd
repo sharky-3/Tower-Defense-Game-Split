@@ -23,13 +23,16 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 """ [[ Stats ]] """
 var current_wave: int = 0
+	
+""" [[ ============================================================ ]] """
+""" [[ LifeCycle ]] """
 
-""" [[ ============================================================
-	// HELPER FUNCTIONS
-]] """
+func _ready() -> void:
+	start_wave_system()
 
 """ [[ ============================================================ ]] """
-""" [[ Get Node Height ]] """
+""" [[ Functions ]] """
+
 func get_node_height(node: Node3D) -> float:
 	var mesh_instance = null
 	
@@ -42,22 +45,10 @@ func get_node_height(node: Node3D) -> float:
 		var aabb = mesh_instance.mesh.get_aabb()
 		return aabb.size.y
 	return 0.0
-	
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
 
-""" [[ ============================================================ ]] """
-""" [[ Ready ]] """
-func _ready() -> void:
-	start_wave_system()
-
-""" [[ Start Wave System ]] """
 func start_wave_system() -> void:
 	async_wave_loop()
 
-""" [[ ============================================================ ]] """
-""" [[ Wave Loop ]] """
 func async_wave_loop() -> void:
 	while true:
 		for wave_index in range(enemies_per_wave.size()):
@@ -72,14 +63,11 @@ func async_wave_loop() -> void:
 				await get_tree().create_timer(0.1).timeout
 			await get_tree().create_timer(time_between_waves).timeout
 
-""" [[ ============================================================ ]] """
-""" [[ Get Random SPawn Offset ]] """
 func _get_random_spawn_offset() -> Vector3:
 	var distance = randf_range(min_distance, max_distance)
 	var angle = randf_range(0, TAU)
 	return Vector3(cos(angle) * distance, 0, sin(angle) * distance)
 
-""" [[ Spawn Enemy ]] """
 func _spawn_enemy(difficulty: float) -> void:
 	if not is_instance_valid(spawn_enemy_position): return
 
@@ -122,7 +110,8 @@ func _spawn_enemy(difficulty: float) -> void:
 	_update_player_game_stats("Enimies_Spawned", 1)
 
 """ [[ ============================================================ ]] """
-""" [[ Input ]] """
+""" [[ Events ]] """
+
 func _input(event):
 	if event is InputEventMouseButton and event.pressed and event.is_action("LEFT_MOUSE_CLICK"):
 		var mouse_pos = subviewport.get_mouse_position()
@@ -162,10 +151,8 @@ func _input(event):
 				
 			node = node.get_parent()
 
-""" [[ ============================================================
-	// GLOBAL
-]] """
+""" [[ ============================================================ ]] """
+""" [[ Globals ]] """
 
-""" [[ Update Player Stats ]] """
 func _update_player_game_stats(stat_name: String, value: int):
 	Global.update_player_game_stats(stat_name, value)

@@ -54,28 +54,50 @@ var grid_size: float = 5.0
 """ [[ Towers ]] """
 var tower_scene: PackedScene = null
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
 
 """ [[ ============================================================ ]] """
-""" [[ Ready ]] """
+""" [[ LifeCycle ]] """
+
 func _ready() -> void:
 	angle_x_max = deg_to_rad(angle_x_max)
 	angle_y_max = deg_to_rad(angle_y_max)
 	collision_shape.set_deferred("disabled", true)
 	
 	var camera : Camera3D = get_viewport().get_camera_3d()
-	ItemPlacerClass = ItemPlacer.new(camera, tower_scene, preview_tower, get_tree().current_scene)
+	ItemPlacerClass = ItemPlacer.new(
+		camera, tower_scene, preview_tower, get_tree().current_scene, 
+		Callable(self, "add_placing_child")
+	)
 	
-""" [[ Process ]] """
 func _process(delta: float) -> void:
 	rotate_velocity(delta)
 	handle_shadow(delta)
 	follow_mouse(delta)
 
 """ [[ ============================================================ ]] """
-""" [[ Camera ]] """
+""" [[ Initialize ]] """
+
+func set_up_card(
+	lvl: int = 1, 
+	timer: float = 1.5,
+	towerName: String = "Name",
+	gold: int = 100
+):
+	self.name = towerName
+	tower_name.text = towerName
+	lvl_value.text = str(lvl)
+	timer_value.text = str(timer)
+	gold_value.text = "$%d" % gold
+	
+	var towers = Global.GAME_DATA["Towers"]
+	tower_scene = null
+	for t in towers:
+		if t.has(towerName):
+			tower_scene = load(t[towerName]["Mesh"])
+			break
+
+""" [[ ============================================================ ]] """
+""" [[ Functions ]] """
 
 func get_cursor_position():
 	var camera: Camera3D = get_viewport().get_camera_3d()
@@ -97,8 +119,6 @@ func get_cursor_position():
 
 	return 
 
-""" [[ ============================================================ ]] """
-""" [[ Rotate ]] """
 func rotate_velocity(delta: float) -> void:
 	if not following_mouse: return
 	var center_pos: Vector2 = global_position - (size/2)
@@ -113,13 +133,11 @@ func rotate_velocity(delta: float) -> void:
 	
 	rotation = displacement
 
-""" [[ Shadow ]] """	
 func handle_shadow(delta: float) -> void:
 	var center: Vector2 = get_viewport_rect().size / 2.0
 	var distance: float = global_position.x - center.x
 	shadow.position.x = lerp(0.0, -sign(distance) * max_offset_shadow, abs(distance/(center.x)))
 
-""" [[ Drag ]] """
 func set_drag_visuals(is_dragging: bool) -> void:
 	if drag_tween and drag_tween.is_running(): drag_tween.kill()
 	drag_tween = create_tween().set_parallel(true)
@@ -131,7 +149,6 @@ func set_drag_visuals(is_dragging: bool) -> void:
 	drag_tween.tween_property(self, "modulate:a", target_alpha, 0.15)
 	drag_tween.tween_property(card_texture, "modulate:a", target_alpha, 0.15)
 	
-""" [[ Place Tower ]] """
 func spawn_tower_at_mouse():
 	var camera: Camera3D = get_viewport().get_camera_3d()
 	if camera == null or tower_scene == null: 
@@ -183,7 +200,6 @@ func spawn_tower_at_mouse():
 
 	return hit_found
 		
-""" [[ Fallow Mouse ]] """
 func follow_mouse(delta: float) -> void:
 	if not following_mouse: return
 	var mouse_pos: Vector2 = get_global_mouse_position()
@@ -191,8 +207,6 @@ func follow_mouse(delta: float) -> void:
 	
 	ItemPlacerClass.item_preview_follow_mouse(preview_tower)
 
-""" [[ ============================================================ ]] """
-""" [[ Handle Mouse Click ]] """
 func handle_mouse_click(event: InputEvent) -> void:
 	if not event is InputEventMouseButton: return
 	if event.button_index != MOUSE_BUTTON_LEFT: return
@@ -236,7 +250,12 @@ func handle_mouse_click(event: InputEvent) -> void:
 		displacement = 0.0
 		oscillator_velocity = 0.0
 
-""" [[ Card Interaction ]] """
+func add_placing_child(child: Node3D):
+	get_tree().current_scene.add_child(child)
+
+""" [[ ============================================================ ]] """
+""" [[ Events ]] """
+
 func _on_gui_input(event: InputEvent) -> void:
 	handle_mouse_click(event)
 	if following_mouse: return
@@ -254,14 +273,12 @@ func _on_gui_input(event: InputEvent) -> void:
 	card_texture.material.set_shader_parameter("x_rot", rot_y)
 	card_texture.material.set_shader_parameter("y_rot", rot_x)
 
-""" [[ Mouse Entered ]] """
 func _on_mouse_entered() -> void:
 	if tween_hover and tween_hover.is_running():
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2(1.2, 1.2), 0.5)
 
-""" [[ Mouse Left ]] """
 func _on_mouse_exited() -> void:
 	if tween_rot and tween_rot.is_running():
 		tween_rot.kill()
@@ -273,24 +290,3 @@ func _on_mouse_exited() -> void:
 		tween_hover.kill()
 	tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_ELASTIC)
 	tween_hover.tween_property(self, "scale", Vector2.ONE, 0.55)
-
-""" [[ ============================================================ ]] """
-""" [[ Set Up Card ]] """
-func set_up_card(
-	lvl: int = 1, 
-	timer: float = 1.5,
-	towerName: String = "Name",
-	gold: int = 100
-):
-	self.name = towerName
-	tower_name.text = towerName
-	lvl_value.text = str(lvl)
-	timer_value.text = str(timer)
-	gold_value.text = "$%d" % gold
-	
-	var towers = Global.GAME_DATA["Towers"]
-	tower_scene = null
-	for t in towers:
-		if t.has(towerName):
-			tower_scene = load(t[towerName]["Mesh"])
-			break

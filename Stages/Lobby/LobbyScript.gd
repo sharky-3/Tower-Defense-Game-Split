@@ -24,19 +24,15 @@ var camera_transform := {
 	}
 }
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
-
 """ [[ ============================================================ ]] """
-""" [[ Ready ]] """
+""" [[ LifeCycle ]] """
+
 func _ready() -> void:
 	camera_transform["position"]["original"] = camera_3d.position
 	camera_transform["rotation"]["original"] = camera_3d.rotation_degrees
 
 	screen_center = get_viewport().get_visible_rect().size / 2
 
-""" [[ Process ]] """
 func _process(delta: float) -> void:
 	var mouse_pos = get_viewport().get_mouse_position()
 
@@ -63,7 +59,8 @@ func _process(delta: float) -> void:
 	)
 
 """ [[ ============================================================ ]] """
-""" [[ Map Design ]] """
+""" [[ Functions ]] """
+
 func _on_map_design_pressed() -> void:
 	var tween := create_tween()
 	tween.set_parallel(true)

@@ -33,19 +33,15 @@ var smooth_pitch_lerp := 12.0
 
 var pitch_target := 0.0
 
-""" [[ ============================================================
-	// FUNCTIONS
-]] """
-
 """ [[ ============================================================ ]] """
-""" [[ Ready ]] """
+""" [[ LifeCycle ]] """
+
 func _ready():
 	move_target = position
 	rotate_keys_target = rotation.y
 	zoom_target = camera.position.z
 	pitch_target = camera_rotation_x.rotation.x
 	
-""" [[ Process ]] """
 func _process(delta):
 	handle_edge_pan()
 	handle_rotate_keys(delta)
@@ -55,19 +51,15 @@ func _process(delta):
 	clamp_to_bounds()
 	apply_smoothing(delta)
 
-""" [[ UnHandle Input ]] """
-func _unhandled_input(event):
-	handle_mouse_rotation(event)
-
 """ [[ ============================================================ ]] """
-""" [[ Keyboard Movement ]] """
+""" [[ Functions ]] """
+
 func handle_wasd_movement():
 	var input_dir := Input.get_vector("left", "right", "up", "down")
 	if input_dir != Vector2.ZERO:
 		var move_vec := transform.basis * Vector3(input_dir.x, 0, input_dir.y)
 		move_target += move_vec.normalized() * move_speed
 
-""" [[ Mouse Movement ]] """
 func handle_edge_pan():
 	var mouse_pos := get_viewport().get_mouse_position()
 	var view := get_viewport().get_visible_rect().size
@@ -82,13 +74,11 @@ func handle_edge_pan():
 	if pan.length_squared() > 0:
 		move_target += transform.basis * pan * move_speed
 
-""" [[ Keyboard Rotation ]] """
 func handle_rotate_keys(delta):
 	var axis := Input.get_axis("rotate_right", "rotate_left")
 	if axis != 0:
 		rotate_keys_target += axis * rotate_keys_speed * delta
 
-""" [[ Zoom ]] """
 func handle_zoom():
 	var zoom_dir := (
 		int(Input.is_action_just_released("camera_zoom_out")) -
@@ -97,7 +87,6 @@ func handle_zoom():
 	if zoom_dir != 0:
 		zoom_target = clamp(zoom_target + zoom_dir * zoom_speed, min_zoom, max_zoom)
 
-""" [[ Mouse Rotation ]] """
 func handle_mouse_rotation(event):
 	if event is InputEventMouseMotion and Input.is_action_pressed("rotate"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -109,8 +98,6 @@ func handle_mouse_rotation(event):
 	elif event is InputEventMouseButton and event.is_released():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-""" [[ ============================================================ ]] """
-""" [[ Clamp Bounds ]] """
 func clamp_to_bounds():
 	move_target.x = clamp(
 		move_target.x,
@@ -124,8 +111,6 @@ func clamp_to_bounds():
 		center_point.z + max_distance_from_center
 	)
 
-""" [[ ============================================================ ]] """
-""" [[ Smoothness ]] """
 func apply_smoothing(delta):
 	var p_lerp = clamp(smooth_pos_lerp * delta, 0, 1)
 	var r_lerp = clamp(smooth_rot_lerp * delta, 0, 1)
@@ -136,3 +121,9 @@ func apply_smoothing(delta):
 	rotation.y = lerp_angle(rotation.y, rotate_keys_target, r_lerp)
 	camera.position.z = lerp(camera.position.z, zoom_target, z_lerp)
 	camera_rotation_x.rotation.x = lerp(camera_rotation_x.rotation.x, pitch_target, pitch_lerp)
+
+""" [[ ============================================================ ]] """
+""" [[ Events ]] """
+
+func _unhandled_input(event):
+	handle_mouse_rotation(event)
