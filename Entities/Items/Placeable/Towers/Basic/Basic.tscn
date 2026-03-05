@@ -17,7 +17,7 @@ points = PackedVector3Array(-1.228615, 1.190177, -0.21943623, -1.228615, 1.19017
 height = 6.901367
 radius = 2.0
 
-[node name="Tower" type="Node3D" groups=["ToolTip"]]
+[node name="Tower" type="Node3D"]
 script = ExtResource("1_x0r5m")
 
 [node name="Area3D" type="Area3D" parent="."]
