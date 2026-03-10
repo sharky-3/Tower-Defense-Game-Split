@@ -36,7 +36,7 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_k8it
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.98618174, -0.093293354, 0.1369013, 7.566612e-08, 0.82636356, 0.56313676, -0.16566719, -0.5553552, 0.8149447, 0, 4.540125, -5.9411197)
 light_color = Color(1, 0.685, 0.37, 1)
-light_energy = 1.2
+light_energy = 2.2
 shadow_enabled = true
 directional_shadow_mode = 1
 directional_shadow_pancake_size = 400.0
