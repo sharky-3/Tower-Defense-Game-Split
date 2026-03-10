@@ -13,13 +13,18 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 @export var max_distance: float = 10
 @export var min_distance: float = 5.0
 
-""" [[ Node references ]] """
-@onready var player_tower: Node3D = $SubViewportContainer/SubViewport/Map/PlayerTower
-@onready var spawn_enemy_position: Node3D = $SubViewportContainer/SubViewport/Map/spawn_enemy_position
+@export_category("User Interface")
+@export var ui_duration: float = 0.2
 
-@onready var subviewport: SubViewport = $SubViewportContainer/SubViewport
-@onready var player_camera: Node3D = $SubViewportContainer/SubViewport/Player
+""" [[ Node references ]] """
+@onready var player_tower: Node3D = $World/SubViewport/Map/PlayerTower
+@onready var spawn_enemy_position: Node3D = $World/SubViewport/Map/spawn_enemy_position
+@onready var subviewport: SubViewport = $World/SubViewport
+@onready var player_camera: Node3D = $World/SubViewport/Player
 @onready var camera: Camera3D = player_camera.find_child("Camera3D", true, false)
+
+@onready var menu: SubViewportContainer = $Menu
+@onready var menu_ui: Control = $Menu/SubViewport/MenuUI
 
 """ [[ Stats ]] """
 var current_wave: int = 0
@@ -108,11 +113,27 @@ func _spawn_enemy(difficulty: float) -> void:
 	enemy_instance.set_difficulty(difficulty)
 
 	_update_player_game_stats("Enimies_Spawned", 1)
+	
+func pause_ui_transition_progress(progress: float) -> void:
+	menu.material.set_shader_parameter("progress", progress)
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
 
 func _input(event):
+	if event and event.is_action_pressed("ui_cancel"):
+		if menu_ui.menu_opened:
+			if menu_ui.has_method("close"): menu_ui.close()
+			
+			var tween: Tween = create_tween()
+			tween.tween_method(pause_ui_transition_progress, 0.0, 1.0, ui_duration)
+			tween.chain().tween_callback(menu.hide)
+		
+		elif not menu.visible:
+			pause_ui_transition_progress(0.0)
+			$Menu.show()
+			menu_ui.open()
+	
 	if event is InputEventMouseButton and event.pressed and event.is_action("LEFT_MOUSE_CLICK"):
 		var mouse_pos = subviewport.get_mouse_position()
 		var ray_origin = camera.project_ray_origin(mouse_pos)

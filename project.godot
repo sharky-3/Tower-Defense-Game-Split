@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*res://Scripts/AutoLoad/Global.gd"
+UISFX="*res://Scripts/AutoLoad/uisfx.gd"
 
 [display]
 

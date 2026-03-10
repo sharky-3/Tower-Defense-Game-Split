@@ -113,7 +113,7 @@ func shoot_enemy(target: Node3D):
 	var enemy_node: Node3D = target.get_parent().get_parent()
 	
 	if muzzle and audio_stream and muzzle.has_method("fire_effect"): 
-		audio_stream.play()
+		#audio_stream.play()
 		muzzle.fire_effect()
 	
 	if enemy_node and enemy_node.has_method("take_damage"):
