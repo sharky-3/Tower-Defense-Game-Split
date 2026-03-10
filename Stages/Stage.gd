@@ -7,9 +7,9 @@ const Enemy = preload("uid://qpx5ico661eo")
 const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 """ [[ Constants / Exported Data ]] """
-@export var enemies_per_wave: Array[int] = [2, 2, 2, 2, 2]
+@export var starting_enemies: int = 2
+@export var enemy_multiplier: float = 1.25
 @export var time_between_waves: float = 15.0
-@export var difficulty_per_wave: Array[float] = [1, 1.2, 1.5, 1.8, 2.0]
 @export var max_distance: float = 10
 @export var min_distance: float = 5.0
 
@@ -51,17 +51,17 @@ func start_wave_system() -> void:
 
 func async_wave_loop() -> void:
 	while true:
-		for wave_index in range(enemies_per_wave.size()):
-			current_wave = wave_index + 1
-			_update_player_game_stats("Waves_Played", 1)
-
-			var enemy_count = enemies_per_wave[wave_index]
-			var difficulty = difficulty_per_wave[wave_index] if wave_index < difficulty_per_wave.size() else 1.0
-
-			for i in range(enemy_count):
-				_spawn_enemy(difficulty)
-				await get_tree().create_timer(0.1).timeout
-			await get_tree().create_timer(time_between_waves).timeout
+		current_wave += 1
+		_update_player_game_stats("Waves_Played", 1)
+		var enemy_count = int(starting_enemies * pow(enemy_multiplier, current_wave - 1))
+		var difficulty = 1.0 + (current_wave * 0.15)
+		
+		print("Wave:", current_wave, "Enemies:", enemy_count)
+		
+		for i in range(enemy_count):
+			_spawn_enemy(difficulty)
+			await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(time_between_waves).timeout
 
 func _get_random_spawn_offset() -> Vector3:
 	var distance = randf_range(min_distance, max_distance)
