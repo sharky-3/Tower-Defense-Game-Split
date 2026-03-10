@@ -35,7 +35,7 @@ shader_parameter/outline_mask = 1.0
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_d4gul")
-enemies_per_wave = Array[int]([10, 15, 20, 30, 45])
+starting_enemies = 20
 max_distance = 50.0
 min_distance = 25.0
 
@@ -312,5 +312,4 @@ grow_vertical = 2
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_bi7ie")
 volume_db = -10.0
-autoplay = true
 parameters/looping = true

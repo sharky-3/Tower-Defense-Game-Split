@@ -3,6 +3,9 @@ extends Node
 class_name ItemPlacer
 """ [[ ============================================================ ]] """
 
+""" [[ Resources ]] """
+const PLACE_EFFECT = preload("uid://d578ry1oxejr")
+
 """ [[ Stats ]] """
 var cursor_ray: CursorRay = null
 
@@ -86,8 +89,21 @@ func place_item_on_ground():
 	
 		if itemPreview:
 			if itemPreview.get_parent() == null:
-				if add_child_function.is_valid(): add_child_function.call(itemPreview)
+				if add_child_function.is_valid():
+					add_child_function.call(itemPreview)
+			itemPreview.scale = Vector3.ONE * 0.1
+
+			var tween = itemPreview.create_tween()
+			tween.tween_property(itemPreview, "scale", Vector3.ONE, 1)\
+				.set_trans(Tween.TRANS_ELASTIC)\
+				.set_ease(Tween.EASE_OUT)
+
 			if itemPreview.has_method("tower_placed"):
+				var effect: Node3D = PLACE_EFFECT.instantiate()
+				itemPreview.add_child(effect)
+				effect.position.y += 2
+
+				if effect.has_method("play_effect"): effect.play_effect()
 				itemPreview.tower_placed()
 		else: 
 			if itemPreview: itemPreview.queue_free()
