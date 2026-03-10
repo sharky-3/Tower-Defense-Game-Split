@@ -16,6 +16,7 @@ const PLACE_TOWER_SOUND = preload("uid://bi7psknl1naq4")
 @onready var area_3d: Area3D = $Area3D
 @onready var timer: Timer = $Timer
 @onready var ray_cast: RayCast3D = $Head/RayCast3D
+@onready var muzzle: Node3D = get_node("Head/Muzzle")
 
 """ [[ Stats ]] """
 var tower_is_placed: bool = false
@@ -112,6 +113,9 @@ func on_shoot_timer_timeout():
 
 func shoot_enemy(target: Node3D):
 	var enemy_node: Node3D = target.get_parent().get_parent()
+	
+	if muzzle.has_method("fire_effect"): muzzle.fire_effect()
+	
 	if enemy_node and enemy_node.has_method("take_damage"):
 		enemy_node.take_damage(tower_damage)
 		

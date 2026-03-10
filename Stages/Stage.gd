@@ -56,7 +56,7 @@ func async_wave_loop() -> void:
 		var enemy_count = int(starting_enemies * pow(enemy_multiplier, current_wave - 1))
 		var difficulty = 1.0 + (current_wave * 0.15)
 		
-		print("Wave:", current_wave, "Enemies:", enemy_count)
+		print("Wave: ", current_wave, "Enemies: ", enemy_count)
 		
 		for i in range(enemy_count):
 			_spawn_enemy(difficulty)

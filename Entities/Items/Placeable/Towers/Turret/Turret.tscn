@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4lillreyucf4"]
+[gd_scene load_steps=10 format=3 uid="uid://c4lillreyucf4"]
 
 [ext_resource type="Script" uid="uid://bjwr71vjwbwhw" path="res://Entities/Items/Placeable/Towers/TowerScript.gd" id="1_f6h0j"]
 [ext_resource type="Texture2D" uid="uid://cchfl65kj6nay" path="res://Entities/Items/Placeable/Towers/Turret/Texture/Pallet.png" id="2_3gsn4"]
 [ext_resource type="ArrayMesh" uid="uid://1o7qwhndv64j" path="res://Entities/Items/Placeable/Towers/Turret/Mesh/Head.obj" id="3_83lw8"]
 [ext_resource type="ArrayMesh" uid="uid://ea3raawdolip" path="res://Entities/Items/Placeable/Towers/Turret/Mesh/Body.obj" id="3_pwl7p"]
+[ext_resource type="PackedScene" uid="uid://ce8jyq8mrkfq3" path="res://Common/Visual Effects/Muzzle/muzzle.tscn" id="4_nk8dt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_t47gw"]
 
@@ -41,6 +42,9 @@ transform = Transform3D(0.9999999, 0, 6.357308e-08, 0, 0.9999999, 0, -6.357308e-
 target_position = Vector3(0, 0, 0)
 collide_with_areas = true
 debug_shape_thickness = 5
+
+[node name="Muzzle" parent="Head" instance=ExtResource("4_nk8dt")]
+transform = Transform3D(-2.9140926e-08, 0, 0.6666667, 0, 0.6666667, 0, -0.6666667, 0, -2.9140926e-08, -1.9897765, 1.5791559, 0)
 
 [node name="Base" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1.5, 0, -2.2649371e-07, 0, 1.5, 0, 2.2649371e-07, 0, -1.5, 0, 0, 0)

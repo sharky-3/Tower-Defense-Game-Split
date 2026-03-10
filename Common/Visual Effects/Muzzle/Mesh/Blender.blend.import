@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://deepjivf7jc7l"
-path="res://.godot/imported/Blender.blend-8f40cde750d8a67ca7fb20ffbb41c959.scn"
+path="res://.godot/imported/Blender.blend-cdcbfedfa97e2d89afe5e6d577912b78.scn"
 
 [deps]
 
-source_file="res://Common/Visual Effects/Muzzle/Blender.blend"
-dest_files=["res://.godot/imported/Blender.blend-8f40cde750d8a67ca7fb20ffbb41c959.scn"]
+source_file="res://Common/Visual Effects/Muzzle/Mesh/Blender.blend"
+dest_files=["res://.godot/imported/Blender.blend-cdcbfedfa97e2d89afe5e6d577912b78.scn"]
 
 [params]
 
