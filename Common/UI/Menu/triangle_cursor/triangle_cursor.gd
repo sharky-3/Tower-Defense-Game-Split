@@ -2,7 +2,6 @@
 extends Node2D
 class_name UiMainMenuCursor
 
-
 @onready var timer: Timer = $Timer
 
 @export_range(1.0, 1.5, 0.01) var twitch_scale := 1.15
@@ -60,9 +59,8 @@ func attach_to_option(option: Control) -> void:
 	
 	cursor_moving_tween.tween_property(self, "position", new_transform.origin, 0.06)
 	cursor_moving_tween.parallel().tween_property(self, "rotation", new_transform.get_rotation(), 0.06)
-	cursor_moving_tween.parallel().tween_property(self, "scale", Vector2(option.size.x / 135.0, option.size.y / 40.0), 0.06)
+	cursor_moving_tween.parallel().tween_property(self, "scale", Vector2(option.size.x / 150.0, option.size.y / 40.0), 0.06)
 	cursor_moving_tween.parallel().tween_property(self, "angle", -option.rotation_degrees * 0.16, 0.06)
-
 
 func twitch() -> void:
 	timer.start(1.0)
@@ -73,8 +71,7 @@ func twitch() -> void:
 	twitch_tween.tween_property(front_polygon, "scale", Vector2.ONE * twitch_scale, twitch_duration * 0.5)
 	twitch_tween.chain().tween_property(front_polygon, "scale", Vector2.ONE, twitch_duration * 0.5)
 
-
-func spawn_at_option(option: UiMainMenuOption) -> void:
+func spawn_at_option(option: UiSelectedItem) -> void:
 	hide()
 	
 	var final_transform := option.get_transform().translated(option.pivot_offset.rotated(option.rotation))

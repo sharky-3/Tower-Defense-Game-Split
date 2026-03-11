@@ -13,5 +13,4 @@ transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraRotationX/CameraZoomPivot"]
 current = true
-fov = 60.0
 script = ExtResource("2_7xgpr")

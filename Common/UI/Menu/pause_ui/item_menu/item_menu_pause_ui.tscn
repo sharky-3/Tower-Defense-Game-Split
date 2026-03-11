@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/pause_ui/item_menu/item_menu_pause_ui.gd" id="1_wlex8"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="3_284pf"]
-[ext_resource type="Texture2D" uid="uid://dd23n8yso2uni" path="res://Assets/Textures/kenney_input-prompts_1.4/steamdeck_button_b.svg" id="6_islfj"]
+[ext_resource type="Texture2D" uid="uid://dd23n8yso2uni" path="res://Assets/Images/Textures/kenney_input-prompts_1.4/steamdeck_button_b.svg" id="6_islfj"]
 [ext_resource type="FontFile" uid="uid://b4aaxiw3j538g" path="res://Assets/Font/Montserrat/static/Montserrat-SemiBoldItalic.ttf" id="7_tj0wl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sfq1b"]

@@ -1,20 +1,14 @@
 shader_type canvas_item;
 
-// Comment this if you want to use custom radius
 #define USE_CIRCUMRADIUS
 
-/** Transition of the mask effect. */
+uniform vec3 tint_color : source_color = vec3(1.0, 0.3, 0.6);
 uniform float progress: hint_range(0.0, 1.0) = 0.5;
-/** Center of the circle in normalized UV coordinates. */
 uniform vec2 center = vec2(0.5);
 
-/** The difference in the farest and the nearest waveness to the center. */
 uniform float amplitude: hint_range(0.0, 1.0) = 0.1;
-/** Amount of waves. */
 uniform float period: hint_range(0.0, 256.0, 1.0) = 5.0;
-/** Normalized rotation on 0 progress. */
 uniform float base_rotation: hint_range(0.0, 1.0) = 0.0;
-/** Additional rotation in radians, that adds with progress. */
 uniform float add_rotation = 0.4;
 
 uniform sampler2D screen: hint_screen_texture, filter_nearest;
@@ -32,7 +26,6 @@ float calc_angle(vec2 diff) {
 void fragment() {
 	float aspect_ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
 
-	// Scale coords to non-square screens.
 	vec2 ar_uv = vec2(aspect_ratio * UV.x, UV.y);
 	vec2 ar_center = vec2(aspect_ratio * center.x, center.y);
 
@@ -52,5 +45,5 @@ void fragment() {
 	COLOR.a = step(length(mask) + offset * progress, progress * radius);
 
 	vec3 albedo = texture(screen, SCREEN_UV * 0.6 + vec2(0.15)).rgb;
-	COLOR.rgb = vec3(albedo.r * 0.25, albedo.g * 0.5, albedo.b);
+	COLOR.rgb = albedo * tint_color;
 }

@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://c4418261dc1ab" path="res://Common/UI/Menu/pause_ui/background_pause_ui.gd" id="1_vywnj"]
 [ext_resource type="Shader" uid="uid://cbgka5qhroq86" path="res://Assets/Shader/UI/distortion.gdshader" id="3_2xhm7"]
 [ext_resource type="Shader" uid="uid://b4bf3knlcor8d" path="res://Assets/Shader/UI/bubbles_caustics_canvas.gdshader" id="4_d73xn"]
-[ext_resource type="Texture2D" uid="uid://jg7y5o2ql6bj" path="res://Assets/Textures/caustic_1_mask.png" id="5_j8351"]
+[ext_resource type="Texture2D" uid="uid://jg7y5o2ql6bj" path="res://Assets/Images/Textures/caustic_1_mask.png" id="5_j8351"]
 [ext_resource type="Shader" uid="uid://brfy48mtsimwp" path="res://Assets/Shader/UI/caustics_canvas.gdshader" id="6_kluir"]
-[ext_resource type="Texture2D" uid="uid://ca4ucddch0oy4" path="res://Assets/Textures/caustic_2_mask.png" id="7_5xdig"]
+[ext_resource type="Texture2D" uid="uid://ca4ucddch0oy4" path="res://Assets/Images/Textures/caustic_2_mask.png" id="7_5xdig"]
 [ext_resource type="Shader" uid="uid://bc4tcygd6k4o8" path="res://Assets/Shader/UI/gaussian_blur.gdshader" id="8_vywnj"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_jgdag"]

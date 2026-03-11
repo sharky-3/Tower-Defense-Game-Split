@@ -4,12 +4,13 @@
 [ext_resource type="Material" uid="uid://drjvdq146ek1x" path="res://Assets/Materials/ui_transitions/double_circular_cut_mask_transition.material" id="2_d6t4o"]
 [ext_resource type="Shader" uid="uid://bvenkafqpkfwr" path="res://Assets/Shader/UI/blot_cut_closeup.gdshader" id="3_ttllr"]
 [ext_resource type="Material" uid="uid://bvo0r6b2u3tun" path="res://Assets/Materials/ui_transitions/blot_cut_mask_transition.material" id="5_xxg1h"]
-[ext_resource type="PackedScene" uid="uid://cs0hfd1qv72s1" path="res://Common/UI/Menu/pause_ui/item_menu/item_menu_pause_ui.tscn" id="6_d6t4o"]
+[ext_resource type="PackedScene" uid="uid://dt45hris2sfcs" path="res://Common/UI/Menu/Selected Items/settings.tscn" id="11_l7gvk"]
 [ext_resource type="PackedScene" uid="uid://dgtg08fo02d7d" path="res://Common/UI/Menu/pause_ui/main_menu/main_menu_pause_ui.tscn" id="19_n5cv4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvw67"]
 resource_local_to_scene = true
 shader = ExtResource("3_ttllr")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
 shader_parameter/progress = 0.0
 shader_parameter/center = Vector2(0.26, 0.385)
 shader_parameter/amplitude = 0.1
@@ -39,10 +40,8 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="MainMenu"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1920, 1080)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
-
-[node name="MainMenuPauseUI" parent="MainMenu/SubViewport" instance=ExtResource("19_n5cv4")]
 
 [node name="BlotTransition" type="ColorRect" parent="MainMenu/SubViewport"]
 z_index = 50
@@ -52,10 +51,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.16027, 0.329393, 0.514597, 1)
+
+[node name="MainMenuPauseUI" parent="MainMenu/SubViewport" instance=ExtResource("19_n5cv4")]
 
 [node name="ItemMenu" type="SubViewportContainer" parent="."]
-visible = false
 material = ExtResource("5_xxg1h")
 layout_mode = 1
 anchors_preset = 15
@@ -68,9 +67,9 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="ItemMenu"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
-[node name="ItemMenuPauseUI" parent="ItemMenu/SubViewport" instance=ExtResource("6_d6t4o")]
+[node name="Settings" parent="ItemMenu/SubViewport" instance=ExtResource("11_l7gvk")]
 
 [connection signal="submenu_selected" from="MainMenu/SubViewport/MainMenuPauseUI" to="." method="_on_main_menu_pause_ui_submenu_selected"]

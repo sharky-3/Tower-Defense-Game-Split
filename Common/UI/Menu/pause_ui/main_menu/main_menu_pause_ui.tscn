@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dgtg08fo02d7d"]
+[gd_scene load_steps=14 format=3 uid="uid://dgtg08fo02d7d"]
 
 [ext_resource type="Script" uid="uid://dpqmrv3yonype" path="res://Common/UI/Menu/pause_ui/main_menu/main_menu_pause_ui.gd" id="1_ns3k1"]
 [ext_resource type="FontFile" uid="uid://ccm0ekqbubtus" path="res://Assets/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf" id="4_t1do1"]
 [ext_resource type="Texture2D" uid="uid://bqfls8iwobjoe" path="res://Assets/Images/Keyboard/enter-icon_lg_noOutline.png" id="7_ikkkg"]
 [ext_resource type="Texture2D" uid="uid://dnfuko0hhyl7u" path="res://Assets/Images/Keyboard/escape_noOutline.png" id="8_35mqh"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="9_35mqh"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected Items/selected_item.gd" id="9_g0peo"]
 [ext_resource type="PackedScene" uid="uid://c2opuuewjo3tr" path="res://Common/UI/Menu/triangle_cursor/triangle_cursor.tscn" id="11_yxs1g"]
-[ext_resource type="Script" uid="uid://dx68wves2oo4j" path="res://Common/UI/Menu/pause_ui/main_menu/ui_main_menu_option.gd" id="15_6s1bj"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="15_aongp"]
 [ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="16_8ohll"]
 
@@ -13,25 +14,14 @@
 base_font = ExtResource("4_t1do1")
 spacing_glyph = -25
 
+[sub_resource type="FontVariation" id="FontVariation_g0peo"]
+base_font = ExtResource("9_35mqh")
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_040hm"]
 blend_mode = 4
 
 [sub_resource type="FontVariation" id="FontVariation_ovcsy"]
-base_font = ExtResource("4_t1do1")
-
-[sub_resource type="LabelSettings" id="LabelSettings_h1qgf"]
-font_size = 32
-outline_size = 4
-outline_color = Color(0, 0, 0, 0.54902)
-shadow_size = 0
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ns3k1"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_s5651"]
-font_size = 32
-outline_size = 4
-outline_color = Color(0, 0, 0, 0.54902)
-shadow_size = 0
+base_font = ExtResource("9_35mqh")
 
 [node name="MainMenuPauseUI" type="Control"]
 layout_mode = 3
@@ -49,7 +39,7 @@ anchor_bottom = 1.0
 grow_vertical = 2
 
 [node name="NiceLeft" type="Polygon2D" parent="MenuInfo"]
-position = Vector2(-369.1656, 0)
+position = Vector2(-328.1656, 0)
 scale = Vector2(0.7510833, 1)
 polygon = PackedVector2Array(159, 2135, 1076, -523, -1001, -462, -996, 2252)
 
@@ -88,23 +78,76 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 213.35461
-offset_top = -623.99927
-offset_right = 1045.3546
-offset_bottom = -378.99927
+offset_left = 213.35553
+offset_top = -483.15918
+offset_right = 739.67126
+offset_bottom = -238.15918
 grow_vertical = 0
 rotation = 1.57079
 scale = Vector2(0.95, 1.15)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = SubResource("FontVariation_rjn7q")
 theme_override_font_sizes/font_size = 200
-text = "MAIN"
+text = "SPLIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TriangleCursor" parent="." node_paths=PackedStringArray("sub_viewport_texture") instance=ExtResource("11_yxs1g")]
 position = Vector2(1648, 416)
 sub_viewport_texture = NodePath("../Options/SubViewport")
+
+[node name="TooltipUI" parent="." instance=ExtResource("15_aongp")]
+layout_mode = 1
+title = "Use a Skill"
+sub_title = "Command"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TooltipUI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -374.0
+offset_top = -58.0
+offset_right = -24.0
+offset_bottom = -13.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TooltipUI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("7_ikkkg")
+expand_mode = 3
+
+[node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_g0peo")
+theme_override_font_sizes/font_size = 35
+text = "SELECT"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TooltipUI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer/HBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+texture = ExtResource("8_35mqh")
+expand_mode = 3
+
+[node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer/HBoxContainer"]
+texture_filter = 2
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_g0peo")
+theme_override_font_sizes/font_size = 35
+text = "BACK"
 
 [node name="Options" type="SubViewportContainer" parent="."]
 material = SubResource("CanvasItemMaterial_040hm")
@@ -122,272 +165,6 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="_Options" type="Control" parent="Options/SubViewport"]
-visible = false
-z_index = 10
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Skill" type="Label" parent="Options/SubViewport/_Options"]
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -329.05154
-offset_top = -299.15298
-offset_right = -107.051544
-offset_bottom = -207.15298
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(111, 46)
-theme_override_colors/font_color = Color(0.415686, 0.901961, 0.984314, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "SKILL"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.415686, 0.901961, 0.984314, 1)
-
-[node name="Item" type="Label" parent="Options/SubViewport/_Options"]
-z_index = -1
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -272.82547
-offset_top = -242.457
-offset_right = -77.82547
-offset_bottom = -150.457
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(97.5, 46)
-theme_override_colors/font_color = Color(0.0431373, 0.784314, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "ITEM"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.0431373, 0.784314, 1, 1)
-
-[node name="Equip" type="Label" parent="Options/SubViewport/_Options"]
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -332.81754
-offset_top = -188.60301
-offset_right = -80.817535
-offset_bottom = -96.60301
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(126, 46)
-theme_override_colors/font_color = Color(0.415686, 0.901961, 0.984314, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "EQUIP"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.415686, 0.901961, 0.984314, 1)
-
-[node name="Persona" type="Label" parent="Options/SubViewport/_Options"]
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -417.81747
-offset_top = -130.603
-offset_right = -25.817505
-offset_bottom = -38.602997
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(196, 46)
-theme_override_colors/font_color = Color(0.407843, 1, 0.988235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "PERSONA"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.407843, 1, 0.988235, 1)
-
-[node name="Stats" type="Label" parent="Options/SubViewport/_Options"]
-z_index = -1
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -297.87247
-offset_top = -65.04495
-offset_right = -52.872437
-offset_bottom = 26.955048
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(122.500015, 46)
-theme_override_colors/font_color = Color(0.0470588, 0.796078, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "STATS"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.0470588, 0.796078, 1, 1)
-
-[node name="Quest" type="Label" parent="Options/SubViewport/_Options"]
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -360.87247
-offset_top = -2.0568542
-offset_right = -93.87247
-offset_bottom = 89.943146
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(133.5, 46)
-theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "QUEST"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.407843, 0.909804, 0.988235, 1)
-
-[node name="SocialLink" type="Label" parent="Options/SubViewport/_Options"]
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -407.87247
-offset_top = 43.954987
-offset_right = 99.12756
-offset_bottom = 135.95499
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(253.50002, 46)
-theme_override_colors/font_color = Color(0.407843, 0.992157, 0.976471, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "SOCIAL LINK"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.407843, 0.992157, 0.976471, 1)
-
-[node name="Calendar" type="Label" parent="Options/SubViewport/_Options"]
-z_index = -1
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -427.87253
-offset_top = 111.45502
-offset_right = 18.127441
-offset_bottom = 203.45502
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(223, 46)
-theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "CALENDAR"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.407843, 0.909804, 0.988235, 1)
-
-[node name="System" type="Label" parent="Options/SubViewport/_Options"]
-z_index = -2
-material = ExtResource("16_8ohll")
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -325.37247
-offset_top = 188.45496
-offset_right = -8.372437
-offset_bottom = 280.45496
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.82, 1)
-pivot_offset = Vector2(158.50002, 46)
-theme_override_colors/font_color = Color(0.0431373, 0.796078, 0.984314, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 75
-text = "SYSTEM"
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.0431373, 0.796078, 0.984314, 1)
-
 [node name="Options" type="Control" parent="Options/SubViewport"]
 layout_mode = 3
 anchors_preset = 15
@@ -396,138 +173,104 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play" type="Label" parent="Options/SubViewport/Options"]
+[node name="Continue" type="HBoxContainer" parent="Options/SubViewport/Options"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 220.0
+offset_right = 483.0
+offset_bottom = 276.0
+pivot_offset = Vector2(126.5, 28)
+script = ExtResource("9_g0peo")
+use_item_scale_effect = true
+use_text_scale_effect = null
+
+[node name="Title" type="Label" parent="Options/SubViewport/Options/Continue"]
 z_index = -1
 material = ExtResource("16_8ohll")
-layout_mode = 0
-offset_left = 190.29411
-offset_top = 183.32263
-offset_right = 441.29413
-offset_bottom = 294.32263
-rotation = 0.08726646
-pivot_offset = Vector2(125.50001, 55.5)
-theme_override_colors/font_color = Color(0.85903335, 0.37463737, 1.92523e-07, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 90
-text = "PLAY"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 45
+text = "CONTINUE"
 vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.85882354, 0.3764706, 0, 1)
+uppercase = true
 
-[node name="Towers" type="Label" parent="Options/SubViewport/Options"]
+[node name="Settings" type="HBoxContainer" parent="Options/SubViewport/Options"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 272.0
+offset_right = 465.0
+offset_bottom = 328.0
+pivot_offset = Vector2(117.5, 28)
+script = ExtResource("9_g0peo")
+use_item_scale_effect = true
+use_text_scale_effect = null
+
+[node name="Title" type="Label" parent="Options/SubViewport/Options/Settings"]
 z_index = -1
 material = ExtResource("16_8ohll")
-layout_mode = 0
-offset_left = 192.17332
-offset_top = 300.64526
-offset_right = 425.17334
-offset_bottom = 362.64526
-rotation = -0.12217305
-pivot_offset = Vector2(116.50001, 31)
-theme_override_colors/font_color = Color(0.0431373, 0.784314, 1, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 50
-text = "TOWERS"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 45
+text = "settings"
 vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.0431373, 0.784314, 1, 1)
+uppercase = true
 
-[node name="Stats" type="Label" parent="Options/SubViewport/Options"]
+[node name="Progression" type="HBoxContainer" parent="Options/SubViewport/Options"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 325.0
+offset_right = 582.0
+offset_bottom = 381.0
+pivot_offset = Vector2(176, 28)
+script = ExtResource("9_g0peo")
+use_item_scale_effect = true
+use_text_scale_effect = null
+
+[node name="Title" type="Label" parent="Options/SubViewport/Options/Progression"]
 z_index = -1
 material = ExtResource("16_8ohll")
-layout_mode = 0
-offset_left = 235.17332
-offset_top = 344.64526
-offset_right = 398.17334
-offset_bottom = 406.64526
-rotation = -0.2617994
-pivot_offset = Vector2(81.50001, 31)
-theme_override_colors/font_color = Color(0.0470588, 0.796078, 1, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 50
-text = "STATS"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 45
+text = "progression"
 vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.0470588, 0.796078, 1, 1)
+uppercase = true
 
-[node name="Quest" type="Label" parent="Options/SubViewport/Options"]
+[node name="Quit" type="HBoxContainer" parent="Options/SubViewport/Options"]
+layout_mode = 0
+offset_left = 230.0
+offset_top = 379.0
+offset_right = 349.0
+offset_bottom = 435.0
+pivot_offset = Vector2(59.5, 28)
+script = ExtResource("9_g0peo")
+use_item_scale_effect = true
+use_text_scale_effect = null
+
+[node name="Title" type="Label" parent="Options/SubViewport/Options/Quit"]
+z_index = -1
 material = ExtResource("16_8ohll")
-layout_mode = 0
-offset_left = 203.17334
-offset_top = 408.64526
-offset_right = 381.17334
-offset_bottom = 470.64526
-rotation = -0.12217305
-pivot_offset = Vector2(89, 31)
-theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_ovcsy")
-theme_override_font_sizes/font_size = 50
-text = "QUEST"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 45
+text = "quit"
 vertical_alignment = 1
-script = ExtResource("15_6s1bj")
-base_color = Color(0.407843, 0.909804, 0.988235, 1)
-
-[node name="TooltipUI" parent="." instance=ExtResource("15_aongp")]
-layout_mode = 1
-title = "Use a Skill"
-sub_title = "Command"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="TooltipUI"]
-visible = false
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -374.0
-offset_top = -58.0
-offset_right = -24.0
-offset_bottom = -13.0
-grow_horizontal = 0
-grow_vertical = 0
-theme_override_constants/separation = 5
-alignment = 2
-
-[node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("7_ikkkg")
-expand_mode = 3
-
-[node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer"]
-layout_mode = 2
-text = "Select"
-label_settings = SubResource("LabelSettings_h1qgf")
-
-[node name="VSeparator" type="VSeparator" parent="TooltipUI/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 20
-theme_override_styles/separator = SubResource("StyleBoxEmpty_ns3k1")
-
-[node name="BButton" type="TextureRect" parent="TooltipUI/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("8_35mqh")
-expand_mode = 3
-
-[node name="Back" type="Label" parent="TooltipUI/HBoxContainer"]
-layout_mode = 2
-text = "Close"
-label_settings = SubResource("LabelSettings_s5651")
+uppercase = true
 
 [connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]

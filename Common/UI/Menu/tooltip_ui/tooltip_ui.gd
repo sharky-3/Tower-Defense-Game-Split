@@ -20,7 +20,6 @@ class_name TooltipUI
 		if is_node_ready():
 			sub_title_label.text = sub_title
 
-
 func _recalculate_titles_position(previous_size: Vector2) -> void:
 	title_label.position = title_label.position + previous_size - title_label.size
 	sub_title_container.position = title_label.position + Vector2(0.0, title_label.size.y)

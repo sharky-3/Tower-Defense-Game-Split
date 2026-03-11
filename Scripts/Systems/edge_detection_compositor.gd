@@ -24,7 +24,6 @@ func _notification(what: int) -> void:
 		if shader.is_valid():
 			rd.free_rid(shader)
 
-
 func _initialize_compute() -> void:
 	rd = RenderingServer.get_rendering_device()
 	if not rd: return
