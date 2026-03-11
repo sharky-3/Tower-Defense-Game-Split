@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://d578ry1oxejr"]
 
-[ext_resource type="Shader" uid="uid://cg3hhxapgv7r1" path="res://Common/Shader/puff.tres" id="1_lg102"]
+[ext_resource type="Shader" uid="uid://cg3hhxapgv7r1" path="res://Assets/Shader/puff.tres" id="1_lg102"]
 [ext_resource type="Script" uid="uid://cm88nau1t6qib" path="res://Common/Visual Effects/Puff/Place/place.gd" id="1_v2m6l"]
 [ext_resource type="AudioStream" uid="uid://bm17xsb5b48mm" path="res://Assets/Audio/Effects/place_item.mp3" id="3_dbplr"]
 

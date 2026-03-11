@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd5u3fco5kbkc" path="res://Common/UI/Card/Card.gd" id="1_q2jb2"]
 [ext_resource type="Texture2D" uid="uid://cc2sr51xc03u7" path="res://Common/UI/Card/Texture/Background.png" id="2_yowvl"]
-[ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Common/Shader/fake_3D.gdshader" id="3_yowvl"]
+[ext_resource type="Shader" uid="uid://sfec8twnyipw" path="res://Assets/Shader/fake_3D.gdshader" id="3_yowvl"]
 [ext_resource type="Texture2D" uid="uid://chma4hkavoqdw" path="res://Common/UI/Card/Texture/Gold.png" id="4_twk8o"]
 [ext_resource type="Texture2D" uid="uid://chuhsymkxr8bx" path="res://Common/UI/Card/Texture/Lvl.png" id="4_wd0qj"]
 [ext_resource type="FontFile" uid="uid://bur2o7vs45pli" path="res://Assets/Font/Comic_Relief,Geist,Roboto,Roboto_Flex/Comic_Relief/ComicRelief-Bold.ttf" id="5_vs11m"]

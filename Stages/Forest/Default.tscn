@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://nbh0nuuxu0hr"]
+[gd_scene load_steps=22 format=3 uid="uid://nbh0nuuxu0hr"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Stages/Stage.gd" id="1_d4gul"]
 [ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Common/Lights/EnvironmentLight.tscn" id="2_cg61v"]
@@ -9,12 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cpyqypt4q7pnd" path="res://Entities/Environment/Grass/grass.tscn" id="8_cg61v"]
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="8_ik1ra"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Entities/Player/Camera/PlayerCamera.tscn" id="9_skrqh"]
-[ext_resource type="AudioStream" uid="uid://qyei5iet5vx7" path="res://Assets/Audio/Music/Paolo_Dollorenzo-Desert_Light_drones.mp3" id="10_bi7ie"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
-[ext_resource type="Script" uid="uid://b2ck7tvyu8e00" path="res://Entities/Player/PlayerStatsScript.gd" id="11_ui4gc"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
-[ext_resource type="Shader" uid="uid://cl4owofoeik0y" path="res://Common/Shader/UI/double_circular_cut_mask_reversed.gdshader" id="14_qv1uj"]
-[ext_resource type="PackedScene" uid="uid://butdpdnphn6j3" path="res://Common/UI/Menu/menu_ui.tscn" id="15_d4gul"]
+[ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/pause_ui/pause_ui.tscn" id="15_qv1uj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amb8m"]
 albedo_color = Color(4.6205523e-06, 0.70352113, 0.9888517, 1)
@@ -35,11 +32,46 @@ shader_parameter/outline_mask = 1.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_gsfny"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cg61v"]
-shader = ExtResource("14_qv1uj")
-shader_parameter/progress = 0.0
-shader_parameter/center_1 = Vector2(0.75, 0.1)
-shader_parameter/center_2 = Vector2(0.25, 0.9)
+[sub_resource type="Shader" id="Shader_amb8m"]
+code = "shader_type canvas_item;
+
+#define USE_CIRCUMRADIUS
+
+uniform float progress: hint_range(0.0, 1.0) = 0.5;
+uniform vec2 center_1 = vec2(0.5);
+uniform vec2 center_2 = vec2(0.5);
+uniform float center_2_scale: hint_range(0.0, 1.0) = 0.8;
+
+#ifndef USE_CIRCUMRADIUS
+uniform float radius = 0.5;
+#endif
+
+void fragment() {
+	float aspect_ratio = SCREEN_PIXEL_SIZE.y / SCREEN_PIXEL_SIZE.x;
+
+	vec2 ar_uv = vec2(aspect_ratio * UV.x, UV.y);
+	vec2 ar_center_1 = vec2(aspect_ratio * center_1.x, center_1.y);
+	vec2 ar_center_2 = vec2(aspect_ratio * center_2.x, center_2.y);
+
+	vec2 mask_1 = ar_uv - ar_center_1;
+	vec2 mask_2 = ar_uv - ar_center_2;
+
+	#ifdef USE_CIRCUMRADIUS
+	float d1 = distance(ar_center_1, vec2(0.0, 0.0));
+	float d2 = distance(ar_center_1, vec2(0.0, 1.0));
+	float d3 = distance(ar_center_1, vec2(aspect_ratio * 1.0, 0.0));
+	float d4 = distance(ar_center_1, vec2(aspect_ratio * 1.0, 1.0));
+	float radius = max(max(d1, d2), max(d3, d4));
+	#endif
+
+	COLOR.a = COLOR.a * step(progress * radius, length(mask_1)) * step(progress * radius * center_2_scale, length(mask_2));
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4gul"]
+shader = SubResource("Shader_amb8m")
+shader_parameter/progress = 0.5
+shader_parameter/center_1 = Vector2(0.5, 0.5)
+shader_parameter/center_2 = Vector2(0.5, 0.5)
 shader_parameter/center_2_scale = 0.8
 
 [node name="Main" type="Node3D"]
@@ -49,9 +81,7 @@ max_distance = 50.0
 min_distance = 25.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_bi7ie")
 volume_db = -10.0
-parameters/looping = true
 
 [node name="World" type="SubViewportContainer" parent="."]
 texture_filter = 1
@@ -278,34 +308,6 @@ tower_health = 1000000.0
 
 [node name="User Interface" type="Node" parent="World/SubViewport"]
 
-[node name="Stats" type="Control" parent="World/SubViewport/User Interface"]
-visible = false
-layout_mode = 3
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -119.0
-offset_right = 119.0
-offset_bottom = 84.0
-grow_horizontal = 2
-size_flags_vertical = 0
-script = ExtResource("11_ui4gc")
-metadata/_edit_use_anchors_ = true
-
-[node name="Gold" type="Label" parent="World/SubViewport/User Interface/Stats"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -30.0
-offset_right = 30.0
-offset_bottom = 25.0
-grow_horizontal = 2
-scale = Vector2(4, 4)
-pivot_offset = Vector2(30, 0)
-text = "Gold: 0"
-metadata/_edit_use_anchors_ = true
-
 [node name="Deck" type="Control" parent="World/SubViewport/User Interface"]
 layout_mode = 3
 anchors_preset = 8
@@ -325,7 +327,7 @@ grow_vertical = 2
 
 [node name="Menu" type="SubViewportContainer" parent="."]
 visible = false
-material = SubResource("ShaderMaterial_cg61v")
+material = SubResource("ShaderMaterial_d4gul")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -334,8 +336,10 @@ grow_vertical = 2
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="Menu"]
+transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 0
 
-[node name="MenuUI" parent="Menu/SubViewport" instance=ExtResource("15_d4gul")]
+[node name="MenuUI" parent="Menu/SubViewport" instance=ExtResource("15_qv1uj")]
+visible = false

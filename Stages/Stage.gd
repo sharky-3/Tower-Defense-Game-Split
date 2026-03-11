@@ -25,6 +25,7 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 @onready var menu: SubViewportContainer = $Menu
 @onready var menu_ui: Control = $Menu/SubViewport/MenuUI
+@onready var deck: Control = $"World/SubViewport/User Interface/Deck"
 
 """ [[ Stats ]] """
 var current_wave: int = 0
@@ -122,8 +123,10 @@ func pause_ui_transition_progress(progress: float) -> void:
 
 func _input(event):
 	if event and event.is_action_pressed("ui_cancel"):
-		if menu_ui.menu_opened:
+		if menu_ui.in_main_menu:
 			if menu_ui.has_method("close"): menu_ui.close()
+			
+			deck.show()
 			
 			var tween: Tween = create_tween()
 			tween.tween_method(pause_ui_transition_progress, 0.0, 1.0, ui_duration)
@@ -133,7 +136,8 @@ func _input(event):
 			pause_ui_transition_progress(0.0)
 			$Menu.show()
 			menu_ui.open()
-	
+			deck.hide()
+			
 	if event is InputEventMouseButton and event.pressed and event.is_action("LEFT_MOUSE_CLICK"):
 		var mouse_pos = subviewport.get_mouse_position()
 		var ray_origin = camera.project_ray_origin(mouse_pos)
