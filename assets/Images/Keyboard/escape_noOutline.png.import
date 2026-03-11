@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bhopd2kv07vp6"
-path="res://.godot/imported/red_heart.png-02d92d48829fa399dc39ee351a9426ac.ctex"
+uid="uid://dnfuko0hhyl7u"
+path="res://.godot/imported/escape_noOutline.png-ccd276220e5cee3af692a2b37e06edbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icon/red_heart.png"
-dest_files=["res://.godot/imported/red_heart.png-02d92d48829fa399dc39ee351a9426ac.ctex"]
+source_file="res://Assets/Images/Keyboard/escape_noOutline.png"
+dest_files=["res://.godot/imported/escape_noOutline.png-ccd276220e5cee3af692a2b37e06edbf.ctex"]
 
 [params]
 

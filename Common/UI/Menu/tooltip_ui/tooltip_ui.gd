@@ -12,8 +12,6 @@ class_name TooltipUI
 		if is_node_ready():
 			var previous_size := title_label.size
 			title_label.text = title
-			# Forcefully recalculate container with new title text.
-			# Otherwise, node size will be recalculated later.
 			title_label.reset_size()
 			_recalculate_titles_position(previous_size)
 @export var sub_title: String = "Sub" :

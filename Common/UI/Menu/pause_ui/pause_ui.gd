@@ -5,6 +5,9 @@ extends Control
 @onready var main_menu_sub_viewport_container: SubViewportContainer = $MainMenu
 @onready var item_menu_sub_viewport_container: SubViewportContainer = $ItemMenu
 
+@onready var player: Node3D = $"../../../World/SubViewport/Player"
+@onready var spectating: Camera3D = $"../../../World/SubViewport/SpectatingCamera/Camera"
+
 @onready var sub_menu_sub_viewport_containers: Array[Control] = [
 	$ItemMenu,
 	$ItemMenu,
@@ -55,17 +58,26 @@ func reset() -> void:
 	for container in sub_menu_sub_viewport_containers:
 		container.hide()
 
+func switch_player_camera():
+	if player.has_method("is_current_camera") and player.has_method("make_current_camera"):
+		var is_current: bool = player.is_current_camera()
+		if is_current: spectating.make_current()
+		else: player.make_current_camera()
+
 func open() -> void:
 	show()
-	$"../../../World/SubViewport".render_target_update_mode = SubViewport.UpdateMode.UPDATE_DISABLED
+	var subviewport = $"../../../World/SubViewport"
+	#subviewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 	open_main_menu_first_time()
 	UISFX.play_open_pause()
-
+	switch_player_camera()
 
 func close() -> void:
 	UISFX.play_cancel()
-	$"../../../World/SubViewport".render_target_update_mode = SubViewport.UpdateMode.UPDATE_WHEN_VISIBLE
+	var subviewport = $"../../../World/SubViewport"
+	#subviewport.render_target_update_mode = SubViewport.UPDATE_WHEN_VISIBLE
 	close_main_menu()
+	switch_player_camera()
 
 func open_main_menu() -> void:
 	main_menu_pause_ui.set_process(true)

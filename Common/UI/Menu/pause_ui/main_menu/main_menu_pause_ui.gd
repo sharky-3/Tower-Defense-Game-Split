@@ -63,10 +63,10 @@ func handle_selection_update(prev_idx: int, new_idx: int) -> void:
 	
 	index.text = "%d" % (new_idx + 1)
 	tooltip_ui.title = [
-		"View / Play",
-		"View / Towers",
-		"View / Player Stats",
-		"View / Quests",
+		"Play Game",
+		"Upgrade Towers",
+		"View Player Stats",
+		"Quests",
 	][new_idx]
 	
 	move_cursor(options[new_idx])

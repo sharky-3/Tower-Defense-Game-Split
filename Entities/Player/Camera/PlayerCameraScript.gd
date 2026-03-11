@@ -121,6 +121,9 @@ func apply_smoothing(delta):
 	rotation.y = lerp_angle(rotation.y, rotate_keys_target, r_lerp)
 	camera.position.z = lerp(camera.position.z, zoom_target, z_lerp)
 	camera_rotation_x.rotation.x = lerp(camera_rotation_x.rotation.x, pitch_target, pitch_lerp)
+	
+func is_current_camera() -> bool: return camera.is_current()
+func make_current_camera(): camera.make_current()
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3mduw6x4yo1v"
-path="res://.godot/imported/cursor.png-b73e26c174381966151640ad5feb358f.ctex"
+uid="uid://bqfls8iwobjoe"
+path="res://.godot/imported/enter-icon_lg_noOutline.png-b20701c5ebe3c427d08bfaddc60a135d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icon/cursor.png"
-dest_files=["res://.godot/imported/cursor.png-b73e26c174381966151640ad5feb358f.ctex"]
+source_file="res://Assets/Images/Keyboard/enter-icon_lg_noOutline.png"
+dest_files=["res://.godot/imported/enter-icon_lg_noOutline.png-b20701c5ebe3c427d08bfaddc60a135d.ctex"]
 
 [params]
 

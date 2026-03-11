@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://idalc7w0g5ve"
-path="res://.godot/imported/ToolTip.png-360764a288615aca3123236b22bbb8ca.ctex"
+uid="uid://3mduw6x4yo1v"
+path="res://.godot/imported/cursor.png-2101be333d9e012aedcb967a1dd55d99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icon/ToolTip.png"
-dest_files=["res://.godot/imported/ToolTip.png-360764a288615aca3123236b22bbb8ca.ctex"]
+source_file="res://Assets/Images/Icon/cursor.png"
+dest_files=["res://.godot/imported/cursor.png-2101be333d9e012aedcb967a1dd55d99.ctex"]
 
 [params]
 

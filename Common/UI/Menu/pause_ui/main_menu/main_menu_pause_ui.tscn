@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dpqmrv3yonype" path="res://Common/UI/Menu/pause_ui/main_menu/main_menu_pause_ui.gd" id="1_ns3k1"]
 [ext_resource type="FontFile" uid="uid://ccm0ekqbubtus" path="res://Assets/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf" id="4_t1do1"]
-[ext_resource type="Texture2D" uid="uid://clrnp2tjxybd6" path="res://Assets/Textures/kenney_input-prompts_1.4/steamdeck_button_a.svg" id="9_3kmt1"]
+[ext_resource type="Texture2D" uid="uid://bqfls8iwobjoe" path="res://Assets/Images/Keyboard/enter-icon_lg_noOutline.png" id="7_ikkkg"]
+[ext_resource type="Texture2D" uid="uid://dnfuko0hhyl7u" path="res://Assets/Images/Keyboard/escape_noOutline.png" id="8_35mqh"]
 [ext_resource type="PackedScene" uid="uid://c2opuuewjo3tr" path="res://Common/UI/Menu/triangle_cursor/triangle_cursor.tscn" id="11_yxs1g"]
-[ext_resource type="Texture2D" uid="uid://dd23n8yso2uni" path="res://Assets/Textures/kenney_input-prompts_1.4/steamdeck_button_b.svg" id="13_aongp"]
 [ext_resource type="Script" uid="uid://dx68wves2oo4j" path="res://Common/UI/Menu/pause_ui/main_menu/ui_main_menu_option.gd" id="15_6s1bj"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="15_aongp"]
 [ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="16_8ohll"]
@@ -147,7 +147,7 @@ offset_bottom = -207.15298
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(105.999985, 52)
+pivot_offset = Vector2(111, 46)
 theme_override_colors/font_color = Color(0.415686, 0.901961, 0.984314, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -176,7 +176,7 @@ offset_bottom = -150.457
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(95.50006, 52.000008)
+pivot_offset = Vector2(97.5, 46)
 theme_override_colors/font_color = Color(0.0431373, 0.784314, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -204,7 +204,7 @@ offset_bottom = -96.60301
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(123.499985, 52)
+pivot_offset = Vector2(126, 46)
 theme_override_colors/font_color = Color(0.415686, 0.901961, 0.984314, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -232,7 +232,7 @@ offset_bottom = -38.602997
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(192.5, 52)
+pivot_offset = Vector2(196, 46)
 theme_override_colors/font_color = Color(0.407843, 1, 0.988235, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -261,7 +261,7 @@ offset_bottom = 26.955048
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(119.5, 52)
+pivot_offset = Vector2(122.500015, 46)
 theme_override_colors/font_color = Color(0.0470588, 0.796078, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -289,7 +289,7 @@ offset_bottom = 89.943146
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(131.5, 52)
+pivot_offset = Vector2(133.5, 46)
 theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -317,7 +317,7 @@ offset_bottom = 135.95499
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(239, 52)
+pivot_offset = Vector2(253.50002, 46)
 theme_override_colors/font_color = Color(0.407843, 0.992157, 0.976471, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -346,7 +346,7 @@ offset_bottom = 203.45502
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(218.00002, 52)
+pivot_offset = Vector2(223, 46)
 theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -375,7 +375,7 @@ offset_bottom = 280.45496
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.82, 1)
-pivot_offset = Vector2(155, 52)
+pivot_offset = Vector2(158.50002, 46)
 theme_override_colors/font_color = Color(0.0431373, 0.796078, 0.984314, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -405,8 +405,8 @@ offset_top = 183.32263
 offset_right = 441.29413
 offset_bottom = 294.32263
 rotation = 0.08726646
-pivot_offset = Vector2(97.5, 46)
-theme_override_colors/font_color = Color(0.0431373, 0.784314, 1, 1)
+pivot_offset = Vector2(125.50001, 55.5)
+theme_override_colors/font_color = Color(0.85903335, 0.37463737, 1.92523e-07, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
@@ -416,7 +416,7 @@ text = "PLAY"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("15_6s1bj")
-base_color = Color(0.46583098, 0.45558107, 0.42283314, 1)
+base_color = Color(0.85882354, 0.3764706, 0, 1)
 
 [node name="Towers" type="Label" parent="Options/SubViewport/Options"]
 z_index = -1
@@ -427,7 +427,7 @@ offset_top = 300.64526
 offset_right = 425.17334
 offset_bottom = 362.64526
 rotation = -0.12217305
-pivot_offset = Vector2(97.5, 46)
+pivot_offset = Vector2(116.50001, 31)
 theme_override_colors/font_color = Color(0.0431373, 0.784314, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -449,7 +449,7 @@ offset_top = 344.64526
 offset_right = 398.17334
 offset_bottom = 406.64526
 rotation = -0.2617994
-pivot_offset = Vector2(122.500015, 46)
+pivot_offset = Vector2(81.50001, 31)
 theme_override_colors/font_color = Color(0.0470588, 0.796078, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -470,7 +470,7 @@ offset_top = 408.64526
 offset_right = 381.17334
 offset_bottom = 470.64526
 rotation = -0.12217305
-pivot_offset = Vector2(133.5, 46)
+pivot_offset = Vector2(89, 31)
 theme_override_colors/font_color = Color(0.407843, 0.909804, 0.988235, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -489,29 +489,30 @@ title = "Use a Skill"
 sub_title = "Command"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TooltipUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -368.0
-offset_top = -53.0
-offset_right = -48.0
+offset_left = -374.0
+offset_top = -58.0
+offset_right = -24.0
 offset_bottom = -13.0
 grow_horizontal = 0
 grow_vertical = 0
-theme_override_constants/separation = -2
+theme_override_constants/separation = 5
 alignment = 2
 
 [node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("9_3kmt1")
+texture = ExtResource("7_ikkkg")
 expand_mode = 3
 
 [node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer"]
 layout_mode = 2
-text = "Confirm"
+text = "Select"
 label_settings = SubResource("LabelSettings_h1qgf")
 
 [node name="VSeparator" type="VSeparator" parent="TooltipUI/HBoxContainer"]
@@ -521,7 +522,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ns3k1")
 
 [node name="BButton" type="TextureRect" parent="TooltipUI/HBoxContainer"]
 layout_mode = 2
-texture = ExtResource("13_aongp")
+texture = ExtResource("8_35mqh")
 expand_mode = 3
 
 [node name="Back" type="Label" parent="TooltipUI/HBoxContainer"]

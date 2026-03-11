@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dcme2k0edqisw"
-path="res://.godot/imported/Attack.png-8c183e45b34fedd950049ca261428fcd.ctex"
+uid="uid://bhopd2kv07vp6"
+path="res://.godot/imported/red_heart.png-d2a7f7bc385066b79f706b9bb8cca481.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Icon/Attack.png"
-dest_files=["res://.godot/imported/Attack.png-8c183e45b34fedd950049ca261428fcd.ctex"]
+source_file="res://Assets/Images/Icon/red_heart.png"
+dest_files=["res://.godot/imported/red_heart.png-d2a7f7bc385066b79f706b9bb8cca481.ctex"]
 
 [params]
 

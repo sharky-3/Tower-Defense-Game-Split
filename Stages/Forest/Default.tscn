@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://nbh0nuuxu0hr"]
+[gd_scene load_steps=23 format=3 uid="uid://nbh0nuuxu0hr"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Stages/Stage.gd" id="1_d4gul"]
 [ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Common/Lights/EnvironmentLight.tscn" id="2_cg61v"]
@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="8_ik1ra"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Entities/Player/Camera/PlayerCamera.tscn" id="9_skrqh"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
+[ext_resource type="Script" uid="uid://b5dxv5bkkreh6" path="res://Scripts/Systems/menu_camera.gd" id="12_amb8m"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
 [ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/pause_ui/pause_ui.tscn" id="15_qv1uj"]
 
@@ -295,7 +296,7 @@ visible = false
 navigation_mesh = SubResource("NavigationMesh_gsfny")
 
 [node name="Player" parent="World/SubViewport" instance=ExtResource("9_skrqh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 50)
 max_distance_from_center = 50.0
 
 [node name="Map" type="Node" parent="World/SubViewport"]
@@ -309,6 +310,7 @@ tower_health = 1000000.0
 [node name="User Interface" type="Node" parent="World/SubViewport"]
 
 [node name="Deck" type="Control" parent="World/SubViewport/User Interface"]
+visible = false
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -324,6 +326,14 @@ spacing = 150.0
 anchors_preset = 0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SpectatingCamera" type="Node3D" parent="World/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+script = ExtResource("12_amb8m")
+
+[node name="Camera" type="Camera3D" parent="World/SubViewport/SpectatingCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 75)
+fov = 20.0
 
 [node name="Menu" type="SubViewportContainer" parent="."]
 visible = false

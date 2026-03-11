@@ -34,6 +34,7 @@ var current_wave: int = 0
 """ [[ LifeCycle ]] """
 
 func _ready() -> void:
+	#open_menu()
 	start_wave_system()
 
 """ [[ ============================================================ ]] """
@@ -117,27 +118,27 @@ func _spawn_enemy(difficulty: float) -> void:
 	
 func pause_ui_transition_progress(progress: float) -> void:
 	menu.material.set_shader_parameter("progress", progress)
+	
+func open_menu():
+	if menu_ui.in_main_menu:
+		if menu_ui.has_method("close"): menu_ui.close()
+		
+		var tween: Tween = create_tween()
+		tween.tween_method(pause_ui_transition_progress, 0.0, 1.0, ui_duration)
+		tween.chain().tween_callback(menu.hide)
+		
+	if not menu.visible:
+		pause_ui_transition_progress(0.0)
+		$Menu.show()
+		menu_ui.open()
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
 
 func _input(event):
 	if event and event.is_action_pressed("ui_cancel"):
-		if menu_ui.in_main_menu:
-			if menu_ui.has_method("close"): menu_ui.close()
-			
-			deck.show()
-			
-			var tween: Tween = create_tween()
-			tween.tween_method(pause_ui_transition_progress, 0.0, 1.0, ui_duration)
-			tween.chain().tween_callback(menu.hide)
-		
-		elif not menu.visible:
-			pause_ui_transition_progress(0.0)
-			$Menu.show()
-			menu_ui.open()
-			deck.hide()
-			
+		open_menu()
+
 	if event is InputEventMouseButton and event.pressed and event.is_action("LEFT_MOUSE_CLICK"):
 		var mouse_pos = subviewport.get_mouse_position()
 		var ray_origin = camera.project_ray_origin(mouse_pos)
