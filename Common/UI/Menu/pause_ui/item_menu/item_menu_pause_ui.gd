@@ -14,6 +14,7 @@ var game_settings = GameSettings.new()
 """ [[ Node references ]] """
 @onready var options: Array[HBoxContainer] = []
 @onready var player: Node3D = $"../../../../../../World/SubViewport/Player"
+@onready var tooltip_ui: TooltipUI = $TooltipUI
 
 """ [[ Stats ]] """
 const FIRST_SELECTION_IDX: int = 0
@@ -47,6 +48,18 @@ func select_next() -> void:
 
 func handle_selection_update(prev_idx: int, new_idx: int) -> void:
 	options[prev_idx].unselect()
+	
+	tooltip_ui.title = [
+		"Toggle between windowed and fullscreen modes for your game.",
+		"Set the width and height of the game window to your preference.",
+		"Adjust the camera's field of view to see more or less of the world.",
+	][new_idx]
+
+	tooltip_ui.sub_title = [
+		"Window Mode",
+		"Screen Size",
+		"Camera FOV",
+	][new_idx]
 	options[new_idx].select()
 
 func open_options() -> void:
@@ -97,3 +110,4 @@ func _input(event: InputEvent) -> void:
 
 func _on_slider_value_changed(value: float) -> void:
 	if self.slider_text: self.slider_text.text = str(int(value))
+	

@@ -10,7 +10,7 @@ var settings: Array = [
 		"CurrentSelectedValue": 2
 	},
 	{ "Name": "Resolution",
-		"Values": [ Vector2i(1280, 720), Vector2i(1920, 1080), Vector2i(2560, 1440) ], 
+		"Values": [ Vector2i(1024, 768), Vector2i(1280, 720), Vector2i(1366, 768), Vector2i(1600, 900), Vector2i(1920, 1080), Vector2i(1920, 1200), Vector2i(2560, 1440), Vector2i(2560, 1600), Vector2i(3440, 1440), Vector2i(3840, 2160), Vector2i(5120, 2880), Vector2i(7680, 4320) ],
 		"CurrentSelectedValue": 0
 	},
 	{ "Name": "Fov",
@@ -23,7 +23,7 @@ var settings: Array = [
 var previousSettingName: String = ""
 
 """ [[ ============================================================ ]] """
-""" [[ LifeCycle ]] """
+""" [[ Functions ]] """
 
 func update_game_settings(index: int, player_camera: Camera3D):
 	var setting = settings[index]
@@ -33,7 +33,7 @@ func update_game_settings(index: int, player_camera: Camera3D):
 	var current_value: int = setting.get("CurrentSelectedValue", 0)
 
 	if setting_name == "Fov":
-		var fov_options := [120, 75, 60, 45, 30]
+		var fov_options := [120, 100, 90, 75, 60, 45, 30]
 		if previousSettingName == setting_name:
 			var current_idx := fov_options.find(current_value)
 			current_idx = (current_idx + 1) % fov_options.size()
@@ -47,7 +47,6 @@ func update_game_settings(index: int, player_camera: Camera3D):
 
 	if previousSettingName == setting_name and values.size() > 0: current_value = (current_value + 1) % values.size()
 	else: previousSettingName = setting_name
-
 	setting["CurrentSelectedValue"] = current_value
 	var new_value = values[current_value] if values.size() > 0 else null
 
