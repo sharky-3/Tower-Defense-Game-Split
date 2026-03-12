@@ -14,7 +14,6 @@ const UI_TEXT_RIPPLES = preload("uid://dubel6ylnu5lm")
 
 @export_category("Selected Index")
 @export var hovered_color: Color = Color("dab227")
-@export var is_sub_menu: bool = false
 
 @export_category("Scale Effects")
 @export var use_item_scale_effect: bool = false

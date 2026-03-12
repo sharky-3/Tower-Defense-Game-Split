@@ -4,11 +4,18 @@ extends Control
 
 """ [[ Classes ]] """
 var game_settings = GameSettings.new()
+var game_editor = GameEditor.new()
 
 """ [[ Constants / Exported Data ]] """
+@export_enum("Normal", "Settings", "Editor") var menu_type: String = "Normal"
 @export_range(0, 2, 1) 
 var selected_idx: int = 0:
+	
 	set(new_selected_idx):
+		if options.is_empty():
+			selected_idx = new_selected_idx
+			return
+			
 		handle_selection_update(selected_idx, new_selected_idx)
 		selected_idx = new_selected_idx
 		
@@ -39,7 +46,10 @@ var slider_text: Label
 
 func _ready() -> void:
 	for child in $Items.get_children():
-		if child is HBoxContainer: options.append(child)
+		if child is HBoxContainer:
+			options.append(child)
+
+	selected_idx = 0
 	options[selected_idx].select()
 
 """ [[ ============================================================ ]] """
@@ -97,28 +107,45 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("ui_select"):
 		UISFX.play_select()
-		var is_sub_menu: bool = options[selected_idx].is_sub_menu
 		
-		if is_sub_menu:
-			pass
-			
-		else:
-			var player: Node3D = get_node_or_null("../../../../../../World/SubViewport/Player")
-			if player: 
-				var player_camera: Camera3D = player.get_player_camera()
-				var new_value = game_settings.update_game_settings(selected_idx, player_camera)
+		match menu_type:
+			"Normal":
+				print("Normal")
+			"Editor":
+				var new_value = game_editor.update_game_editor(selected_idx)
+				
 				var selected_option: HBoxContainer = options[selected_idx]
 				var segment_control: HBoxContainer = selected_option.get_node("Segment Control")
 				var text: Label = segment_control.get_node_or_null("Text")
 				var slider: HSlider = segment_control.get_node_or_null("Slider")
 				
 				if slider: 
-					slider.value = new_value
+					if str(new_value) == "INF": slider.value = 105
+					else: slider.value = new_value
 					self.slider_text = text
-					
+						
 				if text:
 					if typeof(new_value) == TYPE_VECTOR2I: text.text = str(new_value.x) + "x" + str(new_value.y)
 					else: text.text = str(new_value)
+				
+			"Settings":
+				var player: Node3D = get_node_or_null("../../../../../../World/SubViewport/Player")
+				if player: 
+					var player_camera: Camera3D = player.get_player_camera()
+					var new_value = game_settings.update_game_settings(selected_idx, player_camera)
+					
+					var selected_option: HBoxContainer = options[selected_idx]
+					var segment_control: HBoxContainer = selected_option.get_node("Segment Control")
+					var text: Label = segment_control.get_node_or_null("Text")
+					var slider: HSlider = segment_control.get_node_or_null("Slider")
+					
+					if slider: 
+						slider.value = new_value
+						self.slider_text = text
+						
+					if text:
+						if typeof(new_value) == TYPE_VECTOR2I: text.text = str(new_value.x) + "x" + str(new_value.y)
+						else: text.text = str(new_value)
 
 func _on_slider_value_changed(value: float) -> void:
 	if self.slider_text: self.slider_text.text = str(int(value))

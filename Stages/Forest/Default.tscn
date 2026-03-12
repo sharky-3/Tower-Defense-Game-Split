@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://nbh0nuuxu0hr"]
+[gd_scene load_steps=24 format=3 uid="uid://nbh0nuuxu0hr"]
 
 [ext_resource type="Script" uid="uid://b4v7wadteo8ju" path="res://Stages/Stage.gd" id="1_d4gul"]
 [ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Common/Lights/EnvironmentLight.tscn" id="2_cg61v"]
@@ -32,6 +32,9 @@ shader_parameter/outline_mask = 1.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fwj"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_gsfny"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_amb8m"]
+transform_format = 1
 
 [sub_resource type="Shader" id="Shader_amb8m"]
 code = "shader_type canvas_item;
@@ -294,6 +297,9 @@ transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.526381, 0)
 visible = false
 navigation_mesh = SubResource("NavigationMesh_gsfny")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="World/SubViewport/Environment"]
+multimesh = SubResource("MultiMesh_amb8m")
 
 [node name="Player" parent="World/SubViewport" instance=ExtResource("9_skrqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 50)

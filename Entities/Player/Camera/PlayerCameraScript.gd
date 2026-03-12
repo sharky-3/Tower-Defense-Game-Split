@@ -17,7 +17,7 @@ const EDGE_SIZE: float = 5.0
 var move_speed := 0.6
 var move_target := Vector3.ZERO
 
-var rotate_keys_speed := 1.5
+var rotate_keys_speed := 1.0
 var rotate_keys_target := 0.0
 var mouse_sensitivity := 0.01
 

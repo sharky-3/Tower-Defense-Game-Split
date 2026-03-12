@@ -6,7 +6,7 @@ class_name GameSettings
 """ [[ Stats ]] """
 var settings: Array = [
 	{  "Name": "Windowed Mode", 
-		"Values": ["Windowed", "Maximized", "Fullscreen"], 
+		"Values": [ "Windowed", "Maximized", "Fullscreen" ], 
 		"CurrentSelectedValue": 2
 	},
 	{ "Name": "Resolution",
@@ -32,19 +32,6 @@ func update_game_settings(index: int, player_camera: Camera3D):
 	var values: Array = setting.get("Values", [])
 	var current_value: int = setting.get("CurrentSelectedValue", 0)
 
-	if setting_name == "Fov":
-		var fov_options := [120, 100, 90, 75, 60, 45, 30]
-		if previousSettingName == setting_name:
-			var current_idx := fov_options.find(current_value)
-			current_idx = (current_idx + 1) % fov_options.size()
-			current_value = fov_options[current_idx]
-		else:
-			current_value = 75
-			previousSettingName = setting_name
-		setting["CurrentSelectedValue"] = current_value
-		if player_camera: player_camera.fov = current_value
-		return current_value
-
 	if previousSettingName == setting_name and values.size() > 0: current_value = (current_value + 1) % values.size()
 	else: previousSettingName = setting_name
 	setting["CurrentSelectedValue"] = current_value
@@ -59,5 +46,18 @@ func update_game_settings(index: int, player_camera: Camera3D):
 		"Resolution":
 			if typeof(new_value) == TYPE_VECTOR2I:
 				DisplayServer.window_set_size(new_value)
-
+		"Fov":
+			var fov_options := [120, 110, 100, 90, 75, 60, 45, 30]
+			if previousSettingName == setting_name:
+				var current_idx := fov_options.find(current_value)
+				current_idx = (current_idx + 1) % fov_options.size()
+				current_value = fov_options[current_idx]
+			else:
+				current_value = 75
+				previousSettingName = setting_name
+			setting["CurrentSelectedValue"] = current_value
+			if player_camera: player_camera.fov = current_value
+			
+			return current_value
+			
 	return new_value

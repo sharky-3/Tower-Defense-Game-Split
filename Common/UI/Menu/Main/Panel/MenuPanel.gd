@@ -24,7 +24,7 @@ extends Control
 ]
 
 @onready var sub_menus: Array[Control] = [
-	$ItemMenu/SubViewport/Settings, 
+	$ItemMenu/SubViewport/Editor, 
 	$ItemMenu/SubViewport/Settings, 
 	$ItemMenu/SubViewport/Progression, 
 	$ItemMenu/SubViewport/Settings, 
