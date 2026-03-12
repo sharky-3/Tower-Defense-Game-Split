@@ -84,8 +84,8 @@ func update_game_editor(index: int, viewport: SubViewport):
 				env_node.name = "Environment"
 				map_node.add_child(env_node)
 
-			var count = int(new_value * 2.5)
-			var rocks_count = int(round(count * 0.4))
+			var count = int(new_value * 1.5)
+			var rocks_count = int(round(count * 0.2))
 			var flowers_count = int(round(count * 0.2))
 			var remaining = count - rocks_count - flowers_count
 
@@ -108,11 +108,13 @@ func update_game_editor(index: int, viewport: SubViewport):
 			for child in env_objects:
 				existing_positions.append(child.position)
 
+			var spacing_radius: float = 10.0
+
 			for i in range(count - env_objects.size()):
 				var obj_scene = objects[i].instantiate() as Node3D
 				obj_scene.name = "EnvObject_%d" % (env_objects.size() + i)
 
-				var pos = find_valid_position(existing_positions)
+				var pos = find_valid_position(existing_positions, spacing_radius, 45)
 				if pos:
 					obj_scene.position = pos
 					existing_positions.append(pos)
@@ -133,5 +135,6 @@ func find_valid_position(existing_positions: Array, radius: float = 10, area_siz
 			if pos.distance_to(other) < radius:
 				valid = false
 				break
+				
 		if valid: return pos
-	return Vector3()
+	return Vector3(randf_range(-area_size, area_size), 0, randf_range(-area_size, area_size))

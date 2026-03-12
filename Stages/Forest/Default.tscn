@@ -329,54 +329,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_bi7ie")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Ocean/Ground/RigidBody3D"]
 shape = SubResource("BoxShape3D_80fwj")
 
-[node name="Rocks" type="Node3D" parent="World/SubViewport/Ocean"]
-transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0, 0)
-
-[node name="Rock" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.78117204, 2.4927292, 9.536743e-07, 16.25613)
-
-[node name="Rock2" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
-
-[node name="Rock3" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
-
-[node name="Rock4" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
-
-[node name="Rock5" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
-
-[node name="Rock6" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
-
-[node name="Rock7" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
-
-[node name="Rock8" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
-
-[node name="Rock9" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
-
-[node name="Rock10" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
-
-[node name="Rock11" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
-
-[node name="Rock12" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
-
-[node name="Rock13" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
-
-[node name="Rock14" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
-
-[node name="Rock15" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
-
 [node name="Environment" type="Node3D" parent="World/SubViewport/Ocean"]
 
 [node name="Desert" type="Node3D" parent="World/SubViewport"]
@@ -393,54 +345,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_qv1uj")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Desert/Ground/RigidBody3D"]
 shape = SubResource("BoxShape3D_80fwj")
 
-[node name="Rocks" type="Node3D" parent="World/SubViewport/Desert"]
-transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0, 0)
-
-[node name="Rock" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.78117204, 2.4927292, 9.536743e-07, 16.25613)
-
-[node name="Rock2" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
-
-[node name="Rock3" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
-
-[node name="Rock4" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
-
-[node name="Rock5" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
-
-[node name="Rock6" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
-
-[node name="Rock7" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
-
-[node name="Rock8" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
-
-[node name="Rock9" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
-
-[node name="Rock10" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
-
-[node name="Rock11" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
-
-[node name="Rock12" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
-
-[node name="Rock13" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
-
-[node name="Rock14" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
-
-[node name="Rock15" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
-
 [node name="Environment" type="Node3D" parent="World/SubViewport/Desert"]
 
 [node name="Placing Positions" type="Node3D" parent="World/SubViewport"]
@@ -449,6 +353,7 @@ transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0.2, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/SubViewport/Placing Positions/PlacingPositions3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0002193451, -3.8146973e-06, 7.4863434e-05)
 material_override = SubResource("StandardMaterial3D_amb8m")
 transparency = 1.0
 mesh = SubResource("BoxMesh_bi7ie")
