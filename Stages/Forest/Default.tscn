@@ -87,7 +87,6 @@ shader_parameter/center_2_scale = 0.8
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_d4gul")
-starting_enemies = 20
 max_distance = 50.0
 min_distance = 25.0
 

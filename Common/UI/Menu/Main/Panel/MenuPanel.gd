@@ -159,9 +159,15 @@ func blot_transition_progress(progress: float) -> void:
 func main_menu_transition_progress(progress: float) -> void:
 	main_menu_sub_viewport_container.material.set_shader_parameter("progress", progress)
 
+func player_is_quiting_game():
+	get_tree().quit()
+	print("PLAYER QUITED GAME")
+	return
+
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
 
 func _on_main_menu_pause_ui_submenu_selected(index: int) -> void:
+	if index == 3: player_is_quiting_game()
 	open_sub_menu(sub_menus[index])
 	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])
