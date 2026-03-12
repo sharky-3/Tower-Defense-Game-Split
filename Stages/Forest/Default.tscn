@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
 [ext_resource type="Script" uid="uid://b5dxv5bkkreh6" path="res://Scripts/Systems/Game/menu_camera.gd" id="12_amb8m"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
-[ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/pause_ui/pause_ui.tscn" id="15_qv1uj"]
+[ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/Main/Panel/panel.tscn" id="15_qv1uj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amb8m"]
 albedo_color = Color(4.6205523e-06, 0.70352113, 0.9888517, 1)

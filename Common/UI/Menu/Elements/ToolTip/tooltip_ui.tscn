@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://7jd276bkardh"]
 
-[ext_resource type="Script" uid="uid://brepfdhmjob7j" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.gd" id="1_788ty"]
+[ext_resource type="Script" uid="uid://brepfdhmjob7j" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.gd" id="1_788ty"]
 [ext_resource type="FontFile" uid="uid://b4aaxiw3j538g" path="res://Assets/Font/Montserrat/static/Montserrat-SemiBoldItalic.ttf" id="2_3nw3a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_788ty"]

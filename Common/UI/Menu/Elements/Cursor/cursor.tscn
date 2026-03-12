@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c2opuuewjo3tr"]
 
 [ext_resource type="Shader" uid="uid://d3fe5foy1rjms" path="res://Assets/Shader/UI/ui_cursor_mask.gdshader" id="1_tehr1"]
-[ext_resource type="Script" uid="uid://kt61mfm8rg45" path="res://Common/UI/Menu/triangle_cursor/triangle_cursor.gd" id="2_io2nc"]
+[ext_resource type="Script" uid="uid://kt61mfm8rg45" path="res://Common/UI/Menu/Elements/Cursor/Cursor.gd" id="2_io2nc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1hmsg"]
 shader = ExtResource("1_tehr1")

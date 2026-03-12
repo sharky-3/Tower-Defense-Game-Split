@@ -1,7 +1,7 @@
 [gd_scene load_steps=33 format=3 uid="uid://u6m61wrqng7i"]
 
 [ext_resource type="Shader" uid="uid://yq8ugk5kirt2" path="res://Assets/Shader/UI/color_mapping.gdshader" id="1_jgdag"]
-[ext_resource type="Script" uid="uid://c4418261dc1ab" path="res://Common/UI/Menu/pause_ui/background_pause_ui.gd" id="1_vywnj"]
+[ext_resource type="Script" uid="uid://c4418261dc1ab" path="res://Common/UI/Menu/Main/Background/background_pause_ui.gd" id="1_vywnj"]
 [ext_resource type="Shader" uid="uid://cbgka5qhroq86" path="res://Assets/Shader/UI/distortion.gdshader" id="3_2xhm7"]
 [ext_resource type="Shader" uid="uid://b4bf3knlcor8d" path="res://Assets/Shader/UI/bubbles_caustics_canvas.gdshader" id="4_d73xn"]
 [ext_resource type="Texture2D" uid="uid://jg7y5o2ql6bj" path="res://Assets/Images/Textures/caustic_1_mask.png" id="5_j8351"]
@@ -48,9 +48,9 @@ frequency = 0.0222
 fractal_octaves = 4
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xf5e8"]
-seamless = true
-color_ramp = SubResource("Gradient_yxs1g")
 noise = SubResource("FastNoiseLite_icaa8")
+color_ramp = SubResource("Gradient_yxs1g")
+seamless = true
 
 [sub_resource type="Gradient" id="Gradient_74fje"]
 
@@ -59,9 +59,9 @@ noise_type = 2
 fractal_octaves = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8ux41"]
-seamless = true
-color_ramp = SubResource("Gradient_74fje")
 noise = SubResource("FastNoiseLite_cgpx8")
+color_ramp = SubResource("Gradient_74fje")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6s1bj"]
 shader = ExtResource("4_d73xn")
@@ -89,9 +89,9 @@ fractal_lacunarity = 2.1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uorgs"]
 height = 1024
-seamless = true
-color_ramp = SubResource("Gradient_8ohll")
 noise = SubResource("FastNoiseLite_w4med")
+color_ramp = SubResource("Gradient_8ohll")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kjbag"]
 shader = ExtResource("6_kluir")
@@ -152,7 +152,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1920, 1080)
+size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]

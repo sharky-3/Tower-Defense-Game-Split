@@ -1,13 +1,13 @@
 [gd_scene load_steps=18 format=3 uid="uid://dt45hris2sfcs"]
 
-[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/pause_ui/item_menu/item_menu_pause_ui.gd" id="1_ttga3"]
-[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="2_7gsgq"]
-[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected Items/selected_item.gd" id="5_5rojs"]
-[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="5_udq30"]
-[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_av6eq"]
-[ext_resource type="Texture2D" uid="uid://e5dugvr1bfwi" path="res://Assets/Images/Icon/arrow.png" id="7_udq30"]
-[ext_resource type="Texture2D" uid="uid://c7eldsopyxnd4" path="res://Assets/Images/Icon/grabber.png" id="8_5rojs"]
-[ext_resource type="Texture2D" uid="uid://hcjg6rpicy1n" path="res://Assets/Images/Icon/grabber_highlight.png" id="9_5umfo"]
+[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Sub/Item/SubMenuPanel.gd" id="1_y2qj6"]
+[ext_resource type="Texture2D" uid="uid://c7eldsopyxnd4" path="res://Assets/Images/Icon/grabber.png" id="2_tuo6s"]
+[ext_resource type="Texture2D" uid="uid://hcjg6rpicy1n" path="res://Assets/Images/Icon/grabber_highlight.png" id="3_4tuwv"]
+[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="4_cqk0k"]
+[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="5_o0so2"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_xd44s"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected/ItemPanel.gd" id="7_ij5pd"]
+[ext_resource type="Texture2D" uid="uid://e5dugvr1bfwi" path="res://Assets/Images/Icon/arrow.png" id="8_rnkd2"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rojs"]
 bg_color = Color(1, 1, 1, 1)
@@ -18,7 +18,7 @@ expand_margin_bottom = 5.0
 bg_color = Color(0, 0, 0, 0.25)
 
 [sub_resource type="FontVariation" id="FontVariation_5umfo"]
-base_font = ExtResource("6_av6eq")
+base_font = ExtResource("6_xd44s")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_av6eq"]
 
@@ -39,7 +39,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ttga3")
+script = ExtResource("1_y2qj6")
 
 [node name="Slider Segment" type="HBoxContainer" parent="."]
 visible = false
@@ -56,8 +56,8 @@ alignment = 2
 custom_minimum_size = Vector2(347, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
-theme_override_icons/grabber = ExtResource("8_5rojs")
-theme_override_icons/grabber_highlight = ExtResource("9_5umfo")
+theme_override_icons/grabber = ExtResource("2_tuo6s")
+theme_override_icons/grabber_highlight = ExtResource("3_4tuwv")
 theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
 step = 25.0
 
@@ -71,14 +71,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_i6mgv")
 
-[node name="TooltipUI" parent="." instance=ExtResource("2_7gsgq")]
+[node name="TooltipUI" parent="." instance=ExtResource("4_cqk0k")]
 layout_mode = 1
 title = "Game Settings"
 sub_title = "Guide"
 
 [node name="Title" type="Label" parent="."]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -125,13 +125,13 @@ offset_right = 1102.0
 offset_bottom = 164.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
-script = ExtResource("5_5rojs")
+script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Windowed Mode"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -173,13 +173,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_udq30")
+texture = ExtResource("8_rnkd2")
 expand_mode = 3
 flip_h = true
 
 [node name="Text" type="Label" parent="Items/Windowed Mode/Segment Control"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -206,7 +206,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_udq30")
+texture = ExtResource("8_rnkd2")
 expand_mode = 3
 
 [node name="Resolution" type="HBoxContainer" parent="Items"]
@@ -217,13 +217,13 @@ offset_right = 1102.0
 offset_bottom = 222.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
-script = ExtResource("5_5rojs")
+script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Resolution"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -257,13 +257,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_udq30")
+texture = ExtResource("8_rnkd2")
 expand_mode = 3
 flip_h = true
 
 [node name="Text" type="Label" parent="Items/Resolution/Segment Control"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -290,7 +290,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("7_udq30")
+texture = ExtResource("8_rnkd2")
 expand_mode = 3
 
 [node name="Fov" type="HBoxContainer" parent="Items"]
@@ -301,13 +301,13 @@ offset_right = 1102.0
 offset_bottom = 280.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
-script = ExtResource("5_5rojs")
+script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Fov"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -330,8 +330,8 @@ alignment = 2
 custom_minimum_size = Vector2(270, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
-theme_override_icons/grabber = ExtResource("9_5umfo")
-theme_override_icons/grabber_highlight = ExtResource("9_5umfo")
+theme_override_icons/grabber = ExtResource("3_4tuwv")
+theme_override_icons/grabber_highlight = ExtResource("3_4tuwv")
 theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
 min_value = 30.0
 max_value = 120.0
@@ -350,7 +350,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 
 [node name="Text" type="Label" parent="Items/Fov/Segment Control"]
 z_index = -1
-material = ExtResource("5_udq30")
+material = ExtResource("5_o0so2")
 custom_minimum_size = Vector2(70, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)

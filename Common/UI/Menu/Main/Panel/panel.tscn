@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://cdgpjcf0sswem"]
 
-[ext_resource type="Script" uid="uid://hd3bmneaqtru" path="res://Common/UI/Menu/pause_ui/pause_ui.gd" id="1_kui2b"]
+[ext_resource type="Script" uid="uid://hd3bmneaqtru" path="res://Common/UI/Menu/Main/Panel/MenuPanel.gd" id="1_kui2b"]
 [ext_resource type="Material" uid="uid://drjvdq146ek1x" path="res://Assets/Materials/ui_transitions/double_circular_cut_mask_transition.material" id="2_d6t4o"]
 [ext_resource type="Shader" uid="uid://bvenkafqpkfwr" path="res://Assets/Shader/UI/blot_cut_closeup.gdshader" id="3_ttllr"]
 [ext_resource type="Material" uid="uid://bvo0r6b2u3tun" path="res://Assets/Materials/ui_transitions/blot_cut_mask_transition.material" id="5_xxg1h"]
-[ext_resource type="PackedScene" uid="uid://chr1qewo1y5au" path="res://Common/UI/Menu/Selected Items/progression.tscn" id="7_ltr5c"]
-[ext_resource type="PackedScene" uid="uid://dt45hris2sfcs" path="res://Common/UI/Menu/Selected Items/settings.tscn" id="11_l7gvk"]
-[ext_resource type="PackedScene" uid="uid://dgtg08fo02d7d" path="res://Common/UI/Menu/pause_ui/main_menu/main_menu_pause_ui.tscn" id="19_n5cv4"]
+[ext_resource type="PackedScene" uid="uid://chr1qewo1y5au" path="res://Common/UI/Menu/Sub/progression.tscn" id="7_ltr5c"]
+[ext_resource type="PackedScene" uid="uid://dt45hris2sfcs" path="res://Common/UI/Menu/Selected/Scenes/settings.tscn" id="11_l7gvk"]
+[ext_resource type="PackedScene" uid="uid://dgtg08fo02d7d" path="res://Common/UI/Menu/Main/Navigation/navigation.tscn" id="19_n5cv4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tvw67"]
 resource_local_to_scene = true
@@ -19,7 +19,7 @@ shader_parameter/period = 5.0
 shader_parameter/base_rotation = 0.0
 shader_parameter/add_rotation = 0.4
 
-[node name="PauseUI" type="Control"]
+[node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,27 +1,27 @@
 [gd_scene load_steps=14 format=3 uid="uid://dgtg08fo02d7d"]
 
-[ext_resource type="Script" uid="uid://dpqmrv3yonype" path="res://Common/UI/Menu/pause_ui/main_menu/main_menu_pause_ui.gd" id="1_ns3k1"]
-[ext_resource type="FontFile" uid="uid://ccm0ekqbubtus" path="res://Assets/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf" id="4_t1do1"]
-[ext_resource type="Texture2D" uid="uid://bqfls8iwobjoe" path="res://Assets/Images/Keyboard/enter-icon_lg_noOutline.png" id="7_ikkkg"]
-[ext_resource type="Texture2D" uid="uid://dnfuko0hhyl7u" path="res://Assets/Images/Keyboard/escape_noOutline.png" id="8_35mqh"]
-[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="9_35mqh"]
-[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected Items/selected_item.gd" id="9_g0peo"]
-[ext_resource type="PackedScene" uid="uid://c2opuuewjo3tr" path="res://Common/UI/Menu/triangle_cursor/triangle_cursor.tscn" id="11_yxs1g"]
-[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="15_aongp"]
-[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="16_8ohll"]
+[ext_resource type="Script" uid="uid://dpqmrv3yonype" path="res://Common/UI/Menu/Main/Navigation/Navigation.gd" id="1_xc7ja"]
+[ext_resource type="FontFile" uid="uid://ccm0ekqbubtus" path="res://Assets/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf" id="2_5wcis"]
+[ext_resource type="PackedScene" uid="uid://c2opuuewjo3tr" path="res://Common/UI/Menu/Elements/Cursor/cursor.tscn" id="3_8aqej"]
+[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="4_35h0s"]
+[ext_resource type="Texture2D" uid="uid://bqfls8iwobjoe" path="res://Assets/Images/Keyboard/enter-icon_lg_noOutline.png" id="5_eor2k"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_rocwe"]
+[ext_resource type="Texture2D" uid="uid://dnfuko0hhyl7u" path="res://Assets/Images/Keyboard/escape_noOutline.png" id="7_riu5w"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected/ItemPanel.gd" id="8_jex1w"]
+[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="9_412tk"]
 
 [sub_resource type="FontVariation" id="FontVariation_rjn7q"]
-base_font = ExtResource("4_t1do1")
+base_font = ExtResource("2_5wcis")
 spacing_glyph = -25
 
 [sub_resource type="FontVariation" id="FontVariation_g0peo"]
-base_font = ExtResource("9_35mqh")
+base_font = ExtResource("6_rocwe")
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_040hm"]
 blend_mode = 4
 
 [sub_resource type="FontVariation" id="FontVariation_ovcsy"]
-base_font = ExtResource("9_35mqh")
+base_font = ExtResource("6_rocwe")
 
 [node name="MainMenuPauseUI" type="Control"]
 layout_mode = 3
@@ -30,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ns3k1")
+script = ExtResource("1_xc7ja")
 LAST_SELECTION_IDX = 3
 tool_title = Array[String](["Map", "Game settings", "Upgrades & Stats", "Quit Game"])
 tool_sub_title = Array[String](["Editor", "Preformance", "Player", "Close"])
@@ -95,11 +95,11 @@ text = "SPLIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TriangleCursor" parent="." node_paths=PackedStringArray("sub_viewport_texture") instance=ExtResource("11_yxs1g")]
+[node name="TriangleCursor" parent="." node_paths=PackedStringArray("sub_viewport_texture") instance=ExtResource("3_8aqej")]
 position = Vector2(1648, 416)
 sub_viewport_texture = NodePath("../Options/SubViewport")
 
-[node name="TooltipUI" parent="." instance=ExtResource("15_aongp")]
+[node name="TooltipUI" parent="." instance=ExtResource("4_35h0s")]
 layout_mode = 1
 title = "Use a Skill"
 sub_title = "Command"
@@ -126,7 +126,7 @@ theme_override_constants/separation = 20
 
 [node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer/HBoxContainer2"]
 layout_mode = 2
-texture = ExtResource("7_ikkkg")
+texture = ExtResource("5_eor2k")
 expand_mode = 3
 
 [node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer/HBoxContainer2"]
@@ -142,7 +142,7 @@ theme_override_constants/separation = 20
 [node name="AButton" type="TextureRect" parent="TooltipUI/HBoxContainer/HBoxContainer"]
 texture_filter = 2
 layout_mode = 2
-texture = ExtResource("8_35mqh")
+texture = ExtResource("7_riu5w")
 expand_mode = 3
 
 [node name="Confirm" type="Label" parent="TooltipUI/HBoxContainer/HBoxContainer"]
@@ -183,13 +183,13 @@ offset_top = 220.0
 offset_right = 483.0
 offset_bottom = 276.0
 pivot_offset = Vector2(126.5, 28)
-script = ExtResource("9_g0peo")
+script = ExtResource("8_jex1w")
 hovered_color = Color(0, 0, 0, 1)
 use_item_scale_effect = true
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Continue"]
 z_index = -1
-material = ExtResource("16_8ohll")
+material = ExtResource("9_412tk")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -208,13 +208,13 @@ offset_top = 272.0
 offset_right = 465.0
 offset_bottom = 328.0
 pivot_offset = Vector2(117.5, 28)
-script = ExtResource("9_g0peo")
+script = ExtResource("8_jex1w")
 hovered_color = Color(0, 0, 0, 1)
 use_item_scale_effect = true
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Settings"]
 z_index = -1
-material = ExtResource("16_8ohll")
+material = ExtResource("9_412tk")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -233,13 +233,13 @@ offset_top = 325.0
 offset_right = 582.0
 offset_bottom = 381.0
 pivot_offset = Vector2(176, 28)
-script = ExtResource("9_g0peo")
+script = ExtResource("8_jex1w")
 hovered_color = Color(0, 0, 0, 1)
 use_item_scale_effect = true
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Progression"]
 z_index = -1
-material = ExtResource("16_8ohll")
+material = ExtResource("9_412tk")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -258,13 +258,13 @@ offset_top = 379.0
 offset_right = 349.0
 offset_bottom = 435.0
 pivot_offset = Vector2(59.5, 28)
-script = ExtResource("9_g0peo")
+script = ExtResource("8_jex1w")
 hovered_color = Color(0, 0, 0, 1)
 use_item_scale_effect = true
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Quit"]
 z_index = -1
-material = ExtResource("16_8ohll")
+material = ExtResource("9_412tk")
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
