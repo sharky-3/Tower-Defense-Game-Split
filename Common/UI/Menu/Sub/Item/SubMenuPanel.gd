@@ -37,6 +37,7 @@ var selected_idx: int = 0:
 """ [[ Node references ]] """
 @onready var options: Array[HBoxContainer] = []
 @onready var tooltip_ui: TooltipUI = $TooltipUI
+@onready var sub_viewport: SubViewport = $"../../../../../../World/SubViewport"
 
 """ [[ Stats ]] """
 var slider_text: Label
@@ -112,7 +113,7 @@ func _input(event: InputEvent) -> void:
 			"Normal":
 				print("Normal")
 			"Editor":
-				var new_value = game_editor.update_game_editor(selected_idx)
+				var new_value = game_editor.update_game_editor(selected_idx, sub_viewport)
 				
 				var selected_option: HBoxContainer = options[selected_idx]
 				var segment_control: HBoxContainer = selected_option.get_node("Segment Control")

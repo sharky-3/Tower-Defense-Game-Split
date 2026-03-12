@@ -5,7 +5,7 @@ class_name GameSettings
 
 """ [[ Stats ]] """
 var settings: Array = [
-	{  "Name": "Windowed Mode", 
+	{ "Name": "Windowed Mode", 
 		"Values": [ "Windowed", "Maximized", "Fullscreen" ], 
 		"CurrentSelectedValue": 2
 	},
@@ -32,10 +32,15 @@ func update_game_settings(index: int, player_camera: Camera3D):
 	var values: Array = setting.get("Values", [])
 	var current_value: int = setting.get("CurrentSelectedValue", 0)
 
-	if previousSettingName == setting_name and values.size() > 0: current_value = (current_value + 1) % values.size()
-	else: previousSettingName = setting_name
 	setting["CurrentSelectedValue"] = current_value
 	var new_value = values[current_value] if values.size() > 0 else null
+
+	if values.size() > 0:
+		if previousSettingName != setting_name: previousSettingName = setting_name
+		current_value = (current_value + 1) % values.size()
+		setting["CurrentSelectedValue"] = current_value
+		new_value = values[current_value]
+	else:  new_value = null
 
 	match setting_name:
 		"Windowed Mode":

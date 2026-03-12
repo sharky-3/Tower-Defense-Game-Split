@@ -14,16 +14,9 @@
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
 [ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/Main/Panel/panel.tscn" id="15_qv1uj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amb8m"]
-albedo_color = Color(4.6205523e-06, 0.70352113, 0.9888517, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_bi7ie"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_qv1uj"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_jhds8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_o35ae"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_amb8m"]
 render_priority = 0
 shader = ExtResource("8_ik1ra")
 shader_parameter/ground_color = Color(0.101960786, 0.6901961, 0.21176471, 1)
@@ -31,10 +24,24 @@ shader_parameter/outline_mask = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_80fwj"]
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_gsfny"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bi7ie"]
+render_priority = 0
+shader = ExtResource("8_ik1ra")
+shader_parameter/ground_color = Color(2.0214916e-06, 0.6552747, 0.67394006, 1)
+shader_parameter/outline_mask = 1.0
 
-[sub_resource type="MultiMesh" id="MultiMesh_amb8m"]
-transform_format = 1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qv1uj"]
+render_priority = 0
+shader = ExtResource("8_ik1ra")
+shader_parameter/ground_color = Color(0.660809, 0.5749919, 0, 1)
+shader_parameter/outline_mask = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_amb8m"]
+albedo_color = Color(4.6205523e-06, 0.70352113, 0.9888517, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bi7ie"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qv1uj"]
 
 [sub_resource type="Shader" id="Shader_amb8m"]
 code = "shader_type canvas_item;
@@ -101,6 +108,341 @@ handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
+[node name="Environment" type="Node3D" parent="World/SubViewport"]
+
+[node name="EnvironmentLight" parent="World/SubViewport/Environment" instance=ExtResource("2_cg61v")]
+
+[node name="Forest" type="Node3D" parent="World/SubViewport"]
+
+[node name="Ground" type="MeshInstance3D" parent="World/SubViewport/Forest"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.526381, 0)
+mesh = SubResource("BoxMesh_jhds8")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_amb8m")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World/SubViewport/Forest/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Forest/Ground/RigidBody3D"]
+shape = SubResource("BoxShape3D_80fwj")
+
+[node name="Grass" type="Node3D" parent="World/SubViewport/Forest"]
+
+[node name="Grass" parent="World/SubViewport/Forest/Grass" instance=ExtResource("8_cg61v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
+
+[node name="Grass2" parent="World/SubViewport/Forest/Grass" instance=ExtResource("8_cg61v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
+
+[node name="Grass3" parent="World/SubViewport/Forest/Grass" instance=ExtResource("8_cg61v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
+
+[node name="Grass4" parent="World/SubViewport/Forest/Grass" instance=ExtResource("8_cg61v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
+
+[node name="Environment" type="Node3D" parent="World/SubViewport/Forest"]
+
+[node name="EnvObject_0" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-0.7834102, 0, -1.2791672, 0, 1.5, 0, 1.2791672, 0, -0.7834102, -17.88875, 0, 25.724972)
+
+[node name="EnvObject_1" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.358905, 0, 0.9333741, 0, 1, 0, -0.9333741, 0, -0.358905, 40.44218, 0, 41.154106)
+
+[node name="EnvObject_2" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.7277084, 0, 0.6858866, 0, 1, 0, -0.6858866, 0, -0.7277084, 30.00985, 0, 24.001112)
+
+[node name="EnvObject_3" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(1.4450817, 0, -0.40216792, 0, 1.5, 0, 0.40216792, 0, 1.4450817, -33.030117, 0, -44.66378)
+
+[node name="EnvObject_4" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.09602799, 0, 0.9953786, 0, 1, 0, -0.9953786, 0, -0.09602799, 19.35531, 0, -25.461533)
+
+[node name="EnvObject_5" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.4046022, 0, 0.9144928, 0, 1, 0, -0.9144928, 0, 0.4046022, -42.996643, 0, -13.896971)
+
+[node name="EnvObject_6" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.7608707, 0, -0.64890355, 0, 1, 0, 0.64890355, 0, -0.7608707, 3.4587755, 0, 8.380279)
+
+[node name="EnvObject_7" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.8986836, 0, -0.43859753, 0, 1, 0, 0.43859753, 0, 0.8986836, 33.572166, 0, 11.438482)
+
+[node name="EnvObject_8" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.44635722, 0, -1.4320493, 0, 1.5, 0, 1.4320493, 0, 0.44635722, -35.8902, 0, 33.83506)
+
+[node name="EnvObject_9" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.95678484, 0, -0.29079682, 0, 1, 0, 0.29079682, 0, -0.95678484, 41.907063, 0, -3.670183)
+
+[node name="EnvObject_10" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.28436014, 0, 0.9587175, 0, 1, 0, -0.9587175, 0, -0.28436014, -13.725355, 0, -18.927317)
+
+[node name="EnvObject_11" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.3768384, 0, -0.926279, 0, 1, 0, 0.926279, 0, -0.3768384, 20.437445, 0, 17.98414)
+
+[node name="EnvObject_12" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.8250077, 0, 0.56512153, 0, 1, 0, -0.56512153, 0, 0.8250077, -10.750161, 0, -1.8722984)
+
+[node name="EnvObject_13" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.9610019, 0, -1.1517272, 0, 1.5, 0, 1.1517272, 0, 0.9610019, -25.220778, 0, 16.705105)
+
+[node name="EnvObject_14" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.82487655, 0, 0.56531286, 0, 1, 0, -0.56531286, 0, 0.82487655, -21.821732, 0, -42.8558)
+
+[node name="EnvObject_15" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.4098988, 0, 0.912131, 0, 1, 0, -0.912131, 0, 0.4098988, 31.21624, 0, -17.388897)
+
+[node name="EnvObject_16" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.58629227, 0, -0.8100996, 0, 1, 0, 0.8100996, 0, -0.58629227, 31.084024, 0, 37.508007)
+
+[node name="EnvObject_17" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.61492103, 0, -0.7885887, 0, 1, 0, 0.7885887, 0, -0.61492103, 13.423375, 0, 40.490677)
+
+[node name="EnvObject_18" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.99990666, 0, -0.013661763, 0, 1, 0, 0.013661763, 0, -0.99990666, 41.806847, 0, 29.818727)
+
+[node name="EnvObject_19" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.12613846, 0, 0.9920126, 0, 1, 0, -0.9920126, 0, -0.12613846, -4.66166, 0, -32.630783)
+
+[node name="EnvObject_20" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.6249105, 0, -0.7806964, 0, 1, 0, 0.7806964, 0, -0.6249105, 12.107425, 0, 2.1732638)
+
+[node name="EnvObject_21" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.93074065, 0, 0.36568, 0, 1, 0, -0.36568, 0, 0.93074065, -24.125048, 0, -9.8246765)
+
+[node name="EnvObject_22" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.9459614, 0, 0.32427925, 0, 1, 0, -0.32427925, 0, -0.9459614, -42.76871, 0, 41.756176)
+
+[node name="EnvObject_23" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-0.8947588, 0, -1.203913, 0, 1.5, 0, 1.203913, 0, -0.8947588, 31.690472, 0, -35.751717)
+
+[node name="EnvObject_24" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.5898247, 0, -0.80753136, 0, 1, 0, 0.80753136, 0, -0.5898247, -3.1469514, 0, 37.896606)
+
+[node name="EnvObject_25" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(1.3361365, 0, 0.68171793, 0, 1.5, 0, -0.68171793, 0, 1.3361365, -1.1311496, 0, -5.206996)
+
+[node name="EnvObject_26" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.7593422, 0, 0.6506915, 0, 1, 0, -0.6506915, 0, 0.7593422, -37.86268, 0, 20.386995)
+
+[node name="EnvObject_27" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.3463932, 0, -0.93808943, 0, 1, 0, 0.93808943, 0, 0.3463932, -25.704212, 0, -19.874002)
+
+[node name="EnvObject_28" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.7819975, 0, 0.62328154, 0, 1, 0, -0.62328154, 0, -0.7819975, -31.94182, 0, 4.509749)
+
+[node name="EnvObject_29" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.07747928, 0, 0.99699396, 0, 1, 0, -0.99699396, 0, -0.07747928, -4.132932, 0, 23.486444)
+
+[node name="EnvObject_30" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-0.9020661, 0, 1.1984477, 0, 1.5, 0, -1.1984477, 0, -0.9020661, 10.645201, 0, -40.56517)
+
+[node name="EnvObject_31" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.40831104, 0, 0.91284287, 0, 1, 0, -0.91284287, 0, -0.40831104, 43.097126, 0, -24.566673)
+
+[node name="EnvObject_32" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.30883026, 0, -0.95111716, 0, 1, 0, 0.95111716, 0, -0.30883026, -37.292595, 0, -23.787489)
+
+[node name="EnvObject_33" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.9710403, 0, -1.1432763, 0, 1.5, 0, 1.1432763, 0, 0.9710403, 20.930199, 0, -5.895324)
+
+[node name="EnvObject_34" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.7899354, 0, 1.2751478, 0, 1.5, 0, -1.2751478, 0, 0.7899354, 44.29965, 0, 6.2072945)
+
+[node name="EnvObject_35" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.7121384, 0, 0.70203906, 0, 1, 0, -0.70203906, 0, -0.7121384, 41.759174, 0, -38.429913)
+
+[node name="EnvObject_36" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-1.1886744, 0, -0.91490614, 0, 1.5, 0, 0.91490614, 0, -1.1886744, -20.619709, 0, 43.417175)
+
+[node name="EnvObject_37" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.77744097, 0, -0.6289559, 0, 1, 0, 0.6289559, 0, 0.77744097, 2.5704215, 0, -16.659822)
+
+[node name="EnvObject_38" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.99981034, 0, 0.019474857, 0, 1, 0, -0.019474857, 0, -0.99981034, 5.7270565, 0, 33.2323)
+
+[node name="EnvObject_39" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.6633639, 0, 0.748297, 0, 1, 0, -0.748297, 0, 0.6633639, -44.5196, 0, -35.642803)
+
+[node name="EnvObject_40" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.4737175, 0, 0.88067687, 0, 1, 0, -0.88067687, 0, 0.4737175, -14.322088, 0, 12.065795)
+
+[node name="EnvObject_41" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.91075236, 0, -0.41295302, 0, 1, 0, 0.41295302, 0, -0.91075236, 6.3996177, 0, -26.831287)
+
+[node name="EnvObject_42" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(0.46196407, 0, 0.88689864, 0, 1, 0, -0.88689864, 0, 0.46196407, 21.91969, 0, -43.214622)
+
+[node name="EnvObject_43" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(0.056478992, 0, -1.4989363, 0, 1.5, 0, 1.4989363, 0, 0.056478992, -39.288208, 0, -3.7103975)
+
+[node name="EnvObject_44" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-1.357799, 0, 0.63748056, 0, 1.5, 0, -0.63748056, 0, -1.357799, 22.386667, 0, 4.1676555)
+
+[node name="EnvObject_45" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.4795021, 0, -0.8775407, 0, 1, 0, 0.8775407, 0, 0.4795021, -31.305199, 0, 44.253)
+
+[node name="EnvObject_46" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.0108755315, 0, 0.9999409, 0, 1, 0, -0.9999409, 0, -0.0108755315, 9.170757, 0, 17.829592)
+
+[node name="EnvObject_47" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.619894, 0, 0.78468555, 0, 1, 0, -0.78468555, 0, 0.619894, 42.668022, 0, 17.877668)
+
+[node name="EnvObject_48" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(1.4968822, 0, -0.09666318, 0, 1.5, 0, 0.09666318, 0, 1.4968822, -31.645504, 0, -32.42948)
+
+[node name="EnvObject_50" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.8503955, 0, 0.52614397, 0, 1, 0, -0.52614397, 0, 0.8503955, -8.350531, 0, -42.67836)
+
+[node name="EnvObject_51" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(1.4965537, 0, 0.1016236, 0, 1.5, 0, -0.1016236, 0, 1.4965537, -44.491684, 0, 5.8629174)
+
+[node name="EnvObject_52" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_tf230")]
+transform = Transform3D(-1.4913538, 0, 0.1608226, 0, 1.5, 0, -0.1608226, 0, -1.4913538, 31.922668, 0, 0.46635497)
+
+[node name="EnvObject_53" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.9922573, 0, -0.12419906, 0, 1, 0, 0.12419906, 0, 0.9922573, -14.867523, 0, -29.440619)
+
+[node name="EnvObject_54" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(-0.7678823, 0, 0.64059097, 0, 1, 0, -0.64059097, 0, -0.7678823, -24.64216, 0, 33.210785)
+
+[node name="EnvObject_56" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(-0.8383125, 0, 0.54519, 0, 1, 0, -0.54519, 0, -0.8383125, 42.097748, 0, -14.569653)
+
+[node name="EnvObject_58" parent="World/SubViewport/Forest/Environment" instance=ExtResource("6_qv1uj")]
+transform = Transform3D(-0.8494638, 0, 0.52764684, 0, 1, 0, -0.52764684, 0, -0.8494638, 13.01645, 0, -13.6026325)
+
+[node name="EnvObject_63" parent="World/SubViewport/Forest/Environment" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.8663746, 0, -0.49939466, 0, 1, 0, 0.49939466, 0, 0.8663746, -20.951157, 0, 0.47213134)
+
+[node name="EnvObject_66" parent="World/SubViewport/Forest/Environment" instance=ExtResource("4_d4gul")]
+transform = Transform3D(0.61382455, 0, 0.7894425, 0, 1, 0, -0.7894425, 0, 0.61382455, 17.676607, 0, 31.331392)
+
+[node name="Ocean" type="Node3D" parent="World/SubViewport"]
+visible = false
+
+[node name="Ground" type="MeshInstance3D" parent="World/SubViewport/Ocean"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.526381, 0)
+mesh = SubResource("BoxMesh_jhds8")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_bi7ie")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World/SubViewport/Ocean/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Ocean/Ground/RigidBody3D"]
+shape = SubResource("BoxShape3D_80fwj")
+
+[node name="Rocks" type="Node3D" parent="World/SubViewport/Ocean"]
+transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0, 0)
+
+[node name="Rock" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.78117204, 2.4927292, 9.536743e-07, 16.25613)
+
+[node name="Rock2" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
+
+[node name="Rock3" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
+
+[node name="Rock4" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
+
+[node name="Rock5" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
+
+[node name="Rock6" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
+
+[node name="Rock7" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
+
+[node name="Rock8" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
+
+[node name="Rock9" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
+
+[node name="Rock10" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
+
+[node name="Rock11" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
+
+[node name="Rock12" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
+
+[node name="Rock13" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
+
+[node name="Rock14" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
+
+[node name="Rock15" parent="World/SubViewport/Ocean/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
+
+[node name="Environment" type="Node3D" parent="World/SubViewport/Ocean"]
+
+[node name="Desert" type="Node3D" parent="World/SubViewport"]
+visible = false
+
+[node name="Ground" type="MeshInstance3D" parent="World/SubViewport/Desert"]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.526381, 0)
+mesh = SubResource("BoxMesh_jhds8")
+skeleton = NodePath("../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_qv1uj")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="World/SubViewport/Desert/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Desert/Ground/RigidBody3D"]
+shape = SubResource("BoxShape3D_80fwj")
+
+[node name="Rocks" type="Node3D" parent="World/SubViewport/Desert"]
+transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0, 0)
+
+[node name="Rock" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.78117204, 2.4927292, 9.536743e-07, 16.25613)
+
+[node name="Rock2" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
+
+[node name="Rock3" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
+
+[node name="Rock4" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
+
+[node name="Rock5" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
+
+[node name="Rock6" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
+
+[node name="Rock7" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
+
+[node name="Rock8" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
+
+[node name="Rock9" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
+
+[node name="Rock10" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
+
+[node name="Rock11" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
+
+[node name="Rock12" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
+
+[node name="Rock13" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
+
+[node name="Rock14" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
+
+[node name="Rock15" parent="World/SubViewport/Desert/Rocks" instance=ExtResource("7_e6oa1")]
+transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
+
+[node name="Environment" type="Node3D" parent="World/SubViewport/Desert"]
+
 [node name="Placing Positions" type="Node3D" parent="World/SubViewport"]
 
 [node name="PlacingPositions3" type="StaticBody3D" parent="World/SubViewport/Placing Positions" groups=["PlacingGrid"]]
@@ -114,196 +456,17 @@ mesh = SubResource("BoxMesh_bi7ie")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Placing Positions/PlacingPositions3"]
 shape = SubResource("BoxShape3D_qv1uj")
 
-[node name="Environment" type="Node3D" parent="World/SubViewport"]
-
-[node name="EnvironmentLight" parent="World/SubViewport/Environment" instance=ExtResource("2_cg61v")]
-
-[node name="Ground" type="MeshInstance3D" parent="World/SubViewport/Environment"]
-transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -0.526381, 0)
-mesh = SubResource("BoxMesh_jhds8")
-skeleton = NodePath("../../../..")
-surface_material_override/0 = SubResource("ShaderMaterial_o35ae")
-
-[node name="RigidBody3D" type="RigidBody3D" parent="World/SubViewport/Environment/Ground"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/SubViewport/Environment/Ground/RigidBody3D"]
-shape = SubResource("BoxShape3D_80fwj")
-
-[node name="Grass" type="Node3D" parent="World/SubViewport/Environment"]
-
-[node name="Grass" parent="World/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 25)
-
-[node name="Grass2" parent="World/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, 25)
-
-[node name="Grass3" parent="World/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0, -25)
-
-[node name="Grass4" parent="World/SubViewport/Environment/Grass" instance=ExtResource("8_cg61v")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -25)
-
-[node name="Flowers" type="Node3D" parent="World/SubViewport/Environment"]
-transform = Transform3D(0.9868275, 0, -0.16177607, 0, 1, 0, 0.16177607, 0, 0.9868275, 0, 0, 0)
-
-[node name="Flower" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1874905, 0, -19.583303)
-
-[node name="Flower2" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3411503, 0, 13.4779)
-
-[node name="Flower3" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.515423, 0, 0.8275242)
-
-[node name="Flower4" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(0.59587455, 0, -0.8030775, 0, 1, 0, 0.8030775, 0, 0.59587455, -16.79652, 0, -25.584759)
-
-[node name="Flower5" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.61291, 0, -42.100094)
-
-[node name="Flower6" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(0.79986274, 0, 0.60018295, 0, 1, 0, -0.60018295, 0, 0.79986274, 32.535645, 0, 27.031414)
-
-[node name="Flower7" parent="World/SubViewport/Environment/Flowers" instance=ExtResource("4_d4gul")]
-transform = Transform3D(0.33836022, 0, 0.9410167, 0, 1, 0, -0.9410167, 0, 0.33836022, -33.02269, 0, 27.031414)
-
-[node name="Trees" type="Node3D" parent="World/SubViewport/Environment"]
-transform = Transform3D(0.9913122, 0, -0.13152975, 0, 1, 0, 0.13152975, 0, 0.9913122, 0, 0, 0)
-
-[node name="Tree" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -17.165327, 0, -34.56225)
-
-[node name="Tree2" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.74999994, 0, -1.2990382, 0, 1.5, 0, 1.2990382, 0, 0.74999994, 41.954964, 0, -17.67115)
-
-[node name="Tree3" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(-6.556708e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.556708e-08, -1.7350101, 0, 42.33092)
-
-[node name="Tree4" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.84999996, 0, -1.4722433, 0, 1.7, 0, 1.4722433, 0, 0.84999996, 44.675705, 0, 7.9818964)
-
-[node name="Tree5" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.299038, 0, 0.75, 0, 1.5, 0, -0.75, 0, 1.299038, 31.098108, 0, 17.893478)
-
-[node name="Tree6" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.0606601, 0, 1.0606601, 0, 1.5, 0, -1.0606601, 0, 1.0606601, 11.144161, 0, -5.0069294)
-
-[node name="Tree7" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.4722432, 0, 0.85, 0, 1.7, 0, -0.85, 0, 1.4722432, 13.395106, 0, -22.129253)
-
-[node name="Tree8" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.51763815, 0, -1.9318516, 0, 2, 0, 1.9318516, 0, 0.51763815, -38.961525, 0, -31.432753)
-
-[node name="Tree9" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(-0.38822857, 0, -1.4488888, 0, 1.5, 0, 1.4488888, 0, -0.38822857, -37.1512, 0, 38.725464)
-
-[node name="Tree10" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.74999994, 0, 1.2990382, 0, 1.5, 0, -1.2990382, 0, 0.74999994, -15.845476, 0, 9.740686)
-
-[node name="Tree11" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(-7.430936e-08, 0, -1.7, 0, 1.7, 0, 1.7, 0, -7.430936e-08, -30.711395, 0, 11.953223)
-
-[node name="Tree12" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.0606601, 0, 1.0606601, 0, 1.5, 0, -1.0606601, 0, 1.0606601, -20.798311, 0, 22.117947)
-
-[node name="Tree13" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.7, 0, 6.755192e-08, 0, 1.7, 0, -6.755192e-08, 0, 1.7, -38.332935, 0, -3.5501041)
-
-[node name="Tree14" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(-0.7500001, 0, 1.299038, 0, 1.5, 0, -1.299038, 0, -0.7500001, -17.851692, 0, -14.143847)
-
-[node name="Tree15" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, -10.129915, 0, -1.1197739)
-
-[node name="Tree16" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_qv1uj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2974257, 0, 8.324589)
-
-[node name="Tree17" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 17.059082, 9.536743e-07, 11.827114)
-
-[node name="Tree18" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_qv1uj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.013177, 0, 26.79803)
-
-[node name="Tree19" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_qv1uj")]
-transform = Transform3D(0.68541175, 0, -0.7281557, 0, 1, 0, 0.7281557, 0, 0.68541175, 32.196983, 0, 40.136894)
-
-[node name="Tree20" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.4548105, 0, 0.87950355, 0, 1.7, 0, -0.87950355, 0, 1.4548105, 9, 0, 33.46223)
-
-[node name="Tree21" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 31, 0, 2)
-
-[node name="Tree22" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_qv1uj")]
-transform = Transform3D(1.7, 0, 0, 0, 1.7, 0, 0, 0, 1.7, 28, 0, -16)
-
-[node name="Tree23" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_qv1uj")]
-transform = Transform3D(1.0393147, 0, 1.3452982, 0, 1.6999999, 0, -1.3452982, 0, 1.0393147, 9.939088, 0, -43.697144)
-
-[node name="Tree24" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.6521515, 0, -1.569936, 0, 1.7, 0, 1.569936, 0, 0.6521515, 38.09349, 0, -47.422424)
-
-[node name="Tree25" parent="World/SubViewport/Environment/Trees" instance=ExtResource("6_tf230")]
-transform = Transform3D(0.572622, 0, 1.3863999, 0, 1.5, 0, -1.3863999, 0, 0.572622, 31.741352, 0, -34.47444)
-
-[node name="Rocks" type="Node3D" parent="World/SubViewport/Environment"]
-transform = Transform3D(0.9555824, 0, 0.2947242, 0, 1, 0, -0.2947242, 0, 0.9555824, -9.816839, 0, 0)
-
-[node name="Rock" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.78117204, 0, -0.624316, 0, 1, 0, 0.624316, 0, 0.78117204, 2.4927292, 9.536743e-07, 16.25613)
-
-[node name="Rock2" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.5068314, 0, 0.8620453, 0, 1, 0, -0.8620453, 0, 0.5068314, 7.0075946, 9.536743e-07, -8.231132)
-
-[node name="Rock3" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.981806, 9.536743e-07, 2.5973852)
-
-[node name="Rock4" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.4170899, 0, 0.9088652, 0, 1, 0, -0.9088652, 0, 0.4170899, -2.248763, 9.536743e-07, -21.529026)
-
-[node name="Rock5" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.53105843, 0, -0.8473352, 0, 1, 0, 0.8473352, 0, 0.53105843, -19.775402, 9.536743e-07, -30.419106)
-
-[node name="Rock6" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.62371, 9.536743e-07, 11.480698)
-
-[node name="Rock7" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.62972724, 0, 0.77681637, 0, 1, 0, -0.77681637, 0, 0.62972724, -28.62371, 9.536743e-07, 30.580732)
-
-[node name="Rock8" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.44316506, 0, -0.89644, 0, 1, 0, 0.89644, 0, 0.44316506, 14.45594, 9.536743e-07, 30.580732)
-
-[node name="Rock9" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302966, 9.536743e-07, 38.87455)
-
-[node name="Rock10" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38.857845, 9.536743e-07, 22.19033)
-
-[node name="Rock11" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44.61887, 9.536743e-07, 41.496307)
-
-[node name="Rock12" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.12533323, 0, 0.9921147, 0, 1, 0, -0.9921147, 0, 0.12533323, 40.696213, 9.536743e-07, -8.688065)
-
-[node name="Rock13" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.408442, 0, 0.9127843, 0, 1, 0, -0.9127843, 0, 0.408442, 32.358475, 9.536743e-07, -32.419113)
-
-[node name="Rock14" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.66038185, 0, -0.75092995, 0, 1, 0, 0.75092995, 0, 0.66038185, 16.904423, 9.536743e-07, -42.947163)
-
-[node name="Rock15" parent="World/SubViewport/Environment/Rocks" instance=ExtResource("7_e6oa1")]
-transform = Transform3D(0.59886986, 0, 0.80084634, 0, 1, 0, -0.80084634, 0, 0.59886986, -9.777008, 9.536743e-07, -42.947163)
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="World/SubViewport/Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.526381, 0)
-visible = false
-navigation_mesh = SubResource("NavigationMesh_gsfny")
-
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="World/SubViewport/Environment"]
-multimesh = SubResource("MultiMesh_amb8m")
-
 [node name="Player" parent="World/SubViewport" instance=ExtResource("9_skrqh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 20, 50)
 max_distance_from_center = 50.0
+
+[node name="SpectatingCamera" type="Node3D" parent="World/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
+script = ExtResource("12_amb8m")
+
+[node name="Camera" type="Camera3D" parent="World/SubViewport/SpectatingCamera"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 75)
+fov = 20.0
 
 [node name="Map" type="Node" parent="World/SubViewport"]
 
@@ -332,14 +495,6 @@ spacing = 150.0
 anchors_preset = 0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SpectatingCamera" type="Node3D" parent="World/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 0)
-script = ExtResource("12_amb8m")
-
-[node name="Camera" type="Camera3D" parent="World/SubViewport/SpectatingCamera"]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 75)
-fov = 20.0
 
 [node name="Menu" type="SubViewportContainer" parent="."]
 visible = false
