@@ -4,20 +4,34 @@ extends Control
 
 """ [[ Constants / Exported Data ]] """
 @export var background_ui_viewport: SubViewport
-@export_range(FIRST_SELECTION_IDX, LAST_SELECTION_IDX, 1) var selected_idx: int = 0 :
+@export_range(0, 2, 1) 
+var selected_idx: int = 0:
 	set(new_selected_idx):
 		handle_selection_update(selected_idx, new_selected_idx)
 		selected_idx = new_selected_idx
+		
+@export var FIRST_SELECTION_IDX: int = 0
+@export var LAST_SELECTION_IDX: int = 2
+
+@export_category("Tool Tip")
+@export var tool_title: Array[String] = [
+	"Toggle between windowed and fullscreen modes for your game.",
+	"Set the width and height of the game window to your preference.",
+	"Adjust the camera's field of view to see more or less of the world."
+]
+@export var tool_sub_title: Array[String] = [
+	"Window Mode",
+	"Screen Size",
+	"Camera FOV",
+]
 
 """ [[ Node references ]] """
-@onready var cursor: UiMainMenuCursor = $TriangleCursor
+@onready var cursor: UiCursor = $TriangleCursor
 @onready var index: Label = $MenuInfo/MenuIndex
 @onready var options: Array[HBoxContainer] = []
 @onready var tooltip_ui: TooltipUI = $TooltipUI
 
 """ [[ Stats ]] """
-const FIRST_SELECTION_IDX = 0
-const LAST_SELECTION_IDX = 3
 
 signal submenu_selected(index: int)
 
@@ -52,12 +66,9 @@ func handle_selection_update(prev_idx: int, new_idx: int) -> void:
 	options[new_idx].select()
 	
 	index.text = "%d" % (new_idx + 1)
-	tooltip_ui.title = [
-		"Play Game",
-		"Game Settings",
-		"Player Stats & Tower Upgrades",
-		"Quit",
-	][new_idx]
+	tooltip_ui.title = tool_title[new_idx]
+	tooltip_ui.sub_title = tool_sub_title[new_idx]
+	
 	move_cursor(options[new_idx])
 
 func move_cursor(option: Control) -> void:
@@ -79,6 +90,7 @@ func close() -> void:
 """ [[ Events ]] """
 
 func _input(event: InputEvent) -> void:
+	
 	if event.is_action_pressed("ui_down"):
 		UISFX.play_move()
 		select_next()

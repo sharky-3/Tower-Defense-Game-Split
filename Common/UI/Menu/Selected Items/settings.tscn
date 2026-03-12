@@ -126,7 +126,7 @@ offset_bottom = 164.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
 script = ExtResource("5_5rojs")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Windowed Mode"]
@@ -218,7 +218,7 @@ offset_bottom = 222.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
 script = ExtResource("5_5rojs")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Resolution"]
@@ -302,7 +302,7 @@ offset_bottom = 280.0
 pivot_offset = Vector2(0, 21.5)
 alignment = 1
 script = ExtResource("5_5rojs")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Fov"]

@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://chr1qewo1y5au"]
+
+[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/pause_ui/item_menu/item_menu_pause_ui.gd" id="1_g0pve"]
+[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="4_6lwn0"]
+[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="5_fwgp3"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_ewfge"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected Items/selected_item.gd" id="7_lb3t6"]
+
+[sub_resource type="FontVariation" id="FontVariation_qli1y"]
+base_font = ExtResource("6_ewfge")
+
+[node name="Progression" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g0pve")
+LAST_SELECTION_IDX = 1
+tool_title = Array[String](["Upgrade your towers for better chance", "View your game stats"])
+tool_sub_title = Array[String](["Upgrades", "Stats"])
+
+[node name="TooltipUI" parent="." instance=ExtResource("4_6lwn0")]
+layout_mode = 1
+title = "Game Settings"
+sub_title = "Guide"
+
+[node name="Title" type="Label" parent="."]
+material = ExtResource("5_fwgp3")
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 517.0
+offset_bottom = 106.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_qli1y")
+theme_override_font_sizes/font_size = 60
+text = "progression"
+vertical_alignment = 1
+uppercase = true
+
+[node name="Items" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="UpgradeTowers" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 264.0
+offset_right = 517.0
+offset_bottom = 320.0
+pivot_offset = Vector2(126.5, 28)
+script = ExtResource("7_lb3t6")
+hovered_color = Color(1, 0.9166666, 0, 1)
+is_sub_menu = true
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/UpgradeTowers"]
+material = ExtResource("5_fwgp3")
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_qli1y")
+theme_override_font_sizes/font_size = 35
+text = "upgrade towers"
+vertical_alignment = 1
+uppercase = true
+
+[node name="PlayerStats" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 316.0
+offset_right = 285.0
+offset_bottom = 372.0
+pivot_offset = Vector2(117.5, 28)
+script = ExtResource("7_lb3t6")
+hovered_color = Color(1, 0.9166666, 0, 1)
+is_sub_menu = true
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/PlayerStats"]
+material = ExtResource("5_fwgp3")
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_qli1y")
+theme_override_font_sizes/font_size = 35
+text = "stats"
+vertical_alignment = 1
+uppercase = true
+
+[node name="SubMenus" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]

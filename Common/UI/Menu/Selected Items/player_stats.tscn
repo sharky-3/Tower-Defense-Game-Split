@@ -1,0 +1,613 @@
+[gd_scene load_steps=11 format=3 uid="uid://dow3hrbtj8qel"]
+
+[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/pause_ui/item_menu/item_menu_pause_ui.gd" id="1_g46as"]
+[ext_resource type="Texture2D" uid="uid://c7eldsopyxnd4" path="res://Assets/Images/Icon/grabber.png" id="2_siywt"]
+[ext_resource type="Texture2D" uid="uid://hcjg6rpicy1n" path="res://Assets/Images/Icon/grabber_highlight.png" id="3_jb61t"]
+[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/tooltip_ui/tooltip_ui.tscn" id="4_6kml3"]
+[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="5_b2w81"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_u4j83"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected Items/selected_item.gd" id="7_cp5vp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rojs"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6mgv"]
+bg_color = Color(0, 0, 0, 0.25)
+
+[sub_resource type="FontVariation" id="FontVariation_5umfo"]
+base_font = ExtResource("6_u4j83")
+
+[node name="PlayerStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g46as")
+LAST_SELECTION_IDX = 10
+tool_title = Array[String](["Toggle between windowed and fullscreen modes for your game.", "Set the width and height of the game window to your preference.", "Adjust the camera's field of view to see more or less of the world.", "", "", "", "", "", "", "", ""])
+tool_sub_title = Array[String](["Window Mode", "Screen Size", "Camera FOV", "", "", "", "", "", "", "", ""])
+
+[node name="Slider Segment" type="HBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 0
+offset_left = 454.0
+offset_top = 237.0
+offset_right = 854.0
+offset_bottom = 280.0
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Slider" type="HSlider" parent="Slider Segment"]
+custom_minimum_size = Vector2(347, 43)
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("2_siywt")
+theme_override_icons/grabber_highlight = ExtResource("3_jb61t")
+theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
+step = 25.0
+
+[node name="Background" type="Panel" parent="."]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_i6mgv")
+
+[node name="TooltipUI" parent="." instance=ExtResource("4_6kml3")]
+layout_mode = 1
+title = "Game Settings"
+sub_title = "Guide"
+
+[node name="Title" type="Label" parent="."]
+z_index = -1
+material = ExtResource("5_b2w81")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 25.0
+offset_right = 104.0
+offset_bottom = 100.0
+grow_horizontal = 2
+pivot_offset = Vector2(126.5, 28)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 60
+text = "Player stats"
+vertical_alignment = 1
+uppercase = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 121.0
+offset_right = -50.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Left" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HBoxContainer/Left"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VSplitContainer2" type="VSplitContainer" parent="VBoxContainer/HBoxContainer/Left"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Right" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Items" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TotalGamesPlayed" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 121.0
+offset_right = 551.0
+offset_bottom = 153.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/TotalGamesPlayed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Total Games Played"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/TotalGamesPlayed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Wins" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 163.0
+offset_right = 551.0
+offset_bottom = 195.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/Wins"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Wins"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/Wins"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Loses" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 205.0
+offset_right = 551.0
+offset_bottom = 237.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/Loses"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Loses"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/Loses"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="WinRate" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 247.0
+offset_right = 551.0
+offset_bottom = 279.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/WinRate"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Win Rate"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/WinRate"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0%"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="WavesPlayed" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 309.0
+offset_right = 551.0
+offset_bottom = 341.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/WavesPlayed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Waves Played"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/WavesPlayed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="HigestWaveReached" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 351.0
+offset_right = 551.0
+offset_bottom = 383.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/HigestWaveReached"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Highest Wave Reached"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/HigestWaveReached"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="EnemiesKilled" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 413.0
+offset_right = 551.0
+offset_bottom = 445.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/EnemiesKilled"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Enemies Killed"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/EnemiesKilled"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="EnemiesSpawned" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 141.0
+offset_top = 455.0
+offset_right = 551.0
+offset_bottom = 487.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/EnemiesSpawned"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Enemies Spawned"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/EnemiesSpawned"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TotalDamageTaken" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 121.0
+offset_right = 1011.0
+offset_bottom = 153.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/TotalDamageTaken"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Total Damage Taken"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/TotalDamageTaken"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TotalDamageDealed" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 157.0
+offset_right = 1011.0
+offset_bottom = 189.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/TotalDamageDealed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Total Damage Dealed"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/TotalDamageDealed"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="TotalTowersPlaced" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 193.0
+offset_right = 1011.0
+offset_bottom = 225.0
+pivot_offset = Vector2(0, 16)
+theme_override_constants/separation = 10
+alignment = 1
+script = ExtResource("7_cp5vp")
+hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
+use_text_scale_effect = false
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/TotalTowersPlaced"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(325, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Total Towers Placed"
+vertical_alignment = 1
+
+[node name="Value" type="Label" parent="Items/TotalTowersPlaced"]
+z_index = -1
+material = ExtResource("5_b2w81")
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

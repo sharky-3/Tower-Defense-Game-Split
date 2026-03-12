@@ -1,6 +1,6 @@
 @tool
 extends Node2D
-class_name UiMainMenuCursor
+class_name UiCursor
 
 @onready var timer: Timer = $Timer
 

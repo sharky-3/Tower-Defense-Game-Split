@@ -18,7 +18,6 @@ var GAME_DATA = {
 		{ "Name": "Games_Lost", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Total_Games", "Value": 0, "Parent": "Stats" },
 		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
-		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
 
 		{ "Name": "Highest_Wave_Reached", "Value": 0, "Parent": "Stats" },
 		
