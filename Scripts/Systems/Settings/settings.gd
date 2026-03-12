@@ -1,0 +1,64 @@
+""" [[ ============================================================ ]] """
+extends Node
+class_name GameSettings
+""" [[ ============================================================ ]] """
+
+""" [[ Stats ]] """
+var settings: Array = [
+	{  "Name": "Windowed Mode", 
+		"Values": ["Windowed", "Maximized", "Fullscreen"], 
+		"CurrentSelectedValue": 2
+	},
+	{ "Name": "Resolution",
+		"Values": [ Vector2i(1280, 720), Vector2i(1920, 1080), Vector2i(2560, 1440) ], 
+		"CurrentSelectedValue": 0
+	},
+	{ "Name": "Fov",
+		"Values": [], 
+		"CurrentSelectedValue": 75,
+		"MinValue": 30,
+		"MaxValue": 120
+	},
+]
+var previousSettingName: String = ""
+
+""" [[ ============================================================ ]] """
+""" [[ LifeCycle ]] """
+
+func update_game_settings(index: int, player_camera: Camera3D):
+	var setting = settings[index]
+
+	var setting_name: String = setting["Name"]
+	var values: Array = setting.get("Values", [])
+	var current_value: int = setting.get("CurrentSelectedValue", 0)
+
+	if setting_name == "Fov":
+		var fov_options := [120, 75, 60, 45, 30]
+		if previousSettingName == setting_name:
+			var current_idx := fov_options.find(current_value)
+			current_idx = (current_idx + 1) % fov_options.size()
+			current_value = fov_options[current_idx]
+		else:
+			current_value = 75
+			previousSettingName = setting_name
+		setting["CurrentSelectedValue"] = current_value
+		if player_camera: player_camera.fov = current_value
+		return current_value
+
+	if previousSettingName == setting_name and values.size() > 0: current_value = (current_value + 1) % values.size()
+	else: previousSettingName = setting_name
+
+	setting["CurrentSelectedValue"] = current_value
+	var new_value = values[current_value] if values.size() > 0 else null
+
+	match setting_name:
+		"Windowed Mode":
+			match str(new_value):
+				"Windowed": DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+				"Maximized": DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_MAXIMIZED)
+				"Fullscreen": DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_FULLSCREEN)
+		"Resolution":
+			if typeof(new_value) == TYPE_VECTOR2I:
+				DisplayServer.window_set_size(new_value)
+
+	return new_value

@@ -2,6 +2,9 @@
 extends Control
 """ [[ ============================================================ ]] """
 
+""" [[ Classes ]] """
+var game_settings = GameSettings.new()
+
 """ [[ Constants / Exported Data ]] """
 @export_range(FIRST_SELECTION_IDX, LAST_SELECTION_IDX, 1) var selected_idx: int = 0 :
 	set(new_selected_idx):
@@ -10,12 +13,12 @@ extends Control
 
 """ [[ Node references ]] """
 @onready var options: Array[HBoxContainer] = []
+@onready var player: Node3D = $"../../../../../../World/SubViewport/Player"
 
 """ [[ Stats ]] """
 const FIRST_SELECTION_IDX: int = 0
-const LAST_SELECTION_IDX: int = 3
-
-signal submenu_selected(index: int)
+const LAST_SELECTION_IDX: int = 2
+var slider_text: Label
 
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
@@ -56,7 +59,7 @@ func open_options() -> void:
 
 func close() -> void: 
 	for option in options: option.hide()
-	
+
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
 
@@ -76,5 +79,21 @@ func _input(event: InputEvent) -> void:
 	
 	elif event.is_action_pressed("ui_select"):
 		UISFX.play_select()
-		print(selected_idx)
-		submenu_selected.emit(selected_idx)
+		
+		var player_camera: Camera3D = player.get_player_camera()
+		var new_value = game_settings.update_game_settings(selected_idx, player_camera)
+		var selected_option: HBoxContainer = options[selected_idx]
+		var segment_control: HBoxContainer = selected_option.get_node("Segment Control")
+		var text: Label = segment_control.get_node_or_null("Text")
+		var slider: HSlider = segment_control.get_node_or_null("Slider")
+		
+		if slider: 
+			slider.value = new_value
+			self.slider_text = text
+			
+		if text:
+			if typeof(new_value) == TYPE_VECTOR2I: text.text = str(new_value.x) + "x" + str(new_value.y)
+			else: text.text = str(new_value)
+
+func _on_slider_value_changed(value: float) -> void:
+	if self.slider_text: self.slider_text.text = str(int(value))

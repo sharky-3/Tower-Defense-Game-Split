@@ -10,7 +10,7 @@
 [ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="8_ik1ra"]
 [ext_resource type="PackedScene" uid="uid://cvv2hyffbjekj" path="res://Entities/Player/Camera/PlayerCamera.tscn" id="9_skrqh"]
 [ext_resource type="PackedScene" uid="uid://drloc1w2f0v3v" path="res://Entities/Player/Tower/BaseTower.tscn" id="10_sal2d"]
-[ext_resource type="Script" uid="uid://b5dxv5bkkreh6" path="res://Scripts/Systems/menu_camera.gd" id="12_amb8m"]
+[ext_resource type="Script" uid="uid://b5dxv5bkkreh6" path="res://Scripts/Systems/Game/menu_camera.gd" id="12_amb8m"]
 [ext_resource type="Script" uid="uid://cmn34aixvwb5k" path="res://Common/UI/Card/Deck.gd" id="12_yg8k5"]
 [ext_resource type="PackedScene" uid="uid://cdgpjcf0sswem" path="res://Common/UI/Menu/pause_ui/pause_ui.tscn" id="15_qv1uj"]
 

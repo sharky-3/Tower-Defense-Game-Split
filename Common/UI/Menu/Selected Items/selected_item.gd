@@ -105,8 +105,6 @@ func select() -> void:
 	
 	set_font_collor(hovered_color)
 	material = null
-	
-	print(self.name)
 
 func unselect() -> void:
 	if tween_when_selected: tween_when_selected.kill()

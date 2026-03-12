@@ -34,7 +34,7 @@ var current_wave: int = 0
 """ [[ LifeCycle ]] """
 
 func _ready() -> void:
-	#open_menu()
+	open_menu()
 	start_wave_system()
 
 """ [[ ============================================================ ]] """

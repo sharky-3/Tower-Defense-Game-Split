@@ -124,6 +124,7 @@ func apply_smoothing(delta):
 	
 func is_current_camera() -> bool: return camera.is_current()
 func make_current_camera(): camera.make_current()
+func get_player_camera(): return camera
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
