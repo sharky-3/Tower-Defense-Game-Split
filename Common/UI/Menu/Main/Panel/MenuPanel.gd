@@ -21,9 +21,11 @@ extends Control
 	$ItemMenu,
 	$ItemMenu,
 	$ItemMenu,
+	$ItemMenu,
 ]
 
 @onready var sub_menus: Array[Control] = [
+	$ItemMenu/SubViewport/Editor, 
 	$ItemMenu/SubViewport/Editor, 
 	$ItemMenu/SubViewport/Settings, 
 	$ItemMenu/SubViewport/Progression, 
@@ -159,6 +161,13 @@ func blot_transition_progress(progress: float) -> void:
 func main_menu_transition_progress(progress: float) -> void:
 	main_menu_sub_viewport_container.material.set_shader_parameter("progress", progress)
 
+func player_que_to_game():
+	var main: Node3D = $"../../.."
+	if main.has_method("start_new_game"):
+		main.start_new_game()
+		main.open_menu()
+	return
+
 func player_is_quiting_game():
 	get_tree().quit()
 	print("PLAYER QUITED GAME")
@@ -168,6 +177,7 @@ func player_is_quiting_game():
 """ [[ Events ]] """
 
 func _on_main_menu_pause_ui_submenu_selected(index: int) -> void:
-	if index == 3: player_is_quiting_game()
+	if index == 0: player_que_to_game(); return
+	if index == 4: player_is_quiting_game()
 	open_sub_menu(sub_menus[index])
 	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])

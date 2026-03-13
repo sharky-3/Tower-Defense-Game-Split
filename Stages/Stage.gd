@@ -72,7 +72,7 @@ func set_up_bosses(isBoss: String):
 func set_up_difficulty(diff: String): 
 	self.game_difficulty = diff
 
-func saved_and_start_new_game(): 
+func start_new_game(): 
 	reset()
 	start_wave_system()
 

@@ -45,11 +45,6 @@ var editorValues: Array = [
 		"Values": [ "On", "Off" ],
 		"CurrentSelectedValue": 0
 	},
-
-	{ "Name": "Save",
-		"Values": [],
-		"CurrentSelectedValue": 0
-	},
 ]
 var previousSettingName: String = ""
 
@@ -161,12 +156,8 @@ func update_game_editor(index: int, viewport: SubViewport):
 				main.set_up_initial_enemies(int(new_value))
 
 		"Bosses": 
-			if main.has_method("set_up_bossesčplol"):
+			if main.has_method("set_up_bosses"):
 				main.set_up_bosses(str(new_value))
-				
-		"Save":
-			if main.has_method("saved_and_start_new_game"):
-				main.saved_and_start_new_game()
 			
 	return new_value
 

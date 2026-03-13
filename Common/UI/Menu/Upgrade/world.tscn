@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://bj4pgsqlwjlf5"]
+
+[ext_resource type="PackedScene" uid="uid://2qfqe3pkv812" path="res://Common/Lights/EnvironmentLight.tscn" id="1_h7vus"]
+[ext_resource type="Shader" uid="uid://bifltg3r6fjhh" path="res://Entities/Environment/Ground/Shader/ground_shader.gdshader" id="2_kfmrx"]
+[ext_resource type="PackedScene" uid="uid://cpyqypt4q7pnd" path="res://Entities/Environment/Grass/grass.tscn" id="3_ysd44"]
+[ext_resource type="PackedScene" uid="uid://cvq5oa37c1bkt" path="res://Entities/Items/Placeable/Towers/Basic/Basic.tscn" id="4_i5qnp"]
+[ext_resource type="Script" uid="uid://b5dxv5bkkreh6" path="res://Scripts/Systems/Game/menu_camera.gd" id="5_kfmrx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tklga"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4vimx"]
+render_priority = 0
+shader = ExtResource("2_kfmrx")
+shader_parameter/ground_color = Color(0.101960786, 0.6901961, 0.21176471, 1)
+shader_parameter/outline_mask = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8sj4g"]
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Item" type="Node3D" parent="SubViewport"]
+
+[node name="Environment" type="Node3D" parent="SubViewport/Item"]
+
+[node name="EnvironmentLight" parent="SubViewport/Item/Environment" instance=ExtResource("1_h7vus")]
+
+[node name="Camera" type="Camera3D" parent="SubViewport/Item"]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 80, 130)
+fov = 25.0
+
+[node name="SpectatingCamera" type="Node3D" parent="SubViewport/Item"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15, 0)
+script = ExtResource("5_kfmrx")
+
+[node name="Tower" parent="SubViewport/Item/SpectatingCamera" instance=ExtResource("4_i5qnp")]
+transform = Transform3D(3.535534, 0, -3.535534, 0, 5, 0, 3.535534, 0, 3.535534, 0, -11, 0)
+
+[node name="Ground" type="MeshInstance3D" parent="SubViewport/Item/SpectatingCamera"]
+transform = Transform3D(50, 0, 0, 0, 5, 0, 0, 0, 50, 0, -18.52638, 0)
+mesh = SubResource("BoxMesh_tklga")
+skeleton = NodePath("../../../../../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_4vimx")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="SubViewport/Item/SpectatingCamera/Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/Item/SpectatingCamera/Ground/RigidBody3D"]
+shape = SubResource("BoxShape3D_8sj4g")
+
+[node name="Grass" parent="SubViewport/Item/SpectatingCamera" instance=ExtResource("3_ysd44")]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0, -16, 0)
