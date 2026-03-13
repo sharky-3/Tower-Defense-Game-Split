@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dt45hris2sfcs"]
+[gd_scene load_steps=18 format=3 uid="uid://dt45hris2sfcs"]
 
 [ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Sub/Item/SubMenuPanel.gd" id="1_y2qj6"]
 [ext_resource type="Texture2D" uid="uid://hcjg6rpicy1n" path="res://Assets/Images/Icon/grabber_highlight.png" id="3_4tuwv"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6mgv"]
 bg_color = Color(0, 0, 0, 0.25)
+
+[sub_resource type="FontVariation" id="FontVariation_wikni"]
+base_font = ExtResource("6_xd44s")
 
 [sub_resource type="FontVariation" id="FontVariation_5umfo"]
 base_font = ExtResource("6_xd44s")
@@ -41,6 +44,7 @@ grow_vertical = 2
 script = ExtResource("1_y2qj6")
 
 [node name="Background" type="Panel" parent="."]
+visible = false
 z_index = -1
 layout_mode = 1
 anchors_preset = 15
@@ -52,30 +56,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_i6mgv")
 
 [node name="TooltipUI" parent="." instance=ExtResource("4_cqk0k")]
 layout_mode = 1
+offset_top = -473.0
+offset_bottom = -473.0
 title = "Game Settings"
 sub_title = "Guide"
-
-[node name="Title" type="Label" parent="."]
-z_index = -1
-material = ExtResource("5_o0so2")
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -104.0
-offset_top = 25.0
-offset_right = 104.0
-offset_bottom = 100.0
-grow_horizontal = 2
-pivot_offset = Vector2(126.5, 28)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 60
-text = "VIDEO"
-vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 visible = false
@@ -83,13 +67,32 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 121.0
-offset_right = -50.0
-offset_bottom = -50.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Title" type="Label" parent="."]
+z_index = -1
+material = ExtResource("5_o0so2")
+layout_mode = 0
+offset_left = 25.0
+offset_top = 403.0
+offset_right = 1127.0
+offset_bottom = 465.0
+pivot_offset = Vector2(126.5, 28)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_wikni")
+theme_override_font_sizes/font_size = 50
+text = "video"
+uppercase = true
 
 [node name="Items" type="Control" parent="."]
 anchors_preset = 0
@@ -98,12 +101,11 @@ offset_bottom = 40.0
 
 [node name="Windowed Mode" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 121.0
-offset_right = 1102.0
-offset_bottom = 164.0
+offset_left = 25.0
+offset_top = 480.0
+offset_right = 1127.0
+offset_bottom = 515.0
 pivot_offset = Vector2(0, 21.5)
-alignment = 1
 script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
@@ -111,20 +113,19 @@ scale_direction = 1
 [node name="Title" type="Label" parent="Items/Windowed Mode"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
-text = "windowed mode"
+theme_override_font_sizes/font_size = 25
+text = "Windowed Mode"
 vertical_alignment = 1
-uppercase = true
 
 [node name="Segment Control" type="HBoxContainer" parent="Items/Windowed Mode"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
@@ -159,14 +160,14 @@ flip_h = true
 [node name="Text" type="Label" parent="Items/Windowed Mode/Segment Control"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 25
 text = "Fullscreen"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -190,12 +191,11 @@ expand_mode = 3
 
 [node name="Resolution" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 179.0
-offset_right = 1102.0
-offset_bottom = 222.0
+offset_left = 25.0
+offset_top = 530.0
+offset_right = 1127.0
+offset_bottom = 565.0
 pivot_offset = Vector2(0, 21.5)
-alignment = 1
 script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
@@ -203,20 +203,19 @@ scale_direction = 1
 [node name="Title" type="Label" parent="Items/Resolution"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
-text = "resolution"
+theme_override_font_sizes/font_size = 25
+text = "Resolution"
 vertical_alignment = 1
-uppercase = true
 
 [node name="Segment Control" type="HBoxContainer" parent="Items/Resolution"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
@@ -243,14 +242,14 @@ flip_h = true
 [node name="Text" type="Label" parent="Items/Resolution/Segment Control"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(175, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 25
 text = "1920x1080"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -274,12 +273,11 @@ expand_mode = 3
 
 [node name="Fov" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 50.0
-offset_top = 237.0
-offset_right = 1102.0
-offset_bottom = 280.0
+offset_left = 25.0
+offset_top = 580.0
+offset_right = 1127.0
+offset_bottom = 623.0
 pivot_offset = Vector2(0, 21.5)
-alignment = 1
 script = ExtResource("7_ij5pd")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
@@ -287,26 +285,25 @@ scale_direction = 1
 [node name="Title" type="Label" parent="Items/Fov"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(275, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
-text = "fov"
+theme_override_font_sizes/font_size = 25
+text = "Fov"
 vertical_alignment = 1
-uppercase = true
 
 [node name="Segment Control" type="HBoxContainer" parent="Items/Fov"]
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
 [node name="Slider" type="HSlider" parent="Items/Fov/Segment Control"]
-custom_minimum_size = Vector2(270, 43)
+custom_minimum_size = Vector2(230, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
 theme_override_icons/grabber = ExtResource("3_4tuwv")
@@ -330,14 +327,14 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 [node name="Text" type="Label" parent="Items/Fov/Segment Control"]
 z_index = -1
 material = ExtResource("5_o0so2")
-custom_minimum_size = Vector2(70, 0)
+custom_minimum_size = Vector2(35, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 25
 text = "75"
 horizontal_alignment = 2
 vertical_alignment = 1

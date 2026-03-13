@@ -10,8 +10,6 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 @export_category("Spawn")
 @export var max_spawn_enemy_distance: float = 10
 @export var min_spawn_enemy_distance: float = 5.0
-
-@export_category("User Interface")
 @export var ui_duration: float = 0.2
 
 """ [[ Node references ]] """
@@ -59,7 +57,6 @@ func set_up_round_multiplier(value: float):
 	self.round_multiplier = value
 
 func set_up_initial_enemies(value: int):
-	print("Set value: ", value)
 	self.starting_enemies = value
 	
 func set_up_bosses(isBoss: String): 
@@ -123,9 +120,7 @@ func start_wave_system() -> void:
 	async_wave_loop(id)
 
 func async_wave_loop(id: int) -> void:
-	if not can_continue_playing: 
-		print("RESETING")
-		return
+	if not can_continue_playing:  return
 	
 	while (round_counts == -1 or current_wave < round_counts) and id == wave_loop_id:
 		if not can_continue_playing:  return

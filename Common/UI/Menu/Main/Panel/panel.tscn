@@ -79,11 +79,6 @@ menu_type = "Editor"
 [node name="Settings" parent="ItemMenu/SubViewport" instance=ExtResource("11_l7gvk")]
 visible = false
 menu_type = "Settings"
-selected_idx = 0
-FIRST_SELECTION_IDX = 0
-LAST_SELECTION_IDX = 2
-tool_title = Array[String](["Toggle between windowed and fullscreen modes for your game.", "Set the width and height of the game window to your preference.", "Adjust the camera's field of view to see more or less of the world."])
-tool_sub_title = Array[String](["Window Mode", "Screen Size", "Camera FOV"])
 
 [node name="Progression" parent="ItemMenu/SubViewport" instance=ExtResource("7_ltr5c")]
 visible = false

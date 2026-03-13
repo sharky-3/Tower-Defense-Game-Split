@@ -71,11 +71,11 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 2
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 
@@ -711,10 +711,10 @@ expand_mode = 3
 [node name="Save" type="HBoxContainer" parent="Items"]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 568.0
+offset_top = 564.0
 offset_right = 1127.0
-offset_bottom = 630.0
-pivot_offset = Vector2(0, 17.5)
+offset_bottom = 626.0
+pivot_offset = Vector2(1102, 31)
 alignment = 2
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
@@ -731,7 +731,7 @@ theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
 theme_override_font_sizes/font_size = 50
-text = "Save"
+text = "LOAD"
 horizontal_alignment = 2
 vertical_alignment = 1
 

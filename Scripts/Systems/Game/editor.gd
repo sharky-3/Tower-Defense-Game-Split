@@ -57,7 +57,6 @@ var previousSettingName: String = ""
 """ [[ Functions ]] """
 
 func update_game_editor(index: int, viewport: SubViewport):
-
 	var editor = editorValues[index]
 	var main: Node3D = viewport.get_parent().get_parent()
 	
@@ -170,7 +169,7 @@ func update_game_editor(index: int, viewport: SubViewport):
 				main.saved_and_start_new_game()
 			
 	return new_value
-	
+
 func find_valid_position(existing_positions: Array, radius: float = 10, area_size: float = 45) -> Vector3:
 	for attempt in range(100):
 		var pos = Vector3(randf_range(-area_size, area_size), 0, randf_range(-area_size, area_size))
