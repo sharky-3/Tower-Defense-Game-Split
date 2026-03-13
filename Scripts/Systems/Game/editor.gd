@@ -11,6 +11,10 @@ const TREE_2 = preload("uid://b7mx4vexa3go")
 
 """ [[ Stats ]] """
 var editorValues: Array = [
+	{ "Name": "Difficulty",
+		"Values": [ "Easy", "Normal", "Medium", "Hard" ],
+		"CurrentSelectedValue": 1
+	},
 	{ "Name": "Map",
 		"Values": [ "Forest", "Ocean", "Desert" ],
 		"CurrentSelectedValue": 0
@@ -19,6 +23,7 @@ var editorValues: Array = [
 		"Values": [ 30, 25, 20, 15, 10, 5, 3, 0 ],
 		"CurrentSelectedValue": 1
 	},
+
 	{ "Name": "Wave Timer",
 		"Values": [ 60, 50, 40, 30, 20, 10, 5 ],
 		"CurrentSelectedValue": 5
@@ -27,14 +32,20 @@ var editorValues: Array = [
 		"Values": [ "INF", 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5 ],
 		"CurrentSelectedValue": 0
 	},
+	{ "Name": "Round Multiplier",
+		"Values": [ 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0 ],
+		"CurrentSelectedValue": 0
+	},
+
+	{ "Name": "Initial Enemies",
+		"Values": [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ],
+		"CurrentSelectedValue": 3
+	},
 	{ "Name": "Bosses",
 		"Values": [ "On", "Off" ],
 		"CurrentSelectedValue": 0
 	},
-	{ "Name": "Difficulty",
-		"Values": [ "Easy", "Normal", "Medium", "Hard" ],
-		"CurrentSelectedValue": 1
-	},
+
 	{ "Name": "Save",
 		"Values": [],
 		"CurrentSelectedValue": 0
@@ -65,6 +76,10 @@ func update_game_editor(index: int, viewport: SubViewport):
 	else: new_value = null
 		
 	match editor_name:
+		"Difficulty": 
+			if main.has_method("set_up_difficulty"):
+				main.set_up_difficulty(str(new_value))
+
 		"Map":
 			for map in viewport.get_children():
 				if map is Node3D: map.visible = false
@@ -137,14 +152,18 @@ func update_game_editor(index: int, viewport: SubViewport):
 		"Round Count": 
 			if main.has_method("set_up_round_counts"):
 				main.set_up_round_counts(str(new_value))
-				
+		
+		"Round Multiplier": 
+			if main.has_method("set_up_round_multiplier"):
+				main.set_up_round_multiplier(float(new_value))
+
+		"Bosses": 
+			if main.has_method("set_up_initial_enemies"):
+				main.set_up_initial_enemies(int(new_value))
+
 		"Bosses": 
 			if main.has_method("set_up_bosses"):
 				main.set_up_bosses(str(new_value))
-				
-		"Difficulty": 
-			if main.has_method("set_up_difficulty"):
-				main.set_up_difficulty(str(new_value))
 				
 		"Save":
 			if main.has_method("saved_and_start_new_game"):

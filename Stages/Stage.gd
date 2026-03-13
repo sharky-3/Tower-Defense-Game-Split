@@ -7,9 +7,7 @@ const Enemy = preload("uid://qpx5ico661eo")
 const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 """ [[ Constants / Exported Data ]] """
-@export_category("Enemy")
-@export var starting_enemies: int = 2
-@export var enemy_multiplier: float = 1.25
+@export_category("Spawn")
 @export var max_spawn_enemy_distance: float = 10
 @export var min_spawn_enemy_distance: float = 5.0
 
@@ -28,14 +26,18 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 @onready var deck: Control = $"World/SubViewport/User Interface/Deck"
 
 """ [[ Stats ]] """
-var wave_loop_id = 0
-var current_wave: int = 0
 var can_continue_playing: bool = true
 
-var time_between_waves: float = 10.0
-var round_counts: int = -1
-var bosses: bool = true
 var game_difficulty: String = "Normal"
+
+var time_between_waves: float = 10.0
+var wave_loop_id = 0
+var round_counts: int = -1
+var current_wave: int = 0
+var round_multiplier: float = 1.25
+
+var starting_enemies: int = 2
+var bosses: bool = true
 	
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
@@ -52,6 +54,13 @@ func set_up_wave_timer(value: int):
 func set_up_round_counts(value: String): 
 	if value == "INF": self.round_counts = -1
 	else: self.round_counts = int(value)
+
+func set_up_round_multiplier(value: float):
+	self.round_multiplier = value
+
+func set_up_initial_enemies(value: int):
+	print("Set value: ", value)
+	self.starting_enemies = value
 	
 func set_up_bosses(isBoss: String): 
 	var type: bool = true
@@ -75,7 +84,7 @@ func reset():
 	can_continue_playing = false
 	await get_tree().process_frame
 	
-	enemy_multiplier = 1.25
+	round_multiplier = 1.25
 	current_wave = 0
 	
 	var enemiesFolder: Node3D = get_node("EnemiesFolder")
@@ -99,10 +108,13 @@ func start_wave_system() -> void:
 	print(
 		"\n\nGAME SET UP",
 		"\n---------------------------------",
+		"\nDifficulty: ", self.game_difficulty,
 		"\nWave Timer: ", self.time_between_waves,
 		"\nRounds: ", self.round_counts, 
+		"\nMultiplier: ", self.round_multiplier, 
+
+		"\n\nInitial Enemies: ", self.starting_enemies, 
 		"\nBoss: ", self.bosses, 
-		"\nDifficulty: ", self.game_difficulty,
 	)
 	can_continue_playing = true
 	wave_loop_id += 1
@@ -120,7 +132,7 @@ func async_wave_loop(id: int) -> void:
 		current_wave += 1
 		
 		_update_player_game_stats("Waves_Played", 1)
-		var enemy_count = int(starting_enemies * pow(enemy_multiplier, current_wave - 1))
+		var enemy_count = int(starting_enemies * pow(round_multiplier, current_wave - 1))
 		var difficulty = 1.0 + (current_wave * 0.15)
 		
 		print("Wave: ", current_wave, " | Enemies: ", enemy_count)
