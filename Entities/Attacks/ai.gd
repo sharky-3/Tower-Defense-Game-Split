@@ -21,7 +21,7 @@ extends Node3D
 @onready var rigid_body: RigidBody3D = $Mesh/RigidBody3D
 @onready var rayCastGroup: Node = $Ray
 
-@onready var target: Node3D = get_node_or_null("../World/SubViewport/Map/PlayerTower")
+@onready var target: Node3D = get_node_or_null("../../World/SubViewport/Map/PlayerTower")
 
 """ [[ Stats ]] """
 var rays := {}

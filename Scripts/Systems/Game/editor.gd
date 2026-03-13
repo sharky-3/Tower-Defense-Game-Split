@@ -19,6 +19,10 @@ var editorValues: Array = [
 		"Values": [ 30, 25, 20, 15, 10, 5, 3, 0 ],
 		"CurrentSelectedValue": 1
 	},
+	{ "Name": "Wave Timer",
+		"Values": [ 60, 50, 40, 30, 20, 10, 5 ],
+		"CurrentSelectedValue": 5
+	},
 	{ "Name": "Round Count",
 		"Values": [ "INF", 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5 ],
 		"CurrentSelectedValue": 0
@@ -31,6 +35,10 @@ var editorValues: Array = [
 		"Values": [ "Easy", "Normal", "Medium", "Hard" ],
 		"CurrentSelectedValue": 1
 	},
+	{ "Name": "Save",
+		"Values": [],
+		"CurrentSelectedValue": 0
+	},
 ]
 var previousSettingName: String = ""
 
@@ -40,6 +48,7 @@ var previousSettingName: String = ""
 func update_game_editor(index: int, viewport: SubViewport):
 
 	var editor = editorValues[index]
+	var main: Node3D = viewport.get_parent().get_parent()
 	
 	var editor_name: String = editor["Name"]
 	var values: Array = editor.get("Values", [])
@@ -121,10 +130,27 @@ func update_game_editor(index: int, viewport: SubViewport):
 					obj_scene.rotation.y = randf_range(0, TAU)
 					env_node.add_child(obj_scene)
 
-		"Round Count": pass
-		"Bosses": pass
-		"Difficulty": pass
-		
+		"Wave Timer":
+			if main.has_method("set_up_wave_timer"):
+				main.set_up_wave_timer(int(new_value))
+
+		"Round Count": 
+			if main.has_method("set_up_round_counts"):
+				main.set_up_round_counts(str(new_value))
+				
+		"Bosses": 
+			if main.has_method("set_up_bosses"):
+				main.set_up_bosses(str(new_value))
+				
+		"Difficulty": 
+			if main.has_method("set_up_difficulty"):
+				main.set_up_difficulty(str(new_value))
+				
+		"Save":
+			if main.has_method("saved_and_start_new_game"):
+				main.saved_and_start_new_game()
+			
+				
 	return new_value
 	
 func find_valid_position(existing_positions: Array, radius: float = 10, area_size: float = 45) -> Vector3:

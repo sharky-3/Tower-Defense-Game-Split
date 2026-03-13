@@ -87,8 +87,8 @@ shader_parameter/center_2_scale = 0.8
 
 [node name="Main" type="Node3D"]
 script = ExtResource("1_d4gul")
-max_distance = 50.0
-min_distance = 25.0
+max_spawn_enemy_distance = 40.0
+min_spawn_enemy_distance = 25.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 volume_db = -10.0
@@ -418,3 +418,5 @@ render_target_update_mode = 0
 
 [node name="MenuUI" parent="Menu/SubViewport" instance=ExtResource("15_qv1uj")]
 visible = false
+
+[node name="EnemiesFolder" type="Node3D" parent="."]

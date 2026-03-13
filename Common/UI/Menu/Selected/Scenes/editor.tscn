@@ -39,9 +39,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sf2j3")
-LAST_SELECTION_IDX = 4
-tool_title = Array[String](["Choose the style or layout of the map.", "Set how many rounds the match will have.", "Enable or disable boss enemies on this map.", "Choose how challenging the gameplay will be.", "Adjust how many trees, rocks, and objects appear."])
-tool_sub_title = Array[String](["Style", "Rounds", "Boss Enemies", "Difficulty", "Density"])
+LAST_SELECTION_IDX = 6
+tool_title = Array[String](["Choose the style or layout of the map.", "Set how many rounds the match will have.", "Set time between each new wave", "Enable or disable boss enemies on this map.", "Choose how challenging the gameplay will be.", "Adjust how many trees, rocks, and objects appear.", "Save & Load new game"])
+tool_sub_title = Array[String](["Style", "Rounds", "Timer", "Boss Enemies", "Difficulty", "Density", "Save"])
 
 [node name="TooltipUI" parent="." instance=ExtResource("4_lkqqo")]
 layout_mode = 1
@@ -80,9 +80,9 @@ z_index = -1
 material = ExtResource("5_886em")
 layout_mode = 0
 offset_left = 25.0
-offset_top = 299.0
+offset_top = 246.0
 offset_right = 1127.0
-offset_bottom = 361.0
+offset_bottom = 308.0
 pivot_offset = Vector2(126.5, 28)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
@@ -104,9 +104,9 @@ grow_vertical = 2
 [node name="Map" type="HBoxContainer" parent="Items"]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 384.0
+offset_top = 331.0
 offset_right = 1127.0
-offset_bottom = 419.0
+offset_bottom = 366.0
 pivot_offset = Vector2(0, 17.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
@@ -193,9 +193,9 @@ expand_mode = 3
 [node name="Environment" type="HBoxContainer" parent="Items"]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 429.0
+offset_top = 376.0
 offset_right = 1127.0
-offset_bottom = 472.0
+offset_bottom = 419.0
 pivot_offset = Vector2(0, 21.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
@@ -254,6 +254,74 @@ theme_override_font_sizes/font_size = 25
 text = "30"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="WaveTimer" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 440.0
+offset_right = 1127.0
+offset_bottom = 483.0
+pivot_offset = Vector2(0, 21.5)
+script = ExtResource("7_25inf")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/WaveTimer"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Wave Timer"
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/WaveTimer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Slider" type="HSlider" parent="Items/WaveTimer/Segment Control"]
+custom_minimum_size = Vector2(230, 43)
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("3_q57ew")
+theme_override_icons/grabber_highlight = ExtResource("3_q57ew")
+theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
+min_value = 5.0
+max_value = 60.0
+step = 5.0
+value = 10.0
+scrollable = false
+
+[node name="Panel" type="Panel" parent="Items/WaveTimer/Segment Control/Slider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
+
+[node name="Text" type="Label" parent="Items/WaveTimer/Segment Control"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "10"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
 
 [node name="Rounds" type="HBoxContainer" parent="Items"]
 layout_mode = 0
@@ -492,6 +560,97 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
 
 [node name="Icon" type="TextureRect" parent="Items/Difficulty/Segment Control/Right"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_4fre3")
+expand_mode = 3
+
+[node name="Save" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 875.0
+offset_top = 121.0
+offset_right = 1125.0
+offset_bottom = 183.0
+pivot_offset = Vector2(0, 17.5)
+script = ExtResource("7_25inf")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 2
+
+[node name="Title" type="Label" parent="Items/Save"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 50
+text = "Save"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/Save"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Left" type="Button" parent="Items/Save/Segment Control"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_sf2j3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lkqqo")
+shortcut_feedback = false
+
+[node name="Icon" type="TextureRect" parent="Items/Save/Segment Control/Left"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_4fre3")
+expand_mode = 3
+flip_h = true
+
+[node name="Text" type="Label" parent="Items/Save/Segment Control"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_886em")
+theme_override_font_sizes/font_size = 25
+text = "Normal"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Right" type="Button" parent="Items/Save/Segment Control"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
+
+[node name="Icon" type="TextureRect" parent="Items/Save/Segment Control/Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

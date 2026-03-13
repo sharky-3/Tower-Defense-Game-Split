@@ -73,7 +73,7 @@ func spawn() -> void:
 	transparent_color.a = 0.0
 	
 	set_font_collor(transparent_color)
-	position += Vector2.UP * 30.0
+	position += Vector2.UP * 50.0
 	
 	if tween_when_selected: tween_when_selected.kill()
 		

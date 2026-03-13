@@ -7,11 +7,11 @@ const Enemy = preload("uid://qpx5ico661eo")
 const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 
 """ [[ Constants / Exported Data ]] """
+@export_category("Enemy")
 @export var starting_enemies: int = 2
 @export var enemy_multiplier: float = 1.25
-@export var time_between_waves: float = 15.0
-@export var max_distance: float = 10
-@export var min_distance: float = 5.0
+@export var max_spawn_enemy_distance: float = 10
+@export var min_spawn_enemy_distance: float = 5.0
 
 @export_category("User Interface")
 @export var ui_duration: float = 0.2
@@ -28,17 +28,59 @@ const TOOL_TIP = preload("uid://xeyl6w62dtwx")
 @onready var deck: Control = $"World/SubViewport/User Interface/Deck"
 
 """ [[ Stats ]] """
+var wave_loop_id = 0
 var current_wave: int = 0
+var can_continue_playing: bool = true
+
+var time_between_waves: float = 10.0
+var round_counts: int = -1
+var bosses: bool = true
+var game_difficulty: String = "Normal"
 	
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
 
 func _ready() -> void:
 	open_menu()
-	start_wave_system()
 
 """ [[ ============================================================ ]] """
+""" [[ Set Ups ]] """
+
+func set_up_wave_timer(value: int):
+	self.time_between_waves = value
+	
+func set_up_round_counts(value: String): 
+	if value == "INF": self.round_counts = -1
+	else: self.round_counts = int(value)
+	
+func set_up_bosses(isBoss: String): 
+	var type: bool = true
+	match isBoss:
+		"On": type = true
+		"Off": type = false
+	self.bosses = type
+	
+""" [[ ============================================================ ]] """
 """ [[ Functions ]] """
+	
+func set_up_difficulty(diff: String): 
+	self.game_difficulty = diff
+
+func saved_and_start_new_game(): 
+	reset()
+	start_wave_system()
+
+func reset():
+	wave_loop_id += 1
+	can_continue_playing = false
+	await get_tree().process_frame
+	
+	enemy_multiplier = 1.25
+	current_wave = 0
+	
+	var enemiesFolder: Node3D = get_node("EnemiesFolder")
+	for child in enemiesFolder.get_children():
+		if child is Node3D: child.queue_free()
 
 func get_node_height(node: Node3D) -> float:
 	var mesh_instance = null
@@ -54,11 +96,29 @@ func get_node_height(node: Node3D) -> float:
 	return 0.0
 
 func start_wave_system() -> void:
-	async_wave_loop()
+	print(
+		"\n\nGAME SET UP",
+		"\n---------------------------------",
+		"\nWave Timer: ", self.time_between_waves,
+		"\nRounds: ", self.round_counts, 
+		"\nBoss: ", self.bosses, 
+		"\nDifficulty: ", self.game_difficulty,
+	)
+	can_continue_playing = true
+	wave_loop_id += 1
+	var id = wave_loop_id
+	can_continue_playing = true
+	async_wave_loop(id)
 
-func async_wave_loop() -> void:
-	while true:
+func async_wave_loop(id: int) -> void:
+	if not can_continue_playing: 
+		print("RESETING")
+		return
+	
+	while (round_counts == -1 or current_wave < round_counts) and id == wave_loop_id:
+		if not can_continue_playing:  return
 		current_wave += 1
+		
 		_update_player_game_stats("Waves_Played", 1)
 		var enemy_count = int(starting_enemies * pow(enemy_multiplier, current_wave - 1))
 		var difficulty = 1.0 + (current_wave * 0.15)
@@ -66,20 +126,22 @@ func async_wave_loop() -> void:
 		print("Wave: ", current_wave, " | Enemies: ", enemy_count)
 		
 		for i in range(enemy_count):
+			if id != wave_loop_id: return
 			_spawn_enemy(difficulty)
 			await get_tree().create_timer(0.1).timeout
 		await get_tree().create_timer(time_between_waves).timeout
 
 func _get_random_spawn_offset() -> Vector3:
-	var distance = randf_range(min_distance, max_distance)
+	var distance = randf_range(min_spawn_enemy_distance, max_spawn_enemy_distance)
 	var angle = randf_range(0, TAU)
 	return Vector3(cos(angle) * distance, 0, sin(angle) * distance)
 
 func _spawn_enemy(difficulty: float) -> void:
 	if not is_instance_valid(spawn_enemy_position): return
 
+	var folder: Node3D = get_node("EnemiesFolder") 
 	var enemy_instance = Enemy.instantiate()
-	add_child(enemy_instance)
+	folder.add_child(enemy_instance)
 	enemy_instance.set_group()
 
 	var spawn_pos = spawn_enemy_position.global_position
