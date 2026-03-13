@@ -39,9 +39,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sf2j3")
-LAST_SELECTION_IDX = 6
-tool_title = Array[String](["Choose the style or layout of the map.", "Set how many rounds the match will have.", "Set time between each new wave", "Enable or disable boss enemies on this map.", "Choose how challenging the gameplay will be.", "Adjust how many trees, rocks, and objects appear.", "Save & Load new game"])
-tool_sub_title = Array[String](["Style", "Rounds", "Timer", "Boss Enemies", "Difficulty", "Density", "Save"])
+LAST_SELECTION_IDX = 8
+tool_title = Array[String](["Choose how challenging the gameplay will be.", "Choose the style or layout of the map.", "Adjust how many trees, rocks, and objects appear.", "Set time between each new wave", "Set how many rounds the match will have.", "Set round multiplier which increase difficulty", "Set how many enemies spawn at start", "Enable or disable boss enemies on this map.", "Save & Load new game"])
+tool_sub_title = Array[String](["Difficulty", "Style", "Density", "Timer", "Rounds", "Mutliplier", "Enemies", "Boss Enemies", "Save/Load"])
 
 [node name="TooltipUI" parent="." instance=ExtResource("4_lkqqo")]
 layout_mode = 1
@@ -57,6 +57,7 @@ title = "Game Settings"
 sub_title = "Guide"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -70,10 +71,23 @@ grow_vertical = 2
 theme_override_constants/separation = 10
 alignment = 2
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="Title" type="Label" parent="."]
 z_index = -1
 material = ExtResource("5_886em")
-layout_mode = 2
+layout_mode = 0
+offset_left = 25.0
+offset_top = 91.0
+offset_right = 1127.0
+offset_bottom = 153.0
+pivot_offset = Vector2(126.5, 28)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
@@ -83,13 +97,26 @@ theme_override_font_sizes/font_size = 50
 text = "editor"
 uppercase = true
 
-[node name="Difficulty" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Items" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Difficulty" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 163.0
+offset_right = 1127.0
+offset_bottom = 198.0
+pivot_offset = Vector2(0, 17.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/Difficulty"]
+[node name="Title" type="Label" parent="Items/Difficulty"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -103,12 +130,12 @@ theme_override_font_sizes/font_size = 25
 text = "Difficulty"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/Difficulty"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/Difficulty"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Left" type="Button" parent="VBoxContainer/Difficulty/Segment Control"]
+[node name="Left" type="Button" parent="Items/Difficulty/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
@@ -124,7 +151,7 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_sf2j3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lkqqo")
 shortcut_feedback = false
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Difficulty/Segment Control/Left"]
+[node name="Icon" type="TextureRect" parent="Items/Difficulty/Segment Control/Left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -135,7 +162,7 @@ texture = ExtResource("8_4fre3")
 expand_mode = 3
 flip_h = true
 
-[node name="Text" type="Label" parent="VBoxContainer/Difficulty/Segment Control"]
+[node name="Text" type="Label" parent="Items/Difficulty/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(175, 0)
@@ -150,14 +177,14 @@ text = "Normal"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Right" type="Button" parent="VBoxContainer/Difficulty/Segment Control"]
+[node name="Right" type="Button" parent="Items/Difficulty/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Difficulty/Segment Control/Right"]
+[node name="Icon" type="TextureRect" parent="Items/Difficulty/Segment Control/Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,13 +194,18 @@ grow_vertical = 2
 texture = ExtResource("8_4fre3")
 expand_mode = 3
 
-[node name="Map" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Map" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 208.0
+offset_right = 1127.0
+offset_bottom = 243.0
+pivot_offset = Vector2(0, 17.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/Map"]
+[node name="Title" type="Label" parent="Items/Map"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -187,12 +219,12 @@ theme_override_font_sizes/font_size = 25
 text = "Map"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/Map"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/Map"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Left" type="Button" parent="VBoxContainer/Map/Segment Control"]
+[node name="Left" type="Button" parent="Items/Map/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
@@ -208,7 +240,7 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_sf2j3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lkqqo")
 shortcut_feedback = false
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Map/Segment Control/Left"]
+[node name="Icon" type="TextureRect" parent="Items/Map/Segment Control/Left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -219,7 +251,7 @@ texture = ExtResource("8_4fre3")
 expand_mode = 3
 flip_h = true
 
-[node name="Text" type="Label" parent="VBoxContainer/Map/Segment Control"]
+[node name="Text" type="Label" parent="Items/Map/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(175, 0)
@@ -234,14 +266,14 @@ text = "Forest"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Right" type="Button" parent="VBoxContainer/Map/Segment Control"]
+[node name="Right" type="Button" parent="Items/Map/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Map/Segment Control/Right"]
+[node name="Icon" type="TextureRect" parent="Items/Map/Segment Control/Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -251,13 +283,18 @@ grow_vertical = 2
 texture = ExtResource("8_4fre3")
 expand_mode = 3
 
-[node name="Environment" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Environment" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 253.0
+offset_right = 1127.0
+offset_bottom = 296.0
+pivot_offset = Vector2(0, 21.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/Environment"]
+[node name="Title" type="Label" parent="Items/Environment"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -271,12 +308,12 @@ theme_override_font_sizes/font_size = 25
 text = "Environment"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/Environment"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/Environment"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Slider" type="HSlider" parent="VBoxContainer/Environment/Segment Control"]
+[node name="Slider" type="HSlider" parent="Items/Environment/Segment Control"]
 custom_minimum_size = Vector2(230, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
@@ -287,7 +324,7 @@ max_value = 30.0
 value = 30.0
 scrollable = false
 
-[node name="Panel" type="Panel" parent="VBoxContainer/Environment/Segment Control/Slider"]
+[node name="Panel" type="Panel" parent="Items/Environment/Segment Control/Slider"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -296,7 +333,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 
-[node name="Text" type="Label" parent="VBoxContainer/Environment/Segment Control"]
+[node name="Text" type="Label" parent="Items/Environment/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(35, 0)
@@ -311,17 +348,18 @@ text = "30"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="WaveTimer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="WaveTimer" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 341.0
+offset_right = 1127.0
+offset_bottom = 384.0
+pivot_offset = Vector2(0, 21.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/WaveTimer"]
+[node name="Title" type="Label" parent="Items/WaveTimer"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -335,12 +373,12 @@ theme_override_font_sizes/font_size = 25
 text = "Wave Timer"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/WaveTimer"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/WaveTimer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Slider" type="HSlider" parent="VBoxContainer/WaveTimer/Segment Control"]
+[node name="Slider" type="HSlider" parent="Items/WaveTimer/Segment Control"]
 custom_minimum_size = Vector2(230, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
@@ -353,7 +391,7 @@ step = 5.0
 value = 10.0
 scrollable = false
 
-[node name="Panel" type="Panel" parent="VBoxContainer/WaveTimer/Segment Control/Slider"]
+[node name="Panel" type="Panel" parent="Items/WaveTimer/Segment Control/Slider"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -362,7 +400,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 
-[node name="Text" type="Label" parent="VBoxContainer/WaveTimer/Segment Control"]
+[node name="Text" type="Label" parent="Items/WaveTimer/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(35, 0)
@@ -378,76 +416,18 @@ horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 
-[node name="RoundMultiplier" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Rounds" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 394.0
+offset_right = 1127.0
+offset_bottom = 437.0
+pivot_offset = Vector2(0, 21.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/RoundMultiplier"]
-z_index = -1
-material = ExtResource("5_886em")
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 25
-text = "Round Multiplier"
-vertical_alignment = 1
-
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/RoundMultiplier"]
-layout_mode = 2
-theme_override_constants/separation = 20
-alignment = 2
-
-[node name="Slider" type="HSlider" parent="VBoxContainer/RoundMultiplier/Segment Control"]
-custom_minimum_size = Vector2(230, 43)
-layout_mode = 2
-theme_override_constants/center_grabber = 1
-theme_override_icons/grabber = ExtResource("3_q57ew")
-theme_override_icons/grabber_highlight = ExtResource("3_q57ew")
-theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
-min_value = 1.25
-max_value = 3.0
-step = 0.25
-value = 1.25
-scrollable = false
-
-[node name="Panel" type="Panel" parent="VBoxContainer/RoundMultiplier/Segment Control/Slider"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
-
-[node name="Text" type="Label" parent="VBoxContainer/RoundMultiplier/Segment Control"]
-z_index = -1
-material = ExtResource("5_886em")
-custom_minimum_size = Vector2(35, 0)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_constants/shadow_outline_size = 20
-theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 25
-text = "1.25"
-horizontal_alignment = 2
-vertical_alignment = 1
-uppercase = true
-
-[node name="Rounds" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-script = ExtResource("7_25inf")
-hovered_color = Color(1, 0.91764706, 0, 1)
-scale_direction = 1
-
-[node name="Title" type="Label" parent="VBoxContainer/Rounds"]
+[node name="Title" type="Label" parent="Items/Rounds"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -461,12 +441,12 @@ theme_override_font_sizes/font_size = 25
 text = "Round Count"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/Rounds"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/Rounds"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Slider" type="HSlider" parent="VBoxContainer/Rounds/Segment Control"]
+[node name="Slider" type="HSlider" parent="Items/Rounds/Segment Control"]
 custom_minimum_size = Vector2(230, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
@@ -479,7 +459,7 @@ step = 5.0
 value = 105.0
 scrollable = false
 
-[node name="Panel" type="Panel" parent="VBoxContainer/Rounds/Segment Control/Slider"]
+[node name="Panel" type="Panel" parent="Items/Rounds/Segment Control/Slider"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -488,7 +468,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 
-[node name="Text" type="Label" parent="VBoxContainer/Rounds/Segment Control"]
+[node name="Text" type="Label" parent="Items/Rounds/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(35, 0)
@@ -504,17 +484,86 @@ horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 
-[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-
-[node name="StartingEnemiesAmount" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="RoundMultiplier" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 447.0
+offset_right = 1127.0
+offset_bottom = 490.0
+pivot_offset = Vector2(0, 21.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/StartingEnemiesAmount"]
+[node name="Title" type="Label" parent="Items/RoundMultiplier"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Round Multiplier"
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/RoundMultiplier"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="Slider" type="HSlider" parent="Items/RoundMultiplier/Segment Control"]
+custom_minimum_size = Vector2(230, 43)
+layout_mode = 2
+theme_override_constants/center_grabber = 1
+theme_override_icons/grabber = ExtResource("3_q57ew")
+theme_override_icons/grabber_highlight = ExtResource("3_q57ew")
+theme_override_styles/slider = SubResource("StyleBoxFlat_5rojs")
+min_value = 1.25
+max_value = 3.0
+step = 0.25
+value = 1.25
+scrollable = false
+
+[node name="Panel" type="Panel" parent="Items/RoundMultiplier/Segment Control/Slider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
+
+[node name="Text" type="Label" parent="Items/RoundMultiplier/Segment Control"]
+z_index = -1
+material = ExtResource("5_886em")
+custom_minimum_size = Vector2(35, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "1.25"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true
+
+[node name="StartingEnemiesAmount" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 535.0
+offset_right = 1127.0
+offset_bottom = 578.0
+pivot_offset = Vector2(0, 21.5)
+script = ExtResource("7_25inf")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/StartingEnemiesAmount"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -528,12 +577,12 @@ theme_override_font_sizes/font_size = 25
 text = "Initial Enemies"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/StartingEnemiesAmount"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/StartingEnemiesAmount"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Slider" type="HSlider" parent="VBoxContainer/StartingEnemiesAmount/Segment Control"]
+[node name="Slider" type="HSlider" parent="Items/StartingEnemiesAmount/Segment Control"]
 custom_minimum_size = Vector2(230, 43)
 layout_mode = 2
 theme_override_constants/center_grabber = 1
@@ -545,7 +594,7 @@ max_value = 15.0
 value = 8.0
 scrollable = false
 
-[node name="Panel" type="Panel" parent="VBoxContainer/StartingEnemiesAmount/Segment Control/Slider"]
+[node name="Panel" type="Panel" parent="Items/StartingEnemiesAmount/Segment Control/Slider"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -554,7 +603,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_cq2b3")
 
-[node name="Text" type="Label" parent="VBoxContainer/StartingEnemiesAmount/Segment Control"]
+[node name="Text" type="Label" parent="Items/StartingEnemiesAmount/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(35, 0)
@@ -570,13 +619,18 @@ horizontal_alignment = 2
 vertical_alignment = 1
 uppercase = true
 
-[node name="Bosses" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+[node name="Bosses" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 588.0
+offset_right = 1127.0
+offset_bottom = 623.0
+pivot_offset = Vector2(0, 17.5)
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 1
 
-[node name="Title" type="Label" parent="VBoxContainer/Bosses"]
+[node name="Title" type="Label" parent="Items/Bosses"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(250, 0)
@@ -590,12 +644,12 @@ theme_override_font_sizes/font_size = 25
 text = "Bosses"
 vertical_alignment = 1
 
-[node name="Segment Control" type="HBoxContainer" parent="VBoxContainer/Bosses"]
+[node name="Segment Control" type="HBoxContainer" parent="Items/Bosses"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
-[node name="Left" type="Button" parent="VBoxContainer/Bosses/Segment Control"]
+[node name="Left" type="Button" parent="Items/Bosses/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
@@ -611,7 +665,7 @@ theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_sf2j3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_lkqqo")
 shortcut_feedback = false
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Bosses/Segment Control/Left"]
+[node name="Icon" type="TextureRect" parent="Items/Bosses/Segment Control/Left"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -622,7 +676,7 @@ texture = ExtResource("8_4fre3")
 expand_mode = 3
 flip_h = true
 
-[node name="Text" type="Label" parent="VBoxContainer/Bosses/Segment Control"]
+[node name="Text" type="Label" parent="Items/Bosses/Segment Control"]
 z_index = -1
 material = ExtResource("5_886em")
 custom_minimum_size = Vector2(175, 0)
@@ -637,14 +691,14 @@ text = "On"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Right" type="Button" parent="VBoxContainer/Bosses/Segment Control"]
+[node name="Right" type="Button" parent="Items/Bosses/Segment Control"]
 custom_minimum_size = Vector2(35, 35)
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fpkac")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_pfa3b")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_q57ew")
 
-[node name="Icon" type="TextureRect" parent="VBoxContainer/Bosses/Segment Control/Right"]
+[node name="Icon" type="TextureRect" parent="Items/Bosses/Segment Control/Right"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -653,15 +707,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("8_4fre3")
 expand_mode = 3
-
-[node name="Items" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="Save" type="HBoxContainer" parent="Items"]
 layout_mode = 0
