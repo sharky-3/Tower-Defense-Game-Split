@@ -710,11 +710,12 @@ expand_mode = 3
 
 [node name="Save" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 875.0
-offset_top = 121.0
-offset_right = 1125.0
-offset_bottom = 183.0
+offset_left = 25.0
+offset_top = 568.0
+offset_right = 1127.0
+offset_bottom = 630.0
 pivot_offset = Vector2(0, 17.5)
+alignment = 2
 script = ExtResource("7_25inf")
 hovered_color = Color(1, 0.91764706, 0, 1)
 scale_direction = 2

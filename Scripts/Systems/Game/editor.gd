@@ -157,19 +157,18 @@ func update_game_editor(index: int, viewport: SubViewport):
 			if main.has_method("set_up_round_multiplier"):
 				main.set_up_round_multiplier(float(new_value))
 
-		"Bosses": 
+		"Initial Enemies": 
 			if main.has_method("set_up_initial_enemies"):
 				main.set_up_initial_enemies(int(new_value))
 
 		"Bosses": 
-			if main.has_method("set_up_bosses"):
+			if main.has_method("set_up_bossesčplol"):
 				main.set_up_bosses(str(new_value))
 				
 		"Save":
 			if main.has_method("saved_and_start_new_game"):
 				main.saved_and_start_new_game()
 			
-				
 	return new_value
 	
 func find_valid_position(existing_positions: Array, radius: float = 10, area_size: float = 45) -> Vector3:
