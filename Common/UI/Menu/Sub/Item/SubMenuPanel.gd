@@ -7,7 +7,7 @@ var game_settings = GameSettings.new()
 var game_editor = GameEditor.new()
 
 """ [[ Constants / Exported Data ]] """
-@export_enum("Normal", "Settings", "Editor") var menu_type: String = "Normal"
+@export_enum("Normal", "Menu", "Settings", "Editor") var menu_type: String = "Normal"
 @export_range(0, 2, 1) 
 var selected_idx: int = 0:
 	
@@ -41,6 +41,7 @@ var selected_idx: int = 0:
 
 """ [[ Stats ]] """
 var slider_text: Label
+signal submenu_selected(index: int)
 
 """ [[ ============================================================ ]] """
 """ [[ LifeCycle ]] """
@@ -110,8 +111,13 @@ func _input(event: InputEvent) -> void:
 		UISFX.play_select()
 		
 		match menu_type:
-			"Normal":
-				print("Normal")
+			"Normal": 
+				print("")
+				
+			"Menu":
+				submenu_selected.emit(selected_idx + 6)
+				self.visible = false
+				
 			"Editor":
 				var new_value = game_editor.update_game_editor(selected_idx, sub_viewport)
 				

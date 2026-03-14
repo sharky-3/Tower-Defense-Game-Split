@@ -23,8 +23,6 @@ tool_sub_title = Array[String](["Upgrades", "Stats"])
 
 [node name="TooltipUI" parent="." instance=ExtResource("2_o20io")]
 layout_mode = 1
-offset_top = -473.0
-offset_bottom = -473.0
 title = "Game Settings"
 sub_title = "Guide"
 
@@ -42,7 +40,7 @@ offset_left = 25.0
 offset_top = 549.0
 offset_right = 1127.0
 offset_bottom = 581.0
-pivot_offset = Vector2(0, 28)
+pivot_offset = Vector2(0, 16)
 script = ExtResource("5_uqfd0")
 hovered_color = Color(1, 0.9166666, 0, 1)
 scale_direction = 1
@@ -65,7 +63,7 @@ offset_left = 25.0
 offset_top = 591.0
 offset_right = 1127.0
 offset_bottom = 623.0
-pivot_offset = Vector2(0, 28)
+pivot_offset = Vector2(0, 16)
 script = ExtResource("5_uqfd0")
 hovered_color = Color(1, 0.9166666, 0, 1)
 scale_direction = 1

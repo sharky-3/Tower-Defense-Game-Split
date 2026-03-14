@@ -26,7 +26,6 @@ var selected_idx: int = 0:
 ]
 
 """ [[ Node references ]] """
-@onready var cursor: UiCursor = $TriangleCursor
 @onready var index: Label = $MenuInfo/MenuIndex
 @onready var options: Array[HBoxContainer] = []
 @onready var tooltip_ui: TooltipUI = $TooltipUI
@@ -48,7 +47,6 @@ func _ready() -> void:
 
 func open() -> void:
 	show()
-	move_cursor(options[selected_idx])
 
 func open_first_time() -> void:
 	selected_idx = 0
@@ -68,11 +66,6 @@ func handle_selection_update(prev_idx: int, new_idx: int) -> void:
 	index.text = "%d" % (new_idx + 1)
 	tooltip_ui.title = tool_title[new_idx]
 	tooltip_ui.sub_title = tool_sub_title[new_idx]
-	
-	move_cursor(options[new_idx])
-
-func move_cursor(option: Control) -> void:
-	cursor.attach_to_option(option)
 
 func open_options() -> void:
 	var tween := get_tree().create_tween()
@@ -84,7 +77,6 @@ func open_options() -> void:
 
 func close() -> void:
 	for option in options: option.hide()
-	cursor.hide()
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """

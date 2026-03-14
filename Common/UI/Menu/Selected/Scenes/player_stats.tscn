@@ -1,13 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dow3hrbtj8qel"]
+[gd_scene load_steps=7 format=3 uid="uid://dow3hrbtj8qel"]
 
 [ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Sub/Item/SubMenuPanel.gd" id="1_g46as"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="4_6kml3"]
 [ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="5_b2w81"]
 [ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_u4j83"]
 [ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected/ItemPanel.gd" id="7_cp5vp"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6mgv"]
-bg_color = Color(0, 0, 0, 0.25)
 
 [sub_resource type="FontVariation" id="FontVariation_5umfo"]
 base_font = ExtResource("6_u4j83")
@@ -21,18 +18,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g46as")
 LAST_SELECTION_IDX = 10
-tool_title = Array[String](["Toggle between windowed and fullscreen modes for your game.", "Set the width and height of the game window to your preference.", "Adjust the camera's field of view to see more or less of the world.", "", "", "", "", "", "", "", ""])
-tool_sub_title = Array[String](["Window Mode", "Screen Size", "Camera FOV", "", "", "", "", "", "", "", ""])
-
-[node name="Background" type="Panel" parent="."]
-z_index = -1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_i6mgv")
+tool_title = Array[String](["Total number of matches you've completed.", "Matches where you successfully finished the game.", "Matches that ended in defeat.", "Percentage of games you've won.", "Total enemy waves you've faced.", "Furthest wave you've ever reached.", "Total enemies you've eliminated.", "Total enemies that appeared in your games.", "Total damage your base received.", "Total damage dealt to enemies.", "Total towers placed across all games."])
+tool_sub_title = Array[String](["Games Played", "Wins", "Losses", "Win Rate", "Waves Survived", "Highest Wave", "Enemies Defeated", "Enemies Spawned", "Damage Taken", "Damage Dealt", "Towers Built"])
 
 [node name="TooltipUI" parent="." instance=ExtResource("4_6kml3")]
 layout_mode = 1
@@ -42,14 +29,11 @@ sub_title = "Guide"
 [node name="Title" type="Label" parent="."]
 z_index = -1
 material = ExtResource("5_b2w81")
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -104.0
-offset_top = 25.0
-offset_right = 104.0
-offset_bottom = 100.0
+layout_mode = 0
+offset_left = 25.0
+offset_top = 29.0
+offset_right = 1127.0
+offset_bottom = 91.0
 grow_horizontal = 2
 pivot_offset = Vector2(126.5, 28)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
@@ -57,7 +41,7 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 50
 text = "Player stats"
 vertical_alignment = 1
 uppercase = true
@@ -68,18 +52,18 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 121.0
-offset_right = -50.0
-offset_bottom = -50.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
-alignment = 1
 
 [node name="Left" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -93,6 +77,10 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
+[node name="VSplitContainer3" type="VSplitContainer" parent="VBoxContainer/HBoxContainer/Left"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="Right" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
@@ -103,16 +91,16 @@ offset_bottom = 40.0
 
 [node name="TotalGamesPlayed" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 121.0
-offset_right = 551.0
-offset_bottom = 153.0
+offset_left = 25.0
+offset_top = 106.0
+offset_right = 435.0
+offset_bottom = 138.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/TotalGamesPlayed"]
@@ -147,16 +135,16 @@ uppercase = true
 
 [node name="Wins" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 163.0
-offset_right = 551.0
-offset_bottom = 195.0
+offset_left = 25.0
+offset_top = 148.0
+offset_right = 435.0
+offset_bottom = 180.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Wins"]
@@ -191,16 +179,16 @@ uppercase = true
 
 [node name="Loses" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 205.0
-offset_right = 551.0
-offset_bottom = 237.0
+offset_left = 25.0
+offset_top = 190.0
+offset_right = 435.0
+offset_bottom = 222.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/Loses"]
@@ -214,7 +202,7 @@ theme_override_constants/outline_size = 5
 theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_5umfo")
 theme_override_font_sizes/font_size = 25
-text = "Loses"
+text = "Losses"
 vertical_alignment = 1
 
 [node name="Value" type="Label" parent="Items/Loses"]
@@ -235,16 +223,16 @@ uppercase = true
 
 [node name="WinRate" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 247.0
-offset_right = 551.0
-offset_bottom = 279.0
+offset_left = 25.0
+offset_top = 232.0
+offset_right = 435.0
+offset_bottom = 264.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/WinRate"]
@@ -279,16 +267,16 @@ uppercase = true
 
 [node name="WavesPlayed" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 309.0
-offset_right = 551.0
-offset_bottom = 341.0
+offset_left = 25.0
+offset_top = 294.0
+offset_right = 435.0
+offset_bottom = 326.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/WavesPlayed"]
@@ -323,16 +311,16 @@ uppercase = true
 
 [node name="HigestWaveReached" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 351.0
-offset_right = 551.0
-offset_bottom = 383.0
+offset_left = 25.0
+offset_top = 336.0
+offset_right = 435.0
+offset_bottom = 368.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/HigestWaveReached"]
@@ -367,16 +355,16 @@ uppercase = true
 
 [node name="EnemiesKilled" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 413.0
-offset_right = 551.0
-offset_bottom = 445.0
+offset_left = 25.0
+offset_top = 398.0
+offset_right = 435.0
+offset_bottom = 430.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/EnemiesKilled"]
@@ -411,16 +399,16 @@ uppercase = true
 
 [node name="EnemiesSpawned" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 141.0
-offset_top = 455.0
-offset_right = 551.0
-offset_bottom = 487.0
+offset_left = 25.0
+offset_top = 440.0
+offset_right = 435.0
+offset_bottom = 472.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/EnemiesSpawned"]
@@ -455,16 +443,16 @@ uppercase = true
 
 [node name="TotalDamageTaken" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 601.0
-offset_top = 121.0
-offset_right = 1011.0
-offset_bottom = 153.0
+offset_left = 25.0
+offset_top = 502.0
+offset_right = 435.0
+offset_bottom = 534.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/TotalDamageTaken"]
@@ -499,16 +487,16 @@ uppercase = true
 
 [node name="TotalDamageDealed" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 601.0
-offset_top = 157.0
-offset_right = 1011.0
-offset_bottom = 189.0
+offset_left = 25.0
+offset_top = 544.0
+offset_right = 435.0
+offset_bottom = 576.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/TotalDamageDealed"]
@@ -543,16 +531,16 @@ uppercase = true
 
 [node name="TotalTowersPlaced" type="HBoxContainer" parent="Items"]
 layout_mode = 0
-offset_left = 601.0
-offset_top = 193.0
-offset_right = 1011.0
-offset_bottom = 225.0
+offset_left = 25.0
+offset_top = 586.0
+offset_right = 435.0
+offset_bottom = 618.0
 pivot_offset = Vector2(0, 16)
 theme_override_constants/separation = 10
 alignment = 1
 script = ExtResource("7_cp5vp")
-hovered_color = Color(0.6627451, 0.6627451, 0.6627451, 1)
-use_text_scale_effect = false
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_up_text = 1.1
 scale_direction = 1
 
 [node name="Title" type="Label" parent="Items/TotalTowersPlaced"]

@@ -22,14 +22,22 @@ extends Control
 	$ItemMenu,
 	$ItemMenu,
 	$ItemMenu,
+	$ItemMenu,
+	
+	$ItemMenu,
+	$ItemMenu,
 ]
 
 @onready var sub_menus: Array[Control] = [
-	$ItemMenu/SubViewport/Editor, 
-	$ItemMenu/SubViewport/Editor, 
-	$ItemMenu/SubViewport/Settings, 
-	$ItemMenu/SubViewport/Progression, 
-	$ItemMenu/SubViewport/Settings, 
+	$ItemMenu/SubViewport/Editor, 			# Play
+	$ItemMenu/SubViewport/Editor, 			# Editor
+	$ItemMenu/SubViewport/Settings, 		# Settings
+	$ItemMenu/SubViewport/PlayerStats, 		# Progression
+	$ItemMenu/SubViewport/Settings, 		# Quit
+	$ItemMenu/SubViewport/Settings, 		# Account
+	
+	$ItemMenu/SubViewport/Editor, 		# Upgrades
+	$ItemMenu/SubViewport/PlayerStats, 		# Stats
 ]
 
 """ [[ Stats ]] """
@@ -179,5 +187,10 @@ func player_is_quiting_game():
 func _on_main_menu_pause_ui_submenu_selected(index: int) -> void:
 	if index == 0: player_que_to_game(); return
 	if index == 4: player_is_quiting_game()
+	open_sub_menu(sub_menus[index])
+	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])
+
+
+func _on_progression_submenu_selected(index: int) -> void:
 	open_sub_menu(sub_menus[index])
 	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])

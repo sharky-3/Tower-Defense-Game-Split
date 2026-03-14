@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dgtg08fo02d7d"]
+[gd_scene load_steps=10 format=3 uid="uid://dgtg08fo02d7d"]
 
 [ext_resource type="Script" uid="uid://dpqmrv3yonype" path="res://Common/UI/Menu/Main/Navigation/Navigation.gd" id="1_xc7ja"]
 [ext_resource type="FontFile" uid="uid://ccm0ekqbubtus" path="res://Assets/Font/Montserrat/static/Montserrat-ExtraBoldItalic.ttf" id="2_5wcis"]
-[ext_resource type="PackedScene" uid="uid://c2opuuewjo3tr" path="res://Common/UI/Menu/Elements/Cursor/cursor.tscn" id="3_8aqej"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="4_35h0s"]
 [ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="6_rocwe"]
 [ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected/ItemPanel.gd" id="8_jex1w"]
@@ -26,9 +25,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xc7ja")
-LAST_SELECTION_IDX = 4
-tool_title = Array[String](["Jump into the game or continue your journey.", "Design and experiment with your own worlds and challenges.", "Adjust controls, graphics, audio, and gameplay.", "Track achievements, unlocks, and upgrade your towers.", "Leave the game and return to desktop."])
-tool_sub_title = Array[String](["Adventure", "Editor", "Preformance", "Your Progression", "Exit Game"])
+LAST_SELECTION_IDX = 5
+tool_title = Array[String](["Jump into the game or continue your journey.", "Design and experiment with your own worlds and challenges.", "Adjust controls, graphics, audio, and gameplay.", "Track achievements, unlocks, and upgrade your towers.", "Leave the game and return to desktop.", "Access your account or create one."])
+tool_sub_title = Array[String](["Adventure", "Editor", "Preformance", "Your Progression", "Exit Game", "Account"])
 
 [node name="MenuInfo" type="Control" parent="."]
 layout_mode = 1
@@ -90,10 +89,6 @@ text = "SPLIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TriangleCursor" parent="." node_paths=PackedStringArray("sub_viewport_texture") instance=ExtResource("3_8aqej")]
-position = Vector2(1648, 416)
-sub_viewport_texture = NodePath("../Options/SubViewport")
-
 [node name="TooltipUI" parent="." instance=ExtResource("4_35h0s")]
 layout_mode = 1
 offset_top = -473.0
@@ -133,8 +128,9 @@ offset_right = 548.0
 offset_bottom = 283.0
 pivot_offset = Vector2(174, 31)
 script = ExtResource("8_jex1w")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 use_item_scale_effect = true
+scale_direction = 1
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Play"]
 z_index = -1
@@ -158,8 +154,9 @@ offset_right = 368.0
 offset_bottom = 319.0
 pivot_offset = Vector2(84, 16)
 script = ExtResource("8_jex1w")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 use_item_scale_effect = true
+scale_direction = 1
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Editor"]
 z_index = -1
@@ -182,8 +179,9 @@ offset_right = 313.0
 offset_bottom = 355.0
 pivot_offset = Vector2(56.5, 16)
 script = ExtResource("8_jex1w")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 use_item_scale_effect = true
+scale_direction = 1
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Settings"]
 z_index = -1
@@ -206,8 +204,9 @@ offset_right = 363.0
 offset_bottom = 391.0
 pivot_offset = Vector2(81.5, 16)
 script = ExtResource("8_jex1w")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 use_item_scale_effect = true
+scale_direction = 1
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Progression"]
 z_index = -1
@@ -230,8 +229,9 @@ offset_right = 258.0
 offset_bottom = 427.0
 pivot_offset = Vector2(29, 16)
 script = ExtResource("8_jex1w")
-hovered_color = Color(0, 0, 0, 1)
+hovered_color = Color(1, 0.91764706, 0, 1)
 use_item_scale_effect = true
+scale_direction = 1
 
 [node name="Title" type="Label" parent="Options/SubViewport/Options/Quit"]
 z_index = -1
@@ -244,6 +244,39 @@ theme_override_constants/shadow_outline_size = 20
 theme_override_fonts/font = SubResource("FontVariation_ovcsy")
 theme_override_font_sizes/font_size = 25
 text = "Quit"
+vertical_alignment = 1
+
+[node name="Account" type="HBoxContainer" parent="Options/SubViewport/Options"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -253.0
+offset_top = -87.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(29, 16)
+alignment = 2
+script = ExtResource("8_jex1w")
+hovered_color = Color(1, 0.91764706, 0, 1)
+use_item_scale_effect = true
+scale_direction = 2
+
+[node name="Title" type="Label" parent="Options/SubViewport/Options/Account"]
+z_index = -1
+material = ExtResource("9_412tk")
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_ovcsy")
+theme_override_font_sizes/font_size = 50
+text = "Sign In"
 vertical_alignment = 1
 
 [connection signal="item_rect_changed" from="." to="." method="_on_item_rect_changed"]

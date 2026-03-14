@@ -45,14 +45,6 @@ tool_sub_title = Array[String](["Difficulty", "Style", "Density", "Timer", "Roun
 
 [node name="TooltipUI" parent="." instance=ExtResource("4_lkqqo")]
 layout_mode = 1
-anchors_preset = 1
-anchor_top = 0.0
-anchor_bottom = 0.0
-offset_left = -3.0
-offset_top = 175.0
-offset_right = -3.0
-offset_bottom = 175.0
-grow_vertical = 1
 title = "Game Settings"
 sub_title = "Guide"
 

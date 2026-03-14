@@ -36,20 +36,21 @@ grow_vertical = 0
 script = ExtResource("1_788ty")
 
 [node name="Title" type="Label" parent="."]
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 0
-offset_left = -112.0
-offset_top = -136.0
-offset_right = -41.0
-offset_bottom = -96.0
+offset_left = -500.0
+offset_top = -105.0
+offset_bottom = -65.0
 pivot_offset = Vector2(71, 40)
 text = "Title"
 label_settings = SubResource("LabelSettings_788ty")
+autowrap_mode = 2
 
 [node name="SubTitleContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -112.0
-offset_top = -96.0
-offset_bottom = -56.0
+offset_left = -500.0
+offset_top = -65.0
+offset_bottom = -25.0
 
 [node name="SubTitle" type="Label" parent="SubTitleContainer"]
 layout_mode = 2
