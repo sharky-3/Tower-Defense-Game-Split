@@ -17,6 +17,7 @@ func save_data():
 		data = JSON.parse_string(fileRead.get_as_text())
 	if data == null: data = {}
 
+	if Global.USER_NAME == null: return
 	data[Global.USER_NAME] = {
 		"Password": Global.PASSWORD,
 		"PlayerStats": Global.GAME_DATA["PlayerStats"]
