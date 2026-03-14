@@ -55,12 +55,25 @@ func _ready() -> void:
 	options[selected_idx].select()
 
 """ [[ ============================================================ ]] """
+""" [[ Set Ups ]] """
+
+func set_up_values() -> void:
+	for child in options:
+		var child_name: String = child.name
+		var value: Label = child.get_node("Value")
+		if child_name == "Win_Rate": value.text = str(Global.get_looking_value(child_name)) + "%"
+		else: value.text = str(Global.get_looking_value(child_name))
+	
+""" [[ ============================================================ ]] """
 """ [[ Functions ]] """
 
 func open() -> void: 
 	show()
 
 func open_first_time() -> void:
+	if self.name == "PlayerStats":
+		set_up_values()
+		
 	selected_idx = 0
 	show()
 	open_options()
@@ -115,8 +128,9 @@ func _input(event: InputEvent) -> void:
 				print("")
 				
 			"Menu":
-				submenu_selected.emit(selected_idx + 6)
-				self.visible = false
+				if self.visible:
+					submenu_selected.emit(selected_idx + 6)
+					self.visible = false
 				
 			"Editor":
 				var new_value = game_editor.update_game_editor(selected_idx, sub_viewport)

@@ -32,11 +32,11 @@ extends Control
 	$ItemMenu/SubViewport/Editor, 			# Play
 	$ItemMenu/SubViewport/Editor, 			# Editor
 	$ItemMenu/SubViewport/Settings, 		# Settings
-	$ItemMenu/SubViewport/PlayerStats, 		# Progression
+	$ItemMenu/SubViewport/Progression, 		# Progression
 	$ItemMenu/SubViewport/Settings, 		# Quit
 	$ItemMenu/SubViewport/Settings, 		# Account
 	
-	$ItemMenu/SubViewport/Editor, 		# Upgrades
+	$ItemMenu/SubViewport/Editor, 			# Upgrades
 	$ItemMenu/SubViewport/PlayerStats, 		# Stats
 ]
 
@@ -106,6 +106,7 @@ func open_main_menu_first_time() -> void:
 	in_main_menu = true
 
 func open_sub_menu(sub_menu: Control) -> void:
+	
 	sub_menu.show()
 	sub_menu.set_process(true)
 	sub_menu.set_process_input(true)
@@ -189,7 +190,6 @@ func _on_main_menu_pause_ui_submenu_selected(index: int) -> void:
 	if index == 4: player_is_quiting_game()
 	open_sub_menu(sub_menus[index])
 	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])
-
 
 func _on_progression_submenu_selected(index: int) -> void:
 	open_sub_menu(sub_menus[index])

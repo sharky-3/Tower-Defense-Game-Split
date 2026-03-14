@@ -83,6 +83,7 @@ menu_type = "Settings"
 
 [node name="Progression" parent="ItemMenu/SubViewport" instance=ExtResource("7_ltr5c")]
 visible = false
+menu_type = "Menu"
 
 [node name="PlayerStats" parent="ItemMenu/SubViewport" instance=ExtResource("9_m14nf")]
 visible = false

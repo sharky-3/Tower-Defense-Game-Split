@@ -105,12 +105,12 @@ func update_player_game_stats(stat_name: String, value: float) -> void:
 			item["Value"] += value
 			return
 
-func get_looking_value(stat_name: String) -> float:
+func get_looking_value(stat_name: String) -> int:
 	var stats = GAME_DATA["PlayerStats"]
 	for item in stats:
 		if item.get("Name", "") == stat_name:
 			return item["Value"]
-	return 0.0
+	return 0
 
 """ [[ ============================================================ ]] """
 """ [[ Tower ]] """
