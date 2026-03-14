@@ -249,5 +249,5 @@ func _input(event):
 """ [[ ============================================================ ]] """
 """ [[ Globals ]] """
 
-func _update_player_game_stats(stat_name: String, value: int):
+func _update_player_game_stats(stat_name: String, value: float):
 	Global.update_player_game_stats(stat_name, value)

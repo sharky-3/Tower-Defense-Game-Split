@@ -115,7 +115,7 @@ func shoot_enemy(target: Node3D):
 	if muzzle and audio_stream and muzzle.has_method("fire_effect"): 
 		#audio_stream.play()
 		muzzle.fire_effect()
-	
+	_update_player_game_stats("Total_Damage_Dealed", tower_damage)
 	if enemy_node and enemy_node.has_method("take_damage"):
 		enemy_node.take_damage(tower_damage)
 		
@@ -134,3 +134,9 @@ func _on_area_3d_body_exited(body: Node3D):
 		if current_target == body:
 			if enemies_in_range.is_empty(): current_target = null
 			else: current_target = enemies_in_range[0]
+
+""" [[ ============================================================ ]] """
+""" [[ Globals ]] """
+
+func _update_player_game_stats(stat_name: String, value: float):
+	Global.update_player_game_stats(stat_name, value)

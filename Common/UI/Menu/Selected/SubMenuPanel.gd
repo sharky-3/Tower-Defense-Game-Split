@@ -200,3 +200,6 @@ func _input(event: InputEvent) -> void:
 
 func _on_slider_value_changed(value: float) -> void:
 	if self.slider_text: self.slider_text.text = str(int(value))
+
+func _on_timer_timeout() -> void:
+	set_up_values()

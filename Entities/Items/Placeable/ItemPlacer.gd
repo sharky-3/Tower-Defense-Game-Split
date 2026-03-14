@@ -105,8 +105,15 @@ func place_item_on_ground():
 
 				if effect.has_method("play_effect"): effect.play_effect()
 				itemPreview.tower_placed()
+				_update_player_game_stats("Total_Towers_Placed", 1)
 		else: 
 			if itemPreview: itemPreview.queue_free()
 			
 		self.itemPreview = null; break
 	return hit_found
+
+""" [[ ============================================================ ]] """
+""" [[ Globals ]] """
+
+func _update_player_game_stats(stat_name: String, value: float):
+	Global.update_player_game_stats(stat_name, value)

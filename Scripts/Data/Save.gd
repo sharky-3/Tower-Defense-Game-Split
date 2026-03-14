@@ -26,4 +26,4 @@ func save_data():
 	var fileWrite = FileAccess.open(SAVE_GAME_PATH, FileAccess.WRITE)
 	fileWrite.store_string(JSON.stringify(data, "\t"))
 
-	print("Saved player:", Global.USER_NAME)
+	print("Saved player: ", Global.USER_NAME)
