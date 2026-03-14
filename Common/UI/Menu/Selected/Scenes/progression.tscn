@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://chr1qewo1y5au"]
 
-[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Sub/Item/SubMenuPanel.gd" id="1_6aqsl"]
+[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Selected/SubMenuPanel.gd" id="1_6aqsl"]
 [ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="2_o20io"]
 [ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="3_8fr20"]
 [ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="4_r68fi"]

@@ -34,7 +34,7 @@ extends Control
 	$ItemMenu/SubViewport/Settings, 		# Settings
 	$ItemMenu/SubViewport/Progression, 		# Progression
 	$ItemMenu/SubViewport/Settings, 		# Quit
-	$ItemMenu/SubViewport/Settings, 		# Account
+	$ItemMenu/SubViewport/Account, 			# Account
 	
 	$ItemMenu/SubViewport/Editor, 			# Upgrades
 	$ItemMenu/SubViewport/PlayerStats, 		# Stats

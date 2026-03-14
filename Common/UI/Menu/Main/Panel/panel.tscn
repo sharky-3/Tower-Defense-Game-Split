@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdgpjcf0sswem"]
+[gd_scene load_steps=12 format=3 uid="uid://cdgpjcf0sswem"]
 
 [ext_resource type="Script" uid="uid://hd3bmneaqtru" path="res://Common/UI/Menu/Main/Panel/MenuPanel.gd" id="1_kui2b"]
 [ext_resource type="Material" uid="uid://drjvdq146ek1x" path="res://Assets/Materials/ui_transitions/double_circular_cut_mask_transition.material" id="2_d6t4o"]
 [ext_resource type="Shader" uid="uid://bvenkafqpkfwr" path="res://Assets/Shader/UI/blot_cut_closeup.gdshader" id="3_ttllr"]
 [ext_resource type="Material" uid="uid://bvo0r6b2u3tun" path="res://Assets/Materials/ui_transitions/blot_cut_mask_transition.material" id="5_xxg1h"]
 [ext_resource type="PackedScene" uid="uid://cqcnvcsyb87ed" path="res://Common/UI/Menu/Selected/Scenes/editor.tscn" id="6_u0dhr"]
-[ext_resource type="PackedScene" uid="uid://chr1qewo1y5au" path="res://Common/UI/Menu/Sub/progression.tscn" id="7_ltr5c"]
+[ext_resource type="PackedScene" uid="uid://chr1qewo1y5au" path="res://Common/UI/Menu/Selected/Scenes/progression.tscn" id="7_ltr5c"]
 [ext_resource type="PackedScene" uid="uid://dow3hrbtj8qel" path="res://Common/UI/Menu/Selected/Scenes/player_stats.tscn" id="9_m14nf"]
+[ext_resource type="PackedScene" uid="uid://bx3icjyaltbhj" path="res://Common/UI/Menu/Selected/Scenes/account.tscn" id="10_6trhp"]
 [ext_resource type="PackedScene" uid="uid://dt45hris2sfcs" path="res://Common/UI/Menu/Selected/Scenes/settings.tscn" id="11_l7gvk"]
 [ext_resource type="PackedScene" uid="uid://dgtg08fo02d7d" path="res://Common/UI/Menu/Main/Navigation/navigation.tscn" id="19_n5cv4"]
 
@@ -87,6 +88,10 @@ menu_type = "Menu"
 
 [node name="PlayerStats" parent="ItemMenu/SubViewport" instance=ExtResource("9_m14nf")]
 visible = false
+
+[node name="Account" parent="ItemMenu/SubViewport" instance=ExtResource("10_6trhp")]
+visible = false
+menu_type = "Account"
 
 [connection signal="submenu_selected" from="MainMenu/SubViewport/MainMenuPauseUI" to="." method="_on_main_menu_pause_ui_submenu_selected"]
 [connection signal="submenu_selected" from="ItemMenu/SubViewport/Progression" to="." method="_on_progression_submenu_selected"]

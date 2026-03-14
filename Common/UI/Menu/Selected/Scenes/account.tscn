@@ -1,0 +1,217 @@
+[gd_scene load_steps=13 format=3 uid="uid://bx3icjyaltbhj"]
+
+[ext_resource type="Script" uid="uid://dxggjikcr2rw8" path="res://Common/UI/Menu/Selected/SubMenuPanel.gd" id="1_7xu4w"]
+[ext_resource type="PackedScene" uid="uid://7jd276bkardh" path="res://Common/UI/Menu/Elements/ToolTip/tooltip_ui.tscn" id="2_g05iq"]
+[ext_resource type="Script" uid="uid://dh0mnarvjgx3f" path="res://Common/UI/Menu/Selected/ItemPanel.gd" id="3_1qqeo"]
+[ext_resource type="Material" uid="uid://basn0p842j1ji" path="res://Assets/Materials/ui_text_ripples.material" id="4_dwxle"]
+[ext_resource type="FontFile" uid="uid://cnanau3n8itmd" path="res://Assets/Font/Montserrat/static/Montserrat-Black.ttf" id="5_muonn"]
+[ext_resource type="FontFile" uid="uid://dt1sj4c1syl4p" path="res://Assets/Font/Montserrat/static/Montserrat-Bold.ttf" id="6_g05iq"]
+
+[sub_resource type="FontVariation" id="FontVariation_wikni"]
+base_font = ExtResource("5_muonn")
+
+[sub_resource type="FontVariation" id="FontVariation_5umfo"]
+base_font = ExtResource("5_muonn")
+
+[sub_resource type="FontVariation" id="FontVariation_1qqeo"]
+fallbacks = Array[Font]([ExtResource("5_muonn"), ExtResource("6_g05iq")])
+base_font = ExtResource("5_muonn")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5scmt"]
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lanv1"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7xu4w"]
+
+[node name="Account" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7xu4w")
+tool_title = Array[String](["Your account or player name.", "Keep it secret to secure your account.", "Save your progress or load a previous game."])
+tool_sub_title = Array[String](["Name", "Password", "Data"])
+
+[node name="TooltipUI" parent="." instance=ExtResource("2_g05iq")]
+layout_mode = 1
+title = "Game Settings"
+sub_title = "Guide"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 2
+
+[node name="Title" type="Label" parent="."]
+z_index = -1
+material = ExtResource("4_dwxle")
+layout_mode = 0
+offset_left = 25.0
+offset_top = 403.0
+offset_right = 1127.0
+offset_bottom = 465.0
+pivot_offset = Vector2(126.5, 28)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_wikni")
+theme_override_font_sizes/font_size = 50
+text = "log in / sing up"
+uppercase = true
+
+[node name="Items" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Name" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 497.0
+offset_right = 1127.0
+offset_bottom = 529.0
+pivot_offset = Vector2(0, 17.5)
+script = ExtResource("3_1qqeo")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/Name"]
+z_index = -1
+material = ExtResource("4_dwxle")
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Username"
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/Name"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="Items/Name/Segment Control"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.6632752, 0.6632752, 0.6632752, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1qqeo")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_5scmt")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_lanv1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7xu4w")
+placeholder_text = "name..."
+
+[node name="Password" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 544.0
+offset_right = 1127.0
+offset_bottom = 576.0
+pivot_offset = Vector2(0, 16)
+script = ExtResource("3_1qqeo")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/Password"]
+z_index = -1
+material = ExtResource("4_dwxle")
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Password"
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/Password"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="Items/Password/Segment Control"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.6632752, 0.6632752, 0.6632752, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1qqeo")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_5scmt")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_lanv1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7xu4w")
+placeholder_text = "********"
+secret = true
+
+[node name="Save" type="HBoxContainer" parent="Items"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 591.0
+offset_right = 1127.0
+offset_bottom = 623.0
+pivot_offset = Vector2(0, 16)
+script = ExtResource("3_1qqeo")
+hovered_color = Color(1, 0.91764706, 0, 1)
+scale_direction = 1
+
+[node name="Title" type="Label" parent="Items/Save"]
+z_index = -1
+material = ExtResource("4_dwxle")
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 20
+theme_override_fonts/font = SubResource("FontVariation_5umfo")
+theme_override_font_sizes/font_size = 25
+text = "Save / Load"
+vertical_alignment = 1
+
+[node name="Segment Control" type="HBoxContainer" parent="Items/Save"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="LineEdit" type="LineEdit" parent="Items/Save/Segment Control"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.6632752, 0.6632752, 0.6632752, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = SubResource("FontVariation_1qqeo")
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_5scmt")
+theme_override_styles/read_only = SubResource("StyleBoxFlat_lanv1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7xu4w")
+placeholder_text = "********"

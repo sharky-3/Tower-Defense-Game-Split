@@ -5,9 +5,10 @@ extends Control
 """ [[ Classes ]] """
 var game_settings = GameSettings.new()
 var game_editor = GameEditor.new()
+var game_account = GameAccount.new()
 
 """ [[ Constants / Exported Data ]] """
-@export_enum("Normal", "Menu", "Settings", "Editor") var menu_type: String = "Normal"
+@export_enum("Normal", "Account", "Menu", "Settings", "Editor") var menu_type: String = "Normal"
 @export_range(0, 2, 1) 
 var selected_idx: int = 0:
 	
@@ -124,8 +125,17 @@ func _input(event: InputEvent) -> void:
 		UISFX.play_select()
 		
 		match menu_type:
-			"Normal": 
-				print("")
+			"Normal": pass
+				
+			"Account":
+				var new_value = game_account.game_account_registered(selected_idx)
+				var selected_option: HBoxContainer = options[selected_idx]
+				var segment_control: HBoxContainer = selected_option.get_node("Segment Control")
+				var line_edit: LineEdit = segment_control.get_node("LineEdit")
+				
+				if line_edit: 
+					if typeof(new_value) == TYPE_STRING: line_edit.text = new_value
+					elif typeof(new_value) == TYPE_BOOL: line_edit.secret = new_value
 				
 			"Menu":
 				if self.visible:
