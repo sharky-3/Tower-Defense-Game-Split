@@ -177,17 +177,17 @@ func player_que_to_game():
 		main.open_menu()
 	return
 
-func player_is_quiting_game():
-	get_tree().quit()
+func player_is_quitting_game():
 	print("PLAYER QUITED GAME")
-	return
+	SaveGame.new().save_data()
+	get_tree().quit()
 
 """ [[ ============================================================ ]] """
 """ [[ Events ]] """
 
 func _on_main_menu_pause_ui_submenu_selected(index: int) -> void:
 	if index == 0: player_que_to_game(); return
-	if index == 4: player_is_quiting_game()
+	if index == 4: player_is_quitting_game()
 	open_sub_menu(sub_menus[index])
 	sub_menu_transition_open(sub_menu_sub_viewport_containers[index])
 

@@ -7,6 +7,8 @@ var game_settings = GameSettings.new()
 var game_editor = GameEditor.new()
 var game_account = GameAccount.new()
 
+var game_load = LoadGame.new()
+
 """ [[ Constants / Exported Data ]] """
 @export_enum("Normal", "Account", "Menu", "Settings", "Editor") var menu_type: String = "Normal"
 @export_range(0, 2, 1) 
@@ -42,6 +44,9 @@ var selected_idx: int = 0:
 
 """ [[ Stats ]] """
 var slider_text: Label
+var userNameNode: LineEdit
+var passwordNode: LineEdit
+
 signal submenu_selected(index: int)
 
 """ [[ ============================================================ ]] """
@@ -129,13 +134,28 @@ func _input(event: InputEvent) -> void:
 				
 			"Account":
 				var new_value = game_account.game_account_registered(selected_idx)
+
 				var selected_option: HBoxContainer = options[selected_idx]
 				var segment_control: HBoxContainer = selected_option.get_node("Segment Control")
+				var title: Label = selected_option.get_node("Title")
 				var line_edit: LineEdit = segment_control.get_node("LineEdit")
-				
-				if line_edit: 
-					if typeof(new_value) == TYPE_STRING: line_edit.text = new_value
-					elif typeof(new_value) == TYPE_BOOL: line_edit.secret = new_value
+
+				if line_edit == null: return
+
+				if typeof(new_value) == TYPE_STRING and new_value == "Register":
+					if userNameNode and passwordNode and userNameNode.text.length() > 0 and passwordNode.text.length() > 0:
+						Global.switch_account(userNameNode.text, passwordNode.text)
+						title.text = "Registered / Loaded!"
+					else:
+						title.text = "Insert your username and password"
+
+				elif new_value is String:
+					userNameNode = line_edit
+					line_edit.text = new_value
+
+				elif new_value is bool:
+					passwordNode = line_edit
+					line_edit.secret = new_value
 				
 			"Menu":
 				if self.visible:

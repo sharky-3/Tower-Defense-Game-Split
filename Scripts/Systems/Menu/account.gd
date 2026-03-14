@@ -49,7 +49,6 @@ func game_account_registered(index: int):
 				new_value = true
 				password_displayed = true
 
-		2:
-			print("Registered")
-
+		2: new_value = "Register"
+		
 	return new_value

@@ -3,11 +3,37 @@ extends Node
 """ [[ ============================================================ ]] """
 
 """ [[ Stats ]] """
+var USER_NAME
+var PASSWORD
+
 var tower_name: String = "Basic"
 var IS_DRAGGING_CARD: bool = false
 var placing_meshes: Array[MeshInstance3D] = []
 
 """ [[ Game Data ]] """
+var DEFAULT_PLAYER_DATA = {
+	"PlayerStats": [
+		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Exp", "Value": 0, "Parent": "leaderstats" },
+		{ "Name": "Lvl", "Value": 1, "Parent": "leaderstats" },
+		
+		{ "Name": "Games_Won", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Games_Lost", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Games", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Win_Rate", "Value": 0, "Parent": "Stats" },
+
+		{ "Name": "Highest_Wave_Reached", "Value": 0, "Parent": "Stats" },
+		
+		{ "Name": "Waves_Played", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enemies_Killed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Enimies_Spawned", "Value": 0, "Parent": "Stats" },
+
+		{ "Name": "Total_Damage_Taken", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Damage_Dealed", "Value": 0, "Parent": "Stats" },
+		{ "Name": "Total_Towers_Placed", "Value": 0, "Parent": "Stats" }
+	],
+}
+
 var GAME_DATA = {
 	"PlayerStats": [
 		{ "Name": "Gold", "Value": 0, "Parent": "leaderstats" },
@@ -175,3 +201,21 @@ func cache_placing_positions(placing_position: Node3D):
 		if child is StaticBody3D and child.is_in_group("PlacingGrid"):
 			var mesh: MeshInstance3D = child.get_node_or_null("MeshInstance3D")
 			if mesh: placing_meshes.append(mesh)
+
+""" [[ ============================================================ ]] """
+""" [[ Registration ]] """
+
+func switch_account(new_username: String, new_password: String) -> void:
+	if USER_NAME != null: SaveGame.new().save_data()
+	USER_NAME = new_username
+	PASSWORD = new_password
+	
+	LoadGame.new().load_data()
+
+""" [[ ============================================================ ]] """
+""" [[ Notifications ]] """
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		print("Game closing, saving...")
+		SaveGame.new().save_data()

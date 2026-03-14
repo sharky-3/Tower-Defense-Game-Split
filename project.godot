@@ -18,6 +18,7 @@ config/name="Split"
 run/main_scene="uid://nbh0nuuxu0hr"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
+config/tags=PackedStringArray("final", "tds")
 
 [autoload]
 
